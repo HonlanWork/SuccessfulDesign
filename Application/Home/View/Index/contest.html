@@ -51,17 +51,21 @@ footer {
     margin-left: 15px;
     margin-right: 15px;
     margin-bottom: 30px;
+    font-size: 16px;
+    border-radius: 10px;
+    color: white;
+    background-color: #f90;
+    vertical-align: middle;
 }
 
 #main #section3 .category button {
-    font-size: 16px;
-    height: 70px;
-    width: 70px;
-    border-radius: 20px;
-    color: white;
-    background-color: #f90;
     border: none;
     outline: none;
+    color: white;
+    background-color: #f90;
+    height: 70px;
+    width: 70px;
+    border-radius: 10px;
 }
 
 #main #section3 #subcategories {
@@ -141,17 +145,14 @@ footer {
         <div class="category">
             <button>视觉</button>
         </div>
-        <div class="category" style="position:relative;top:-12px">
-            <button>商业
-                <br/>模式</button>
+        <div class="category">
+            <button>商业<br/>模式</button>
         </div>
-        <div class="category" style="position:relative;top:-12px">
-            <button>社会
-                <br/>创新</button>
+        <div class="category">
+            <button>社会<br/>创新</button>
         </div>
-        <div class="category" style="position:relative;top:-12px">
-            <button>众创
-                <br/>空间</button>
+        <div class="category">
+            <button>众创<br/>空间</button>
         </div>
         <div id="subcategories">
             <div class="subcategory" name="产品">电子、通信及数码产品</div>
@@ -230,7 +231,7 @@ footer {
 </div>
 <div id="section5">
     <h3>大赛时间表</h3>
-    <img src="__PUBLIC__/img/schedule.png" style="width:90%;margin-bottom:50px;" alt="">
+    <img src="__PUBLIC__/img/schedule.png" style="width:90%;margin-bottom:20px;" alt="">
 </div>
 <div id="section6">
     <h3>奖项设置</h3>
@@ -241,6 +242,7 @@ $(document).ready(function() {
     $('#section3 .subcategory').hide();
     $('#section3 .category button').click(function() {
         var cate = $(this).text();
+        console.log(cate);
         $('#section3 .subcategory').hide();
         $('#section3 .subcategory[name="' + cate + '"]').show();
     });
