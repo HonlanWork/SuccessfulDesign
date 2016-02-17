@@ -1,7 +1,6 @@
 <style>
 header,
-nav,
-footer {
+nav {
     display: none;
 }
 
@@ -25,7 +24,7 @@ footer {
     padding: 20px 10% 60px 10%;
 }
 
-#main #section2 #join {
+#main #section2 .join, #main #section6 .join {
     color: white;
     background-color: #f90;
     padding: 12px 24px;
@@ -50,7 +49,7 @@ footer {
     display: inline-block;
     margin-left: 15px;
     margin-right: 15px;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
     font-size: 16px;
     border-radius: 10px;
     color: white;
@@ -69,7 +68,7 @@ footer {
 }
 
 #main #section3 #subcategories {
-    margin-top: -20px;
+    margin-top: -5px;
     width: 80%;
     margin-left: 10%;
     margin-right: 10%;
@@ -79,7 +78,7 @@ footer {
     display: none;
     display: inline-block;
     padding: 4px 10px;
-    margin: 10px 5px 5px 5px;
+    margin: 3px 5px;
     border-radius: 3px;
     font-size: 13px;
     background-color: #9796a4;
@@ -119,14 +118,14 @@ footer {
 }
 </style>
 <div id="section1">
-    <img src="__PUBLIC__/img/banner.png" alt="" style="width:100%;">
+    <img src="__PUBLIC__/img/contest2016/banner.png" alt="" style="width:100%;">
 </div>
 <div id="section2">
     <h3 style="font-size:20px;">国内首个评估设计商业和社会价值的<br/>全球综合类设计大赛</h3>
     <p>成功设计大赛是中国最具影响力的国际化商业设计大赛。</p>
     <p>创立于2006年，历经多年辉煌积淀，它已成为设计创新与管理的标杆。不同于其他设计赛事，成功设计大赛不仅仅关注设计风格，更注重的是从管理者的角度审视设计，挖掘设计背后的策略、流程以及对企业、社会、环境、人类生活带来的价值和深远影响。</p>
     <p>我们的舞台既有众多知名企业科勒、飞利浦、惠普、奔驰、宝马、海尔、长虹等，也有恩诺童、Parallaxe在此一夜成名，被打造成知名设计品牌。至今，已有超过20多个国家、20多个行业，1200名的参赛企业获得了成功设计大赛的殊荣。</p>
-    <a href="" id="join">立即参加</a>
+    <a href="{:U('Contest/apply',array('contestId'=>$contest['id']))}" class="join">立即参加</a>
 </div>
 <div id="section3">
     <h3>大赛类别</h3>
@@ -235,11 +234,13 @@ footer {
 </div>
 <div id="section5">
     <h3>大赛时间表</h3>
-    <img src="__PUBLIC__/img/schedule.png" style="width:90%;margin-bottom:20px;" alt="">
+    <img src="__PUBLIC__/img/contest2016/schedule.png" style="width:90%;margin-bottom:20px;" alt="">
 </div>
 <div id="section6">
     <h3>奖项设置</h3>
-    <img src="__PUBLIC__/img/award.png" style="width:90%;margin-bottom:20px;" alt="">
+    <img src="__PUBLIC__/img/contest2016/award.png" style="width:90%;margin-bottom:50px;" alt="">
+    <br>
+    <a href="{:U('Contest/apply',array('contestId'=>$contest['id']))}" class="join" style="position:relative;top:-20px;">立即参加</a>
 </div>
 <script>
 $(document).ready(function() {

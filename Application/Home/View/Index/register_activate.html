@@ -1,0 +1,66 @@
+<style>
+body {
+    background-image: url(__PUBLIC__/img/signbg.jpg);
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+header,
+nav,
+footer {
+    display: none;
+}
+
+#main form {
+    width: 400px;
+    margin: 0 auto;
+    margin-top: 100px;
+    margin-bottom: 100px;
+    background-color: rgba(250, 250, 250, 0.8);
+    border-radius: 5px;
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    padding: 30px 50px;
+    padding-bottom: 50px;
+}
+
+#main form #title {
+    font-size: 27px;
+    color: #34495E;
+    margin-bottom: 20px;
+}
+
+#main button[type='submit'] {
+    background-color: #77c651;
+    width: 100%;
+    color: #f9f9f9;
+    font-size: 18px;
+    border: none;
+    height: 46px;
+    margin-top: 5px;
+}
+#main form div:last-child {
+	margin-top: 20px;
+}
+#main form div:last-child a {
+	color: #666;
+	margin-left: 5px;
+	margin-right: 5px;
+}
+#main form div:last-child a:hover {
+	color: #333;
+}
+</style>
+<form class="form" method="post" action="{:U('Index/register_resend')}">
+    <a href="{:U('Index/index')}">
+        <img src="__PUBLIC__/img/logo.png" alt="" style="width:120px;margin-bottom:10px;">
+    </a>
+    <p id="title">账号激活</p>
+    <p style="margin-top:20px;">激活邮件已发送，请激活邮箱后登陆</p>
+    <p style="font-size:20px;color:#F05036;">{$email}</p>
+    <p>没有收到邮件？</p>
+    <button type="submit" class="btn btn-primary">重发</button>
+    <div>
+        <a href="{:U('Index/login')}">已经激活？前往登陆</a>
+    </div>
+</form>
