@@ -13,7 +13,8 @@
     <script src="http://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
     <link href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet" />
     <script src="http://cdn.bootcss.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-    <!-- <link href="//netdna.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet"> -->
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="__PUBLIC__/js/lrz.bundle.js"></script>
     <style>
     body,
     html {
@@ -25,16 +26,19 @@
     a, a:hover {
         text-decoration: none;
     }
+    button {
+        outline: none !important;
+    }
 
-    .form-group span {
+    .form-group .input-group-lg span {
         color: #a1a1a1;
         background-color: #f7f7f7;
     }
-    .form-group .input-group-addon {
+    .form-group .input-group-lg .input-group-addon {
         border: none !important;
     }
 
-    .form-group input {
+    .form-group .input-group-lg input {
         border: none !important;
         outline: none;
         color: #666 !important;
@@ -69,6 +73,7 @@
         border-left: none;
         border-right: none;
         padding: 0 30px 0 15px;
+        margin-bottom: 0;
     }
     .navbar-default .navbar-nav>li>a {
         color: #333;

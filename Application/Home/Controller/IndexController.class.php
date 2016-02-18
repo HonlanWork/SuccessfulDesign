@@ -97,7 +97,12 @@ class IndexController extends Controller {
 					"email" => I('email'),
 					"password" => md5(I('password')),
 					"activate" => 0,
-					"activate_key" => md5($activate_key)
+					"activate_key" => md5($activate_key),
+                    // 默认值
+                    "nickname" => I('email'),
+                    "gender" => 1,
+                    "portrait" => "/img/user.png",
+                    "introduction" => "暂无"
 					))->add();
 
 				$email = M('email')->where(array('name'=>'激活邮箱'))->find();
