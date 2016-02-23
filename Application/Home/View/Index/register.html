@@ -61,31 +61,31 @@ footer {
     <a href="{:U('Index/index')}">
         <img src="__PUBLIC__/img/logo.png" alt="" style="width:120px;margin-bottom:10px;">
     </a>
-    <p id="title">账号注册</p>
+    <p id="title"><?php translate('账号注册')?></p>
     <div class="form-group">
         <div class="input-group input-group-lg">
             <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-            <input type="text" name="email" class="form-control" placeholder="邮箱">
+            <input type="text" name="email" class="form-control" placeholder="<?php translate('邮箱')?>">
         </div>
     </div>
     <div class="form-group">
         <div class="input-group input-group-lg">
             <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-            <input type="password" name="password" class="form-control" placeholder="密码">
+            <input type="password" name="password" class="form-control" placeholder="<?php translate('密码')?>">
         </div>
     </div>
     <div class="form-group">
         <div class="input-group input-group-lg">
             <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-            <input type="password" name="password1" class="form-control" placeholder="重复密码">
+            <input type="password" name="password1" class="form-control" placeholder="<?php translate('重复密码')?>">
         </div>
     </div>
-    <button type="submit" class="btn btn-primary">注册</button>
+    <button type="submit" class="btn btn-primary"><?php translate('注册')?></button>
     <if condition="$error">
     	<p id="error">{$error}</p>
     </if>
     <div>
-        <a href="{:U('Index/login')}">已有账号</a>
-        <a href="{:U('Index/forget')}">忘记密码</a>
+        <a href="{:U('Index/login')}"><?php translate('已有账号')?></a>
+        <a href="{:U('Index/forget')}"><?php translate('忘记密码')?></a>
     </div>
 </form>

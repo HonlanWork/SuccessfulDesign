@@ -1,0 +1,383 @@
+<style>
+#main {
+    padding: 40px 10%;
+}
+
+#main a[role='tab'] {
+    color: #888;
+    font-size: 13px;
+}
+
+#main li.active a[role='tab'] {
+    color: #4E6B88;
+}
+
+#main ul.nav-tabs span.count {
+    margin-left: 6px;
+    color: #F05036;
+}
+
+#main ul.nav-tabs span.fa {
+    display: none;
+}
+
+#main ul.nav-tabs span.word {
+    display: none;
+}
+
+#main .tab-pane h4 {
+    color: #444;
+}
+</style>
+<div style="position:relative;">
+    <a href="{:U('Contest/apply')}" class="btn btn-success" style="position:absolute;top:55px;right:0px;">
+        <?php translate('添加新作品')?>
+    </a>
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist" style="margin-bottom:23px;">
+        <li role="presentation" class="active"><a href="#all" aria-controls="all" role="tab" data-toggle="tab"><span class="word"><?php translate('全部作品')?></span><span class="fa fa-fw fa-tasks"></span><span class="count">{$all|count=###}</span></a></li>
+        <li role="presentation"><a href="#notcomplete" aria-controls="notcomplete" role="tab" data-toggle="tab"><span class="word"><?php translate('信息未完成')?></span><span class="fa fa-fw fa-pencil-square-o"></span><span class="count">{$notcomplete|count=###}</span></a></li>
+        <li role="presentation"><a href="#notpaied" aria-controls="notpaied" role="tab" data-toggle="tab"><span class="word"><?php translate('未付款作品')?></span><span class="fa fa-fw fa-dollar"></span><span class="count">{$notpaied|count=###}</span></a></li>
+        <li role="presentation"><a href="#notsubmitted" aria-controls="notsubmitted" role="tab" data-toggle="tab"><span class="word"><?php translate('未提交作品')?></span><span class="fa fa-fw fa-paper-plane-o"></span><span class="count">{$notsubmitted|count=###}</span></a></li>
+    </ul>
+    <!-- Tab panes -->
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="all">
+            <h4 style="font-size:20px;margin-bottom:20px;"><?php translate('全部作品')?></h4>
+            <table class="table table-hover">
+                <tr>
+                    <th>
+                        <?php translate('作品名称')?>
+                    </th>
+                    <th>
+                        <?php translate('信息完整度')?>
+                    </th>
+                    <th>
+                        <?php translate('作品状态')?>
+                    </th>
+                    <th>
+                        <?php translate('操作')?>
+                    </th>
+                </tr>
+                <foreach name="all" item="v">
+                    <tr class='cell'>
+                        <td style="width:55%;">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                    <img src="__PUBLIC__{$v['image']}" alt="" style="width:100%;max-width:250px;margin:5px auto;border-radius:3px;box-shadow:1px 1px 3px rgba(20,20,20,0.4);">
+                                </div>
+                                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                    <p style="font-size:13px;margin-top:10px;color:#666;">{$v.titlee}</p>
+                                    <p style="font-size:13px;color:#666;">{$v.titlec}</p>
+                                </div>
+                            </div>
+                        </td>
+                        <td style="width:15%;min-width:60px;">
+                            <p style="margin-top:10px;color:#888;">{$v.completeness}%</p>
+                        </td>
+                        <td style="width:15%;min-width:60px;">
+                            <?php 
+                            if ($v['ispaied'] == 1) { 
+                                echo '<p style="margin-top:10px;color:#888;">'.translate('已支付').'</p>';
+                            }
+                            else {
+                                echo '<p style="margin-top:10px;color:#888;">'.translate('未支付').'</p>';
+
+                            }
+                            if ($v['issubmitted'] == 1) { 
+                                echo '<p style="margin-top:10px;color:#888;">'.translate('已提交').'</p>';
+                            }
+                            else {
+                                echo '<p style="margin-top:10px;color:#888;">'.translate('未提交').'</p>';
+                            }
+                            ?>
+                        </td>
+                        <td style="width:15%;min-width:60px;">
+                            <p style="margin-top:10px;">
+                                <a href="{:U('User/submission', array('id'=>$v['id']))}">
+                                    <?php translate('详情')?>
+                                </a>
+                            </p>
+                            <if condition="$v['ispaied'] == 0">
+                                <p>
+                                    <a href="{:U('Contest/pay', array('id'=>$v['id']))}">
+                                        <?php translate('支付')?>
+                                    </a>
+                                </p>
+                                <elseif condition="$v['issubmitted'] == 0" />
+                                <p>
+                                    <a href="{:U('Contest/info', array('id'=>$v['id']))}">
+                                        <?php translate('编辑')?>
+                                    </a>
+                                </p>
+                                <p>
+                                    <a href="{:U('Contest/submit', array('id'=>$v['id']))}">
+                                        <?php translate('提交')?>
+                                    </a>
+                                </p>
+                            </if>
+                        </td>
+                    </tr>
+                </foreach>
+            </table>
+        </div>
+        <div role="tabpanel" class="tab-pane" id="notcomplete">
+            <h4 style="font-size:20px;margin-bottom:20px;"><?php translate('信息未完成')?></h4>
+            <table class="table table-hover">
+                <tr>
+                    <th>
+                        <?php translate('作品名称')?>
+                    </th>
+                    <th>
+                        <?php translate('信息完整度')?>
+                    </th>
+                    <th>
+                        <?php translate('作品状态')?>
+                    </th>
+                    <th>
+                        <?php translate('操作')?>
+                    </th>
+                </tr>
+                <foreach name="notcomplete" item="v">
+                    <tr class='cell'>
+                        <td style="width:55%;">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                    <img src="__PUBLIC__{$v['image']}" alt="" style="width:100%;max-width:250px;margin:5px auto;border-radius:3px;box-shadow:1px 1px 3px rgba(20,20,20,0.4);">
+                                </div>
+                                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                    <p style="font-size:13px;margin-top:10px;color:#666;">{$v.titlee}</p>
+                                    <p style="font-size:13px;color:#666;">{$v.titlec}</p>
+                                </div>
+                            </div>
+                        </td>
+                        <td style="width:15%;min-width:60px;">
+                            <p style="margin-top:10px;color:#888;">{$v.completeness}%</p>
+                        </td>
+                        <td style="width:15%;min-width:60px;">
+                            <?php 
+                            if ($v['ispaied'] == 1) { 
+                                echo '<p style="margin-top:10px;color:#888;">'.translate('已支付').'</p>';
+                            }
+                            else {
+                                echo '<p style="margin-top:10px;color:#888;">'.translate('未支付').'</p>';
+
+                            }
+                            if ($v['issubmitted'] == 1) { 
+                                echo '<p style="margin-top:10px;color:#888;">'.translate('已提交').'</p>';
+                            }
+                            else {
+                                echo '<p style="margin-top:10px;color:#888;">'.translate('未提交').'</p>';
+                            }
+                            ?>
+                        </td>
+                        <td style="width:15%;min-width:60px;">
+                            <p style="margin-top:10px;">
+                                <a href="{:U('User/submission', array('id'=>$v['id']))}">
+                                    <?php translate('详情')?>
+                                </a>
+                            </p>
+                            <if condition="$v['ispaied'] == 0">
+                                <p>
+                                    <a href="{:U('Contest/pay', array('id'=>$v['id']))}">
+                                        <?php translate('支付')?>
+                                    </a>
+                                </p>
+                                <elseif condition="$v['issubmitted'] == 0" />
+                                <p>
+                                    <a href="{:U('Contest/info', array('id'=>$v['id']))}">
+                                        <?php translate('编辑')?>
+                                    </a>
+                                </p>
+                                <p>
+                                    <a href="{:U('Contest/submit', array('id'=>$v['id']))}">
+                                        <?php translate('提交')?>
+                                    </a>
+                                </p>
+                            </if>
+                        </td>
+                    </tr>
+                </foreach>
+            </table>
+        </div>
+        <div role="tabpanel" class="tab-pane" id="notpaied">
+            <h4 style="font-size:20px;margin-bottom:20px;"><?php translate('未付款作品')?></h4>
+            <table class="table table-hover">
+                <tr>
+                    <th>
+                        <?php translate('作品名称')?>
+                    </th>
+                    <th>
+                        <?php translate('信息完整度')?>
+                    </th>
+                    <th>
+                        <?php translate('作品状态')?>
+                    </th>
+                    <th>
+                        <?php translate('操作')?>
+                    </th>
+                </tr>
+                <foreach name="notpaied" item="v">
+                    <tr class='cell'>
+                        <td style="width:55%;">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                    <img src="__PUBLIC__{$v['image']}" alt="" style="width:100%;max-width:250px;margin:5px auto;border-radius:3px;box-shadow:1px 1px 3px rgba(20,20,20,0.4);">
+                                </div>
+                                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                    <p style="font-size:13px;margin-top:10px;color:#666;">{$v.titlee}</p>
+                                    <p style="font-size:13px;color:#666;">{$v.titlec}</p>
+                                </div>
+                            </div>
+                        </td>
+                        <td style="width:15%;min-width:60px;">
+                            <p style="margin-top:10px;color:#888;">{$v.completeness}%</p>
+                        </td>
+                        <td style="width:15%;min-width:60px;">
+                            <?php 
+                            if ($v['ispaied'] == 1) { 
+                                echo '<p style="margin-top:10px;color:#888;">'.translate('已支付').'</p>';
+                            }
+                            else {
+                                echo '<p style="margin-top:10px;color:#888;">'.translate('未支付').'</p>';
+
+                            }
+                            if ($v['issubmitted'] == 1) { 
+                                echo '<p style="margin-top:10px;color:#888;">'.translate('已提交').'</p>';
+                            }
+                            else {
+                                echo '<p style="margin-top:10px;color:#888;">'.translate('未提交').'</p>';
+                            }
+                            ?>
+                        </td>
+                        <td style="width:15%;min-width:60px;">
+                            <p style="margin-top:10px;">
+                                <a href="{:U('User/submission', array('id'=>$v['id']))}">
+                                    <?php translate('详情')?>
+                                </a>
+                            </p>
+                            <if condition="$v['ispaied'] == 0">
+                                <p>
+                                    <a href="{:U('Contest/pay', array('id'=>$v['id']))}">
+                                        <?php translate('支付')?>
+                                    </a>
+                                </p>
+                                <elseif condition="$v['issubmitted'] == 0" />
+                                <p>
+                                    <a href="{:U('Contest/info', array('id'=>$v['id']))}">
+                                        <?php translate('编辑')?>
+                                    </a>
+                                </p>
+                                <p>
+                                    <a href="{:U('Contest/submit', array('id'=>$v['id']))}">
+                                        <?php translate('提交')?>
+                                    </a>
+                                </p>
+                            </if>
+                        </td>
+                    </tr>
+                </foreach>
+            </table>
+        </div>
+        <div role="tabpanel" class="tab-pane" id="notsubmitted">
+            <h4 style="font-size:20px;margin-bottom:20px;"><?php translate('未提交作品')?></h4>
+            <table class="table table-hover">
+                <tr>
+                    <th>
+                        <?php translate('作品名称')?>
+                    </th>
+                    <th>
+                        <?php translate('信息完整度')?>
+                    </th>
+                    <th>
+                        <?php translate('作品状态')?>
+                    </th>
+                    <th>
+                        <?php translate('操作')?>
+                    </th>
+                </tr>
+                <foreach name="notsubmitted" item="v">
+                    <tr class='cell'>
+                        <td style="width:55%;">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                    <img src="__PUBLIC__{$v['image']}" alt="" style="width:100%;max-width:250px;margin:5px auto;border-radius:3px;box-shadow:1px 1px 3px rgba(20,20,20,0.4);">
+                                </div>
+                                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                    <p style="font-size:13px;margin-top:10px;color:#666;">{$v.titlee}</p>
+                                    <p style="font-size:13px;color:#666;">{$v.titlec}</p>
+                                </div>
+                            </div>
+                        </td>
+                        <td style="width:15%;min-width:60px;">
+                            <p style="margin-top:10px;color:#888;">{$v.completeness}%</p>
+                        </td>
+                        <td style="width:15%;min-width:60px;">
+                            <?php 
+                            if ($v['ispaied'] == 1) { 
+                                echo '<p style="margin-top:10px;color:#888;">'.translate('已支付').'</p>';
+                            }
+                            else {
+                                echo '<p style="margin-top:10px;color:#888;">'.translate('未支付').'</p>';
+
+                            }
+                            if ($v['issubmitted'] == 1) { 
+                                echo '<p style="margin-top:10px;color:#888;">'.translate('已提交').'</p>';
+                            }
+                            else {
+                                echo '<p style="margin-top:10px;color:#888;">'.translate('未提交').'</p>';
+                            }
+                            ?>
+                        </td>
+                        <td style="width:15%;min-width:60px;">
+                            <p style="margin-top:10px;">
+                                <a href="{:U('User/submission', array('id'=>$v['id']))}">
+                                    <?php translate('详情')?>
+                                </a>
+                            </p>
+                            <if condition="$v['ispaied'] == 0">
+                                <p>
+                                    <a href="{:U('Contest/pay', array('id'=>$v['id']))}">
+                                        <?php translate('支付')?>
+                                    </a>
+                                </p>
+                                <elseif condition="$v['issubmitted'] == 0" />
+                                <p>
+                                    <a href="{:U('Contest/info', array('id'=>$v['id']))}">
+                                        <?php translate('编辑')?>
+                                    </a>
+                                </p>
+                                <p>
+                                    <a href="{:U('Contest/submit', array('id'=>$v['id']))}">
+                                        <?php translate('提交')?>
+                                    </a>
+                                </p>
+                            </if>
+                        </td>
+                    </tr>
+                </foreach>
+            </table>
+        </div>
+    </div>
+</div>
+<script>
+$(document).ready(function() {
+    if ($(window).width() < 550) {
+        $('#main ul.nav-tabs span.word').hide();
+        $('#main ul.nav-tabs span.fa').show();
+    } else {
+        $('#main ul.nav-tabs span.word').show();
+        $('#main ul.nav-tabs span.fa').hide();
+    }
+
+    $(window).resize(function(event) {
+        if ($(this).width() < 550) {
+            $('#main ul.nav-tabs span.word').hide();
+            $('#main ul.nav-tabs span.fa').show();
+        } else {
+            $('#main ul.nav-tabs span.word').show();
+            $('#main ul.nav-tabs span.fa').hide();
+        }
+    });
+});
+</script>

@@ -55,12 +55,12 @@ footer {
     <a href="{:U('Index/index')}">
         <img src="__PUBLIC__/img/logo.png" alt="" style="width:120px;margin-bottom:10px;">
     </a>
-    <p id="title">账号激活</p>
-    <p style="margin-top:20px;">激活邮件已发送，请激活邮箱后登陆</p>
+    <p id="title"><?php translate('账号激活')?></p>
+    <p style="margin-top:20px;"><?php translate('激活邮件已发送，请激活邮箱后登陆')?></p>
     <p style="font-size:20px;color:#F05036;">{$email}</p>
-    <p>没有收到邮件？</p>
-    <button type="submit" class="btn btn-primary">重发</button>
+    <p><?php translate('没有收到邮件？')?></p>
+    <button type="submit" class="btn btn-primary"><?php translate('重发')?></button>
     <div>
-        <a href="{:U('Index/login')}">已经激活？前往登陆</a>
+        <a href="{:U('Index/login')}"><?php translate('已经激活？前往登陆')?></a>
     </div>
 </form>

@@ -1,6 +1,7 @@
 <style>
 #main {
     padding: 40px 10%;
+    padding-top: 30px;
 }
 
 #main #basic-info,
@@ -10,8 +11,9 @@
 
 #main #edit-button {
     position: absolute;
-    top: 0;
+    top: -8px;
     right: 0;
+    font-size: 14px;
 }
 
 #main #job-info,
@@ -19,23 +21,42 @@
 #main #job-info-edit,
 #main #other-info-edit {
     padding: 30px;
+    padding-bottom: 20px;
     border-top: 1px solid #ddd;
 }
 
 #main #job-info div, #main #other-info div {
 	color: #888;
-	margin-bottom: 12px;
+	margin-bottom: 25px;
+	line-height: 1.6;
+	position: relative;
 }
 
-#main #job-info p, #main #other-info p {
+#main #job-info div p:first-child {
 	color: #4E6B88;
-	width: 98px;
 	margin-right: 20px;
 	display: inline-block;
+    width: 112px;
 	margin-bottom: 0;
+	position: absolute;
+	left: 0;
+	top: 0;
 }
-#main #other-info p {
-	width: 70px;
+#main #job-info div p:last-child {
+	margin-left: 132px;
+}
+#main #other-info div p:first-child {
+	color: #4E6B88;
+	margin-right: 20px;
+	display: inline-block;
+    width: 70px;
+	margin-bottom: 0;
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+#main #other-info div p:last-child {
+	margin-left: 80px;
 }
 
 #main #info-edit {
@@ -66,22 +87,17 @@
     -moz-appearance: none;
     -webkit-appearance: none;
 }
-
-#main textarea[name="introduction"] {
-    resize: none;
-    width: 100%;
-}
 </style>
 <div id="info">
     <div class="row">
-        <div class="col-xm-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <div style="position:relative" id="basic-info">
-                <button id="edit-button" class="btn btn-default" style="color:#666;">编辑</button>
+                <button id="edit-button" class="btn btn-default" style="color:#666;"><?php translate('编辑')?></button>
                 <div style="width:80px;height:80px;overflow:hidden;position:absolute;left:0;top:0;">
-                    <img src="__PUBLIC__{$user['portrait']}" style="width:80px;">
+                    <img src="__PUBLIC__{$user['portrait']}" style="width:80px;height:80px;">
                 </div>
                 <div style="margin-left:120px;">
-                    <h4 style="color:#444;">{$user.nickname}
+                    <h4 style="color:#444;margin-bottom:20px;">{$user.nickname}
                 		<if condition="$user.gender == 1">
                 			<span class="fa fa-fw fa-male" style="color:#3644F0;margin-left:10px;"></span>
                 			<else/>
@@ -95,35 +111,20 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-xm-12 col-sm-6 col-md-6 col-lg-6">
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
             <div id="job-info">
-                <div><p>单位名称（中）</p>{$user.companyc}</div>
-                <div><p>单位名称（英）</p>{$user.companye}</div>
-                <div><p>公司电话</p>{$user.companyp}</div>
-                <div><p>职务</p>{$user.position}</div>
-                <div><p>联系人（中）</p>{$user.contacterc}</div>
-                <div><p>联系人（英）</p>{$user.contactere}</div>
+                <div><p><?php translate('公司名称（中文）')?></p><p>{$user.companyc}</p></div>
+                <div><p><?php translate('公司名称（英文）')?></p><p>{$user.companye}</p></div>
+                <div><p><?php translate('公司地址（中文）')?></p><p>{$user.companyac}</p></div>
+                <div><p><?php translate('公司地址（英文）')?></p><p>{$user.companyae}</p></div>
             </div>
         </div>
-        <div class="col-xm-12 col-sm-6 col-md-6 col-lg-6">
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
             <div id="other-info">
-                <div><p>联系电话</p>{$user.phone}</div>
-                <div><p>传真</p>{$user.fax}</div>
-                <div><p>邮编</p>{$user.zipcode}</div>
-                <div><p>地址（中）</p>{$user.addressc}</div>
-                <div><p>地址（英）</p>{$user.addresse}</div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-xm-12 col-sm-12 col-md-12 col-lg-12">
-            <div id="personal-info">
-                <div class="panel panel-default">
-                    <div class="panel-heading" style="color:#4E6B88">个人简介</div>
-                    <div class="panel-body" style="color:#888;">
-                        {$user.introduction}
-                    </div>
-                </div>
+                <div><p><?php translate('职位')?></p><p>{$user.position}</p></div>
+                <div><p><?php translate('传真')?></p><p>{$user.fax}</p></div>
+                <div><p><?php translate('邮编')?></p><p>{$user.zipcode}</p></div>
+            	<div><p><?php translate('公司电话')?></p><p>{$user.companyp}</p></div>
             </div>
         </div>
     </div>
@@ -131,35 +132,35 @@
 <div id="info-edit">
     <form class="form" method="post" action="{:U('User/edit')}">
         <div class="row">
-            <div class="col-xm-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 <div id="basic-info-edit" style="position:relative;">
                     <div style="position:absolute;left:0;top:0;">
                         <div style="width:80px;height:80px;overflow:hidden;">
-                            <img src="__PUBLIC__{$user['portrait']}" style="width:80px;">
+                            <img src="__PUBLIC__{$user['portrait']}" style="width:80px;height:80px;">
                         </div>
-                        <p style="margin-top:15px;padding-top:6px;padding-bottom:6px;width:80px;text-align:center;border-radius:3px;border:1px solid #ddd;color:#666;">更换头像</p>
+                        <p style="margin-top:15px;padding-top:6px;padding-bottom:6px;width:80px;text-align:center;border-radius:3px;border:1px solid #ddd;color:#666;"><?php translate('更换头像')?></p>
                         <input type="file" accept="image/*" style="opacity:0;position:absolute;left:0;top:0;width:80px;height:100%;z-index:999;cursor:pointer;" id="portrait" capture="camera">
                         <input type="text" name="portrait" value="" style="display:none;">
                     </div>
                     <div style="margin-left:120px;">
                         <div class="form-group">
-                            <p>昵称</p>
+                            <p><?php translate('昵称')?></p>
                             <input type="text" name="nickname" class="form-control" value="{$user['nickname']}">
                         </div>
                         <div class="form-group">
-                            <p>性别</p>
+                            <p><?php translate('性别')?></p>
                             <select class="form-control" name="gender">
                                 <if condition="$user.gender == 1">
-                                    <option value="1" selected=selected>男</option>
-                                    <option value="0">女</option>
+                                    <option value="1" selected=selected><?php translate('男')?></option>
+                                    <option value="0"><?php translate('女')?></option>
                                     <else/>
-                                    <option value="1">男</option>
-                                    <option value="0" selected=selected>女</option>
+                                    <option value="1"><?php translate('男')?></option>
+                                    <option value="0" selected=selected><?php translate('女')?></option>
                                 </if>
                             </select>
                         </div>
                         <div class="form-group">
-                            <p>手机</p>
+                            <p><?php translate('手机')?></p>
                             <input type="text" name="cellphone" class="form-control" value="{$user['cellphone']}">
                         </div>
                     </div>
@@ -167,72 +168,48 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-xm-12 col-sm-6 col-md-6 col-lg-6">
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                 <div id="job-info-edit">
                     <div class="form-group">
-                        <p>单位名称（中）</p>
-                        <input type="text" name="companyC" class="form-control" value="{$user['companyc']}">
+                        <p><?php translate('公司名称（中文）')?></p>
+                        <input type="text" name="companyc" class="form-control" value="{$user['companyc']}">
                     </div>
                     <div class="form-group">
-                        <p>单位名称（英）</p>
-                        <input type="text" name="companyE" class="form-control" value="{$user['companye']}">
+                        <p><?php translate('公司名称（英文）')?></p>
+                        <input type="text" name="companye" class="form-control" value="{$user['companye']}">
                     </div>
                     <div class="form-group">
-                        <p>公司电话</p>
-                        <input type="text" name="companyP" class="form-control" value="{$user['companyp']}">
+                        <p><?php translate('公司地址（中文）')?></p>
+                        <input type="text" name="companyac" class="form-control" value="{$user['companyac']}">
                     </div>
                     <div class="form-group">
-                        <p>职务</p>
+                        <p><?php translate('公司地址（英文）')?></p>
+                        <input type="text" name="companyae" class="form-control" value="{$user['companyae']}">
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                <div id="other-info-edit">
+                	<div class="form-group">
+                        <p><?php translate('职位')?></p>
                         <input type="text" name="position" class="form-control" value="{$user['position']}">
                     </div>
                     <div class="form-group">
-                        <p>联系人（中）</p>
-                        <input type="text" name="contacterC" class="form-control" value="{$user['contacterc']}">
-                    </div>
-                    <div class="form-group">
-                        <p>联系人（英）</p>
-                        <input type="text" name="contacterE" class="form-control" value="{$user['contactere']}">
-                    </div>
-                </div>
-            </div>
-            <div class="col-xm-12 col-sm-6 col-md-6 col-lg-6">
-                <div id="other-info-edit">
-                    <div class="form-group">
-                        <p>联系电话</p>
-                        <input type="text" name="phone" class="form-control" value="{$user['phone']}">
-                    </div>
-                    <div class="form-group">
-                        <p>传真</p>
+                        <p><?php translate('传真')?></p>
                         <input type="text" name="fax" class="form-control" value="{$user['fax']}">
                     </div>
                     <div class="form-group">
-                        <p>邮编</p>
+                        <p><?php translate('邮编')?></p>
                         <input type="text" name="zipcode" class="form-control" value="{$user['zipcode']}">
                     </div>
                     <div class="form-group">
-                        <p>地址（中）</p>
-                        <input type="text" name="addressC" class="form-control" value="{$user['addressc']}">
-                    </div>
-                    <div class="form-group">
-                        <p>地址（英）</p>
-                        <input type="text" name="addressE" class="form-control" value="{$user['addresse']}">
+                        <p><?php translate('公司电话')?></p>
+                        <input type="text" name="companyp" class="form-control" value="{$user['companyp']}">
                     </div>
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-xm-12 col-sm-12 col-md-12 col-lg-12">
-                <div id="personal-info-edit" style="margin-bottom:30px;">
-                    <div class="panel panel-default">
-                        <div class="panel-heading" style="color:#4E6B88;">个人简介</div>
-                        <div class="panel-body">
-                            <textarea rows="5" name="introduction" class="form-control">{$user.introduction}</textarea>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <button type="submit" class="btn btn-success">保存</button>
+        <button type="submit" class="btn btn-success"><?php translate('保存')?></button>
     </form>
 </div>
 <script>

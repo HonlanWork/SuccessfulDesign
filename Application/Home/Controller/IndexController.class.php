@@ -46,7 +46,8 @@ class IndexController extends Controller {
 			}
 			else{
 				session('uid', $user['id']);
-				session('uemail', $user['email']);
+                session('uemail', $user['email']);
+				session('uportrait', $user['portrait']);
 				if (isset($_SESSION['url'])) {
 					$url = $_SESSION['url'];
 					session('url', null);
@@ -249,5 +250,10 @@ class IndexController extends Controller {
     		M('user')->where(array('email'=>I('email'), 'reset_key'=>I('reset_key')))->save(array('password'=>md5(I('password'))));
     		$this->redirect('Index/login');
     	}
+    }
+
+    public function language(){
+        session('lang', I('language'));
+        echo json_encode(array('language'=>I('language')));
     }
 }

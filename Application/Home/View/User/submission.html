@@ -1,0 +1,300 @@
+<style>
+#main {
+    padding: 40px 10%;
+    padding-top: 20px;
+}
+
+#main .key {
+    width: 112px;
+    color: #4E6B88;
+    position: absolute;
+    left: 0;
+}
+
+#main .value {
+    margin-left: 132px;
+}
+
+#main #detail .row {
+    padding-bottom: 12px;
+    border-top: 1px solid #ddd;
+}
+
+#main #detail .row p:first-child {
+    color: #4E6B88;
+    margin-top: 12px;
+}
+
+#main #detail .row p:last-child {
+    font-size: 13px;
+    margin-bottom: 0;
+}
+
+#main button.indicator {
+    border: none;
+    outline: none;
+    float: right;
+    background-color: #f5f5f5;
+}
+</style>
+<h3 style="font-size:22px;color:#4E6B88;">{$submission.titlec}
+    <small style="margin-left:10px;font-size:16px;">{$submission.titlee}</small>
+</h3>
+<div style="margin-bottom:20px;">
+    <p style="margin-top:12px;font-style:italic;">
+        <span style="color:#F05036;margin-right:10px;">{$submission.category|translate=###}</span>
+        <span style="color:#888;margin-right:10px;">{$submission.completeness}%</span>
+        <span style="color:#888;margin-right:10px;">
+            <?php
+            if ($submission['ispaied'] == 1) {
+                echo translate('已支付');
+            }
+            else {
+                echo translate('未支付');
+            }
+            ?>
+        </span>
+        <span style="color:#888;margin-right:10px;">
+            <?php
+            if ($submission['issubmitted'] == 1) {
+                echo translate('已提交');
+            }
+            else {
+                echo translate('未提交');
+            }
+            ?>
+        </span>
+    </p>
+    <if condition="$submission['ispaied'] == 0">
+        <p>
+            <a href="{:U('Contest/pay', array('id'=>$submission['id']))}" class="btn btn-success" style="font-size:13px;padding:4px 8px;">
+                <?php translate('支付')?>
+            </a>
+        </p>
+        <elseif condition="$submission['issubmitted'] == 0" />
+        <p>
+            <a href="{:U('Contest/info', array('id'=>$submission['id']))}" class="btn btn-success" style="font-size:13px;padding:4px 8px;margin-right:6px;">
+                <?php translate('编辑')?>
+            </a>
+            <a href="{:U('Contest/submit', array('id'=>$submission['id']))}" class="btn btn-info" style="font-size:13px;padding:4px 8px;">
+                <?php translate('提交')?>
+            </a>
+        </p>
+    </if>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading" style="color:#4E6B88;font-size:16px;">
+        <?php translate('个人信息')?>
+            <button class="indicator"><span class="fa fa-fw fa-angle-double-up"></span></button>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                <div style="position:relative;margin-bottom:25px;">
+                    <p class="key">
+                        <?php translate('公司名称（中文）')?>
+                    </p>
+                    <p class="value">{$submission.companyc}</p>
+                </div>
+                <div style="position:relative;margin-bottom:25px;">
+                    <p class="key">
+                        <?php translate('公司名称（英文）')?>
+                    </p>
+                    <p class="value">{$submission.companye}</p>
+                </div>
+                <div style="position:relative;margin-bottom:25px;">
+                    <p class="key">
+                        <?php translate('公司电话')?>
+                    </p>
+                    <p class="value">{$submission.companyp}</p>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                <div style="position:relative;margin-bottom:25px;">
+                    <p class="key">
+                        <?php translate('邮箱')?>
+                    </p>
+                    <p class="value">{$submission.email}</p>
+                </div>
+                <div style="position:relative;margin-bottom:25px;">
+                    <p class="key">
+                        <?php translate('手机')?>
+                    </p>
+                    <p class="value">{$submission.cellphone}</p>
+                </div>
+                <div style="position:relative;">
+                    <p class="key" style="margin-bottom:0;">
+                        <?php translate('职位')?>
+                    </p>
+                    <p class="value" style="margin-bottom:0;">{$submission.position}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="panel panel-default" id="detail">
+    <div class="panel-heading" style="color:#4E6B88;font-size:16px;">
+        <?php translate('详细信息')?>
+            <button class="indicator"><span class="fa fa-fw fa-angle-double-up"></span></button>
+    </div>
+    <div class="panel-body" style="padding-bottom:5px;">
+        <div style="position:relative;">
+            <p class="key">
+                <?php translate('发布日期')?>
+            </p>
+            <p class="value">{$submission.addts}</p>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                <div style="position:relative;">
+                    <p>
+                        <?php translate('简述（英文）')?>
+                    </p>
+                    <p>{$submission.introductione}</p>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                <div style="position:relative;">
+                    <p>
+                        <?php translate('简述（中文）')?>
+                    </p>
+                    <p>{$submission.introductionc}</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                <div style="position:relative;">
+                    <p>
+                        <?php translate('项目需求（英文）')?>
+                    </p>
+                    <p>{$submission.demande}</p>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                <div style="position:relative;">
+                    <p>
+                        <?php translate('项目需求（中文）')?>
+                    </p>
+                    <p>{$submission.demandc}</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                <div style="position:relative;">
+                    <p>
+                        <?php translate('面临挑战（英文）')?>
+                    </p>
+                    <p>{$submission.challengee}</p>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                <div style="position:relative;">
+                    <p>
+                        <?php translate('面临挑战（中文）')?>
+                    </p>
+                    <p>{$submission.challengec}</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                <div style="position:relative;">
+                    <p>
+                        <?php translate('预算评估（英文）')?>
+                    </p>
+                    <p>{$submission.coste}</p>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                <div style="position:relative;">
+                    <p>
+                        <?php translate('预算评估（中文）')?>
+                    </p>
+                    <p>{$submission.costc}</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                <div style="position:relative;">
+                    <p>
+                        <?php translate('设计解决方案（英文）')?>
+                    </p>
+                    <p>{$submission.solutione}</p>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                <div style="position:relative;">
+                    <p>
+                        <?php translate('设计解决方案（中文）')?>
+                    </p>
+                    <p>{$submission.solutionc}</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                <div style="position:relative;">
+                    <p>
+                        <?php translate('项目成效总结（英文）')?>
+                    </p>
+                    <p>{$submission.conclusione}</p>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                <div style="position:relative;">
+                    <p>
+                        <?php translate('项目成效总结（中文）')?>
+                    </p>
+                    <p>{$submission.conclusione}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="panel panel-default" style="margin-top:20px;margin-bottom:0;">
+    <div class="panel-heading" style="color:#4E6B88;font-size:16px;">
+        <?php translate('图像信息')?>
+            <button class="indicator"><span class="fa fa-fw fa-angle-double-up"></span></button>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <foreach name="images" item="v">
+                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                    <img src="__PUBLIC__/{$v}" alt="" style="width:100%;border-radius:3px;box-shadow:1px 1px 3px rgba(20,20,20,0.4);margin-bottom:15px;">
+                </div>
+            </foreach>
+        </div>
+        <if condition="$submission['video'] neq ''">
+            <video controls="controls" loop="loop" muted preload="auto" style="width:100%;max-width:500px;height:auto;border-radius:3px;margin-top:10px;">
+                <source src="__PUBLIC__{$submission['video']}" type="video/mp4">
+            </video>
+        </if>
+        <if condition="$submission['file'] neq ''">
+            <p style="margin-bottom:0;margin-top:20px;">
+                <?php translate('补充文件')?>
+                    <a href="__PUBLIC__{$submission['file']}" style="margin-left:6px;">
+                        <?php echo substr($submission['file'], strrpos($submission['file'], '/') + 1);?>
+                    </a>
+            </p>
+        </if>
+    </div>
+</div>
+<script>
+$(document).ready(function() {
+    $('#main button.indicator').click(function(event) {
+        event.preventDefault();
+        var $button = $(this);
+        var $span = $button.children('span.fa');
+        if ($span.hasClass('fa-angle-double-up')) {
+            $span.removeClass('fa-angle-double-up').addClass('fa-angle-double-down');
+            $button.parent().siblings('.panel-body').slideUp('fast');
+        } else if ($span.hasClass('fa-angle-double-down')) {
+            $span.removeClass('fa-angle-double-down').addClass('fa-angle-double-up');
+            $button.parent().siblings('.panel-body').slideDown('fast');
+        }
+    });
+});
+</script>

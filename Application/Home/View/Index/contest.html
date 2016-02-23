@@ -24,7 +24,8 @@ nav {
     padding: 20px 10% 60px 10%;
 }
 
-#main #section2 .join, #main #section6 .join {
+#main #section2 .join,
+#main #section6 .join {
     color: white;
     background-color: #f90;
     padding: 12px 24px;
@@ -47,10 +48,10 @@ nav {
 
 #main #section3 .category {
     display: inline-block;
-    margin-left: 15px;
-    margin-right: 15px;
+    margin-left: 10px;
+    margin-right: 10px;
     margin-bottom: 20px;
-    font-size: 16px;
+    font-size: 14px;
     border-radius: 10px;
     color: white;
     background-color: #f90;
@@ -62,8 +63,8 @@ nav {
     outline: none;
     color: white;
     background-color: #f90;
-    height: 70px;
-    width: 70px;
+    height: 80px;
+    width: 80px;
     border-radius: 10px;
 }
 
@@ -121,133 +122,255 @@ nav {
     <img src="__PUBLIC__/img/contest2016/banner.png" alt="" style="width:100%;">
 </div>
 <div id="section2">
-    <h3 style="font-size:20px;">国内首个评估设计商业和社会价值的<br/>全球综合类设计大赛</h3>
-    <p>成功设计大赛是中国最具影响力的国际化商业设计大赛。</p>
-    <p>创立于2006年，历经多年辉煌积淀，它已成为设计创新与管理的标杆。不同于其他设计赛事，成功设计大赛不仅仅关注设计风格，更注重的是从管理者的角度审视设计，挖掘设计背后的策略、流程以及对企业、社会、环境、人类生活带来的价值和深远影响。</p>
-    <p>我们的舞台既有众多知名企业科勒、飞利浦、惠普、奔驰、宝马、海尔、长虹等，也有恩诺童、Parallaxe在此一夜成名，被打造成知名设计品牌。至今，已有超过20多个国家、20多个行业，1200名的参赛企业获得了成功设计大赛的殊荣。</p>
-    <a href="{:U('Contest/apply',array('contestId'=>$contest['id']))}" class="join">立即参加</a>
+    <h3 style="font-size:20px;"><?php translate('国内首个评估设计商业和社会价值的<br/>全球综合类设计大赛')?></h3>
+    <p>
+        <?php translate('成功设计大赛是中国最具影响力的国际化商业设计大赛。')?>
+    </p>
+    <p>
+        <?php translate('创立于2006年，历经多年辉煌积淀，它已成为设计创新与管理的标杆。不同于其他设计赛事，成功设计大赛不仅仅关注设计风格，更注重的是从管理者的角度审视设计，挖掘设计背后的策略、流程以及对企业、社会、环境、人类生活带来的价值和深远影响。')?>
+    </p>
+    <p>
+        <?php translate('我们的舞台既有众多知名企业科勒、飞利浦、惠普、奔驰、宝马、海尔、长虹等，也有恩诺童、Parallaxe在此一夜成名，被打造成知名设计品牌。至今，已有超过20多个国家、20多个行业，1200名的参赛企业获得了成功设计大赛的殊荣。')?>
+    </p>
+    <a href="{:U('Contest/apply')}" class="join">
+        <?php translate('立即参加')?>
+    </a>
 </div>
 <div id="section3">
-    <h3>大赛类别</h3>
-    <p>我们欢迎所有对中国市场产生积极影响的设计师和设计企业前来参赛</p>
-    <p>其设计作品需在 <span style="color:#f90;">2016年10月前在中国市场上市或已发布</span></p>
+    <h3><?php translate('大赛类别')?></h3>
+    <p>
+        <?php translate('我们欢迎所有对中国市场产生积极影响的设计师和设计企业前来参赛。')?>
+    </p>
+    <p>
+        <?php translate('其设计作品需在 <span style="color:#f90;">2016年10月前在中国市场上市或已发布</span>')?></p>
     <div id="categories">
-        <p>点击类别查看详细分类</p>
+        <p>
+            <?php translate('点击类别查看详细分类')?>
+        </p>
         <div class="category">
-            <button>产品</button>
+            <button name="产品">
+                <?php translate('产品')?>
+            </button>
         </div>
         <div class="category">
-            <button>空间</button>
+            <button name="空间">
+                <?php translate('空间')?>
+            </button>
         </div>
         <div class="category">
-            <button>营销</button>
+            <button name="营销">
+                <?php translate('营销')?>
+            </button>
         </div>
         <div class="category">
-            <button>数字</button>
+            <button name="数字">
+                <?php translate('数字')?>
+            </button>
         </div>
         <div class="category">
-            <button>视觉</button>
+            <button name="视觉">
+                <?php translate('视觉')?>
+            </button>
         </div>
         <div class="category">
-            <button>商业<br/>模式</button>
+            <button name="商业模式">
+                <?php translate('商业<br/>模式')?>
+            </button>
         </div>
         <div class="category">
-            <button>社会<br/>创新</button>
+            <button name="社会创新">
+                <?php translate('社会<br/>创新')?>
+            </button>
         </div>
         <div class="category">
-            <button>众创<br/>空间</button>
+            <button name="众创空间">
+                <?php translate('众创<br/>空间')?>
+            </button>
         </div>
         <div id="subcategories">
-            <div class="subcategory" name="产品">电子、通信及数码产品</div>
-            <div class="subcategory" name="产品">工业机械及工具</div>
-            <div class="subcategory" name="产品">家居及家用电器类</div>
-            <div class="subcategory" name="产品">办公类用品</div>
-            <div class="subcategory" name="产品">医疗设备</div>
-            <div class="subcategory" name="产品">娱乐设备</div>
-            <div class="subcategory" name="产品">交通工具</div>
-            <div class="subcategory" name="空间">酒店</div>
-            <div class="subcategory" name="空间">1000平米以下工作空间</div>
-            <div class="subcategory" name="空间">公共空间</div>
-            <div class="subcategory" name="空间">商业空间</div>
-            <div class="subcategory" name="空间">1000平米以上工作空间</div>
-            <div class="subcategory" name="空间">多层住宅</div>
-            <div class="subcategory" name="空间">单个住宅</div>
-            <div class="subcategory" name="空间">景观设计</div>
-            <div class="subcategory" name="营销">展览/展示</div>
-            <div class="subcategory" name="营销">活动策划</div>
-            <div class="subcategory" name="营销">广告策划</div>
-            <div class="subcategory" name="数字">网站</div>
-            <div class="subcategory" name="数字">游戏</div>
-            <div class="subcategory" name="数字">UI设计</div>
-            <div class="subcategory" name="数字">APP应用</div>
-            <div class="subcategory" name="视觉">包装设计</div>
-            <div class="subcategory" name="视觉">企业形象识别</div>
-            <div class="subcategory" name="视觉">海报</div>
-            <div class="subcategory" name="视觉">字体</div>
-            <div class="subcategory" name="商业模式">创新的管理模式</div>
-            <div class="subcategory" name="商业模式">商业模式</div>
-            <div class="subcategory" name="社会创新">推动社会发展的非营利性项目</div>
-            <div class="subcategory" name="众创空间">联合空间</div>
-            <div class="subcategory" name="众创空间">孵化器</div>
-            <div class="subcategory" name="众创空间">创业加速器</div>
-            <div class="subcategory" name="众创空间">创新空间</div>
-            <div class="subcategory" name="众创空间">创业咖啡</div>
+            <div class="subcategory" name="产品">
+                <?php translate('电子、通信及数码产品')?>
+            </div>
+            <div class="subcategory" name="产品">
+                <?php translate('工业机械及工具')?>
+            </div>
+            <div class="subcategory" name="产品">
+                <?php translate('家居及家用电器类')?>
+            </div>
+            <div class="subcategory" name="产品">
+                <?php translate('办公类用品')?>
+            </div>
+            <div class="subcategory" name="产品">
+                <?php translate('医疗设备')?>
+            </div>
+            <div class="subcategory" name="产品">
+                <?php translate('娱乐设备')?>
+            </div>
+            <div class="subcategory" name="产品">
+                <?php translate('交通工具')?>
+            </div>
+            <div class="subcategory" name="空间">
+                <?php translate('酒店')?>
+            </div>
+            <div class="subcategory" name="空间">
+                <?php translate('1000平米以下工作空间')?>
+            </div>
+            <div class="subcategory" name="空间">
+                <?php translate('公共空间')?>
+            </div>
+            <div class="subcategory" name="空间">
+                <?php translate('商业空间')?>
+            </div>
+            <div class="subcategory" name="空间">
+                <?php translate('1000平米以上工作空间')?>
+            </div>
+            <div class="subcategory" name="空间">
+                <?php translate('多层住宅')?>
+            </div>
+            <div class="subcategory" name="空间">
+                <?php translate('单个住宅')?>
+            </div>
+            <div class="subcategory" name="空间">
+                <?php translate('景观设计')?>
+            </div>
+            <div class="subcategory" name="营销">
+                <?php translate('展览/展示')?>
+            </div>
+            <div class="subcategory" name="营销">
+                <?php translate('活动策划')?>
+            </div>
+            <div class="subcategory" name="营销">
+                <?php translate('广告策划')?>
+            </div>
+            <div class="subcategory" name="数字">
+                <?php translate('网站')?>
+            </div>
+            <div class="subcategory" name="数字">
+                <?php translate('游戏')?>
+            </div>
+            <div class="subcategory" name="数字">
+                <?php translate('UI设计')?>
+            </div>
+            <div class="subcategory" name="数字">
+                <?php translate('APP应用')?>
+            </div>
+            <div class="subcategory" name="视觉">
+                <?php translate('包装设计')?>
+            </div>
+            <div class="subcategory" name="视觉">
+                <?php translate('企业形象识别')?>
+            </div>
+            <div class="subcategory" name="视觉">
+                <?php translate('海报')?>
+            </div>
+            <div class="subcategory" name="视觉">
+                <?php translate('字体')?>
+            </div>
+            <div class="subcategory" name="商业模式">
+                <?php translate('创新的管理模式')?>
+            </div>
+            <div class="subcategory" name="商业模式">
+                <?php translate('商业模式')?>
+            </div>
+            <div class="subcategory" name="社会创新">
+                <?php translate('推动社会发展的非营利性项目')?>
+            </div>
+            <div class="subcategory" name="众创空间">
+                <?php translate('联合空间')?>
+            </div>
+            <div class="subcategory" name="众创空间">
+                <?php translate('孵化器')?>
+            </div>
+            <div class="subcategory" name="众创空间">
+                <?php translate('创业加速器')?>
+            </div>
+            <div class="subcategory" name="众创空间">
+                <?php translate('创新空间')?>
+            </div>
+            <div class="subcategory" name="众创空间">
+                <?php translate('创业咖啡')?>
+            </div>
         </div>
     </div>
 </div>
 <div id="section4">
-    <h3>获奖收益</h3>
+    <h3><?php translate('获奖收益')?></h3>
     <div class="row">
-        <div class="col-xm-3 col-sm-3 col-md-3 col-lg-3">
-            <h5>成功设计标识</h5>
-            <p>获奖标识只要您的参赛作品获奖，您就可以使用成功设计标识。成功设计标识的使用不受时间或区域限制，线上线下、广告新闻均可使用。得奖者可在成功设计平台官网下载获奖标识。</p>
+        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+            <h5><?php translate('成功设计标识')?></h5>
+            <p>
+                <?php translate('获奖标识只要您的参赛作品获奖，您就可以使用成功设计标识。成功设计标识的使用不受时间或区域限制，线上线下、广告新闻均可使用。得奖者可在成功设计平台官网下载获奖标识。')?>
+            </p>
         </div>
-        <div class="col-xm-3 col-sm-3 col-md-3 col-lg-3">
-            <h5>成功设计线上展览</h5>
-            <p>您的获奖作品将在颁奖典礼后发布于成功设计线上展览，更棒的是这是一项永久福利，展览没有时间限制！您将成为行业标杆之一，名列杰出企业之列。这更是为您提供与社会大众交流的平台，以提高您的品牌影响力。 </p>
+        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+            <h5><?php translate('成功设计线上展览')?></h5>
+            <p>
+                <?php translate('您的获奖作品将在颁奖典礼后发布于成功设计线上展览，更棒的是这是一项永久福利，展览没有时间限制！您将成为行业标杆之一，名列杰出企业之列。这更是为您提供与社会大众交流的平台，以提高您的品牌影响力。')?>
+            </p>
         </div>
-        <div class="col-xm-3 col-sm-3 col-md-3 col-lg-3">
-            <h5>成功设计大奖年鉴</h5>
-            <p>今年所有获奖作品将被收录入《2016 成功设计大赛》年鉴，以展示获奖作品、分享成功设计和团队背后的故事。 </p>
+        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+            <h5><?php translate('成功设计大奖年鉴')?></h5>
+            <p>
+                <?php translate('今年所有获奖作品将被收录入《2016 成功设计大赛》年鉴，以展示获奖作品、分享成功设计和团队背后的故事。')?>
+            </p>
         </div>
-        <div class="col-xm-3 col-sm-3 col-md-3 col-lg-3">
-            <h5>成功设计之夜</h5>
-            <p>获奖者将受邀参加于2016 年9 月举行的“ 成功设计之夜”颁奖典礼。最成功设计大奖得主将在聚光灯下接受颁奖。届时将有各大主流媒体前来报道， 是您进行品牌宣传的极好机会。另外也会有专业摄影师拍照记录，照片可在活动后下载，作为您宣传的助力。</p>
+        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+            <h5><?php translate('成功设计之夜')?></h5>
+            <p>
+                <?php translate('获奖者将受邀参加于2016年9月举行的“ 成功设计之夜”颁奖典礼。最成功设计大奖得主将在聚光灯下接受颁奖。届时将有各大主流媒体前来报道， 是您进行品牌宣传的极好机会。另外也会有专业摄影师拍照记录，照片可在活动后下载，作为您宣传的助力。')?>
+            </p>
         </div>
-        <div class="col-xm-3 col-sm-3 col-md-3 col-lg-3">
-            <h5>证书与奖杯</h5>
-            <p>颁奖典礼当日，获奖者将获得一套相关获奖作品的获奖证书和奖杯，以彰显获奖者的殊荣。另外在活动后，获奖者可以获得自己的电子版获奖证书，以作宣传使用。</p>
+        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+            <h5><?php translate('证书与奖杯')?></h5>
+            <p>
+                <?php translate('颁奖典礼当日，获奖者将获得一套相关获奖作品的获奖证书和奖杯，以彰显获奖者的殊荣。另外在活动后，获奖者可以获得自己的电子版获奖证书，以作宣传使用。')?>
+            </p>
         </div>
-        <div class="col-xm-3 col-sm-3 col-md-3 col-lg-3">
-            <h5>成功设计自媒体传播</h5>
-            <p>您的获奖作品将在颁奖典礼后发布于成功设计线上展览及微信传播！您将成为行业标杆之一，名列杰出企业之列。这更是为您提供与社会大众交流的平台，以提高您的品牌影响力。</p>
+        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+            <h5><?php translate('成功设计自媒体传播')?></h5>
+            <p>
+                <?php translate('您的获奖作品将在颁奖典礼后发布于成功设计线上展览及微信传播！您将成为行业标杆之一，名列杰出企业之列。这更是为您提供与社会大众交流的平台，以提高您的品牌影响力。')?>
+            </p>
         </div>
-        <div class="col-xm-3 col-sm-3 col-md-3 col-lg-3">
-            <h5>更多定制推广服务</h5>
-            <p>获奖作品将有机会被推荐接受我们合作媒体和网站的专访，获得价值百万的媒体传播。可针对您的需求，定制更加多元化的线上线下的推广服务，展示您的获奖作品，加深您的品牌影响力。</p>
+        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+            <h5><?php translate('更多定制推广服务')?></h5>
+            <p>
+                <?php translate('获奖作品将有机会被推荐接受我们合作媒体和网站的专访，获得价值百万的媒体传播。可针对您的需求，定制更加多元化的线上线下的推广服务，展示您的获奖作品，加深您的品牌影响力。')?>
+            </p>
         </div>
-        <div class="col-xm-3 col-sm-3 col-md-3 col-lg-3">
-            <h5>合作赛事推荐</h5>
-            <p>成功设计大赛的获奖者将被免费推荐到亚洲设计管理论坛以及台湾的金点奖，角逐国际大奖。</p>
+        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+            <h5><?php translate('合作赛事推荐')?></h5>
+            <p>
+                <?php translate('成功设计大赛的获奖者将被免费推荐到亚洲设计管理论坛以及台湾的金点奖，角逐国际大奖。')?>
+            </p>
         </div>
     </div>
 </div>
 <div id="section5">
-    <h3>大赛时间表</h3>
-    <img src="__PUBLIC__/img/contest2016/schedule.png" style="width:90%;margin-bottom:20px;" alt="">
+    <h3><?php translate('大赛时间表')?></h3>
+    <?php if (isset($_SESSION['lang']) and $_SESSION['lang'] == 'en') { ?>
+        <img src="__PUBLIC__/img/contest2016/scheduleen.png" style="width:90%;margin-bottom:20px;" alt="">
+        <?php } else{ ?>
+            <img src="__PUBLIC__/img/contest2016/schedule.png" style="width:90%;margin-bottom:20px;" alt="">
+            <?php } ?>
 </div>
 <div id="section6">
-    <h3>奖项设置</h3>
-    <img src="__PUBLIC__/img/contest2016/award.png" style="width:90%;margin-bottom:50px;" alt="">
+    <h3><?php translate('奖项设置')?></h3>
+    <?php if (isset($_SESSION['lang']) and $_SESSION['lang'] == 'en') { ?>
+        <img src="__PUBLIC__/img/contest2016/awarden.png" style="width:90%;margin-bottom:50px;" alt="">
+        <?php } else{ ?>
+            <img src="__PUBLIC__/img/contest2016/award.png" style="width:90%;margin-bottom:50px;" alt="">
+            <?php } ?>
     <br>
-    <a href="{:U('Contest/apply',array('contestId'=>$contest['id']))}" class="join" style="position:relative;top:-20px;">立即参加</a>
+    <a href="{:U('Contest/apply')}" class="join" style="position:relative;top:-20px;">
+        <?php translate('立即参加')?>
+    </a>
 </div>
 <script>
 $(document).ready(function() {
     $('#section3 .subcategory').hide();
     $('#section3 .category button').click(function() {
-        var cate = $(this).text();
-        console.log(cate);
+        var cate = $(this).attr('name');
         $('#section3 .subcategory').hide();
         $('#section3 .subcategory[name="' + cate + '"]').show();
     });

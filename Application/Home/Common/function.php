@@ -27,4 +27,25 @@ function genRandStr() {
 	}
 	return md5($str);
 }
+function translate($str){
+	if (!isset($_SESSION['lang'])) {
+		echo $str;
+	}
+	else {
+		if ($_SESSION['lang'] == 'ch') {
+			echo $str;
+		}
+		elseif ($_SESSION['lang'] == 'en') {
+			if (!isset($_SESSION['dictionary'])) {
+				$translation = M('translation')->select();
+				$dictionary = array();
+				foreach ($translation as $key => $value) {
+					$dictionary[$value['ch']] = $value['en'];
+				}
+				session('dictionary', $dictionary);
+			}
+			echo $_SESSION['dictionary'][$str];
+		}
+	}
+}
 ?>

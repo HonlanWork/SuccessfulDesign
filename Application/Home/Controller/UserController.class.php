@@ -24,23 +24,39 @@ class UserController extends CommonController {
 			$user['nickname'] = $_POST['nickname'];
 			$user['gender'] = intval($_POST['gender']);
 			$user['cellphone'] = $_POST['cellphone'];
-			$user['companyC'] = $_POST['companyC'];
-			$user['companyE'] = $_POST['companyE'];
-			$user['companyP'] = $_POST['companyP'];
+			$user['companyc'] = $_POST['companyc'];
+			$user['companye'] = $_POST['companye'];
+			$user['companyp'] = $_POST['companyp'];
 			$user['position'] = $_POST['position'];
-			$user['contacterC'] = $_POST['contacterC'];
-			$user['contacterE'] = $_POST['contacterE'];
-			$user['phone'] = $_POST['phone'];
 			$user['fax'] = $_POST['fax'];
 			$user['zipcode'] = $_POST['zipcode'];
-			$user['addressC'] = $_POST['addressC'];
-			$user['addressE'] = $_POST['addressE'];
-			$user['introduction'] = $_POST['introduction'];
+			$user['companyac'] = $_POST['companyac'];
+			$user['companyae'] = $_POST['companyae'];
 			M('user')->where(array('id'=>$_SESSION['uid'], 'email'=>$_SESSION['uemail']))->save($user);
 			$this->redirect('User/home');
 		}
 		else {
 			$this->redirect('User/home');
 		}
+	}
+
+	public function submissions() {
+		$this->all = M('submission')->where(array('user_id'=>$_SESSION['uid']))->select();
+		$this->notcomplete = M('submission')->where(array('user_id'=>$_SESSION['uid'], 'iscomplete'=>0))->select();
+		$this->notpaied = M('submission')->where(array('user_id'=>$_SESSION['uid'], 'ispaied'=>0))->select();
+		$this->notsubmitted = M('submission')->where(array('user_id'=>$_SESSION['uid'], 'issubmitted'=>0))->select();
+		$this->display();
+	}
+
+	public function submission() {
+		$this->submission = M('submission')->where(array('id'=>I('id'), 'user_id'=>$_SESSION['uid']))->find();
+		$images = array();
+		for ($i = 1; $i <= 6; $i++) { 
+			if ($this->submission['image'.$i] != '') {
+				array_push($images, $this->submission['image'.$i]);
+			}
+		}
+		$this->images = $images;
+		$this->display();
 	}
 }
