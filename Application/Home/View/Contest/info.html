@@ -1,0 +1,554 @@
+<style>
+#main {
+    padding: 40px 10%;
+    padding-top: 20px;
+}
+
+#main #addinfo {
+    padding-left: 5%;
+    border-left: 1px solid #ddd;
+}
+
+#main #addinfo.plain {
+    padding-left: 0;
+    border-left: none;
+}
+
+#main #addinfo p {
+    color: #4E6B88;
+}
+
+#main #addinfo input.form-control,
+select.form-control {
+    color: #666;
+    max-width: 400px;
+}
+
+#main #addinfo .cell {
+    padding-bottom: 10px;
+    padding-top: 15px;
+    border-bottom: 1px solid #ddd;
+}
+
+#main #addinfo .cell:first-child {
+    padding-top: 0;
+}
+
+#main #addinfo .cell:last-child {
+    border-bottom: none;
+}
+
+#main #addinfo .reminder {
+    color: #F05036;
+    font-size: 12px;
+}
+
+#main #addinfo textarea {
+    resize: none;
+    width: 100%;
+}
+
+#main #addinfo a[role='tab'] {
+    color: #888;
+    font-size: 13px;
+}
+
+#main #addinfo li.active a[role='tab'] {
+    color: #4E6B88;
+}
+#main #addinfo button.detail {
+    border: none;
+    outline: none;
+    float: right;
+    background-color: #f5f5f5;
+}
+
+#main #guide {
+    padding-right: 5%;
+}
+
+#main #guide.plain {
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ddd;
+}
+
+#main #guide ol li {
+    margin-bottom: 3px;
+    color: #888;
+}
+
+#main #guide ol li.active {
+    color: #F05036;
+}
+
+#main #guide p {
+    color: #666;
+}
+
+#main #guide p span {
+    color: #F05036;
+    margin-left: 3px;
+    margin-right: 3px;
+}
+</style>
+<form class="form" method="post" action="{:U('Contest/info_handle')}" enctype="multipart/form-data">
+    <input type="text" style="display:none;" name="id" value="{$submission['id']}">
+    <input type="text" style="display:none;" name="contest_id" value="{$submission['contest_id']}">
+    <div class="row">
+        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
+            <div id="guide">
+                <h3 style="font-size:20px;color:#4E6B88;margin-bottom:15px;"><?php translate('仅需四步完成作品')?></h3>
+                <ol>
+                    <li><?php translate('添加新作品')?></li>
+                    <li><?php translate('完成支付')?></li>
+                    <li class="active"><?php translate('填写详情')?></li>
+                    <li><?php translate('提交作品')?></li>
+                </ol>
+                <div id="note" style="margin-top:20px;">
+                    <p><?php translate('请尽可能<span>完整</span>地填写作品各项信息，所有字段都是<span>必填项</span>，填写完毕后点击<span>保存</span>以保存修改')?></p>
+                    <p><?php translate('请放心，<span>任何时刻</span>都能通过右上角头像中<span>我的作品</span>回到该页面，继续对作品各项信息进行<span>修改</span>和<span>补充</span>，只要作品<span>尚未提交</span>即可')?></p>
+                    <p><?php translate('如果您确定自己的作品信息<span>已经完美</span>，不需要再作任何修改，点击<span>下一步</span>进入作品提交')?></p>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
+            <div id="addinfo">
+                <h3 class="title"><?php translate('2 填写详情')?></h3>
+                <div class="panel panel-default">
+                    <div class="panel-heading" style="color:#4E6B88;font-size:16px;"><?php translate('个人信息')?><button class="detail"><span class="fa fa-fw fa-angle-double-up"></span></button></div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <p class="reminder" style="margin-left:15px;"><?php translate('如果以下信息在个人资料中已经填写完整，此处将自动补全')?></p>
+                            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                <div class="form-group">
+                                    <p><?php translate('公司名称（中文）')?></p>
+                                    <input type="text" name="companyc" class="form-control" value="{$submission['companyc']}">
+                                </div>
+                                <div class="form-group">
+                                    <p><?php translate('公司名称（英文）')?></p>
+                                    <input type="text" name="companye" class="form-control" value="{$submission['companye']}">
+                                </div>
+                                <div class="form-group">
+                                    <p><?php translate('公司电话')?></p>
+                                    <input type="text" name="companyp" class="form-control" value="{$submission['companyp']}">
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                <div class="form-group">
+                                    <p><?php translate('邮箱')?></p>
+                                    <input type="text" name="email" class="form-control" value="{$submission['email']}">
+                                </div>
+                                <div class="form-group">
+                                    <p><?php translate('手机')?></p>
+                                    <input type="text" name="cellphone" class="form-control" value="{$submission['cellphone']}">
+                                </div>
+                                <div class="form-group">
+                                    <p><?php translate('职位')?></p>
+                                    <input type="text" name="position" class="form-control" value="{$submission['position']}">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading" style="color:#4E6B88;font-size:16px;"><?php translate('基本信息')?><button class="detail"><span class="fa fa-fw fa-angle-double-up"></span></button></div>
+                    <div class="panel-body">
+                        <p class="reminder"><?php translate('请注意，您所填写的作品名称将用于今后大赛相关的所有宣传材料中')?></p>
+                        <div class="form-group">
+                            <p><?php translate('作品名（英文）')?></p>
+                            <input type="text" name="titlee" class="form-control" value="{$submission['titlee']}">
+                        </div>
+                        <div class="form-group">
+                            <p><?php translate('作品名（中文）')?></p>
+                            <input type="text" name="titlec" class="form-control" value="{$submission['titlec']}">
+                        </div>
+                        <div class="form-group">
+                            <p><?php translate('作品类别')?></p>
+                            <span style="display:none;" id="hidden1">{$submission['category']}</span>
+                            <select class="form-control" name="category">
+                                <option value="产品"><?php translate('产品')?></option>
+                                <option value="空间"><?php translate('空间')?></option>
+                                <option value="营销"><?php translate('营销')?></option>
+                                <option value="数字"><?php translate('数字')?></option>
+                                <option value="视觉"><?php translate('视觉')?></option>
+                                <option value="商业模式"><?php translate('商业模式')?></option>
+                                <option value="社会创新"><?php translate('社会创新')?></option>
+                                <option value="众创空间"><?php translate('众创空间')?></option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading" style="color:#4E6B88;font-size:16px;"><?php translate('详细信息')?><button class="detail"><span class="fa fa-fw fa-angle-double-up"></span></button></div>
+                    <div class="panel-body">
+                        <div class="cell">
+                            <p class="reminder"><?php translate('设计作品需在2016年10月前在中国市场上市或已发布')?></p>
+                            <div class="form-group">
+                                <p><?php translate('发布日期')?></p>
+                                <input type="date" name="addts" class="form-control" value="{$submission['addts']}">
+                            </div>
+                        </div>
+                        <div class="cell">
+                            <p class="reminder"><?php translate('将设计背景，细节，以及您作品的与众不同之处进行阐述（不超过300字）')?></p>
+                            <div class="form-group">
+                                <p><?php translate('简述（英文）')?></p>
+                                <textarea rows="5" name="introductione" class="form-control">{$submission.introductione}</textarea>
+                            </div>
+                            <div class="form-group">
+                                <p><?php translate('简述（中文）')?></p>
+                                <textarea rows="5" name="introductionc" class="form-control">{$submission.introductionc}</textarea>
+                            </div>
+                        </div>
+                        <div class="cell">
+                            <div class="form-group">
+                                <p><?php translate('项目需求（英文）')?></p>
+                                <textarea rows="5" name="demande" class="form-control" placeholder="">{$submission.demande}</textarea>
+                            </div>
+                            <div class="form-group">
+                                <p><?php translate('项目需求（中文）')?></p>
+                                <textarea rows="5" name="demandc" class="form-control" placeholder="">{$submission.demandc}</textarea>
+                            </div>
+                            <div class="form-group">
+                                <p><?php translate('面临挑战（英文）')?></p>
+                                <textarea rows="5" name="challengee" class="form-control" placeholder="">{$submission.challengee}</textarea>
+                            </div>
+                            <div class="form-group">
+                                <p><?php translate('面临挑战（中文）')?></p>
+                                <textarea rows="5" name="challengec" class="form-control" placeholder="">{$submission.challengec}</textarea>
+                            </div>
+                            <div class="form-group">
+                                <p><?php translate('预算评估（英文）')?></p>
+                                <textarea rows="5" name="coste" class="form-control" placeholder="">{$submission.coste}</textarea>
+                            </div>
+                            <div class="form-group">
+                                <p><?php translate('预算评估（中文）')?></p>
+                                <textarea rows="5" name="costc" class="form-control" placeholder="">{$submission.costc}</textarea>
+                            </div>
+                            <div class="form-group">
+                                <p><?php translate('设计解决方案（英文）')?></p>
+                                <textarea rows="5" name="solutione" class="form-control" placeholder="">{$submission.solutione}</textarea>
+                            </div>
+                            <div class="form-group">
+                                <p><?php translate('设计解决方案（中文）')?></p>
+                                <textarea rows="5" name="solutionc" class="form-control" placeholder="">{$submission.solutionc}</textarea>
+                            </div>
+                        </div>
+                        <div class="cell">
+                            <p class="reminder"><?php translate('请用图表和数据来表现此项目的设计所取得的成效，如: 增进市场业绩，降低生产成本 ,用户使用态度和行为的提升, 内部管理的提升,对环境、社会或其他因素带来的影响')?></p>
+                            <div class="form-group">
+                                <p><?php translate('项目成效总结（英文）')?></p>
+                                <textarea rows="5" name="conclusione" class="form-control">{$submission.conclusione}</textarea>
+                            </div>
+                            <div class="form-group" style="margin-bottom:0;">
+                                <p><?php translate('项目成效总结（中文）')?></p>
+                                <textarea rows="5" name="conclusionc" class="form-control">{$submission.conclusionc}</textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading" style="color:#4E6B88;font-size:16px;"><?php translate('图像信息')?><button class="detail"><span class="fa fa-fw fa-angle-double-up"></span></button></div>
+                    <div class="panel-body">
+                        <div class="cell" id="images">
+                            <div class="row">
+                                <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3">
+                                    <div style="position:relative;width:100%;margin-bottom:15px;">
+                                        <p style="width:100%;text-align:center;border-radius:3px;border:1px solid #ddd;color:#666;background-color:#F4F4F4;position:relative;">
+                                            <if condition="$submission['image1'] eq ''">
+                                                <span class="fa fa-fw fa-file-image-o" style="color:#ddd;font-size:40px;padding-top:20px;padding-bottom:20px;"></span>
+                                                <img src="" alt="" name="image11" style="width:100%;height:auto;display:none;border-radius:3px;">
+                                                <button name="image11" style="display:none;z-index:999;position:absolute;top:5px;right:5px;font-size:16px;border-radius:50%;width:28px;border:none;color:#fff;background-color:rgba(20,20,20,0.8);"><span>x</span></button>
+                                                <else/>
+                                                <span class="fa fa-fw fa-file-image-o" style="color:#ddd;font-size:40px;padding-top:20px;padding-bottom:20px;display:none;"></span>
+                                                <img src="__PUBLIC__{$submission['image1']}" alt="" name="image11" style="width:100%;height:auto;border-radius:3px;">
+                                                <button name="image11" style="z-index:999;position:absolute;top:5px;right:5px;font-size:16px;border-radius:50%;width:28px;border:none;color:#fff;background-color:rgba(20,20,20,0.8);"><span>x</span></button>
+                                            </if>
+                                        </p>
+                                        <input type="file" accept="image/*" style="opacity:0;position:absolute;left:0;top:0;width:100%;height:100%;z-index:99;cursor:pointer;" name="image1" capture="camera">
+                                        <input type="text" name="image11" value="" style="display:none;">
+                                    </div>
+                                    <div style="position:relative;width:100%;margin-bottom:15px;">
+                                        <p style="width:100%;text-align:center;border-radius:3px;border:1px solid #ddd;color:#666;background-color:#F4F4F4;position:relative;">
+                                            <if condition="$submission['image2'] eq ''">
+                                                <span class="fa fa-fw fa-file-image-o" style="color:#ddd;font-size:40px;padding-top:20px;padding-bottom:20px;"></span>
+                                                <img src="" alt="" name="image22" style="width:100%;height:auto;display:none;border-radius:3px;">
+                                                <button name="image22" style="display:none;z-index:999;position:absolute;top:5px;right:5px;font-size:16px;border-radius:50%;width:28px;border:none;color:#fff;background-color:rgba(20,20,20,0.8);"><span>x</span></button>
+                                                <else/>
+                                                <span class="fa fa-fw fa-file-image-o" style="color:#ddd;font-size:40px;padding-top:20px;padding-bottom:20px;display:none;"></span>
+                                                <img src="__PUBLIC__{$submission['image2']}" alt="" name="image22" style="width:100%;height:auto;border-radius:3px;">
+                                                <button name="image22" style="z-index:999;position:absolute;top:5px;right:5px;font-size:16px;border-radius:50%;width:28px;border:none;color:#fff;background-color:rgba(20,20,20,0.8);"><span>x</span></button>
+                                            </if>
+                                        </p>
+                                        <input type="file" accept="image/*" style="opacity:0;position:absolute;left:0;top:0;width:100%;height:100%;z-index:99;cursor:pointer;" name="image2" capture="camera">
+                                        <input type="text" name="image22" value="" style="display:none;">
+                                    </div>
+                                    <div style="position:relative;width:100%;margin-bottom:15px;">
+                                        <p style="width:100%;text-align:center;border-radius:3px;border:1px solid #ddd;color:#666;background-color:#F4F4F4;position:relative;">
+                                            <if condition="$submission['image3'] eq ''">
+                                                <span class="fa fa-fw fa-file-image-o" style="color:#ddd;font-size:40px;padding-top:20px;padding-bottom:20px;"></span>
+                                                <img src="" alt="" name="image33" style="width:100%;height:auto;display:none;border-radius:3px;">
+                                                <button name="image33" style="display:none;z-index:999;position:absolute;top:5px;right:5px;font-size:16px;border-radius:50%;width:28px;border:none;color:#fff;background-color:rgba(20,20,20,0.8);"><span>x</span></button>
+                                                <else/>
+                                                <span class="fa fa-fw fa-file-image-o" style="color:#ddd;font-size:40px;padding-top:20px;padding-bottom:20px;display:none;"></span>
+                                                <img src="__PUBLIC__{$submission['image3']}" alt="" name="image33" style="width:100%;height:auto;border-radius:3px;">
+                                                <button name="image33" style="z-index:999;position:absolute;top:5px;right:5px;font-size:16px;border-radius:50%;width:28px;border:none;color:#fff;background-color:rgba(20,20,20,0.8);"><span>x</span></button>
+                                            </if>
+                                        </p>
+                                        <input type="file" accept="image/*" style="opacity:0;position:absolute;left:0;top:0;width:100%;height:100%;z-index:99;cursor:pointer;" name="image3" capture="camera">
+                                        <input type="text" name="image33" value="" style="display:none;">
+                                    </div>
+                                </div>
+                                <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3">
+                                    <div style="position:relative;width:100%;margin-bottom:15px;">
+                                        <p style="width:100%;text-align:center;border-radius:3px;border:1px solid #ddd;color:#666;background-color:#F4F4F4;position:relative;">
+                                            <if condition="$submission['image4'] eq ''">
+                                                <span class="fa fa-fw fa-file-image-o" style="color:#ddd;font-size:40px;padding-top:20px;padding-bottom:20px;"></span>
+                                                <img src="" alt="" name="image44" style="width:100%;height:auto;display:none;border-radius:3px;">
+                                                <button name="image44" style="display:none;z-index:999;position:absolute;top:5px;right:5px;font-size:16px;border-radius:50%;width:28px;border:none;color:#fff;background-color:rgba(20,20,20,0.8);"><span>x</span></button>
+                                                <else/>
+                                                <span class="fa fa-fw fa-file-image-o" style="color:#ddd;font-size:40px;padding-top:20px;padding-bottom:20px;display:none;"></span>
+                                                <img src="__PUBLIC__{$submission['image4']}" alt="" name="image44" style="width:100%;height:auto;border-radius:3px;">
+                                                <button name="image44" style="z-index:999;position:absolute;top:5px;right:5px;font-size:16px;border-radius:50%;width:28px;border:none;color:#fff;background-color:rgba(20,20,20,0.8);"><span>x</span></button>
+                                            </if>
+                                        </p>
+                                        <input type="file" accept="image/*" style="opacity:0;position:absolute;left:0;top:0;width:100%;height:100%;z-index:99;cursor:pointer;" name="image4" capture="camera">
+                                        <input type="text" name="image44" value="" style="display:none;">
+                                    </div>
+                                    <div style="position:relative;width:100%;margin-bottom:15px;">
+                                        <p style="width:100%;text-align:center;border-radius:3px;border:1px solid #ddd;color:#666;background-color:#F4F4F4;position:relative;">
+                                            <if condition="$submission['image5'] eq ''">
+                                                <span class="fa fa-fw fa-file-image-o" style="color:#ddd;font-size:40px;padding-top:20px;padding-bottom:20px;"></span>
+                                                <img src="" alt="" name="image55" style="width:100%;height:auto;display:none;border-radius:3px;">
+                                                <button name="image55" style="display:none;z-index:999;position:absolute;top:5px;right:5px;font-size:16px;border-radius:50%;width:28px;border:none;color:#fff;background-color:rgba(20,20,20,0.8);"><span>x</span></button>
+                                                <else/>
+                                                <span class="fa fa-fw fa-file-image-o" style="color:#ddd;font-size:40px;padding-top:20px;padding-bottom:20px;display:none;"></span>
+                                                <img src="__PUBLIC__{$submission['image5']}" alt="" name="image55" style="width:100%;height:auto;border-radius:3px;">
+                                                <button name="image55" style="z-index:999;position:absolute;top:5px;right:5px;font-size:16px;border-radius:50%;width:28px;border:none;color:#fff;background-color:rgba(20,20,20,0.8);"><span>x</span></button>
+                                            </if>
+                                        </p>
+                                        <input type="file" accept="image/*" style="opacity:0;position:absolute;left:0;top:0;width:100%;height:100%;z-index:99;cursor:pointer;" name="image5" capture="camera">
+                                        <input type="text" name="image55" value="" style="display:none;">
+                                    </div>
+                                    <div style="position:relative;width:100%;margin-bottom:15px;">
+                                        <p style="width:100%;text-align:center;border-radius:3px;border:1px solid #ddd;color:#666;background-color:#F4F4F4;position:relative;">
+                                            <if condition="$submission['image6'] eq ''">
+                                                <span class="fa fa-fw fa-file-image-o" style="color:#ddd;font-size:40px;padding-top:20px;padding-bottom:20px;"></span>
+                                                <img src="" alt="" name="image66" style="width:100%;height:auto;display:none;border-radius:3px;">
+                                                <button name="image66" style="display:none;z-index:999;position:absolute;top:5px;right:5px;font-size:16px;border-radius:50%;width:28px;border:none;color:#fff;background-color:rgba(20,20,20,0.8);"><span>x</span></button>
+                                                <else/>
+                                                <span class="fa fa-fw fa-file-image-o" style="color:#ddd;font-size:40px;padding-top:20px;padding-bottom:20px;display:none;"></span>
+                                                <img src="__PUBLIC__{$submission['image6']}" alt="" name="image66" style="width:100%;height:auto;border-radius:3px;">
+                                                <button name="image66" style="z-index:999;position:absolute;top:5px;right:5px;font-size:16px;border-radius:50%;width:28px;border:none;color:#fff;background-color:rgba(20,20,20,0.8);"><span>x</span></button>
+                                            </if>
+                                        </p>
+                                        <input type="file" accept="image/*" style="opacity:0;position:absolute;left:0;top:0;width:100%;height:100%;z-index:99;cursor:pointer;" name="image6" capture="camera">
+                                        <input type="text" name="image66" value="" style="display:none;">
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                    <p style="color:#F05036;"><?php translate('图片要求')?></p>
+                                    <ul style="color:#888">
+                                        <li><?php translate('每件作品至少上传1张照片，但不超过6张')?></li>
+                                        <li><?php translate('图像尺寸：长28cm（最小20cm），宽21cm（最小18cm）')?></li>
+                                        <li><?php translate('图像分辨率：300dpi')?></li>
+                                        <li><?php translate('颜色模式：CMYK')?></li>
+                                        <li><?php translate('文件格式：GIF or JPG')?></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cell">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                    <div style="position:relative;width:100%;margin-bottom:8px;">
+                                        <div style="width:100%;text-align:center;border-radius:3px;border:1px solid #ddd;color:#666;background-color:#F4F4F4;position:relative;">
+                                            <if condition="$submission['video'] eq ''">
+                                                <span class="fa fa-fw fa-file-video-o" style="color:#ddd;font-size:40px;padding-top:40px;padding-bottom:40px;"></span>
+                                                <div id="videoinfo" style="display:none;height:120px;">
+                                                    <p style="width:100%;position:relative;top:30px;padding-left:40px;padding-right:40px;" name="videoname" style="color:#888;"></p>
+                                                    <p style="width:100%;position:relative;top:30px;padding-left:40px;padding-right:40px;" name="videosize" style="color:#888;"></p>
+                                                </div>
+                                                <button name="video" style="display:none;z-index:999;position:absolute;top:5px;right:5px;font-size:16px;border-radius:50%;width:28px;border:none;color:#fff;background-color:rgba(20,20,20,0.8);"><span>x</span></button>
+                                                <else/>
+                                                <span class="fa fa-fw fa-file-video-o" style="color:#ddd;font-size:40px;display:none;padding-top:40px;padding-bottom:40px;"></span>
+                                                <div id="videoinfo" style="display:none;height:120px;">
+                                                    <p style="width:100%;position:relative;top:30px;padding-left:40px;padding-right:40px;" name="videoname" style="color:#888;"></p>
+                                                    <p style="width:100%;position:relative;top:30px;padding-left:40px;padding-right:40px;" name="videosize" style="color:#888;"></p>
+                                                </div>
+                                                <video controls="controls" loop="loop" muted preload="auto" style="width:100%;height:auto;border-radius:3px;margin-bottom:-7px;">
+                                                    <source src="__PUBLIC__{$submission['video']}" type="video/mp4">
+                                                </video>
+                                                <button name="video" style="z-index:999;position:absolute;top:5px;right:5px;font-size:16px;border-radius:50%;width:28px;border:none;color:#fff;background-color:rgba(20,20,20,0.8);"><span>x</span></button>
+                                            </if>
+                                        </div>
+                                        <if condition="$submission['video'] eq ''">
+                                            <input type="file" accept="video/*" style="opacity:0;position:absolute;left:0;top:0;width:100%;height:100%;" name="video" capture="camcorder">
+                                            <else/>
+                                            <input type="file" accept="video/*" style="opacity:0;position:absolute;left:0;top:0;width:100%;height:100%;display:none;" name="video" capture="camcorder">
+                                        </if>
+                                        <input type="text" name="videostatus" style="display:none;">
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                    <p style="color:#F05036;"><?php translate('视频要求')?></p>
+                                    <ul style="color:#888">
+                                        <li><?php translate('视频文件为可选，如有需要则上传')?></li>
+                                        <li><?php translate('最长时间：10分钟')?></li>
+                                        <li><?php translate('文件格式：MP4')?></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cell" style="padding-bottom:0;">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                    <div style="position:relative;width:100%;margin-bottom:8px;">
+                                        <div style="width:100%;height:120px;text-align:center;border-radius:3px;border:1px solid #ddd;color:#666;background-color:#F4F4F4;position:relative;">
+                                            <if condition="$submission['file'] eq ''">
+                                                <span class="fa fa-fw fa-file-text-o" style="color:#ddd;font-size:40px;padding-top:40px;padding-bottom:40px;"></span>
+                                                <button name="file" style="display:none;z-index:999;position:absolute;top:5px;right:5px;font-size:16px;border-radius:50%;width:28px;border:none;color:#fff;background-color:rgba(20,20,20,0.8);"><span>x</span></button>
+                                                <p name="file" style="width:100%;position:relative;top:40px;padding-left:40px;padding-right:40px;display:none;"></p>
+                                                <else/>
+                                                <span class="fa fa-fw fa-file-text-o" style="color:#ddd;font-size:40px;padding-top:40px;padding-bottom:40px;display:none;"></span>
+                                                <button name="file" style="z-index:999;position:absolute;top:5px;right:5px;font-size:16px;border-radius:50%;width:28px;border:none;color:#fff;background-color:rgba(20,20,20,0.8);"><span>x</span></button>
+                                                <p name="file" style="width:100%;position:relative;top:40px;padding-left:40px;padding-right:40px;"><?php echo substr($submission['file'], strrpos($submission['file'], '/') + 1);?></p>
+                                            </if>
+                                        </div>
+                                        <input type="file" accept="application/msword,application/pdf" style="opacity:0;position:absolute;left:0;top:0;width:100%;height:100%;" name="file">
+                                        <input type="text" name="fileinfo" style="display:none;">
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                    <p style="color:#F05036;"><?php translate('补充文件要求')?></p>
+                                    <ul style="color:#888">
+                                        <li><?php translate('补充文件为可选，如对作品有额外说明（如商业成效、社会影响等），可上传补充文件')?></li>
+                                        <li><?php translate('最大文件大小：5MB')?></li>
+                                        <li><?php translate('文件格式：DOC or PDF')?></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-success" style="margin-top:20px;"><?php translate('保存')?></button>
+                <a href="{:U('Contest/submit', array('id'=>$submission['id']))}" class="btn btn-primary" style="margin-top:20px;float:right"><?php translate('下一步')?></a>
+            </div>
+        </div>
+    </div>
+</form>
+<script>
+$(document).ready(function() {
+    $('#main select[name="category"] option').each(function(index, el) {
+        if ($(this).val() == $('#main #hidden1').text()) {
+            $(this).attr('selected', 'selected');
+        }
+    });
+
+    if ($(window).width() < 768) {
+        $('#main #addinfo').addClass('plain');
+        $('#main #guide').addClass('plain');
+    } else {
+        $('#main #addinfo').removeClass('plain');
+        $('#main #guide').removeClass('plain');
+    }
+
+    $(window).resize(function(event) {
+        if ($(this).width() < 768) {
+            $('#main #addinfo').addClass('plain');
+            $('#main #guide').addClass('plain');
+        } else {
+            $('#main #addinfo').removeClass('plain');
+            $('#main #guide').removeClass('plain');
+        }
+    });
+
+    $('#main #addinfo button.detail').click(function(event) {
+        event.preventDefault();
+        var $button = $(this);
+        var $span = $button.children('span.fa');
+        if ($span.hasClass('fa-angle-double-up')) {
+            $span.removeClass('fa-angle-double-up').addClass('fa-angle-double-down');
+            $button.parent().siblings('.panel-body').slideUp('fast');
+        }
+        else if ($span.hasClass('fa-angle-double-down')) {
+            $span.removeClass('fa-angle-double-down').addClass('fa-angle-double-up');
+            $button.parent().siblings('.panel-body').slideDown('fast');
+        }
+    });
+
+    $('#main #images input').change(function() {
+        $(this).siblings('p').append("<span class='fa fa-fw fa-spin fa-spinner' style='position:absolute;top:10px;left:10px;font-size:18px;color:#666;'></span>");
+        var image;
+        var id = $(this).attr('name');
+        lrz($(this)[0].files[0], {
+                width: 960,
+                height: 960,
+                quality: 0.8
+            })
+            .then(function(rst) {
+                image = rst.base64;
+                $('#main img[name="' + id + id.substr(id.length - 1) + '"]').attr('src', image);
+                $('#main img[name="' + id + id.substr(id.length - 1) + '"]').siblings('span.fa-file-image-o').hide();
+                $('#main img[name="' + id + id.substr(id.length - 1) + '"]').show();
+                $('#main button[name="' + id + id.substr(id.length - 1) + '"]').show();
+                $('#main input[name="' + id + id.substr(id.length - 1) + '"]').val(image);
+                $('#main span.fa-spinner').remove();
+            })
+            .catch(function(err) {
+                // 处理失败会执行
+            })
+            .always(function() {
+                // 不管是成功失败，都会执行
+            });
+    });
+
+    $('#main #images button').click(function(event) {
+        event.preventDefault();
+        var id = $(this).attr('name');
+        $('#main input[name="' + id + '"]').val('remove');
+        $('#main img[name="' + id + '"]').hide();
+        $('#main button[name="' + id + '"]').hide();
+        $('#main img[name="' + id + '"]').siblings('span.fa-file-image-o').show();
+        $('#main input[name="' + id.substr(0, id.length - 1) + '"]').val('');
+    });
+
+    $('#main input[name="video"]').change(function() {
+        var files = $(this)[0].files[0];
+        $('#main span.fa-file-video-o').hide();
+        $('#main p[name="videoname"]').text(files['name']).show();
+        $('#main p[name="videosize"]').text(parseFloat(files['size'] / 1024 / 1024).toFixed(2) + 'MB');
+        $('#main #videoinfo').show();
+        $('#main button[name="video"]').show();
+        $('#main input[name="videostatus"]').val('add');
+    });
+
+    $('#main button[name="video"]').click(function(event) {
+        event.preventDefault();
+        $('#main #videoinfo').hide();
+        $('#main button[name="video"]').hide();
+        $('#main video').hide();
+        $('#main input[name="video"]').val('').show();
+        $('#main input[name="videostatus"]').val('remove');
+        $('#main span.fa-file-video-o').show();
+    });
+
+    $('#main input[name="file"]').change(function() {
+        var files = $(this)[0].files[0];
+        $('#main span.fa-file-text-o').hide();
+        $('#main p[name="file"]').text(files['name']).show();
+        $('#main button[name="file"]').show();
+        $('#main input[name="fileinfo"]').val(files['name']);
+    });
+
+    $('#main button[name="file"]').click(function(event) {
+        event.preventDefault();
+        $('#main p[name="file"]').text('').hide();
+        $('#main button[name="file"]').hide();
+        $('#main input[name="file"]').val('');
+        $('#main input[name="fileinfo"]').val('remove');
+        $('#main span.fa-file-text-o').show();
+
+    });
+});
+</script>
