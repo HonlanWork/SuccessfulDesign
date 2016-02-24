@@ -11,6 +11,7 @@ class UserController extends CommonController {
 	public function edit() {
 		if (IS_POST) {
 			$user = array();
+			
 			if ($_POST['portrait'] != '') {
 				if (preg_match('/^(data:\s*image\/(\w+);base64,)/', $_POST['portrait'], $result)){
 					$filetype = $result[2];
@@ -22,6 +23,7 @@ class UserController extends CommonController {
 					}
 				}
 			}
+
 			$user['nickname'] = $_POST['nickname'];
 			$user['gender'] = intval($_POST['gender']);
 			$user['cellphone'] = $_POST['cellphone'];
