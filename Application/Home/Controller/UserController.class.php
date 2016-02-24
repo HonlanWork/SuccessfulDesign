@@ -14,10 +14,11 @@ class UserController extends CommonController {
 			if ($_POST['portrait'] != '') {
 				if (preg_match('/^(data:\s*image\/(\w+);base64,)/', $_POST['portrait'], $result)){
 					$filetype = $result[2];
-					$filename = genRandStr();
-					$new_file = "./Public/upload/portrait/".date('Ymd_', time()).$filename.'.'.$filetype;
+					$filename = 'portrait_'.$_SESSION['uid'];
+					$new_file = "./Public/upload/portrait/".$filename.'.'.$filetype;
 					if (file_put_contents($new_file, base64_decode(str_replace($result[1], '', $_POST['portrait'])))){
 						$user['portrait'] = substr($new_file, 8);
+						session('uportrait', $user['portrait']);
 					}
 				}
 			}
