@@ -1,0 +1,119 @@
+<style>
+#main {
+    padding: 40px 10%;
+    padding-top: 20px;
+}
+#main #submit {
+    padding-left: 5%;
+    border-left: 1px solid #ddd;
+}
+#main #submit.plain {
+    padding-left: 0;
+    border-left: none;
+}
+#main #submit #info {
+    margin-bottom: 20px;
+}
+#main #submit #info div {
+    color: #888;
+    margin-bottom: 12px;
+}
+#main #submit #info p {
+    color: #4E6B88;
+    width: 98px;
+    margin-right: 20px;
+    display: inline-block;
+    margin-bottom: 0;
+}
+#main #submit>p {
+    color: #4E6B88;
+    font-size: 15px;
+}
+#main #guide {
+    padding-right: 5%;
+}
+#main #guide.plain {
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ddd;
+}
+#main #guide ol li {
+    margin-bottom: 3px;
+    color: #888;
+}
+#main #guide ol li.active {
+    color: #F05036;
+}
+#main #guide p {
+    color: #666;
+}
+#main #guide p span {
+    color: #F05036;
+    margin-left: 3px;
+    margin-right: 3px;
+}
+</style>
+<form class="form" method="post" action="{:U('Contest/submit_handle')}">
+    <div class="row">
+        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
+            <div id="guide">
+                <h3 style="font-size:20px;color:#4E6B88;margin-bottom:15px;"><?php translate('仅需四步完成作品')?></h3>
+                <ol>
+                    <li><?php translate('添加新作品')?></li>
+                    <li><?php translate('完成支付')?></li>
+                    <li><?php translate('填写详情')?></li>
+                    <li class="active"><?php translate('提交作品')?></li>
+                </ol>
+                <div id="note" style="margin-top:20px;">
+                    <p><?php translate('只有<span>成功提交</span>的作品，才能最终进入<span>审核环节</span>')?></p>
+                    <p><?php translate('请注意，提交之后将<span>无法再次编辑</span>作品各项信息')?></p>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
+            <div id="submit">
+                <h3 class="title"><?php translate('4 提交作品')?></h3>
+                <div id="info">
+                    <div class="panel panel-default">
+                        <div class="panel-heading" style="color:#4E6B88;font-size:16px;margin-bottom:0;"><?php translate('您将提交的作品为')?></div>
+                        <div class="panel-body" style="margin-bottom:5px;">
+                            <div>
+                                <p><?php translate('作品名（英文）')?></p>{$submission.titlee}</div>
+                            <div>
+                                <p><?php translate('作品名（中文）')?></p>{$submission.titlec}</div>
+                            <div style="margin-bottom:0;">
+                                <p><?php translate('作品类别')?></p>{$submission.category}</div>
+                        </div>
+                    </div>
+                </div>
+                <p><?php translate('成功提交的作品无法再次编辑，因此建议在截止日期前的最后时间内提交，为作品的修改和完善保留更改的机会')?></p>
+                <input type="text" style="display:none;" name="id" value="{$submission['id']}">
+                <if condition="$submission['issubmitted'] == 1">
+                    <button type="submit" class="btn btn-success disabled" style="margin-top:20px;"><?php translate('已提交')?></button>
+                    <else/>
+                    <button type="submit" class="btn btn-success" style="margin-top:20px;"><?php translate('提交')?></button>
+                </if>
+            </div>
+        </div>
+    </div>
+</form>
+<script>
+$(document).ready(function() {
+    if ($(window).width() < 768) {
+        $('#main #submit').addClass('plain');
+        $('#main #guide').addClass('plain');
+    } else {
+        $('#main #submit').removeClass('plain');
+        $('#main #guide').removeClass('plain');
+    }
+    $(window).resize(function(event) {
+        if ($(this).width() < 768) {
+            $('#main #submit').addClass('plain');
+            $('#main #guide').addClass('plain');
+        } else {
+            $('#main #submit').removeClass('plain');
+            $('#main #guide').removeClass('plain');
+        }
+    });
+});
+</script>
