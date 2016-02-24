@@ -11,18 +11,23 @@ class UserController extends CommonController {
 	public function edit() {
 		if (IS_POST) {
 			$user = array();
-			
+
 			if ($_POST['portrait'] != '') {
 				if (preg_match('/^(data:\s*image\/(\w+);base64,)/', $_POST['portrait'], $result)){
 					$filetype = $result[2];
 					$filename = 'portrait_'.$_SESSION['uid'];
 					$new_file = "./Public/upload/portrait/".$filename.'.'.$filetype;
+					echo $new_file;
 					if (file_put_contents($new_file, base64_decode(str_replace($result[1], '', $_POST['portrait'])))){
 						$user['portrait'] = substr($new_file, 8);
 						session('uportrait', $user['portrait']);
 					}
+					else {
+						echo 'error';
+					}
 				}
 			}
+			die;
 
 			$user['nickname'] = $_POST['nickname'];
 			$user['gender'] = intval($_POST['gender']);
