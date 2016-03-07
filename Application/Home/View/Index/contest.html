@@ -3,6 +3,26 @@
 nav {
     display: none;
 }*/
+nav {
+    display: none;
+}
+header {
+    margin: 12px;
+    margin-bottom: 0;
+    background-color: #fff;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    box-shadow: 0px -1px 3px rgba(20,20,20,0.4);
+}
+header h3, header h4 {
+    display: none;
+}
+header img {
+    left: 18px;
+}
+body {
+    background-color: #f17e55;
+}
 
 #main {
     text-align: center;
@@ -21,23 +41,35 @@ nav {
 }
 
 #main #section2 {
-    padding: 20px 10% 60px 10%;
+    padding: 20px 5% 30px 5%;
+    background-color: #fff;
+    margin: 0 12px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    box-shadow: 0px -1px 3px rgba(20,20,20,0.4);
+    margin-bottom: 60px;
 }
 
 #main #section2 .join,
 #main #section6 .join {
     color: white;
-    background-color: #f90;
-    padding: 12px 24px;
+    background-color: #ff7c34;
+    padding: 12px 36px;
     border-radius: 5px;
-    font-size: 20px;
+    font-size: 18px;
     position: relative;
-    top: 12px;
+    top: 40px;
+    box-shadow: 2px 2px 3px rgba(20,20,20,0.4);
 }
 
 #main #section3 {
-    padding: 20px 10% 40px 10%;
-    background-color: #f2f2f2;
+    margin: 0 12px;
+    margin-top: 30px;
+    padding: 20px 5% 40px 5%;
+    background-color: #fff;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    box-shadow: 0px -1px 3px rgba(20,20,20,0.4);
 }
 
 #main #section3 #categories>p {
@@ -48,13 +80,12 @@ nav {
 
 #main #section3 .category {
     display: inline-block;
-    margin-left: 10px;
-    margin-right: 10px;
-    margin-bottom: 20px;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-bottom: 10px;
     font-size: 14px;
-    border-radius: 10px;
     color: white;
-    background-color: #f90;
+    background-color: #ef5045;
     vertical-align: middle;
 }
 
@@ -62,17 +93,18 @@ nav {
     border: none;
     outline: none;
     color: white;
-    background-color: #f90;
+    background-color: #ef5045;
     height: 80px;
-    width: 80px;
+    width: 90px;
     border-radius: 10px;
 }
 
 #main #section3 #subcategories {
-    margin-top: -5px;
-    width: 80%;
-    margin-left: 10%;
-    margin-right: 10%;
+    border-radius: 5px;
+    padding: 25px 10px;
+    background-color: #f2f2f2;
+    position: relative;
+    display: none;
 }
 
 #main #section3 .subcategory {
@@ -92,6 +124,8 @@ nav {
     padding: 20px 10% 40px 10%;
     position: relative;
     text-align: left;
+    background-color: #f2f2f2;
+    margin: 0 12px;
 }
 
 #main #section4 h3 {
@@ -99,23 +133,33 @@ nav {
 }
 
 #main #section4 h5 {
-    border-left: 5px solid #f90;
-    padding-left: 12px;
-    font-size: 16px;
+    font-size: 14px;
     color: #333;
 }
 
 #main #section4 p {
     font-size: 12px;
+    display: none;
+}
+#main #section4 button {
+    margin-left: 12px;
+    margin-bottom: 10px;
+    border: none;
+    outline: none;
+    background-color: #f2f2f2;
 }
 
 #main #section5 {
     padding: 20px 0 40px 0;
-    background-color: #f2f2f2;
+    background-color: #fff;
+    margin: 0 12px;
 }
 
 #main #section6 {
-    padding: 20px 0 40px 0;
+    padding: 20px 0 30px 0;
+    background-color: #f2f2f2;
+    margin: 0 12px;
+    margin-bottom: 60px;
 }
 </style>
 <div id="section1">
@@ -188,6 +232,7 @@ nav {
             </button>
         </div>
         <div id="subcategories">
+            <button style="border:none;outline:none;background-color:#f2f2f2;position:absolute;right:0px;top:0px;"><span class="fa fa-fw fa-times"></span></button>
             <div class="subcategory" name="产品">
                 <?php translate('电子、通信及数码产品')?>
             </div>
@@ -298,48 +343,56 @@ nav {
     <div class="row">
         <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
             <h5><?php translate('成功设计标识')?></h5>
+            <div>read more<button><span class="fa fa-fw fa-angle-double-down"></span></button></div>
             <p>
                 <?php translate('获奖标识只要您的参赛作品获奖，您就可以使用成功设计标识。成功设计标识的使用不受时间或区域限制，线上线下、广告新闻均可使用。得奖者可在成功设计平台官网下载获奖标识。')?>
             </p>
         </div>
         <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
             <h5><?php translate('成功设计线上展览')?></h5>
+            <div>read more<button><span class="fa fa-fw fa-angle-double-down"></span></button></div>
             <p>
                 <?php translate('您的获奖作品将在颁奖典礼后发布于成功设计线上展览，更棒的是这是一项永久福利，展览没有时间限制！您将成为行业标杆之一，名列杰出企业之列。这更是为您提供与社会大众交流的平台，以提高您的品牌影响力。')?>
             </p>
         </div>
         <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
             <h5><?php translate('成功设计大奖年鉴')?></h5>
+            <div>read more<button><span class="fa fa-fw fa-angle-double-down"></span></button></div>
             <p>
                 <?php translate('今年所有获奖作品将被收录入《2016 成功设计大赛》年鉴，以展示获奖作品、分享成功设计和团队背后的故事。')?>
             </p>
         </div>
         <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
             <h5><?php translate('成功设计之夜')?></h5>
+            <div>read more<button><span class="fa fa-fw fa-angle-double-down"></span></button></div>
             <p>
                 <?php translate('获奖者将受邀参加于2016年9月举行的“ 成功设计之夜”颁奖典礼。最成功设计大奖得主将在聚光灯下接受颁奖。届时将有各大主流媒体前来报道， 是您进行品牌宣传的极好机会。另外也会有专业摄影师拍照记录，照片可在活动后下载，作为您宣传的助力。')?>
             </p>
         </div>
         <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
             <h5><?php translate('证书与奖杯')?></h5>
+            <div>read more<button><span class="fa fa-fw fa-angle-double-down"></span></button></div>
             <p>
                 <?php translate('颁奖典礼当日，获奖者将获得一套相关获奖作品的获奖证书和奖杯，以彰显获奖者的殊荣。另外在活动后，获奖者可以获得自己的电子版获奖证书，以作宣传使用。')?>
             </p>
         </div>
         <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
             <h5><?php translate('成功设计自媒体传播')?></h5>
+            <div>read more<button><span class="fa fa-fw fa-angle-double-down"></span></button></div>
             <p>
                 <?php translate('您的获奖作品将在颁奖典礼后发布于成功设计线上展览及微信传播！您将成为行业标杆之一，名列杰出企业之列。这更是为您提供与社会大众交流的平台，以提高您的品牌影响力。')?>
             </p>
         </div>
         <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
             <h5><?php translate('更多定制推广服务')?></h5>
+            <div>read more<button><span class="fa fa-fw fa-angle-double-down"></span></button></div>
             <p>
                 <?php translate('获奖作品将有机会被推荐接受我们合作媒体和网站的专访，获得价值百万的媒体传播。可针对您的需求，定制更加多元化的线上线下的推广服务，展示您的获奖作品，加深您的品牌影响力。')?>
             </p>
         </div>
         <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
             <h5><?php translate('合作赛事推荐')?></h5>
+            <div>read more<button><span class="fa fa-fw fa-angle-double-down"></span></button></div>
             <p>
                 <?php translate('成功设计大赛的获奖者将被免费推荐到亚洲设计管理论坛以及台湾的金点奖，角逐国际大奖。')?>
             </p>
@@ -357,12 +410,12 @@ nav {
 <div id="section6">
     <h3><?php translate('奖项设置')?></h3>
     <?php if (isset($_SESSION['lang']) and $_SESSION['lang'] == 'en') { ?>
-        <img src="__PUBLIC__/img/contest2016/awarden.png" style="width:90%;margin-bottom:50px;" alt="">
+        <img src="__PUBLIC__/img/contest2016/awarden.png" style="width:90%;margin-bottom:0px;" alt="">
         <?php } else{ ?>
-            <img src="__PUBLIC__/img/contest2016/award.png" style="width:90%;margin-bottom:50px;" alt="">
+            <img src="__PUBLIC__/img/contest2016/award.png" style="width:90%;margin-bottom:0px;" alt="">
             <?php } ?>
     <br>
-    <a href="{:U('Contest/apply')}" class="join" style="position:relative;top:-20px;">
+    <a href="{:U('Contest/apply')}" class="join">
         <?php translate('立即参加')?>
     </a>
 </div>
@@ -373,6 +426,27 @@ $(document).ready(function() {
         var cate = $(this).attr('name');
         $('#section3 .subcategory').hide();
         $('#section3 .subcategory[name="' + cate + '"]').show();
+        $('#section3 #subcategories').show();
+        $('#section3 .category').hide();
+    });
+    $('#section3 #subcategories button').click(function(event) {
+        event.preventDefault();
+        $('#section3 #subcategories').hide();
+        $('#section3 .category').show();
+    });
+
+    $('#section4 button').click(function(event) {
+        event.preventDefault();
+        var children = $(this).children('span');
+        var p = $(this).parent('div').next('p');
+        if (children.hasClass('fa-angle-double-down')) {
+            children.removeClass('fa-angle-double-down').addClass('fa-angle-double-up');
+            p.fadeIn('fast');
+        }
+        else {
+            children.removeClass('fa-angle-double-up').addClass('fa-angle-double-down');
+            p.fadeOut('fast');
+        }  
     });
 });
 </script>

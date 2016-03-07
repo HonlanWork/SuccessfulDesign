@@ -58,24 +58,27 @@
     }
     
     header {
-        padding: 20px 40px;
+        height: 90px;
+        padding: 20px 0;
+        margin: 0 10%;
         position: relative;
     }
     
     header img {
         position: absolute;
-        left: 40px;
-        top: 20px;
+        left: 0;
+        top: 10px;
+        width: 64px;
     }
     
     header h3 {
-        margin: 0 0 8px 110px;
+        margin: 0 0 8px 90px;
         font-size: 24px;
         color: #333;
     }
     
     header h4 {
-        margin: 0 0 0 110px;
+        margin: 0 0 0 90px;
         font-size: 15px;
         color: #666;
     }
@@ -85,7 +88,7 @@
         border-radius: 0;
         border-left: none;
         border-right: none;
-        padding: 0 30px 0 15px;
+        padding: 0 7%;
         margin-bottom: 0;
     }
     
@@ -177,7 +180,7 @@
 
 <body>
     <header>
-        <a href="{:U('Index/index')}">
+        <a href="{:U('Index/contest',array('id'=>1))}">
             <img src="__PUBLIC__/img/logo.png" alt="">
             <h3>成功设计</h3>
             <h4>SUCCESSFUL DESIGN</h4>
@@ -197,9 +200,9 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li><a href="{:U('Index/index')}"><span class="glyphicon glyphicon-home" style="color:#F05036;"></span></a></li>
+                    <li><a href="{:U('Index/contest',array('id'=>1))}"><span class="glyphicon glyphicon-home" style="color:#F05036;"></span></a></li>
                     <li>
-                        <a href="{:U('Index/contest',array('contestId'=>1))}">
+                        <a href="{:U('Index/contest',array('id'=>1))}">
                             <?php translate('大赛')?>
                         </a>
                     </li>

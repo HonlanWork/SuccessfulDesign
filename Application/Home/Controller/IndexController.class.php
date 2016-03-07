@@ -8,7 +8,7 @@ class IndexController extends Controller {
 
     // 比赛
     public function contest(){
-    	$contestId = I('contestId');
+    	$contestId = I('id');
     	$this->contest = M('contest')->where(array('id'=>$contestId))->find();
     	$this->display();
     }
@@ -47,14 +47,15 @@ class IndexController extends Controller {
 			else{
 				session('uid', $user['id']);
                 session('uemail', $user['email']);
-				session('uportrait', $user['portrait']);
+                session('uportrait', $user['portrait']);
+				session('urole', $user['role']);
 				if (isset($_SESSION['url'])) {
 					$url = $_SESSION['url'];
 					session('url', null);
 					$this->redirect($url);
 				}
 				else {
-					$this->redirect('Index/index');
+					$this->redirect('Index/contest', array('id'=>1));
 				}
 			}
 		}

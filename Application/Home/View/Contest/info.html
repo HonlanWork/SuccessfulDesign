@@ -3,76 +3,104 @@
     padding: 40px 10%;
     padding-top: 20px;
 }
+
 #main #addinfo {
     padding-left: 5%;
     border-left: 1px solid #ddd;
 }
+
 #main #addinfo.plain {
     padding-left: 0;
     border-left: none;
 }
+
 #main #addinfo p {
     color: #4E6B88;
 }
+
 #main #addinfo input.form-control,
 select.form-control {
     color: #666;
     max-width: 400px;
 }
+
 #main #addinfo .cell {
     padding-bottom: 10px;
     padding-top: 15px;
     border-bottom: 1px solid #ddd;
 }
+
 #main #addinfo .cell:first-child {
     padding-top: 0;
 }
+
 #main #addinfo .cell:last-child {
     border-bottom: none;
 }
+
 #main #addinfo .reminder {
     color: #F05036;
     font-size: 12px;
 }
+
 #main #addinfo textarea {
     resize: none;
     width: 100%;
 }
+
 #main #addinfo a[role='tab'] {
     color: #888;
     font-size: 13px;
 }
+
 #main #addinfo li.active a[role='tab'] {
     color: #4E6B88;
 }
+
 #main #addinfo button.detail {
     border: none;
     outline: none;
     float: right;
     background-color: #f5f5f5;
 }
+
 #main #guide {
     padding-right: 5%;
 }
+
 #main #guide.plain {
     padding-bottom: 20px;
     margin-bottom: 20px;
     border-bottom: 1px solid #ddd;
 }
+
 #main #guide ol li {
     margin-bottom: 3px;
     color: #888;
 }
+
 #main #guide ol li.active {
     color: #F05036;
 }
+
 #main #guide p {
     color: #666;
 }
+
 #main #guide p span {
     color: #F05036;
     margin-left: 3px;
     margin-right: 3px;
+}
+
+#main .description {
+    background: #f2f2f2;
+    color: #888 !important;
+    font-size: 12px;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 4px;
+    display: none;
 }
 </style>
 <form class="form" method="post" action="{:U('Contest/info_handle')}" enctype="multipart/form-data">
@@ -83,14 +111,24 @@ select.form-control {
             <div id="guide">
                 <h3 style="font-size:20px;color:#4E6B88;margin-bottom:15px;"><?php translate('仅需四步完成作品')?></h3>
                 <ol>
-                    <li><?php translate('添加新作品')?></li>
-                    <li><?php translate('完成支付')?></li>
-                    <li class="active"><?php translate('填写详情')?></li>
-                    <li><?php translate('提交作品')?></li>
+                    <li>
+                        <?php translate('添加新作品')?>
+                    </li>
+                    <li>
+                        <?php translate('完成支付')?>
+                    </li>
+                    <li class="active">
+                        <?php translate('填写详情')?>
+                    </li>
+                    <li>
+                        <?php translate('提交作品')?>
+                    </li>
                 </ol>
                 <div id="note" style="margin-top:20px;">
-                    <p><?php translate('在作品<span>未提交</span>的情况下，<span>任何时刻</span>都可以通过点击右上角头像中<span>我的作品</span>回到所需编辑的作品页面，进行修改和完善作品信息')?></p>
-                    <p><?php translate('请注意，一旦点击最后的<span>提交</span>，作品进入初审系统，<span>不能再进行修改</span>')?></p>
+                    <p>
+                        <?php translate('在作品<span>未提交</span>的情况下，<span>任何时刻</span>都可以通过点击右上角头像中<span>我的作品</span>回到所需编辑的作品页面，进行修改和完善作品信息')?></p>
+                    <p>
+                        <?php translate('请注意，一旦点击最后的<span>提交</span>，作品进入初审系统，<span>不能再进行修改</span>')?></p>
                 </div>
             </div>
         </div>
@@ -98,139 +136,270 @@ select.form-control {
             <div id="addinfo">
                 <h3 class="title"><?php translate('2 填写详情')?></h3>
                 <div class="panel panel-default">
-                    <div class="panel-heading" style="color:#4E6B88;font-size:16px;"><?php translate('个人信息')?><button class="detail"><span class="fa fa-fw fa-angle-double-up"></span></button></div>
+                    <div class="panel-heading" style="color:#4E6B88;font-size:16px;">
+                        <?php translate('个人信息')?>
+                        <button class="detail"><span class="fa fa-fw fa-angle-double-up"></span></button>
+                    </div>
                     <div class="panel-body">
                         <div class="row">
-                            <p class="reminder" style="margin-left:15px;"><?php translate('如果以下信息在个人资料中已经填写完整，此处将自动补全')?></p>
+                            <p class="reminder" style="margin-left:15px;">
+                                <?php translate('如果以下信息在个人资料中已经填写完整，此处将自动补全')?>
+                            </p>
                             <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                                 <div class="form-group">
-                                    <p><?php translate('公司名称（中文）')?></p>
+                                    <p>
+                                        <?php translate('公司名称（中文）')?>
+                                    </p>
                                     <input type="text" name="companyc" class="form-control" value="{$submission['companyc']}">
                                 </div>
                                 <div class="form-group">
-                                    <p><?php translate('公司名称（英文）')?></p>
+                                    <p>
+                                        <?php translate('公司名称（英文）')?>
+                                    </p>
                                     <input type="text" name="companye" class="form-control" value="{$submission['companye']}">
                                 </div>
                                 <div class="form-group">
-                                    <p><?php translate('公司电话')?></p>
+                                    <p>
+                                        <?php translate('公司电话')?>
+                                    </p>
                                     <input type="text" name="companyp" class="form-control" value="{$submission['companyp']}">
                                 </div>
                             </div>
                             <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                                 <div class="form-group">
-                                    <p><?php translate('邮箱')?></p>
+                                    <p>
+                                        <?php translate('邮箱')?>
+                                    </p>
                                     <input type="text" name="email" class="form-control" value="{$submission['email']}">
                                 </div>
                                 <div class="form-group">
-                                    <p><?php translate('手机')?></p>
+                                    <p>
+                                        <?php translate('手机')?>
+                                    </p>
                                     <input type="text" name="cellphone" class="form-control" value="{$submission['cellphone']}">
                                 </div>
                                 <div class="form-group">
-                                    <p><?php translate('职位')?></p>
+                                    <p>
+                                        <?php translate('职位')?>
+                                    </p>
                                     <input type="text" name="position" class="form-control" value="{$submission['position']}">
                                 </div>
                             </div>
                         </div>
+                        <button type="submit" class="btn btn-success" style="float:right;">
+                            <?php translate('保存')?>
+                        </button>
                     </div>
                 </div>
                 <div class="panel panel-default">
-                    <div class="panel-heading" style="color:#4E6B88;font-size:16px;"><?php translate('基本信息')?><button class="detail"><span class="fa fa-fw fa-angle-double-up"></span></button></div>
+                    <div class="panel-heading" style="color:#4E6B88;font-size:16px;">
+                        <?php translate('基本信息')?>
+                        <button class="detail"><span class="fa fa-fw fa-angle-double-up"></span></button>
+                    </div>
                     <div class="panel-body">
-                        <p class="reminder"><?php translate('请注意，您所填写的作品名称将用于今后大赛相关的所有宣传材料中')?></p>
+                        <p class="reminder">
+                            <?php translate('请注意，您所填写的作品名称将用于今后大赛相关的所有宣传材料中')?>
+                        </p>
                         <div class="form-group">
-                            <p><?php translate('作品名（英文）')?></p>
+                            <p>
+                                <?php translate('作品名（英文）')?>
+                            </p>
                             <input type="text" name="titlee" class="form-control" value="{$submission['titlee']}">
                         </div>
                         <div class="form-group">
-                            <p><?php translate('作品名（中文）')?></p>
+                            <p>
+                                <?php translate('作品名（中文）')?>
+                            </p>
                             <input type="text" name="titlec" class="form-control" value="{$submission['titlec']}">
                         </div>
                         <div class="form-group">
-                            <p><?php translate('作品类别')?></p>
+                            <p>
+                                <?php translate('作品类别')?>
+                            </p>
                             <span style="display:none;" id="hidden1">{$submission['category']}</span>
                             <select class="form-control" name="category">
-                                <option value="产品"><?php translate('产品')?></option>
-                                <option value="空间"><?php translate('空间')?></option>
-                                <option value="营销"><?php translate('营销')?></option>
-                                <option value="数字"><?php translate('数字')?></option>
-                                <option value="视觉"><?php translate('视觉')?></option>
-                                <option value="商业模式"><?php translate('商业模式')?></option>
-                                <option value="社会创新"><?php translate('社会创新')?></option>
-                                <option value="众创空间"><?php translate('众创空间')?></option>
+                                <option value="产品">
+                                    <?php translate('产品')?>
+                                </option>
+                                <option value="空间">
+                                    <?php translate('空间')?>
+                                </option>
+                                <option value="营销">
+                                    <?php translate('营销')?>
+                                </option>
+                                <option value="数字">
+                                    <?php translate('数字')?>
+                                </option>
+                                <option value="视觉">
+                                    <?php translate('视觉')?>
+                                </option>
+                                <option value="商业模式">
+                                    <?php translate('商业模式')?>
+                                </option>
+                                <option value="社会创新">
+                                    <?php translate('社会创新')?>
+                                </option>
+                                <option value="众创空间">
+                                    <?php translate('众创空间')?>
+                                </option>
                             </select>
                         </div>
+                        <button type="submit" class="btn btn-success" style="float:right;">
+                            <?php translate('保存')?>
+                        </button>
                     </div>
                 </div>
                 <div class="panel panel-default">
-                    <div class="panel-heading" style="color:#4E6B88;font-size:16px;"><?php translate('详细信息')?><button class="detail"><span class="fa fa-fw fa-angle-double-up"></span></button></div>
+                    <div class="panel-heading" style="color:#4E6B88;font-size:16px;">
+                        <?php translate('详细信息')?>
+                        <button class="detail"><span class="fa fa-fw fa-angle-double-up"></span></button>
+                    </div>
                     <div class="panel-body">
                         <div class="cell">
-                            <p class="reminder"><?php translate('设计作品需在2016年10月前在中国市场上市或已发布')?></p>
+                            <p class="reminder">
+                                <?php translate('设计作品需在2016年10月前在中国市场上市或已发布')?>
+                            </p>
                             <div class="form-group">
-                                <p><?php translate('发布日期')?></p>
+                                <p>
+                                    <?php translate('发布日期')?>
+                                </p>
                                 <input type="date" name="addts" class="form-control" value="{$submission['addts']}">
                             </div>
                         </div>
                         <div class="cell">
-                            <p class="reminder"><?php translate('将设计背景，细节，以及您作品的与众不同之处进行阐述（不超过300字）')?></p>
+                            <p class="reminder">
+                                <?php translate('将设计背景，细节，以及您作品的与众不同之处进行阐述（不超过300字）')?>
+                            </p>
                             <div class="form-group">
-                                <p><?php translate('简述（英文）')?></p>
+                                <p>
+                                    <?php translate('简述（英文）')?>
+                                </p>
                                 <textarea rows="5" name="introductione" class="form-control">{$submission.introductione}</textarea>
                             </div>
                             <div class="form-group">
-                                <p><?php translate('简述（中文）')?></p>
+                                <p>
+                                    <?php translate('简述（中文）')?>
+                                </p>
                                 <textarea rows="5" name="introductionc" class="form-control">{$submission.introductionc}</textarea>
                             </div>
                         </div>
                         <div class="cell">
                             <div class="form-group">
-                                <p><?php translate('项目需求（英文）')?></p>
+                                <p>
+                                    <?php translate('项目需求（英文）')?>
+                                    <button style="float:right;border:none;outline:none;background-color:white;" class="show_description"><span class="fa fa-fw fa-info" style="font-size:14px;" name="demande"></span></button>
+                                </p>
                                 <textarea rows="5" name="demande" class="form-control" placeholder="">{$submission.demande}</textarea>
+                                <p class="description" id="demande">
+                                    Does the design have a well-defined target and strategy? Why was the project initiated, and what was the desired result or impact of the design?
+                                </p>
                             </div>
                             <div class="form-group">
-                                <p><?php translate('项目需求（中文）')?></p>
+                                <p>
+                                    <?php translate('项目需求（中文）')?>
+                                    <button style="float:right;border:none;outline:none;background-color:white;" class="show_description"><span class="fa fa-fw fa-info" style="font-size:14px;" name="demandc"></span></button>
+                                </p>
                                 <textarea rows="5" name="demandc" class="form-control" placeholder="">{$submission.demandc}</textarea>
+                                <p class="description" id="demandc">
+                                    是否有明确的目标和策略? 为何启动该设计项目,有否达到预期的效果或影响?
+                                </p>
                             </div>
                             <div class="form-group">
-                                <p><?php translate('面临挑战（英文）')?></p>
+                                <p>
+                                    <?php translate('面临挑战（英文）')?>
+                                    <button style="float:right;border:none;outline:none;background-color:white;" class="show_description"><span class="fa fa-fw fa-info" style="font-size:14px;" name="challengee"></span></button>
+                                </p>
                                 <textarea rows="5" name="challengee" class="form-control" placeholder="">{$submission.challengee}</textarea>
+                                <p class="description" id="challengee">
+                                    Were there any challenges or problems to be solved?
+                                </p>
                             </div>
                             <div class="form-group">
-                                <p><?php translate('面临挑战（中文）')?></p>
+                                <p>
+                                    <?php translate('面临挑战（中文）')?>
+                                    <button style="float:right;border:none;outline:none;background-color:white;" class="show_description"><span class="fa fa-fw fa-info" style="font-size:14px;" name="challengec"></span></button>
+                                </p>
                                 <textarea rows="5" name="challengec" class="form-control" placeholder="">{$submission.challengec}</textarea>
+                                <p class="description" id="challengec">
+                                    遇到了哪些挑战和难题?
+                                </p>
                             </div>
                             <div class="form-group">
-                                <p><?php translate('预算评估（英文）')?></p>
+                                <p>
+                                    <?php translate('预算评估（英文）')?>
+                                    <button style="float:right;border:none;outline:none;background-color:white;" class="show_description"><span class="fa fa-fw fa-info" style="font-size:14px;" name="coste"></span></button>
+                                </p>
                                 <textarea rows="5" name="coste" class="form-control" placeholder="">{$submission.coste}</textarea>
+                                <p class="description" id="coste">
+                                    If that was client’s confidential information, you could fill in “N/A”
+                                </p>
                             </div>
                             <div class="form-group">
-                                <p><?php translate('预算评估（中文）')?></p>
+                                <p>
+                                    <?php translate('预算评估（中文）')?>
+                                    <button style="float:right;border:none;outline:none;background-color:white;" class="show_description"><span class="fa fa-fw fa-info" style="font-size:14px;" name="costc"></span></button>
+                                </p>
                                 <textarea rows="5" name="costc" class="form-control" placeholder="">{$submission.costc}</textarea>
+                                <p class="description" id="costc">
+                                    如果属于客户的保密信息,可以选择不填写
+                                </p>
                             </div>
                             <div class="form-group">
-                                <p><?php translate('设计解决方案（英文）')?></p>
+                                <p>
+                                    <?php translate('设计解决方案（英文）')?>
+                                    <button style="float:right;border:none;outline:none;background-color:white;" class="show_description"><span class="fa fa-fw fa-info" style="font-size:14px;" name="solutione"></span></button>
+                                </p>
                                 <textarea rows="5" name="solutione" class="form-control" placeholder="">{$submission.solutione}</textarea>
+                                <p class="description" id="solutione">
+                                    Has the project been systematically managed during the design process? What methodology was used? What resources were used? What was the total investment in the project (if applicable)? When did the project start and how long did it take?
+                                </p>
                             </div>
                             <div class="form-group">
-                                <p><?php translate('设计解决方案（中文）')?></p>
+                                <p>
+                                    <?php translate('设计解决方案（中文）')?>
+                                    <button style="float:right;border:none;outline:none;background-color:white;" class="show_description"><span class="fa fa-fw fa-info" style="font-size:14px;" name="solutionc"></span></button>
+                                </p>
                                 <textarea rows="5" name="solutionc" class="form-control" placeholder="">{$submission.solutionc}</textarea>
+                                <p class="description" id="solutionc">
+                                    在过程中,是否系统性地对设计项目进行了管理? 采用了什么方法来管理? 运用了哪些资 源? 投入了多少资金(是否合理)? 设计项目什么时候开始?持续多长时间?
+                                </p>
                             </div>
                         </div>
-                        <div class="cell">
-                            <p class="reminder"><?php translate('请用图表和数据来表现此项目的设计所取得的成效，如: 增进市场业绩，降低生产成本 ,用户使用态度和行为的提升, 内部管理的提升,对环境、社会或其他因素带来的影响')?></p>
+                        <div class="cell" style="border-bottom:none;margin-bottom:5px;">
+                            <p class="reminder">
+                                <?php translate('请用图表和数据来表现此项目的设计所取得的成效，如: 增进市场业绩，降低生产成本 ,用户使用态度和行为的提升, 内部管理的提升,对环境、社会或其他因素带来的影响')?>
+                            </p>
                             <div class="form-group">
-                                <p><?php translate('项目成效总结（英文）')?></p>
+                                <p>
+                                    <?php translate('项目成效总结（英文）')?>
+                                    <button style="float:right;border:none;outline:none;background-color:white;" class="show_description"><span class="fa fa-fw fa-info" style="font-size:14px;" name="conclusione"></span></button>
+                                </p>
                                 <textarea rows="5" name="conclusione" class="form-control">{$submission.conclusione}</textarea>
+                                <p class="description" id="conclusione">
+                                    Can the project results be measured -- such as profit, sales, market, channel penetration? Has the design benefited the community or society? If so, what is the benefit and who is the recipient? Is the design original? Does the design create benefits? How well is the design executed? Does the design have any “wow” factors? Overall, does the design accomplish the original strategic objectives? Or did it even deliver beyond the defined strategy?
+                                </p>
                             </div>
                             <div class="form-group" style="margin-bottom:0;">
-                                <p><?php translate('项目成效总结（中文）')?></p>
+                                <p>
+                                    <?php translate('项目成效总结（中文）')?>
+                                    <button style="float:right;border:none;outline:none;background-color:white;" class="show_description"><span class="fa fa-fw fa-info" style="font-size:14px;" name="conclusionc"></span></button>
+                                </p>
                                 <textarea rows="5" name="conclusionc" class="form-control">{$submission.conclusionc}</textarea>
+                                <p class="description" id="conclusionc" style="margin-bottom:0;">
+                                    它的结果有标准衡量吗?例如:利润,销售额,市场情况,渠道。 是否带来了社会效益? 具体效益是什么?受益者是谁? 是否是原创?是否带来了益处?实施情况如何?是否有令 人称颂之处? 是否完成了最初的策略目标 或者超额完成了目标? 是否完成了最初的策略 目标,或者超额完成了目标?
+                                </p>
                             </div>
                         </div>
+                        <button type="submit" class="btn btn-success" style="float:right;">
+                            <?php translate('保存')?>
+                        </button>
                     </div>
                 </div>
                 <div class="panel panel-default">
-                    <div class="panel-heading" style="color:#4E6B88;font-size:16px;"><?php translate('图像信息')?><button class="detail"><span class="fa fa-fw fa-angle-double-up"></span></button></div>
+                    <div class="panel-heading" style="color:#4E6B88;font-size:16px;">
+                        <?php translate('图像信息')?>
+                        <button class="detail"><span class="fa fa-fw fa-angle-double-up"></span></button>
+                    </div>
                     <div class="panel-body">
                         <div class="cell" id="images">
                             <div class="row">
@@ -329,13 +498,25 @@ select.form-control {
                                     </div>
                                 </div>
                                 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                                    <p style="color:#F05036;"><?php translate('图片要求')?></p>
+                                    <p style="color:#F05036;">
+                                        <?php translate('图片要求')?>
+                                    </p>
                                     <ul style="color:#888">
-                                        <li><?php translate('每件作品至少上传1张照片，但不超过6张')?></li>
-                                        <li><?php translate('图像尺寸：长28cm（最小20cm），宽21cm（最小18cm）')?></li>
-                                        <li><?php translate('图像分辨率：300dpi')?></li>
-                                        <li><?php translate('颜色模式：CMYK')?></li>
-                                        <li><?php translate('文件格式：GIF or JPG')?></li>
+                                        <li>
+                                            <?php translate('每件作品至少上传1张照片，但不超过6张')?>
+                                        </li>
+                                        <li>
+                                            <?php translate('图像尺寸：长28cm（最小20cm），宽21cm（最小18cm）')?>
+                                        </li>
+                                        <li>
+                                            <?php translate('图像分辨率：300dpi')?>
+                                        </li>
+                                        <li>
+                                            <?php translate('颜色模式：CMYK')?>
+                                        </li>
+                                        <li>
+                                            <?php translate('文件格式：GIF or JPG')?>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
@@ -373,16 +554,24 @@ select.form-control {
                                     </div>
                                 </div>
                                 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                                    <p style="color:#F05036;"><?php translate('视频要求')?></p>
+                                    <p style="color:#F05036;">
+                                        <?php translate('视频要求')?>
+                                    </p>
                                     <ul style="color:#888">
-                                        <li><?php translate('视频文件为可选，如有需要则上传')?></li>
-                                        <li><?php translate('最长时间：10分钟')?></li>
-                                        <li><?php translate('文件格式：MP4')?></li>
+                                        <li>
+                                            <?php translate('视频文件为可选，如有需要则上传')?>
+                                        </li>
+                                        <li>
+                                            <?php translate('最长时间：10分钟')?>
+                                        </li>
+                                        <li>
+                                            <?php translate('文件格式：MP4')?>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
-                        <div class="cell" style="padding-bottom:0;">
+                        <div class="cell" style="padding-bottom:0;border-bottom:none;margin-bottom:5px;">
                             <div class="row">
                                 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                                     <div style="position:relative;width:100%;margin-bottom:8px;">
@@ -394,7 +583,9 @@ select.form-control {
                                                 <else/>
                                                 <span class="fa fa-fw fa-file-text-o" style="color:#ddd;font-size:40px;padding-top:40px;padding-bottom:40px;display:none;"></span>
                                                 <button name="file" style="z-index:999;position:absolute;top:5px;right:5px;font-size:16px;border-radius:50%;width:28px;border:none;color:#fff;background-color:rgba(20,20,20,0.8);"><span>x</span></button>
-                                                <p name="file" style="width:100%;position:relative;top:40px;padding-left:40px;padding-right:40px;"><?php echo substr($submission['file'], strrpos($submission['file'], '/') + 1);?></p>
+                                                <p name="file" style="width:100%;position:relative;top:40px;padding-left:40px;padding-right:40px;">
+                                                    <?php echo substr($submission['file'], strrpos($submission['file'], '/') + 1);?>
+                                                </p>
                                             </if>
                                         </div>
                                         <input type="file" accept="application/msword,application/pdf" style="opacity:0;position:absolute;left:0;top:0;width:100%;height:100%;" name="file">
@@ -402,19 +593,31 @@ select.form-control {
                                     </div>
                                 </div>
                                 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                                    <p style="color:#F05036;"><?php translate('补充文件要求')?></p>
+                                    <p style="color:#F05036;">
+                                        <?php translate('补充文件要求')?>
+                                    </p>
                                     <ul style="color:#888">
-                                        <li><?php translate('补充文件为可选，如对作品有额外说明（如商业成效、社会影响等），可上传补充文件')?></li>
-                                        <li><?php translate('最大文件大小：5MB')?></li>
-                                        <li><?php translate('文件格式：DOC or PDF')?></li>
+                                        <li>
+                                            <?php translate('补充文件为可选，如对作品有额外说明（如商业成效、社会影响等），可上传补充文件')?>
+                                        </li>
+                                        <li>
+                                            <?php translate('最大文件大小：5MB')?>
+                                        </li>
+                                        <li>
+                                            <?php translate('文件格式：DOC or PDF')?>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
+                        <button type="submit" class="btn btn-success" style="float:right;">
+                            <?php translate('保存')?>
+                        </button>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-success" style="margin-top:20px;"><?php translate('保存')?></button>
-                <a href="{:U('Contest/submit', array('id'=>$submission['id']))}" class="btn btn-primary" style="margin-top:20px;float:right"><?php translate('下一步')?></a>
+                <a href="{:U('Contest/submit', array('id'=>$submission['id']))}" class="btn btn-primary" style="margin-top:20px;">
+                    <?php translate('提交')?>
+                </a>
             </div>
         </div>
     </div>
@@ -449,8 +652,7 @@ $(document).ready(function() {
         if ($span.hasClass('fa-angle-double-up')) {
             $span.removeClass('fa-angle-double-up').addClass('fa-angle-double-down');
             $button.parent().siblings('.panel-body').slideUp('fast');
-        }
-        else if ($span.hasClass('fa-angle-double-down')) {
+        } else if ($span.hasClass('fa-angle-double-down')) {
             $span.removeClass('fa-angle-double-down').addClass('fa-angle-double-up');
             $button.parent().siblings('.panel-body').slideDown('fast');
         }
@@ -521,6 +723,11 @@ $(document).ready(function() {
         $('#main input[name="file"]').val('');
         $('#main input[name="fileinfo"]').val('remove');
         $('#main span.fa-file-text-o').show();
+    });
+
+    $('#main .show_description').click(function(event) {
+        event.preventDefault();
+        $('#main #' + $(this).children('span').attr('name')).fadeIn('fast');
     });
 });
 </script>

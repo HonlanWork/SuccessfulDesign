@@ -1,8 +1,9 @@
 <style>
 body {
-    background-image: url(__PUBLIC__/img/signbg.jpg);
+    background-image: url(__PUBLIC__/img/signbg.png);
     background-size: cover;
     background-attachment: fixed;
+    background-opacity: 0.6;
 }
 
 header,
@@ -12,16 +13,16 @@ footer {
 }
 
 #main form {
-    width: 400px;
+    width: 80%;
+    max-width: 400px;
     margin: 0 auto;
-    margin-top: 100px;
+    margin-top: 60px;
     margin-bottom: 100px;
     background-color: rgba(250, 250, 250, 0.8);
     border-radius: 5px;
     box-shadow: 0 0 1px rgba(0, 0, 0, 0.2);
     text-align: center;
-    padding: 30px 50px;
-    padding-bottom: 50px;
+    padding: 20px 30px 30px 30px;
 }
 
 #main form #title {
@@ -53,7 +54,7 @@ footer {
 </style>
 <form class="form" method="post" action="{:U('Index/register_resend')}">
     <a href="{:U('Index/index')}">
-        <img src="__PUBLIC__/img/logo.png" alt="" style="width:120px;margin-bottom:10px;">
+        <img src="__PUBLIC__/img/logo.png" alt="" style="width:100px;margin-bottom:10px;">
     </a>
     <p id="title"><?php translate('账号激活')?></p>
     <p style="margin-top:20px;"><?php translate('激活邮件已发送，请激活邮箱后登陆')?></p>

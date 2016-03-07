@@ -1,6 +1,6 @@
 <style>
 body {
-    background-image: url(__PUBLIC__/img/signbg.jpg);
+    background-image: url(__PUBLIC__/img/signbg.png);
     background-size: cover;
     background-attachment: fixed;
 }
@@ -12,16 +12,16 @@ footer {
 }
 
 #main form {
-    width: 400px;
+    width: 80%;
+    max-width: 400px;
     margin: 0 auto;
-    margin-top: 100px;
+    margin-top: 60px;
     margin-bottom: 100px;
     background-color: rgba(250, 250, 250, 0.8);
     border-radius: 5px;
     box-shadow: 0 0 1px rgba(0, 0, 0, 0.2);
     text-align: center;
-    padding: 30px 50px;
-    padding-bottom: 50px;
+    padding: 20px 30px 30px 30px;
 }
 
 #main form #title {
@@ -30,7 +30,7 @@ footer {
     margin-bottom: 20px;
 }
 
-#main button[type='submit'] {
+#main .btn-primary {
     background-color: #77c651;
     width: 100%;
     color: #f9f9f9;
@@ -39,17 +39,7 @@ footer {
     height: 46px;
     margin-top: 5px;
 }
-#main form div:last-child {
-	margin-top: 20px;
-}
-#main form div:last-child a {
-	color: #666;
-	margin-left: 5px;
-	margin-right: 5px;
-}
-#main form div:last-child a:hover {
-	color: #333;
-}
+
 #main form #error {
 	margin-top: 12px;
 	margin-bottom: 0;
@@ -59,7 +49,7 @@ footer {
 </style>
 <form class="form" method="post" action="{:U('Index/register_handle')}">
     <a href="{:U('Index/index')}">
-        <img src="__PUBLIC__/img/logo.png" alt="" style="width:120px;margin-bottom:10px;">
+        <img src="__PUBLIC__/img/logo.png" alt="" style="width:100px;margin-bottom:10px;">
     </a>
     <p id="title"><?php translate('账号注册')?></p>
     <div class="form-group">
@@ -80,12 +70,18 @@ footer {
             <input type="password" name="password1" class="form-control" placeholder="<?php translate('重复密码')?>">
         </div>
     </div>
-    <button type="submit" class="btn btn-primary"><?php translate('注册')?></button>
+    <button type="submit" class="btn btn-primary" style="background-color:rgb(255,124,52);"><?php translate('注册')?></button>
     <if condition="$error">
     	<p id="error">{$error}</p>
     </if>
-    <div>
+    <!-- <div>
         <a href="{:U('Index/login')}"><?php translate('已有账号')?></a>
         <a href="{:U('Index/forget')}"><?php translate('忘记密码')?></a>
+    </div> -->
+    <div>
+        <p style="margin-bottom:6px;margin-top:6px;color:#888;">or</p>
+        <a href="{:U('Index/login')}" class="btn btn-primary" style="padding-top:10px;">
+            <?php translate('登陆')?>
+        </a>
     </div>
 </form>

@@ -224,7 +224,7 @@ class ContestController extends CommonController {
 				M('submission')->where(array('id'=>$_POST['id'],'contest_id'=>$_POST['contest_id'], 'user_id'=>$_SESSION['uid']))->save(array('image'=>'/img/design.jpg'));
 			}
 
-			$this->redirect('User/submission', array('id'=>$_POST['id']));
+			$this->redirect('Contest/info', array('id'=>$_POST['id']));
 		}
 		else {
 			$this->redirect('Contest/apply');

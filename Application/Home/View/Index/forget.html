@@ -1,6 +1,6 @@
 <style>
 body {
-    background-image: url(__PUBLIC__/img/signbg.jpg);
+    background-image: url(__PUBLIC__/img/signbg.png);
     background-size: cover;
     background-attachment: fixed;
 }
@@ -12,16 +12,16 @@ footer {
 }
 
 #main form {
-    width: 400px;
+    width: 80%;
+    max-width: 400px;
     margin: 0 auto;
-    margin-top: 100px;
+    margin-top: 60px;
     margin-bottom: 100px;
     background-color: rgba(250, 250, 250, 0.8);
     border-radius: 5px;
     box-shadow: 0 0 1px rgba(0, 0, 0, 0.2);
     text-align: center;
-    padding: 30px 50px;
-    padding-bottom: 50px;
+    padding: 20px 30px 30px 30px;
 }
 
 #main form #title {
@@ -59,7 +59,7 @@ footer {
 </style>
 <form class="form">
     <a href="{:U('Index/index')}">
-        <img src="__PUBLIC__/img/logo.png" alt="" style="width:120px;margin-bottom:10px;">
+        <img src="__PUBLIC__/img/logo.png" alt="" style="width:100px;margin-bottom:10px;">
     </a>
     <p id="title"><?php translate('重置密码')?></p>
     <p style="margin-top:20px;"><?php translate('请输入注册邮箱')?></p>
@@ -71,10 +71,10 @@ footer {
     </div>
     <span id="submit" class="btn btn-primary"><?php translate('提交')?></span>
     <p id="result"><?php translate('重置邮件已发送，请登录您的邮箱查收')?></p>
-    <div>
+    <!-- <div>
         <a href="{:U('Index/login')}"><?php translate('已有账号')?></a>
         <a href="{:U('Index/register')}"><?php translate('注册账号')?></a>
-    </div>
+    </div> -->
 </form>
 <script>
 $(document).ready(function() {
