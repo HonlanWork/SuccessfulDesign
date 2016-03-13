@@ -60,4 +60,9 @@ class UserController extends CommonController {
 		$this->images = $images;
 		$this->display();
 	}
+
+	public function change_password() {
+		M('user')->where(array('id'=>$_SESSION['uid']))->save(array('password'=>md5(I('password'))));
+		echo json_encode(array('result'=>'ok'));
+	}
 }

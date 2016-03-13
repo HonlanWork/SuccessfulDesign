@@ -1,31 +1,7 @@
 <style>
-/*header,
-nav {
-    display: none;
-}*/
-nav {
-    display: none;
-}
-header {
-    margin: 12px;
-    margin-bottom: 0;
-    background-color: #fff;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-    box-shadow: 0px -1px 3px rgba(20,20,20,0.4);
-}
-header h3, header h4 {
-    display: none;
-}
-header img {
-    left: 18px;
-}
-body {
-    background-color: #f17e55;
-}
-
 #main {
     text-align: center;
+    background-color: transparent;
 }
 
 #main h3 {
@@ -43,10 +19,9 @@ body {
 #main #section2 {
     padding: 20px 5% 30px 5%;
     background-color: #fff;
-    margin: 0 12px;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
-    box-shadow: 0px -1px 3px rgba(20,20,20,0.4);
+    box-shadow: 2px 2px 3px rgba(20, 20, 20, 0.3);
     margin-bottom: 60px;
 }
 
@@ -59,22 +34,20 @@ body {
     font-size: 18px;
     position: relative;
     top: 40px;
-    box-shadow: 2px 2px 3px rgba(20,20,20,0.4);
+    box-shadow: 2px 2px 3px rgba(20, 20, 20, 0.4);
 }
 
 #main #section3 {
-    margin: 0 12px;
     margin-top: 30px;
     padding: 20px 5% 40px 5%;
     background-color: #fff;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
-    box-shadow: 0px -1px 3px rgba(20,20,20,0.4);
+    box-shadow: 2px 0px 3px rgba(20, 20, 20, 0.3);
 }
 
 #main #section3 #categories>p {
-    text-align: center;
-    color: #f90;
+    color: #ef5045;
     font-size: 12px;
 }
 
@@ -125,7 +98,7 @@ body {
     position: relative;
     text-align: left;
     background-color: #f2f2f2;
-    margin: 0 12px;
+    box-shadow: 2px 0px 3px rgba(20, 20, 20, 0.3);
 }
 
 #main #section4 h3 {
@@ -141,32 +114,83 @@ body {
     font-size: 12px;
     display: none;
 }
+
 #main #section4 button {
-    margin-left: 12px;
-    margin-bottom: 10px;
     border: none;
     outline: none;
     background-color: #f2f2f2;
+    font-size: 12px;
+    font-style: italic;
+    color: #888;
+}
+
+#main #section4 .row .col-xs-12>div {
+    position: relative;
+    padding-left: 24px;
+    margin-bottom: 8px;
+}
+
+#main #section4 .row .col-xs-12>div h5 {
+    display: inline-block;
+}
+
+#main #section4 .row .col-xs-12>div p {
+    margin-top: 10px;
+    margin-bottom: 0px;
+}
+
+#main #section4 .row .col-xs-12 div img {
+    position: absolute;
+    left: -8px;
+    top: 9px;
+    width: 16px;
 }
 
 #main #section5 {
     padding: 20px 0 40px 0;
     background-color: #fff;
-    margin: 0 12px;
+    box-shadow: 2px 0px 3px rgba(20, 20, 20, 0.3);
+}
+
+#main #section5 p {
+    padding-left: 10%;
+    padding-right: 10%;
+    margin-bottom: 12px;
+    font-size: 13px;
 }
 
 #main #section6 {
     padding: 20px 0 30px 0;
     background-color: #f2f2f2;
-    margin: 0 12px;
     margin-bottom: 60px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    box-shadow: 2px 2px 3px rgba(20, 20, 20, 0.3);
+}
+#main #section6 .row {
+    margin-top: 20px;
+}
+#main #section6 .row p {
+    display: inline-block;
+    margin-left: 8px;
+    margin-bottom: 8px;
+    font-size: 13px;
 }
 </style>
 <div id="section1">
-    <img src="__PUBLIC__/img/contest2016/banner.png" alt="" style="width:100%;">
+    <?php if (isset($_SESSION['lang']) and $_SESSION['lang'] == 'en') { ?>
+    <img src="__PUBLIC__/img/contest2016/banneren.png" style="width:100%;">
+    <?php } else{ ?>
+    <img src="__PUBLIC__/img/contest2016/banner.png" style="width:100%;">
+    <?php } ?>
 </div>
 <div id="section2">
+    <?php if (isset($_SESSION['lang']) and $_SESSION['lang'] == 'en') { ?>
+    <h3 style="font-size:25px;"><?php translate('国内首个评估设计商业和社会价值的<br/>全球综合类设计大赛')?></h3>
+    <?php } else{ ?>
     <h3 style="font-size:20px;"><?php translate('国内首个评估设计商业和社会价值的<br/>全球综合类设计大赛')?></h3>
+    <?php } ?>
     <p>
         <?php translate('成功设计大赛是中国最具影响力的国际化商业设计大赛。')?>
     </p>
@@ -341,79 +365,156 @@ body {
 <div id="section4">
     <h3><?php translate('获奖收益')?></h3>
     <div class="row">
-        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
-            <h5><?php translate('成功设计标识')?></h5>
-            <div>read more<button><span class="fa fa-fw fa-angle-double-down"></span></button></div>
-            <p>
-                <?php translate('获奖标识只要您的参赛作品获奖，您就可以使用成功设计标识。成功设计标识的使用不受时间或区域限制，线上线下、广告新闻均可使用。得奖者可在成功设计平台官网下载获奖标识。')?>
-            </p>
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+            <div>
+                <img src="__PUBLIC__/img/contest2016/star.png" alt="">
+                <h5><?php translate('成功设计标识')?></h5>
+                <button>read more</button>
+                <p>
+                    <?php translate('获奖标识只要您的参赛作品获奖，您就可以使用成功设计标识。成功设计标识的使用不受时间或区域限制，线上线下、广告新闻均可使用。得奖者可在成功设计平台官网下载获奖标识。')?>
+                </p>
+            </div>
         </div>
-        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
-            <h5><?php translate('成功设计线上展览')?></h5>
-            <div>read more<button><span class="fa fa-fw fa-angle-double-down"></span></button></div>
-            <p>
-                <?php translate('您的获奖作品将在颁奖典礼后发布于成功设计线上展览，更棒的是这是一项永久福利，展览没有时间限制！您将成为行业标杆之一，名列杰出企业之列。这更是为您提供与社会大众交流的平台，以提高您的品牌影响力。')?>
-            </p>
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+            <div>
+                <img src="__PUBLIC__/img/contest2016/star.png" alt="">
+                <h5><?php translate('成功设计线上展览')?></h5>
+                <button>read more</button>
+                <p>
+                    <?php translate('您的获奖作品将在颁奖典礼后发布于成功设计线上展览，更棒的是这是一项永久福利，展览没有时间限制！您将成为行业标杆之一，名列杰出企业之列。这更是为您提供与社会大众交流的平台，以提高您的品牌影响力。')?>
+                </p>
+            </div>
         </div>
-        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
-            <h5><?php translate('成功设计大奖年鉴')?></h5>
-            <div>read more<button><span class="fa fa-fw fa-angle-double-down"></span></button></div>
-            <p>
-                <?php translate('今年所有获奖作品将被收录入《2016 成功设计大赛》年鉴，以展示获奖作品、分享成功设计和团队背后的故事。')?>
-            </p>
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+            <div>
+                <img src="__PUBLIC__/img/contest2016/star.png" alt="">
+                <h5><?php translate('成功设计大奖年鉴')?></h5>
+                <button>read more</button>
+                <p>
+                    <?php translate('今年所有获奖作品将被收录入《2016 成功设计大赛》年鉴，以展示获奖作品、分享成功设计和团队背后的故事。')?>
+                </p>
+            </div>
         </div>
-        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
-            <h5><?php translate('成功设计之夜')?></h5>
-            <div>read more<button><span class="fa fa-fw fa-angle-double-down"></span></button></div>
-            <p>
-                <?php translate('获奖者将受邀参加于2016年9月举行的“ 成功设计之夜”颁奖典礼。最成功设计大奖得主将在聚光灯下接受颁奖。届时将有各大主流媒体前来报道， 是您进行品牌宣传的极好机会。另外也会有专业摄影师拍照记录，照片可在活动后下载，作为您宣传的助力。')?>
-            </p>
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+            <div>
+                <img src="__PUBLIC__/img/contest2016/star.png" alt="">
+                <h5><?php translate('成功设计之夜')?></h5>
+                <button>read more</button>
+                <p>
+                    <?php translate('获奖者将受邀参加于2016年9月举行的“ 成功设计之夜”颁奖典礼。最成功设计大奖得主将在聚光灯下接受颁奖。届时将有各大主流媒体前来报道， 是您进行品牌宣传的极好机会。另外也会有专业摄影师拍照记录，照片可在活动后下载，作为您宣传的助力。')?>
+                </p>
+            </div>
         </div>
-        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
-            <h5><?php translate('证书与奖杯')?></h5>
-            <div>read more<button><span class="fa fa-fw fa-angle-double-down"></span></button></div>
-            <p>
-                <?php translate('颁奖典礼当日，获奖者将获得一套相关获奖作品的获奖证书和奖杯，以彰显获奖者的殊荣。另外在活动后，获奖者可以获得自己的电子版获奖证书，以作宣传使用。')?>
-            </p>
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+            <div>
+                <img src="__PUBLIC__/img/contest2016/star.png" alt="">
+                <h5><?php translate('证书与奖杯')?></h5>
+                <button>read more</button>
+                <p>
+                    <?php translate('颁奖典礼当日，获奖者将获得一套相关获奖作品的获奖证书和奖杯，以彰显获奖者的殊荣。另外在活动后，获奖者可以获得自己的电子版获奖证书，以作宣传使用。')?>
+                </p>
+            </div>
         </div>
-        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
-            <h5><?php translate('成功设计自媒体传播')?></h5>
-            <div>read more<button><span class="fa fa-fw fa-angle-double-down"></span></button></div>
-            <p>
-                <?php translate('您的获奖作品将在颁奖典礼后发布于成功设计线上展览及微信传播！您将成为行业标杆之一，名列杰出企业之列。这更是为您提供与社会大众交流的平台，以提高您的品牌影响力。')?>
-            </p>
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+            <div>
+                <img src="__PUBLIC__/img/contest2016/star.png" alt="">
+                <h5><?php translate('成功设计自媒体传播')?></h5>
+                <button>read more</button>
+                <p>
+                    <?php translate('您的获奖作品将在颁奖典礼后发布于成功设计线上展览及微信传播！您将成为行业标杆之一，名列杰出企业之列。这更是为您提供与社会大众交流的平台，以提高您的品牌影响力。')?>
+                </p>
+            </div>
         </div>
-        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
-            <h5><?php translate('更多定制推广服务')?></h5>
-            <div>read more<button><span class="fa fa-fw fa-angle-double-down"></span></button></div>
-            <p>
-                <?php translate('获奖作品将有机会被推荐接受我们合作媒体和网站的专访，获得价值百万的媒体传播。可针对您的需求，定制更加多元化的线上线下的推广服务，展示您的获奖作品，加深您的品牌影响力。')?>
-            </p>
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+            <div>
+                <img src="__PUBLIC__/img/contest2016/star.png" alt="">
+                <h5><?php translate('更多定制推广服务')?></h5>
+                <button>read more</button>
+                <p>
+                    <?php translate('获奖作品将有机会被推荐接受我们合作媒体和网站的专访，获得价值百万的媒体传播。可针对您的需求，定制更加多元化的线上线下的推广服务，展示您的获奖作品，加深您的品牌影响力。')?>
+                </p>
+            </div>
         </div>
-        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
-            <h5><?php translate('合作赛事推荐')?></h5>
-            <div>read more<button><span class="fa fa-fw fa-angle-double-down"></span></button></div>
-            <p>
-                <?php translate('成功设计大赛的获奖者将被免费推荐到亚洲设计管理论坛以及台湾的金点奖，角逐国际大奖。')?>
-            </p>
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+            <div>
+                <img src="__PUBLIC__/img/contest2016/star.png" alt="">
+                <h5><?php translate('合作赛事推荐')?></h5>
+                <button>read more</button>
+                <p>
+                    <?php translate('成功设计大赛的获奖者将被免费推荐到亚洲设计管理论坛以及台湾的金点奖，角逐国际大奖。')?>
+                </p>
+            </div>
         </div>
     </div>
 </div>
 <div id="section5">
     <h3><?php translate('大赛时间表')?></h3>
     <?php if (isset($_SESSION['lang']) and $_SESSION['lang'] == 'en') { ?>
-        <img src="__PUBLIC__/img/contest2016/scheduleen.png" style="width:90%;margin-bottom:20px;" alt="">
-        <?php } else{ ?>
-            <img src="__PUBLIC__/img/contest2016/schedule.png" style="width:90%;margin-bottom:20px;" alt="">
-            <?php } ?>
+    <img src="__PUBLIC__/img/contest2016/scheduleen.png" style="width:90%;margin-bottom:20px;max-width:600px;" alt="">
+    <?php } else{ ?>
+    <img src="__PUBLIC__/img/contest2016/schedule.png" style="width:90%;margin-bottom:20px;max-width:600px;" alt="">
+    <?php } ?>
+    <p style="margin-top:20px;">
+        <?php translate('* 早鸟报名开放至3月31日（1800RMB）')?>
+    </p>
+    <p>
+        <?php translate('** 一般报名开放至5月31日（2000RMB）')?>
+    </p>
+    <p>
+        <?php translate('*** 获奖者需支付后期宣传推广费用（3000RMB）')?>
+    </p>
 </div>
 <div id="section6">
     <h3><?php translate('奖项设置')?></h3>
     <?php if (isset($_SESSION['lang']) and $_SESSION['lang'] == 'en') { ?>
-        <img src="__PUBLIC__/img/contest2016/awarden.png" style="width:90%;margin-bottom:0px;" alt="">
-        <?php } else{ ?>
-            <img src="__PUBLIC__/img/contest2016/award.png" style="width:90%;margin-bottom:0px;" alt="">
-            <?php } ?>
+    <img src="__PUBLIC__/img/contest2016/awarden.png" style="width:90%;margin-bottom:0px;max-width:600px;" alt="">
+    <?php } else{ ?>
+    <img src="__PUBLIC__/img/contest2016/award.png" style="width:90%;margin-bottom:0px;max-width:600px;" alt="">
+    <?php } ?>
+    <div class="row" style="text-align:left;">
+        <div style="padding-left:10%;padding-right:10%;margin-top:20px;">
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                <img src="__PUBLIC__/img/contest2016/prize.png" style="width:12px;" alt=""> 
+                <p><?php translate('年度成功市场价值营销大奖')?></p>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                <img src="__PUBLIC__/img/contest2016/prize.png" style="width:12px;" alt=""> 
+                <p><?php translate('年度成功绿色设计大奖')?></p>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                <img src="__PUBLIC__/img/contest2016/prize.png" style="width:12px;" alt=""> 
+                <p><?php translate('年度成功社会影响大奖')?></p>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                <img src="__PUBLIC__/img/contest2016/prize.png" style="width:12px;" alt=""> 
+                <p><?php translate('年度成功客户体验大奖')?></p>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                <img src="__PUBLIC__/img/contest2016/prize.png" style="width:12px;" alt=""> 
+                <p><?php translate('年度成功品牌价值大奖')?></p>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                <img src="__PUBLIC__/img/contest2016/prize.png" style="width:12px;" alt=""> 
+                <p><?php translate('年度成功组织影响大奖')?></p>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                <img src="__PUBLIC__/img/contest2016/prize.png" style="width:12px;" alt=""> 
+                <p><?php translate('年度成功商业模式大奖')?></p>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                <img src="__PUBLIC__/img/contest2016/prize.png" style="width:12px;" alt=""> 
+                <p><?php translate('年度成功创业大奖')?></p>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                <img src="__PUBLIC__/img/contest2016/prize.png" style="width:12px;" alt=""> 
+                <p><?php translate('年度成功策略大奖')?></p>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                <img src="__PUBLIC__/img/contest2016/prize.png" style="width:12px;" alt=""> 
+                <p style="margin-bottom:0;"><?php translate('年度成功领导力大奖')?></p>
+            </div>
+        </div>
+    </div>
     <br>
     <a href="{:U('Contest/apply')}" class="join">
         <?php translate('立即参加')?>
@@ -437,16 +538,8 @@ $(document).ready(function() {
 
     $('#section4 button').click(function(event) {
         event.preventDefault();
-        var children = $(this).children('span');
-        var p = $(this).parent('div').next('p');
-        if (children.hasClass('fa-angle-double-down')) {
-            children.removeClass('fa-angle-double-down').addClass('fa-angle-double-up');
-            p.fadeIn('fast');
-        }
-        else {
-            children.removeClass('fa-angle-double-up').addClass('fa-angle-double-down');
-            p.fadeOut('fast');
-        }  
+        var p = $(this).next('p')
+        p.fadeIn('fast');
     });
 });
 </script>

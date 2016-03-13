@@ -1,89 +1,148 @@
 <style>
 #main {
-    padding: 40px 10%;
-    padding-top: 20px;
+    padding: 10px 10%;
+    margin-bottom: 60px;
+    box-shadow: 2px 2px 3px rgba(20, 20, 20, 0.3);
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
 }
+
 #main #addnew {
     padding-left: 5%;
     border-left: 1px solid #ddd;
 }
+
 #main #addnew.plain {
     padding-left: 0;
     border-left: none;
 }
-#main #addnew p {
-    color: #4E6B88;
+
+#main #addnew input, #main #addnew select {
+    background-color: #f8f8f8;
 }
+
+#main #addnew p {
+    color: #888;
+}
+
+#main #addnew #note p {
+    font-size: 12px;
+    color: #888;
+}
+
 #main #addnew .form-control {
     color: #666;
     max-width: 400px;
 }
+
 #main #guide {
     padding-right: 5%;
+    text-align: center;
 }
+
 #main #guide.plain {
     padding-bottom: 20px;
     margin-bottom: 20px;
     border-bottom: 1px solid #ddd;
 }
-#main #guide ol li {
-    margin-bottom: 3px;
-    color: #888;
+
+#main button[type="submit"] {
+    color: white;
+    background-color: #ff7c34;
+    border: none;
+    padding: 10px 30px;
+    border-radius: 5px;
+    font-size: 14px;
+    position: relative;
+    top: 30px;
+    box-shadow: 2px 2px 3px rgba(20, 20, 20, 0.4);
 }
-#main #guide ol li.active {
-    color: #F05036;
+
+@media screen and (max-width: 768px) {
+    img.v {
+        display: none;
+    }
 }
-#main #guide p {
-    color: #666;
-}
-#main #guide p span {
-    color: #F05036;
-    margin-left: 3px;
-    margin-right: 3px;
+
+@media screen and (min-width: 768px) {
+    img.h {
+        display: none;
+    }
 }
 </style>
 <form class="form" method="post" action="{:U('Contest/apply_handle')}">
     <div class="row">
         <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
             <div id="guide">
-                <h3 style="font-size:20px;color:#4E6B88;margin-bottom:15px;"><?php translate('仅需四步完成作品')?></h3>
-                <ol>
-                    <li class="active"><?php translate('添加新作品')?></li>
-                    <li><?php translate('完成支付')?></li>
-                    <li><?php translate('填写详情')?></li>
-                    <li><?php translate('提交作品')?></li>
-                </ol>
-                <div id="note" style="margin-top:20px;">
-                    <p><?php translate('填写<span>中文</span>和<span>英文作品名</span>，选择<span>作品类别</span>，点击<span>添加</span>，以添加一个属于您的独一无二的新作品')?></p>
-                    <p><?php translate('请注意，以上三项都是<span>必填项</span>')?></p>
-                </div>
+                <h3 style="font-size:14px;color:#666;margin-top:15px;text-align:left;margin-bottom:30px;"><?php translate('注册步骤')?></h3>
+                <?php if (isset($_SESSION['lang']) and $_SESSION['lang'] == 'en') { ?>
+                <img class="h" src="__PUBLIC__/img/contest2016/process1hen.png" alt="" style="width:100%;max-width:400px;margin:0 auto;">
+                <img class="v" src="__PUBLIC__/img/contest2016/process1ven.png" alt="" style="width:100%;max-width:400px;margin:0 auto;">
+                <?php } else{ ?>
+                <img class="h" src="__PUBLIC__/img/contest2016/process1h.png" alt="" style="width:100%;max-width:400px;margin:0 auto;">
+                <img class="v" src="__PUBLIC__/img/contest2016/process1v.png" alt="" style="width:100%;max-width:400px;margin:0 auto;">
+                <?php } ?>
             </div>
         </div>
         <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
             <div id="addnew">
-                <h3 class="title"><?php translate('1 添加新作品')?></h3>
-                <div class="form-group">
-                    <p><?php translate('作品名（英文）')?></p>
-                    <input type="text" name="titlee" class="form-control" value="">
+                <h3 class="title"><?php translate('添加新作品')?></h3>
+                <div id="note">
+                    <p>
+                        <?php translate('填写<span>中文</span>和<span>英文作品名</span>，选择<span>作品类别</span>，点击<span>添加</span>，以添加一个属于您的独一无二的新作品')?></p>
+                    <p>
+                        <?php translate('请注意，以上三项都是<span>必填项</span>')?></p>
                 </div>
-                <div class="form-group">
-                    <p><?php translate('作品名（中文）')?></p>
-                    <input type="text" name="titlec" class="form-control" value="">
+                <div style="padding:15px;border:1px solid #ddd;border-radius:5px;margin-top:20px;">
+                    <div class="form-group">
+                        <p>
+                            <?php translate('作品名（英文）')?>
+                        </p>
+                        <input type="text" name="titlee" class="form-control" value="">
+                    </div>
+                    <div class="form-group">
+                        <p>
+                            <?php translate('作品名（中文）')?>
+                        </p>
+                        <input type="text" name="titlec" class="form-control" value="">
+                    </div>
+                    <div class="form-group">
+                        <p>
+                            <?php translate('作品类别')?>
+                        </p>
+                        <select class="form-control" name="category">
+                            <option value="产品" selected=selected>
+                                <?php translate('产品')?>
+                            </option>
+                            <option value="空间">
+                                <?php translate('空间')?>
+                            </option>
+                            <option value="营销">
+                                <?php translate('营销')?>
+                            </option>
+                            <option value="数字">
+                                <?php translate('数字')?>
+                            </option>
+                            <option value="视觉">
+                                <?php translate('视觉')?>
+                            </option>
+                            <option value="商业模式">
+                                <?php translate('商业模式')?>
+                            </option>
+                            <option value="社会创新">
+                                <?php translate('社会创新')?>
+                            </option>
+                            <option value="众创空间">
+                                <?php translate('众创空间')?>
+                            </option>
+                        </select>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <p><?php translate('作品类别')?></p>
-                    <select class="form-control" name="category">
-                        <option value="产品" selected=selected><?php translate('产品')?></option>
-                        <option value="空间"><?php translate('空间')?></option>
-                        <option value="营销"><?php translate('营销')?></option>
-                        <option value="数字"><?php translate('数字')?></option>
-                        <option value="视觉"><?php translate('视觉')?></option>
-                        <option value="商业模式"><?php translate('商业模式')?></option>
-                        <option value="社会创新"><?php translate('社会创新')?></option>
-                        <option value="众创空间"><?php translate('众创空间')?></option>
-                    </select>
+                <div style="text-align:center;">
+                    <button type="submit" class="disabled">
+                        <?php translate('添加')?>
+                    </button>
                 </div>
-                <button type="submit" class="btn btn-success disabled" style="margin-top:20px;"><?php translate('添加')?></button>
             </div>
         </div>
     </div>

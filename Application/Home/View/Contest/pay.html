@@ -1,107 +1,213 @@
 <style>
 #main {
-    padding: 40px 10%;
-    padding-top: 20px;
+    padding: 10px 10%;
+    margin-bottom: 60px;
+    box-shadow: 2px 2px 3px rgba(20, 20, 20, 0.3);
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
 }
+
 #main #pay {
     padding-left: 5%;
     border-left: 1px solid #ddd;
 }
+
 #main #pay.plain {
     padding-left: 0;
     border-left: none;
 }
-#main #pay #info {
-    padding-bottom: 5px;
-    margin-top: 10px;
-}
+
 #main #pay #info div {
-    color: #888;
-    margin-bottom: 12px;
+    color: #666;
+    margin-bottom: 16px;
 }
+
 #main #pay #info p {
-    color: #4E6B88;
-    width: 98px;
-    margin-right: 20px;
-    display: inline-block;
-    margin-bottom: 0;
+    margin-bottom: 8px;
+    color: #888;
 }
-#main #pay>p {
-    color: #4E6B88;
-    font-size: 15px;
+
+#main #pay #note p {
+    font-size: 12px;
+    color: #888;
 }
+
+#main #pay .paymeans {
+    padding-bottom: 5px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #ddd;
+    display: none;
+}
+#main #pay .paymeans p {
+    font-size: 13px;
+    color: #888;
+    margin-bottom: 5px;
+}
+
 #main #guide {
     padding-right: 5%;
+    text-align: center;
 }
+
 #main #guide.plain {
     padding-bottom: 20px;
     margin-bottom: 20px;
     border-bottom: 1px solid #ddd;
 }
-#main #guide ol li {
-    margin-bottom: 3px;
-    color: #888;
+
+#main button[type="submit"] {
+    color: white;
+    background-color: #ff7c34;
+    border: none;
+    padding: 10px 30px;
+    border-radius: 5px;
+    font-size: 14px;
+    position: relative;
+    top: 30px;
+    box-shadow: 2px 2px 3px rgba(20, 20, 20, 0.4);
 }
-#main #guide ol li.active {
-    color: #F05036;
+
+#main img.online:hover, #main img.offline:hover {
+    cursor: pointer;
 }
-#main #guide p {
-    color: #666;
+
+#main #pay-success {
+    background-color: rgb(60, 150, 255);
+    border-radius: 5px;
+    padding: 20px 30px;
+    text-align: center;
+    display: none;
+    margin-top: 20px;
+    margin-bottom: 30px;
 }
-#main #guide p span {
-    color: #F05036;
-    margin-left: 3px;
-    margin-right: 3px;
+
+#main #confirm-payment button {
+    color: white;
+    background-color: #ff7c34;
+    border: none;
+    padding: 10px 30px;
+    border-radius: 5px;
+    font-size: 14px;
+    position: relative;
+    top: 30px;
+    box-shadow: 2px 2px 3px rgba(20, 20, 20, 0.4);
+}
+
+@media screen and (max-width: 768px) {
+    img.v {
+        display: none;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    img.h {
+        display: none;
+    }
 }
 </style>
 <form class="form" method="" action="">
     <div class="row">
         <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
             <div id="guide">
-                <h3 style="font-size:20px;color:#4E6B88;margin-bottom:15px;"><?php translate('仅需四步完成作品')?></h3>
-                <ol>
-                    <li><?php translate('添加新作品')?></li>
-                    <li class="active"><?php translate('完成支付')?></li>
-                    <li><?php translate('填写详情')?></li>
-                    <li><?php translate('提交作品')?></li>
-                </ol>
-                <div id="note" style="margin-top:20px;">
-                    <p><?php translate('<span style="margin-left:0;">完成支付</span>后，系统将发送<span>确认邮件</span>并提供<span>下一步操作</span>链接')?></p>
-                    <p><?php translate('请注意，<span>未支付</span>的作品可以在右上角头像中<span>我的作品</span>内找到')?></p>
-                </div>
+                <h3 style="font-size:14px;color:#666;margin-top:15px;text-align:left;margin-bottom:30px;"><?php translate('注册步骤')?></h3>
+                <?php if (isset($_SESSION['lang']) and $_SESSION['lang'] == 'en') { ?>
+                <img class="h" src="__PUBLIC__/img/contest2016/process2hen.png" alt="" style="width:100%;max-width:400px;margin:0 auto;">
+                <img class="v" src="__PUBLIC__/img/contest2016/process2ven.png" alt="" style="width:100%;max-width:400px;margin:0 auto;">
+                <?php } else{ ?>
+                <img class="h" src="__PUBLIC__/img/contest2016/process2h.png" alt="" style="width:100%;max-width:400px;margin:0 auto;">
+                <img class="v" src="__PUBLIC__/img/contest2016/process2v.png" alt="" style="width:100%;max-width:400px;margin:0 auto;">
+                <?php } ?>
             </div>
         </div>
         <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
             <div id="pay">
-                <h3 class="title"><?php translate('2 完成支付')?></h3>
-                <div id="info">
-                    <div class="panel panel-default">
-                        <div class="panel-heading" style="color:#4E6B88;font-size:16px;margin-bottom:0;"><?php translate('您将支付的作品为')?></div>
-                        <div class="panel-body" style="margin-bottom:5px;">
+                <h3 class="title"><?php translate('完成支付')?></h3>
+                <div id="pay-process">
+                    <div id="note">
+                        <p>
+                            <?php translate('<span style="margin-left:0;">完成支付</span>后，系统将发送<span>确认邮件</span>并提供<span>下一步操作</span>链接')?></p>
+                        <p>
+                            <?php translate('请注意，<span>未支付</span>的作品可以在右上角头像中<span>我的作品</span>内找到')?></p>
+                    </div>
+                    <div style="padding:15px;border:1px solid #ddd;border-radius:5px;margin-top:20px;">
+                        <div id="info">
                             <div>
-                                <p><?php translate('作品名（英文）')?></p>
+                                <p>
+                                    <?php translate('作品名（英文）')?>
+                                </p>
                                 {$submission.titlee}
                             </div>
                             <div>
-                                <p><?php translate('作品名（中文）')?></p>
+                                <p>
+                                    <?php translate('作品名（中文）')?>
+                                </p>
                                 {$submission.titlec}
                             </div>
                             <div>
-                                <p><?php translate('作品类别')?></p>
+                                <p>
+                                    <?php translate('作品类别')?>
+                                </p>
                                 {$submission.category}
                             </div>
-                            <div style="color:#F05036;margin-bottom:0;">
-                                <p><?php translate('支付费用（元）')?></p>
-                                <if condition="time() lt $contest['early_bird_time']">{$contest.early_bird_fee}<?php translate('（早鸟优惠）')?>
+                            <div style="color:#ef5045;margin-bottom:0;">
+                                <p>
+                                    <?php translate('支付费用（元）')?>
+                                </p>
+                                <if condition="time() lt $contest['early_bird_time']">{$contest.early_bird_fee}
+                                    <?php translate('（早鸟优惠）')?>
                                     <else/>{$contest.fee}
                                 </if>
                             </div>
                         </div>
+                        <p style="margin-top:30px;margin-bottom:15px;">
+                            <?php translate('选择支付方式')?>
+                        </p>
+                        <div style="margin-bottom:20px;">
+                            <?php if (isset($_SESSION['lang']) and $_SESSION['lang'] == 'en') { ?>
+                            <img src="__PUBLIC__/img/contest2016/payofflineen.png" style="margin-right:3%;width:45%;max-width:120px;" alt="" class="offline">
+                            <img src="__PUBLIC__/img/contest2016/payonlineen.png" style="margin-left:3%;width:45%;max-width:120px;" alt="" class="online">
+                            <?php } else{ ?>
+                            <img src="__PUBLIC__/img/contest2016/payoffline.png" style="margin-right:3%;width:45%;max-width:120px;" alt="" class="offline">
+                            <img src="__PUBLIC__/img/contest2016/payonline.png" style="margin-left:3%;width:45%;max-width:120px;" alt="" class="online">
+                            <?php } ?>
+                        </div>
+                        <div class="paymeans offline">
+                            <p style="border-bottom:1px solid #ddd;padding-bottom:15px;margin-bottom:15px;">
+                                <?php translate('请在转账备注里填写')?><span style="color:#EF5045;margin-left:5px;"><?php translate('公司信息＋转账人＋联系手机＋作品名称')?></span>
+                                <?php translate('，这将作为作品支付的唯一凭证')?>
+                            </p>
+                            <img src="__PUBLIC__/img/contest2016/ICBC.png" style="width:45%;max-width:120px;margin-bottom:12px;" alt="">
+                            <p>
+                                <?php translate('户名：上海成功商务服务有限公司')?>
+                            </p>
+                            <p>
+                                <?php translate('开户行：工行静安支行')?>
+                            </p>
+                            <p>
+                                <?php translate('帐号：1001211309207989444')?>
+                            </p>
+                        </div>
+                        <div class="paymeans offline" style="border-bottom:none;padding-bottom:0;margin-bottom:0;">
+                            <img src="__PUBLIC__/img/contest2016/HSBC.png" style="width:45%;max-width:120px;margin-bottom:12px;" alt="">
+                            <p>
+                                <?php translate('外币：ICBKCNBJSHI')?>
+                            </p>
+                            <p>
+                                <?php translate('人民币：102290021133')?>
+                            </p>
+                        </div>
                     </div>
                 </div>
-                <p><?php translate('使用以下任意一种方式进行支付')?></p>
-                <p>支付宝</p>
-                <p><?php translate('支付成功后请等待系统确认，系统将发送确认邮件并提供填写作品详情链接')?></p>
+                <div style="text-align:center;" id="confirm-payment">
+                    <button>
+                        <?php translate('已经支付')?>
+                    </button>
+                </div>
+                <div id="pay-success">
+                    <img src="__PUBLIC__/img/contest2016/check.png" style="width:50px;margin-bottom:20px;" alt="">
+                    <p style="text-align:left;color:#fdfdfd;"><?php translate('恭喜，你已经完成支付，将很快收到一封确认邮件')?></p>
+                    <p style="text-align:left;color:#fdfdfd;"><?php translate('请记住，在5月31日之前，你需要填写作品详情并提交')?></p>
+                </div>
             </div>
         </div>
     </div>
@@ -123,6 +229,39 @@ $(document).ready(function() {
             $('#main #pay').removeClass('plain');
             $('#main #guide').removeClass('plain');
         }
+    });
+
+    $('#main img.offline').click(function(event) {
+        $('#main .paymeans.online').hide();
+        $('#main .paymeans.offline').show();
+    });
+    $('#main img.online').click(function(event) {
+        window.location.href = 'http://event.3188.la/229649539';
+    });
+    $('#main #confirm-payment button').click(function(event) {
+        event.preventDefault();
+        $('#main #confirm-payment').fadeOut('fast', function(){
+            $('#main #pay-process').css('margin-bottom', '40px');
+        });
+        $.ajax({
+            url: "{:U('Contest/pay_confirm')}",
+            type: 'POST',
+            dataType: 'json',
+            data: {
+                id: {$submission.id}
+            },
+        })
+        .done(function() {
+            $('#main #pay-process').hide();
+            $('#main #pay-success').fadeIn('fast');
+        })
+        .fail(function() {
+            console.log("error");
+        })
+        .always(function() {
+            console.log("complete");
+        });
+        
     });
 });
 </script>

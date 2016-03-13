@@ -22,7 +22,7 @@ function sendMail($to, $title, $content) {
 // 生成随机字符串
 function genRandStr() {
 	$str = '';
-	for ($i = 0; $i < 10; $i++) { 
+	for ($i = 0; $i < 8; $i++) { 
 		$str .= rand(0, 9);
 	}
 	return md5($str);
@@ -45,6 +45,27 @@ function translate($str){
 				session('dictionary', $dictionary);
 			}
 			echo $_SESSION['dictionary'][$str];
+		}
+	}
+}
+function translate_return($str){
+	if (!isset($_SESSION['lang'])) {
+		return $str;
+	}
+	else {
+		if ($_SESSION['lang'] == 'ch') {
+			return $str;
+		}
+		elseif ($_SESSION['lang'] == 'en') {
+			if (!isset($_SESSION['dictionary'])) {
+				$translation = M('translation')->select();
+				$dictionary = array();
+				foreach ($translation as $key => $value) {
+					$dictionary[$value['ch']] = $value['en'];
+				}
+				session('dictionary', $dictionary);
+			}
+			return $_SESSION['dictionary'][$str];
 		}
 	}
 }

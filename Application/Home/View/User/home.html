@@ -1,7 +1,11 @@
 <style>
 #main {
-    padding: 40px 10%;
+    padding: 10px 10%;
     padding-top: 30px;
+    margin-bottom: 60px;
+    box-shadow: 2px 2px 3px rgba(20, 20, 20, 0.3);
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
 }
 
 #main #basic-info,
@@ -9,11 +13,23 @@
     margin-bottom: 40px;
 }
 
-#main #edit-button {
-    position: absolute;
-    top: -8px;
-    right: 0;
+#main #edit-button,
+#main button[type="submit"] {
+    color: white;
+    background-color: #ff7c34;
+    border: none;
+    padding: 10px 30px;
+    border-radius: 5px;
     font-size: 14px;
+    position: relative;
+    top: 5px;
+    box-shadow: 2px 2px 3px rgba(20, 20, 20, 0.4);
+    margin-bottom: -30px;
+}
+
+#main button[type="submit"] {
+    margin-bottom: 0;
+    top: 30px;
 }
 
 #main #job-info,
@@ -21,42 +37,47 @@
 #main #job-info-edit,
 #main #other-info-edit {
     padding: 30px;
-    padding-bottom: 20px;
-    border-top: 1px solid #ddd;
+    padding-bottom: 10px;
+    padding-top: 0;
 }
 
-#main #job-info div, #main #other-info div {
-	color: #888;
-	margin-bottom: 25px;
-	line-height: 1.6;
-	position: relative;
+#main #job-info div,
+#main #other-info div {
+    color: #888;
+    margin-bottom: 25px;
+    line-height: 1.6;
+    position: relative;
+    min-height: 22px;
 }
 
 #main #job-info div p:first-child {
-	color: #4E6B88;
-	margin-right: 20px;
-	display: inline-block;
-    width: 112px;
-	margin-bottom: 0;
-	position: absolute;
-	left: 0;
-	top: 0;
+    color: #666;
+    margin-right: 20px;
+    display: inline-block;
+    width: 122px;
+    margin-bottom: 0;
+    position: absolute;
+    left: 0;
+    top: 0;
 }
+
 #main #job-info div p:last-child {
-	margin-left: 132px;
+    margin-left: 142px;
 }
+
 #main #other-info div p:first-child {
-	color: #4E6B88;
-	margin-right: 20px;
-	display: inline-block;
-    width: 70px;
-	margin-bottom: 0;
-	position: absolute;
-	left: 0;
-	top: 0;
+    color: #666;
+    margin-right: 20px;
+    display: inline-block;
+    width: 80px;
+    margin-bottom: 0;
+    position: absolute;
+    left: 0;
+    top: 0;
 }
+
 #main #other-info div p:last-child {
-	margin-left: 80px;
+    margin-left: 100px;
 }
 
 #main #info-edit {
@@ -66,11 +87,11 @@
 }
 
 #main #info-edit p {
-	color: #4E6B88;
+    color: #888;
 }
 
 #main #info-edit .form-control {
-	color: #666;
+    color: #666;
 }
 
 #main #info-edit input.form-control,
@@ -87,23 +108,34 @@
     -moz-appearance: none;
     -webkit-appearance: none;
 }
+
+#main #change_password {
+    color: white;
+    background-color: #ff7c34;
+    border: none;
+    padding: 10px 30px;
+    border-radius: 5px;
+    font-size: 14px;
+    box-shadow: 2px 2px 3px rgba(20, 20, 20, 0.4);
+    margin-bottom: -10px;
+    margin-top: 15px;
+}
 </style>
 <div id="info">
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <div style="position:relative" id="basic-info">
-                <button id="edit-button" class="btn btn-default" style="color:#666;"><?php translate('编辑')?></button>
                 <div style="width:80px;height:80px;overflow:hidden;position:absolute;left:0;top:0;">
                     <img src="__PUBLIC__{$user['portrait']}" style="width:80px;height:80px;">
                 </div>
                 <div style="margin-left:120px;">
                     <h4 style="color:#444;margin-bottom:20px;">{$user.nickname}
-                		<if condition="$user.gender == 1">
-                			<span class="fa fa-fw fa-male" style="color:#3644F0;margin-left:10px;"></span>
-                			<else/>
-                			<span class="fa fa-fw fa-female" style="color:#F03636;margin-left:10px;"></span>
-                		</if>
-                	</h4>
+                        <if condition="$user.gender == 1">
+                            <span class="fa fa-fw fa-male" style="color:#4136F0;margin-left:10px;"></span>
+                            <else/>
+                            <span class="fa fa-fw fa-female" style="color:#F05036;margin-left:10px;"></span>
+                        </if>
+                    </h4>
                     <p style="color:#666;"><span class="fa fa-fw fa-envelope" style="margin-right:15px;"></span>{$user.email}</p>
                     <p style="color:#666;"><span class="fa fa-fw fa-phone" style="margin-right:15px;"></span>{$user.cellphone}</p>
                 </div>
@@ -113,20 +145,65 @@
     <div class="row">
         <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
             <div id="job-info">
-                <div><p><?php translate('公司名称（中文）')?></p><p>{$user.companyc}</p></div>
-                <div><p><?php translate('公司名称（英文）')?></p><p>{$user.companye}</p></div>
-                <div><p><?php translate('公司地址（中文）')?></p><p>{$user.companyac}</p></div>
-                <div><p><?php translate('公司地址（英文）')?></p><p>{$user.companyae}</p></div>
+                <div>
+                    <p>
+                        <?php translate('公司名称（中文）')?>
+                    </p>
+                    <p>{$user.companyc}</p>
+                </div>
+                <div>
+                    <p>
+                        <?php translate('公司名称（英文）')?>
+                    </p>
+                    <p>{$user.companye}</p>
+                </div>
+                <div>
+                    <p>
+                        <?php translate('公司地址（中文）')?>
+                    </p>
+                    <p>{$user.companyac}</p>
+                </div>
+                <div>
+                    <p>
+                        <?php translate('公司地址（英文）')?>
+                    </p>
+                    <p>{$user.companyae}</p>
+                </div>
             </div>
         </div>
         <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
             <div id="other-info">
-                <div><p><?php translate('职位')?></p><p>{$user.position}</p></div>
-                <div><p><?php translate('传真')?></p><p>{$user.fax}</p></div>
-                <div><p><?php translate('邮编')?></p><p>{$user.zipcode}</p></div>
-            	<div><p><?php translate('公司电话')?></p><p>{$user.companyp}</p></div>
+                <div>
+                    <p>
+                        <?php translate('职位')?>
+                    </p>
+                    <p>{$user.position}</p>
+                </div>
+                <div>
+                    <p>
+                        <?php translate('传真')?>
+                    </p>
+                    <p>{$user.fax}</p>
+                </div>
+                <div>
+                    <p>
+                        <?php translate('邮编')?>
+                    </p>
+                    <p>{$user.zipcode}</p>
+                </div>
+                <div>
+                    <p>
+                        <?php translate('公司电话')?>
+                    </p>
+                    <p>{$user.companyp}</p>
+                </div>
             </div>
         </div>
+    </div>
+    <div style="text-align:center;">
+        <button id="edit-button" class="btn btn-default">
+            <?php translate('编辑')?>
+        </button>
     </div>
 </div>
 <div id="info-edit">
@@ -138,31 +215,64 @@
                         <div style="width:80px;height:80px;overflow:hidden;">
                             <img src="__PUBLIC__{$user['portrait']}" style="width:80px;height:80px;">
                         </div>
-                        <p style="margin-top:15px;padding-top:6px;padding-bottom:6px;width:80px;text-align:center;border-radius:3px;border:1px solid #ddd;color:#666;"><?php translate('更换头像')?></p>
+                        <p style="margin-top:15px;padding-top:6px;padding-bottom:6px;width:80px;text-align:center;border-radius:3px;border:1px solid #ddd;color:#666;background-color:#f8f8f8;">
+                            <?php translate('更换头像')?>
+                        </p>
                         <input type="file" accept="image/*" style="opacity:0;position:absolute;left:0;top:0;width:80px;height:100%;z-index:999;cursor:pointer;" id="portrait" capture="camera">
                         <input type="text" name="portrait" value="" style="display:none;">
                     </div>
-                    <div style="margin-left:120px;">
+                    <div style="padding-left:120px;">
                         <div class="form-group">
-                            <p><?php translate('昵称')?></p>
+                            <p>
+                                <?php translate('昵称')?>
+                            </p>
                             <input type="text" name="nickname" class="form-control" value="{$user['nickname']}">
                         </div>
                         <div class="form-group">
-                            <p><?php translate('性别')?></p>
+                            <p>
+                                <?php translate('性别')?>
+                            </p>
                             <select class="form-control" name="gender">
                                 <if condition="$user.gender == 1">
-                                    <option value="1" selected=selected><?php translate('男')?></option>
-                                    <option value="0"><?php translate('女')?></option>
+                                    <option value="1" selected=selected>
+                                        <?php translate('男')?>
+                                    </option>
+                                    <option value="0">
+                                        <?php translate('女')?>
+                                    </option>
                                     <else/>
-                                    <option value="1"><?php translate('男')?></option>
-                                    <option value="0" selected=selected><?php translate('女')?></option>
+                                    <option value="1">
+                                        <?php translate('男')?>
+                                    </option>
+                                    <option value="0" selected=selected>
+                                        <?php translate('女')?>
+                                    </option>
                                 </if>
                             </select>
                         </div>
                         <div class="form-group">
-                            <p><?php translate('手机')?></p>
+                            <p>
+                                <?php translate('手机')?>
+                            </p>
                             <input type="text" name="cellphone" class="form-control" value="{$user['cellphone']}">
                         </div>
+                        <div class="form-group">
+                            <p>
+                                <?php translate('修改密码')?>
+                            </p>
+                            <input type="password" id="newpassword1" class="form-control" value="">
+                        </div>
+                        <div class="form-group">
+                            <p>
+                                <?php translate('重复密码')?>
+                            </p>
+                            <input type="password" id="newpassword2" class="form-control" value="">
+                        </div>
+                    </div>
+                    <div style="text-align:center;">
+                        <button id="change_password" class="btn disabled">
+                            <?php translate('修改密码')?>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -171,45 +281,65 @@
             <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                 <div id="job-info-edit">
                     <div class="form-group">
-                        <p><?php translate('公司名称（中文）')?></p>
+                        <p>
+                            <?php translate('公司名称（中文）')?>
+                        </p>
                         <input type="text" name="companyc" class="form-control" value="{$user['companyc']}">
                     </div>
                     <div class="form-group">
-                        <p><?php translate('公司名称（英文）')?></p>
+                        <p>
+                            <?php translate('公司名称（英文）')?>
+                        </p>
                         <input type="text" name="companye" class="form-control" value="{$user['companye']}">
                     </div>
                     <div class="form-group">
-                        <p><?php translate('公司地址（中文）')?></p>
+                        <p>
+                            <?php translate('公司地址（中文）')?>
+                        </p>
                         <input type="text" name="companyac" class="form-control" value="{$user['companyac']}">
                     </div>
                     <div class="form-group">
-                        <p><?php translate('公司地址（英文）')?></p>
+                        <p>
+                            <?php translate('公司地址（英文）')?>
+                        </p>
                         <input type="text" name="companyae" class="form-control" value="{$user['companyae']}">
                     </div>
                 </div>
             </div>
             <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                 <div id="other-info-edit">
-                	<div class="form-group">
-                        <p><?php translate('职位')?></p>
+                    <div class="form-group">
+                        <p>
+                            <?php translate('职位')?>
+                        </p>
                         <input type="text" name="position" class="form-control" value="{$user['position']}">
                     </div>
                     <div class="form-group">
-                        <p><?php translate('传真')?></p>
+                        <p>
+                            <?php translate('传真')?>
+                        </p>
                         <input type="text" name="fax" class="form-control" value="{$user['fax']}">
                     </div>
                     <div class="form-group">
-                        <p><?php translate('邮编')?></p>
+                        <p>
+                            <?php translate('邮编')?>
+                        </p>
                         <input type="text" name="zipcode" class="form-control" value="{$user['zipcode']}">
                     </div>
                     <div class="form-group">
-                        <p><?php translate('公司电话')?></p>
+                        <p>
+                            <?php translate('公司电话')?>
+                        </p>
                         <input type="text" name="companyp" class="form-control" value="{$user['companyp']}">
                     </div>
                 </div>
             </div>
         </div>
-        <button type="submit" class="btn btn-success"><?php translate('保存')?></button>
+        <div style="text-align:center;">
+            <button type="submit" class="btn btn-success">
+                <?php translate('保存')?>
+            </button>
+        </div>
     </form>
 </div>
 <script>
@@ -237,6 +367,52 @@ $(document).ready(function() {
             .always(function() {
                 // 不管是成功失败，都会执行
             });
+    });
+
+    $('#main #newpassword1').keyup(function(event) {
+        var np1 = $('#main #newpassword1').val();
+        var np2 = $('#main #newpassword2').val();
+        if (np1 == np2 && np1 != '') {
+            $('#change_password').removeClass('disabled');
+        }
+        else {
+            $('#change_password').addClass('disabled');
+        }
+    });
+
+    $('#main #newpassword2').keyup(function(event) {
+        var np1 = $('#main #newpassword1').val();
+        var np2 = $('#main #newpassword2').val();
+        console.log(np1);
+        console.log(np2);
+        if (np1 == np2 && np1 != '') {
+            $('#change_password').removeClass('disabled');
+        }
+        else {
+            $('#change_password').addClass('disabled');
+        }
+    });
+
+    $('#main #change_password').click(function(event) {
+        event.preventDefault();
+        $.ajax({
+            url: '{:U("User/change_password")}',
+            type: 'POST',
+            dataType: 'json',
+            data: {
+                password: $('#main #newpassword1').val()
+            },
+        })
+        .done(function() {
+            window.location.href = "{:U('Index/logout')}";
+        })
+        .fail(function() {
+            console.log("error");
+        })
+        .always(function() {
+            console.log("complete");
+        });
+        
     });
 });
 </script>

@@ -1,7 +1,10 @@
 <style>
 #main {
-    padding: 40px 10%;
-    padding-top: 20px;
+    padding: 10px 10%;
+    margin-bottom: 60px;
+    box-shadow: 2px 2px 3px rgba(20, 20, 20, 0.3);
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
 }
 
 #main #addinfo {
@@ -14,14 +17,20 @@
     border-left: none;
 }
 
+#main #addinfo #note p {
+    font-size: 12px;
+    color: #888;
+}
+
 #main #addinfo p {
-    color: #4E6B88;
+    color: #888;
 }
 
 #main #addinfo input.form-control,
 select.form-control {
     color: #666;
     max-width: 400px;
+    background-color: #f8f8f8;
 }
 
 #main #addinfo .cell {
@@ -39,7 +48,7 @@ select.form-control {
 }
 
 #main #addinfo .reminder {
-    color: #F05036;
+    color: #ef5045;
     font-size: 12px;
 }
 
@@ -74,25 +83,6 @@ select.form-control {
     border-bottom: 1px solid #ddd;
 }
 
-#main #guide ol li {
-    margin-bottom: 3px;
-    color: #888;
-}
-
-#main #guide ol li.active {
-    color: #F05036;
-}
-
-#main #guide p {
-    color: #666;
-}
-
-#main #guide p span {
-    color: #F05036;
-    margin-left: 3px;
-    margin-right: 3px;
-}
-
 #main .description {
     background: #f2f2f2;
     color: #888 !important;
@@ -102,6 +92,44 @@ select.form-control {
     border-radius: 4px;
     display: none;
 }
+
+#main button[type="submit"] {
+    color: white;
+    background-color: #ff7c34;
+    border: none;
+    padding: 10px 30px;
+    border-radius: 5px;
+    font-size: 14px;
+    position: relative;
+    top: 10px;
+    box-shadow: 2px 2px 3px rgba(20, 20, 20, 0.4);
+    margin-bottom: -20px;
+}
+
+#main #addinfo a {
+    color: white;
+    background-color: #ff7c34;
+    border: none;
+    padding: 10px 30px;
+    border-radius: 5px;
+    font-size: 14px;
+    position: relative;
+    top: 10px;
+    box-shadow: 2px 2px 3px rgba(20, 20, 20, 0.4);
+    margin-bottom: -20px;
+}
+
+@media screen and (max-width: 768px) {
+    img.v {
+        display: none;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    img.h {
+        display: none;
+    }
+}
 </style>
 <form class="form" method="post" action="{:U('Contest/info_handle')}" enctype="multipart/form-data">
     <input type="text" style="display:none;" name="id" value="{$submission['id']}">
@@ -109,34 +137,27 @@ select.form-control {
     <div class="row">
         <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
             <div id="guide">
-                <h3 style="font-size:20px;color:#4E6B88;margin-bottom:15px;"><?php translate('仅需四步完成作品')?></h3>
-                <ol>
-                    <li>
-                        <?php translate('添加新作品')?>
-                    </li>
-                    <li>
-                        <?php translate('完成支付')?>
-                    </li>
-                    <li class="active">
-                        <?php translate('填写详情')?>
-                    </li>
-                    <li>
-                        <?php translate('提交作品')?>
-                    </li>
-                </ol>
-                <div id="note" style="margin-top:20px;">
+                <h3 style="font-size:14px;color:#666;margin-top:15px;text-align:left;margin-bottom:30px;"><?php translate('注册步骤')?></h3>
+                <?php if (isset($_SESSION['lang']) and $_SESSION['lang'] == 'en') { ?>
+                <img class="h" src="__PUBLIC__/img/contest2016/process3hen.png" alt="" style="width:100%;max-width:400px;margin:0 auto;">
+                <img class="v" src="__PUBLIC__/img/contest2016/process3ven.png" alt="" style="width:100%;max-width:400px;margin:0 auto;">
+                <?php } else{ ?>
+                <img class="h" src="__PUBLIC__/img/contest2016/process3h.png" alt="" style="width:100%;max-width:400px;margin:0 auto;">
+                <img class="v" src="__PUBLIC__/img/contest2016/process3v.png" alt="" style="width:100%;max-width:400px;margin:0 auto;">
+                <?php } ?>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
+            <div id="addinfo">
+                <h3 class="title"><?php translate('填写详情')?></h3>
+                <div id="note">
                     <p>
                         <?php translate('在作品<span>未提交</span>的情况下，<span>任何时刻</span>都可以通过点击右上角头像中<span>我的作品</span>回到所需编辑的作品页面，进行修改和完善作品信息')?></p>
                     <p>
                         <?php translate('请注意，一旦点击最后的<span>提交</span>，作品进入初审系统，<span>不能再进行修改</span>')?></p>
                 </div>
-            </div>
-        </div>
-        <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
-            <div id="addinfo">
-                <h3 class="title"><?php translate('2 填写详情')?></h3>
-                <div class="panel panel-default">
-                    <div class="panel-heading" style="color:#4E6B88;font-size:16px;">
+                <div class="panel panel-default" style="margin-bottom:40px;margin-top:20px;">
+                    <div class="panel-heading" style="color:#666;font-size:15px;">
                         <?php translate('个人信息')?>
                         <button class="detail"><span class="fa fa-fw fa-angle-double-up"></span></button>
                     </div>
@@ -186,13 +207,15 @@ select.form-control {
                                 </div>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-success" style="float:right;">
-                            <?php translate('保存')?>
-                        </button>
+                        <div style="text-align:center;">
+                            <button type="submit" class="btn btn-success">
+                                <?php translate('保存')?>
+                            </button>
+                        </div>
                     </div>
                 </div>
-                <div class="panel panel-default">
-                    <div class="panel-heading" style="color:#4E6B88;font-size:16px;">
+                <div class="panel panel-default" style="margin-bottom:40px;">
+                    <div class="panel-heading" style="color:#666;font-size:15px;">
                         <?php translate('基本信息')?>
                         <button class="detail"><span class="fa fa-fw fa-angle-double-up"></span></button>
                     </div>
@@ -244,13 +267,15 @@ select.form-control {
                                 </option>
                             </select>
                         </div>
-                        <button type="submit" class="btn btn-success" style="float:right;">
-                            <?php translate('保存')?>
-                        </button>
+                        <div style="text-align:center;">
+                            <button type="submit" class="btn btn-success">
+                                <?php translate('保存')?>
+                            </button>
+                        </div>
                     </div>
                 </div>
-                <div class="panel panel-default">
-                    <div class="panel-heading" style="color:#4E6B88;font-size:16px;">
+                <div class="panel panel-default" style="margin-bottom:40px;">
+                    <div class="panel-heading" style="color:#666;font-size:15px;">
                         <?php translate('详细信息')?>
                         <button class="detail"><span class="fa fa-fw fa-angle-double-up"></span></button>
                     </div>
@@ -390,13 +415,15 @@ select.form-control {
                                 </p>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-success" style="float:right;">
-                            <?php translate('保存')?>
-                        </button>
+                        <div style="text-align:center;">
+                            <button type="submit" class="btn btn-success">
+                                <?php translate('保存')?>
+                            </button>
+                        </div>
                     </div>
                 </div>
                 <div class="panel panel-default">
-                    <div class="panel-heading" style="color:#4E6B88;font-size:16px;">
+                    <div class="panel-heading" style="color:#666;font-size:15px;">
                         <?php translate('图像信息')?>
                         <button class="detail"><span class="fa fa-fw fa-angle-double-up"></span></button>
                     </div>
@@ -610,14 +637,18 @@ select.form-control {
                                 </div>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-success" style="float:right;">
-                            <?php translate('保存')?>
-                        </button>
+                        <div style="text-align:center;">
+                            <button type="submit" class="btn btn-success">
+                                <?php translate('保存')?>
+                            </button>
+                        </div>
                     </div>
                 </div>
-                <a href="{:U('Contest/submit', array('id'=>$submission['id']))}" class="btn btn-primary" style="margin-top:20px;">
-                    <?php translate('提交')?>
-                </a>
+                <div style="text-align:center;">
+                    <a href="{:U('Contest/submit', array('id'=>$submission['id']))}" class="btn btn-primary" style="margin-top:20px;">
+                        <?php translate('提交')?>
+                    </a>
+                </div>
             </div>
         </div>
     </div>

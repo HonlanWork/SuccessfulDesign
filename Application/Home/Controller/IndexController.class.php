@@ -205,8 +205,8 @@ class IndexController extends Controller {
     		$temp .= $value."<br/>";
     	}
     	$email_content = $temp;
-    	$email_content = explode("^^^", $email_content);
-    	$email_content = $email_content[0].U('Index/reset', array('email'=>I('email'), 'reset_key'=>md5($reset_key)),false,true).$email_content[1];
+        $email_content = explode("^^^", $email_content);
+        $email_content = $email_content[0].U('Index/reset', array('email'=>I('email'), 'reset_key'=>md5($reset_key)),false,true).$email_content[1];
     	SendMail(I('email'), $email['title'], $email_content);
 
     	return json_encode(array('status'=>200));
