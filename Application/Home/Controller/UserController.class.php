@@ -62,7 +62,8 @@ class UserController extends CommonController {
 	}
 
 	public function change_password() {
-		M('user')->where(array('id'=>$_SESSION['uid']))->save(array('password'=>md5(I('password'))));
+		$salt = genRandStr();
+		M('user')->where(array('id'=>$_SESSION['uid']))->save(array('password'=>sha1($salt.I('password')),'salt'=>$salt));
 		echo json_encode(array('result'=>'ok'));
 	}
 }

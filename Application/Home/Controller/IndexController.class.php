@@ -34,7 +34,7 @@ class IndexController extends Controller {
 				session('login_error', $error);
 				$this->redirect('Index/login');
 			}
-			else if($user['password'] != md5(I('password'))){
+			else if($user['password'] != sha1($user['salt'].I('password'))){
 				$error = '密码错误';
 				session('login_error', $error);
 				$this->redirect('Index/login');
@@ -95,9 +95,11 @@ class IndexController extends Controller {
 				for ($i = 0; $i < 30; $i++) { 
 					$activate_key .= rand(0, 9);
 				}
+                $salt = genRandStr();
 				M('user')->data(array(
 					"email" => I('email'),
-					"password" => md5(I('password')),
+					"password" => sha1($salt.I('password')),
+                    "salt" => $salt,
 					"activate" => 0,
 					"activate_key" => md5($activate_key),
                     // 默认值
@@ -248,7 +250,8 @@ class IndexController extends Controller {
     		session('reset_email', null);
     		session('reset_key', null);
     		session('login_error', '密码找回完成，请登录');
-    		M('user')->where(array('email'=>I('email'), 'reset_key'=>I('reset_key')))->save(array('password'=>md5(I('password'))));
+            $salt = genRandStr();
+    		M('user')->where(array('email'=>I('email'), 'reset_key'=>I('reset_key')))->save(array('password'=>sha1($salt.I('password')),'salt'=>$salt));
     		$this->redirect('Index/login');
     	}
     }
