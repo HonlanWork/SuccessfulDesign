@@ -1,6 +1,6 @@
 <style>
 #main {
-    padding: 10px 10%;
+    padding: 10px 6%;
     margin-bottom: 60px;
     box-shadow: 2px 2px 3px rgba(20, 20, 20, 0.3);
     border-bottom-right-radius: 5px;
@@ -78,7 +78,20 @@
     text-align: center;
     display: none;
     margin-top: 20px;
-    margin-bottom: 30px;
+    margin-bottom: 50px;
+}
+
+#main #pay-success a {
+    position: relative;
+    top: 90px;
+    color: white;
+    background-color: #ff7c34;
+    border: none;
+    padding: 10px 30px;
+    border-radius: 5px;
+    font-size: 14px;
+    box-shadow: 2px 2px 3px rgba(20, 20, 20, 0.4);
+    text-decoration: none;
 }
 
 #main #confirm-payment button {
@@ -207,6 +220,8 @@
                     <img src="__PUBLIC__/img/contest2016/check.png" style="width:50px;margin-bottom:20px;" alt="">
                     <p style="text-align:left;color:#fdfdfd;"><?php translate('恭喜，你已经完成支付，将很快收到一封确认邮件')?></p>
                     <p style="text-align:left;color:#fdfdfd;"><?php translate('请记住，在5月31日之前，你需要填写作品详情并提交')?></p>
+
+                    <a href="{:U('User/submission', array('id'=>$submission['id']))}"><?php translate('作品详情')?></a>
                 </div>
             </div>
         </div>

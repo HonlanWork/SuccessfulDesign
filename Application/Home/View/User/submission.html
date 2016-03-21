@@ -1,6 +1,6 @@
 <style>
 #main {
-    padding: 20px 10%;
+    padding: 20px 6%;
     margin-bottom: 30px;
     box-shadow: 2px 2px 3px rgba(20, 20, 20, 0.3);
     border-bottom-right-radius: 5px;
@@ -64,6 +64,9 @@
             if ($submission['ispaied'] == 1) {
                 echo translate('已支付');
             }
+            elseif ($submission['pay_confirm'] == 1) {
+                echo translate('支付中');
+            }
             else {
                 echo translate('未支付');
             }
@@ -80,13 +83,15 @@
             ?>
         </span>
     </p>
-    <if condition="$submission['ispaied'] == 0">
+    <if condition="$submission['ispaied'] == 0 and $submission['pay_confirm'] == 0">
         <p>
             <a href="{:U('Contest/pay', array('id'=>$submission['id']))}" class="btn btn-success" style="font-size:13px;padding:4px 8px;">
                 <?php translate('支付')?>
             </a>
         </p>
-        <elseif condition="$submission['issubmitted'] == 0" />
+        <elseif condition="$submission['ispaied'] == 0 and $submission['pay_confirm'] == 1" />
+        <p style="font-size:12px;color: #ef5045;"><?php translate('待管理员确认支付后方可编辑作品详情')?></p>
+        <elseif condition="$submission['ispaied'] == 1 and $submission['issubmitted'] == 0" />
         <p>
             <a href="{:U('Contest/info', array('id'=>$submission['id']))}" class="btn btn-success" style="font-size:13px;padding:4px 8px;margin-right:6px;">
                 <?php translate('编辑')?>

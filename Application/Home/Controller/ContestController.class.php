@@ -32,7 +32,13 @@ class ContestController extends CommonController {
 
 	public function pay() {
 		$this->contest = M('contest')->where(array('id'=>1))->find();
-		$this->submission = M('submission')->field('id,titlee,titlec,category')->where(array('id'=>I('id'), 'user_id'=>$_SESSION['uid']))->find();
+		$this->submission = M('submission')->field('id,titlee,titlec,category,ispaied,pay_confirm')->where(array('id'=>I('id'), 'user_id'=>$_SESSION['uid']))->find();
+		if ($this->submission['ispaied'] == 1) {
+			$this->redirect('Contest/info', array('id'=>I('id')));
+		}
+		elseif ($this->submission['pay_confirm'] == 1) {
+			$this->redirect('User/submission', array('id'=>I('id')));
+		}
 		$this->display();
 	}
 
