@@ -1,0 +1,89 @@
+<style>
+#main {
+    padding: 30px 6%;
+    box-shadow: 2px 2px 3px rgba(20, 20, 20, 0.3);
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+#main ul {
+    list-style-type: none;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding-left: 0;
+}
+
+#main ul p {
+    margin-bottom: 0;
+    padding: 10px 20px;
+    border-bottom: 1px solid #ddd;
+}
+
+#main ul p:hover {
+    cursor: pointer;
+}
+
+#main ul li {
+    border-bottom: 1px solid #ddd;
+    font-size: 13px;
+    padding: 8px 20px;
+    padding-left: 30px;
+    background-color: #eee;
+}
+
+#main ul a {
+    text-decoration: none;
+    color: #bbb;
+}
+
+#main ul a:hover {
+    text-decoration: none;
+    color: #888;
+}
+
+#main ul a:last-child {
+    border-bottom: none;
+}
+
+#main table {
+    font-size: 13px;
+}
+</style>
+<div class="row">
+    <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2">
+        <ul>
+            <p>比赛管理</p>
+            <a href="{:U('Admin/contest_pay_confirm')}">
+                <li>审核支付</li>
+            </a>
+        </ul>
+    </div>
+    <div class="col-xs-12 col-sm-10 col-md-10 col-lg-10">
+        <h3 style="margin-top:10px;margin-bottom:20px;">审核支付</h3>
+        <table class="table">
+            <tr>
+                <th>作品中文名</th>
+                <th>作品英文名</th>
+                <th>作品类别</th>
+                <th>作者邮箱</th>
+                <th>作者公司</th>
+                <th>操作</th>
+            </tr>
+            <foreach name="submissions" item="v">
+                <tr>
+                    <td>{$v.titlec}</td>
+                    <td>{$v.titlee}</td>
+                    <td>{$v.category}</td>
+                    <td>{$v.user_email}</td>
+                    <td>{$v.user_companyc}</td>
+                    <td>
+                        <p><a href="{:U('Admin/contest_pay_yes', array('id'=>$v['id'], 'user_id'=>$v['user_id']))}">已支付</a></p>
+                        <p><a href="{:U('Admin/contest_pay_no', array('id'=>$v['id']))}">未支付</a></p>
+                    </td>
+                </tr>
+            </foreach>
+        </table>
+    </div>
+</div>
+<script>
+</script>
