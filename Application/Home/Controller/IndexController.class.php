@@ -161,7 +161,7 @@ class IndexController extends Controller {
     	}
     	$email_content = $temp;
     	$email_content = explode("^^^", $email_content);
-    	$email_content = $email_content[0].U('Index/activate', array('email'=>I('email'), 'activate_key'=>md5($activate_key)),false,true).$email_content[1];
+    	$email_content = $email_content[0].U('Index/activate', array('email'=>I('email'), 'activate_key'=>$_SESSION['register_key']),false,true).$email_content[1];
     	SendMail(I('email'), $email['title'], $email_content);
 
     	$this->redirect('Index/register_activate');

@@ -22,10 +22,10 @@ function sendMail($to, $title, $content) {
 // 生成随机字符串
 function genRandStr() {
 	$str = '';
-	for ($i = 0; $i < 8; $i++) { 
+	for ($i = 0; $i < 20; $i++) { 
 		$str .= rand(0, 9);
 	}
-	return md5($str);
+	return substr(md5($str), 0, 8);
 }
 function translate($str){
 	if (!isset($_SESSION['lang'])) {
