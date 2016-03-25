@@ -10,7 +10,7 @@ class ContestController extends CommonController {
 		if (IS_POST) {
 			$user = M('user')->where(array('id'=>$_SESSION['uid'], 'email'=>$_SESSION['uemail']))->find();
 			$id = M('submission')->data(array(
-				'contest_id' => 1,
+				'contest_id' => C('CONTESTID'),
 				'user_id' => $_SESSION['uid'],
 				'titlec' => trim($_POST['titlec']),
 				'titlee' => trim($_POST['titlee']),
@@ -31,7 +31,7 @@ class ContestController extends CommonController {
 	}
 
 	public function pay() {
-		$this->contest = M('contest')->where(array('id'=>1))->find();
+		$this->contest = M('contest')->where(array('id'=>C('CONTESTID')))->find();
 		$this->submission = M('submission')->field('id,titlee,titlec,category,ispaied,pay_confirm')->where(array('id'=>I('id'), 'user_id'=>$_SESSION['uid']))->find();
 		if ($this->submission['ispaied'] == 1) {
 			$this->redirect('Contest/info', array('id'=>I('id')));
@@ -71,6 +71,9 @@ class ContestController extends CommonController {
 		$this->submission = M('submission')->where(array('id'=>I('id'), 'user_id'=>$_SESSION['uid']))->find();
 		if ($this->submission['ispaied'] == 0) {
 			$this->redirect('Contest/pay',array('id'=>I('id')));
+		}
+		else if ($this->submission['issubmitted'] == 1) {
+			$this->redirect('Contest/submit',array('id'=>I('id')));
 		}
 		$this->display();
 	}

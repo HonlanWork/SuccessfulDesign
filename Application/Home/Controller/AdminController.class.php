@@ -4,7 +4,7 @@ use Think\Controller;
 class AdminController extends Controller{
 	public function _initialize(){
 		if(!isset($_SESSION['urole']) || $_SESSION['urole'] < 2){
-			$this->redirect('Index/contest', array('id'=>1));
+			$this->redirect('Index/contest', array('id'=>C('CONTESTID')));
 		}
 	}
 
@@ -13,7 +13,7 @@ class AdminController extends Controller{
 	}
 
 	public function contest_pay_confirm(){
-		$submissions = M('submission')->where(array('contest_id'=>1, 'ispaied'=>0, 'pay_confirm'=>1))->select();
+		$submissions = M('submission')->where(array('contest_id'=>C('CONTESTID'), 'ispaied'=>0, 'pay_confirm'=>1))->select();
 		$tmp = array();
 		foreach ($submissions as $key => $value) {
 			$user = M('user')->where(array('id'=>$value['user_id']))->find();
@@ -47,9 +47,13 @@ class AdminController extends Controller{
 		$this->redirect('Admin/contest_pay_confirm');
 	}
 
-	public function contest_pay_no(){
+	public function contest_pay_no() {
 		M('submission')->where(array('id'=>I('id')))->save(array('ispaied'=>0, 'pay_confirm'=>0));
 		$this->redirect('Admin/contest_pay_confirm');
+	}
+
+	public function submissions() {
+
 	}
 }
 ?>

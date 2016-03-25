@@ -50,7 +50,12 @@ class UserController extends CommonController {
 	}
 
 	public function submission() {
-		$this->submission = M('submission')->where(array('id'=>I('id'), 'user_id'=>$_SESSION['uid']))->find();
+		if ($_SESSION['urole'] == 2) {
+			$this->submission = M('submission')->where(array('id'=>I('id')))->find();
+		}
+		else {
+			$this->submission = M('submission')->where(array('id'=>I('id'), 'user_id'=>$_SESSION['uid']))->find();
+		}
 		$images = array();
 		for ($i = 1; $i <= 6; $i++) { 
 			if ($this->submission['image'.$i] != '') {

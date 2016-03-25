@@ -55,7 +55,7 @@ class IndexController extends Controller {
 					$this->redirect($url);
 				}
 				else {
-					$this->redirect('Index/contest', array('id'=>1));
+					$this->redirect('Index/contest', array('id'=>C('CONTESTID')));
 				}
 			}
 		}
