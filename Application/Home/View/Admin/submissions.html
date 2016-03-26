@@ -49,6 +49,13 @@
     font-size: 12px;
     margin-top: 20px;
 }
+
+#main input.form-control {
+    width: 180px;
+    position: absolute;
+    top: -20px;
+    right: 0;
+}
 </style>
 <div class="row">
     <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2">
@@ -64,7 +71,8 @@
     </div>
     <div class="col-xs-12 col-sm-10 col-md-10 col-lg-10">
         <h3 style="margin-top:10px;margin-bottom:20px;">作品管理</h3>
-        <div>
+        <div style="position:relative;">
+            <input type="text" class="form-control">
             <ul class="nav nav-tabs" role="tablist">
                 <li role="presentation" class="active"><a href="#notpaid" aria-controls="notpaid" role="tab" data-toggle="tab">未支付</a></li>
                 <li role="presentation"><a href="#paid_but_notsubmitted" aria-controls="paid_but_notsubmitted" role="tab" data-toggle="tab">已支付未提交</a></li>
@@ -82,7 +90,7 @@
                             <th>操作</th>
                         </tr>
                         <foreach name="notpaid" item="v">
-                            <tr>
+                            <tr name="{$v['titlec']}" class="data">
                                 <td>{$v.titlec}</td>
                                 <td>{$v.titlee}</td>
                                 <td>{$v.category}</td>
@@ -107,7 +115,7 @@
                             <th>操作</th>
                         </tr>
                         <foreach name="paid_but_notsubmitted" item="v">
-                            <tr>
+                            <tr name="{$v['titlec']}" class="data">
                                 <td>{$v.titlec}</td>
                                 <td>{$v.titlee}</td>
                                 <td>{$v.category}</td>
@@ -132,7 +140,7 @@
                             <th>操作</th>
                         </tr>
                         <foreach name="submitted" item="v">
-                            <tr>
+                            <tr name="{$v['titlec']}" class="data">
                                 <td>{$v.titlec}</td>
                                 <td>{$v.titlee}</td>
                                 <td>{$v.category}</td>
@@ -151,4 +159,22 @@
     </div>
 </div>
 <script>
+$(document).ready(function() {
+    $('#main input.form-control').keyup(function(event) {
+        var keyword = $(this).val();
+        if (keyword == '') {
+            $('#main table .data').show();
+        }
+        else {
+            $('#main table .data').each(function(index, el) {
+                if ($(this).attr('name').indexOf(keyword) >= 0) {
+                    $(this).show();
+                }
+                else {
+                    $(this).hide();
+                }
+            });
+        }
+    });
+});
 </script>
