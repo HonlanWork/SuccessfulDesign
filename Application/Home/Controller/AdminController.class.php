@@ -53,7 +53,30 @@ class AdminController extends Controller{
 	}
 
 	public function submissions() {
+		$this->notpaid = M('submission')->where(array('ispaied'=>0))->select();
+		$this->paid_but_notsubmitted = M('submission')->where(array('ispaied'=>1, 'issubmitted'=>0))->select();
+		$this->submitted = M('submission')->where(array('ispaied'=>1, 'issubmitted'=>1))->select();
+		$this->display();
+	}
 
+	public function mark_as_paid() {
+		M('submission')->where(array('id'=>I('id')))->save(array('ispaied'=>1));
+		$this->redirect('Admin/submissions');
+	}
+
+	public function mark_as_notpaid() {
+		M('submission')->where(array('id'=>I('id')))->save(array('ispaied'=>0, 'issubmitted'=>0));
+		$this->redirect('Admin/submissions');
+	}
+
+	public function mark_as_submitted() {
+		M('submission')->where(array('id'=>I('id')))->save(array('ispaied'=>1, 'issubmitted'=>1));
+		$this->redirect('Admin/submissions');
+	}
+
+	public function mark_as_notsubmitted() {
+		M('submission')->where(array('id'=>I('id')))->save(array('issubmitted'=>0));
+		$this->redirect('Admin/submissions');
 	}
 }
 ?>

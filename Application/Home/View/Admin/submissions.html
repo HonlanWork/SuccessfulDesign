@@ -6,24 +6,24 @@
     border-bottom-left-radius: 5px;
 }
 
-#main ul {
+#main ul#admin-nav {
     list-style-type: none;
     border: 1px solid #ddd;
     border-radius: 4px;
     padding-left: 0;
 }
 
-#main ul p {
+#main ul#admin-nav p {
     margin-bottom: 0;
     padding: 10px 20px;
     border-bottom: 1px solid #ddd;
 }
 
-#main ul p:hover {
+#main ul#admin-nav p:hover {
     cursor: pointer;
 }
 
-#main ul li {
+#main ul#admin-nav li {
     border-bottom: 1px solid #ddd;
     font-size: 13px;
     padding: 8px 20px;
@@ -31,27 +31,28 @@
     background-color: #eee;
 }
 
-#main ul a {
+#main ul#admin-nav a {
     text-decoration: none;
     color: #bbb;
 }
 
-#main ul a:hover {
+#main ul#admin-nav a:hover {
     text-decoration: none;
     color: #888;
 }
 
-#main ul a:last-child {
+#main ul#admin-nav a:last-child {
     border-bottom: none;
 }
 
 #main table {
     font-size: 13px;
+    margin-top: 20px;
 }
 </style>
 <div class="row">
     <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2">
-        <ul>
+        <ul id="admin-nav">
             <p>比赛管理</p>
             <a href="{:U('Admin/contest_pay_confirm')}">
                 <li>审核支付</li>
@@ -62,30 +63,91 @@
         </ul>
     </div>
     <div class="col-xs-12 col-sm-10 col-md-10 col-lg-10">
-        <h3 style="margin-top:10px;margin-bottom:20px;">审核支付</h3>
-        <table class="table">
-            <tr>
-                <th>作品中文名</th>
-                <th>作品英文名</th>
-                <th>作品类别</th>
-                <th>作者邮箱</th>
-                <th>作者公司</th>
-                <th>操作</th>
-            </tr>
-            <foreach name="submissions" item="v">
-                <tr>
-                    <td>{$v.titlec}</td>
-                    <td>{$v.titlee}</td>
-                    <td>{$v.category}</td>
-                    <td>{$v.user_email}</td>
-                    <td>{$v.user_companyc}</td>
-                    <td>
-                        <p><a href="{:U('Admin/contest_pay_yes', array('id'=>$v['id'], 'user_id'=>$v['user_id']))}">已支付</a></p>
-                        <p><a href="{:U('Admin/contest_pay_no', array('id'=>$v['id']))}">未支付</a></p>
-                    </td>
-                </tr>
-            </foreach>
-        </table>
+        <h3 style="margin-top:10px;margin-bottom:20px;">作品管理</h3>
+        <div>
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active"><a href="#notpaid" aria-controls="notpaid" role="tab" data-toggle="tab">未支付</a></li>
+                <li role="presentation"><a href="#paid_but_notsubmitted" aria-controls="paid_but_notsubmitted" role="tab" data-toggle="tab">已支付未提交</a></li>
+                <li role="presentation"><a href="#submitted" aria-controls="submitted" role="tab" data-toggle="tab">已提交</a></li>
+            </ul>
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane fade in active" id="notpaid">
+                    <table class="table">
+                        <tr>
+                            <th>作品中文名</th>
+                            <th>作品英文名</th>
+                            <th>作品类别</th>
+                            <th>作者邮箱</th>
+                            <th>作者公司</th>
+                            <th>操作</th>
+                        </tr>
+                        <foreach name="notpaid" item="v">
+                            <tr>
+                                <td>{$v.titlec}</td>
+                                <td>{$v.titlee}</td>
+                                <td>{$v.category}</td>
+                                <td>{$v.user_email}</td>
+                                <td>{$v.user_companyc}</td>
+                                <td>
+                                    <p><a href="{:U('Admin/mark_as_paid', array('id'=>$v['id']))}">改为已支付</a></p>
+                                    <p><a href="{:U('Admin/mark_as_submitted', array('id'=>$v['id']))}">改为已提交</a></p>
+                                </td>
+                            </tr>
+                        </foreach>
+                    </table>
+                </div>
+                <div role="tabpanel" class="tab-pane fade" id="paid_but_notsubmitted">
+                    <table class="table">
+                        <tr>
+                            <th>作品中文名</th>
+                            <th>作品英文名</th>
+                            <th>作品类别</th>
+                            <th>作者邮箱</th>
+                            <th>作者公司</th>
+                            <th>操作</th>
+                        </tr>
+                        <foreach name="paid_but_notsubmitted" item="v">
+                            <tr>
+                                <td>{$v.titlec}</td>
+                                <td>{$v.titlee}</td>
+                                <td>{$v.category}</td>
+                                <td>{$v.user_email}</td>
+                                <td>{$v.user_companyc}</td>
+                                <td>
+                                    <p><a href="{:U('Admin/mark_as_notpaid', array('id'=>$v['id']))}">改为未支付</a></p>
+                                    <p><a href="{:U('Admin/mark_as_submitted', array('id'=>$v['id']))}">改为已提交</a></p>
+                                </td>
+                            </tr>
+                        </foreach>
+                    </table>
+                </div>
+                <div role="tabpanel" class="tab-pane fade" id="submitted">
+                    <table class="table">
+                        <tr>
+                            <th>作品中文名</th>
+                            <th>作品英文名</th>
+                            <th>作品类别</th>
+                            <th>作者邮箱</th>
+                            <th>作者公司</th>
+                            <th>操作</th>
+                        </tr>
+                        <foreach name="submitted" item="v">
+                            <tr>
+                                <td>{$v.titlec}</td>
+                                <td>{$v.titlee}</td>
+                                <td>{$v.category}</td>
+                                <td>{$v.user_email}</td>
+                                <td>{$v.user_companyc}</td>
+                                <td>
+                                    <p><a href="{:U('Admin/mark_as_notpaid', array('id'=>$v['id']))}">改为未支付</a></p>
+                                    <p><a href="{:U('Admin/mark_as_notsubmitted', array('id'=>$v['id']))}">改为未提交</a></p>
+                                </td>
+                            </tr>
+                        </foreach>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 <script>

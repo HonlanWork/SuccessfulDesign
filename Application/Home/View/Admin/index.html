@@ -6,24 +6,24 @@
     border-bottom-left-radius: 5px;
 }
 
-#main ul {
+#main ul#admin-nav {
     list-style-type: none;
     border: 1px solid #ddd;
     border-radius: 4px;
     padding-left: 0;
 }
 
-#main ul p {
+#main ul#admin-nav p {
     margin-bottom: 0;
     padding: 10px 20px;
     border-bottom: 1px solid #ddd;
 }
 
-#main ul p:hover {
+#main ul#admin-nav p:hover {
     cursor: pointer;
 }
 
-#main ul li {
+#main ul#admin-nav li {
     border-bottom: 1px solid #ddd;
     font-size: 13px;
     padding: 8px 20px;
@@ -31,23 +31,23 @@
     background-color: #eee;
 }
 
-#main ul a {
+#main ul#admin-nav a {
     text-decoration: none;
     color: #bbb;
 }
 
-#main ul a:hover {
+#main ul#admin-nav a:hover {
     text-decoration: none;
     color: #888;
 }
 
-#main ul a:last-child {
+#main ul#admin-nav a:last-child {
     border-bottom: none;
 }
 </style>
 <div class="row">
     <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2">
-        <ul>
+        <ul id="admin-nav">
             <p>比赛管理</p>
             <a href="{:U('Admin/contest_pay_confirm')}">
                 <li>审核支付</li>
