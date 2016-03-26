@@ -77,8 +77,8 @@
                     <td>{$v.titlec}</td>
                     <td>{$v.titlee}</td>
                     <td>{$v.category}</td>
-                    <td>{$v.user_email}</td>
-                    <td>{$v.user_companyc}</td>
+                    <td>{$v.email}</td>
+                    <td>{$v.companyc}</td>
                     <td style="min-width:120px;">
                         <p><a href="{:U('Admin/contest_pay_yes', array('id'=>$v['id'], 'user_id'=>$v['user_id']))}">已支付</a></p>
                         <p><a href="{:U('Admin/contest_pay_no', array('id'=>$v['id']))}">未支付</a></p>

@@ -13,15 +13,7 @@ class AdminController extends Controller{
 	}
 
 	public function contest_pay_confirm(){
-		$submissions = M('submission')->where(array('contest_id'=>C('CONTESTID'), 'ispaied'=>0, 'pay_confirm'=>1))->select();
-		$tmp = array();
-		foreach ($submissions as $key => $value) {
-			$user = M('user')->where(array('id'=>$value['user_id']))->find();
-			$value['user_email'] = $user['email'];
-			$value['user_companyc'] = $user['companyc'];
-			$tmp[] = $value;
-		}
-		$this->submissions = $tmp;
+		$this->$submissions = M('submission')->where(array('contest_id'=>C('CONTESTID'), 'ispaied'=>0, 'pay_confirm'=>1))->select();
 		$this->display();
 	}
 
