@@ -288,4 +288,9 @@ class ContestController extends CommonController {
 			$this->redirect('Contest/apply');
 		}
 	}
+
+	public function delete() {
+		M('submission')->where(array('id'=>I('id'), 'user_id'=>$_SESSION['uid'], 'ispaied'=>0))->delete();
+		$this->redirect('User/submissions');
+	}
 }

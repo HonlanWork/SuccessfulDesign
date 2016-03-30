@@ -50,6 +50,9 @@
     top: 30px;
     box-shadow: 2px 2px 3px rgba(20, 20, 20, 0.4);
 }
+#main .reremove {
+    display: none;
+}
 </style>
 <div style="position:relative;">
     <a href="{:U('Contest/apply')}" class="btn btn-success" style="position:absolute;top:55px;right:0px;" id="add_new">
@@ -126,6 +129,14 @@
                                 <p>
                                     <a href="{:U('Contest/pay', array('id'=>$v['id']))}">
                                         <?php translate('支付')?>
+                                    </a>
+                                </p>
+                                <p>
+                                    <a href="" class='remove'>
+                                        <?php translate('删除')?>
+                                    </a>
+                                    <a href="{:U('Contest/delete', array('id'=>$v['id']))}" class="reremove">
+                                        <?php translate('确定删除？')?>
                                     </a>
                                 </p>
                                 <elseif condition="$v['ispaied'] == 1 and $v['issubmitted'] == 0" />
@@ -209,6 +220,14 @@
                                         <?php translate('支付')?>
                                     </a>
                                 </p>
+                                <p>
+                                    <a href="" class='remove'>
+                                        <?php translate('删除')?>
+                                    </a>
+                                    <a href="{:U('Contest/delete', array('id'=>$v['id']))}" class="reremove">
+                                        <?php translate('确定删除？')?>
+                                    </a>
+                                </p>
                                 <elseif condition="$v['ispaied'] == 1 and $v['issubmitted'] == 0" />
                                 <p>
                                     <a href="{:U('Contest/info', array('id'=>$v['id']))}">
@@ -288,6 +307,14 @@
                                 <p>
                                     <a href="{:U('Contest/pay', array('id'=>$v['id']))}">
                                         <?php translate('支付')?>
+                                    </a>
+                                </p>
+                                <p>
+                                    <a href="" class='remove'>
+                                        <?php translate('删除')?>
+                                    </a>
+                                    <a href="{:U('Contest/delete', array('id'=>$v['id']))}" class="reremove">
+                                        <?php translate('确定删除？')?>
                                     </a>
                                 </p>
                                 <elseif condition="$v['ispaied'] == 1 and $v['issubmitted'] == 0" />
@@ -371,6 +398,14 @@
                                         <?php translate('支付')?>
                                     </a>
                                 </p>
+                                <p>
+                                    <a href="" class='remove'>
+                                        <?php translate('删除')?>
+                                    </a>
+                                    <a href="{:U('Contest/delete', array('id'=>$v['id']))}" class="reremove">
+                                        <?php translate('确定删除？')?>
+                                    </a>
+                                </p>
                                 <elseif condition="$v['ispaied'] == 1 and $v['issubmitted'] == 0" />
                                 <p>
                                     <a href="{:U('Contest/info', array('id'=>$v['id']))}">
@@ -408,6 +443,13 @@ $(document).ready(function() {
             $('#main ul.nav-tabs span.word').show();
             $('#main ul.nav-tabs span.fa').hide();
         }
+    });
+
+    $('#main .remove').click(function() {
+        event.preventDefault();
+        $p = $(this);
+        $p.hide();
+        $p.siblings('a.reremove').show();
     });
 });
 </script>
