@@ -78,7 +78,7 @@ class AdminController extends Controller{
 
 	public function reset_password() {
 		$user = M('user')->where(array('id'=>I('id')))->find();
-		M('user')->where(array('id'=>I('id')))->save(array('password'=>sha1($user['salt'].'successfuldesign')));
+		M('user')->where(array('id'=>I('id')))->save(array('password'=>sha1($user['salt'].'123456')));
 		$this->redirect('Admin/users');
 	}
 
