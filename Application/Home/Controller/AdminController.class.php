@@ -13,7 +13,7 @@ class AdminController extends Controller{
 	}
 
 	public function contest_pay_confirm(){
-		$this->$submissions = M('submission')->where(array('contest_id'=>C('CONTESTID'), 'ispaied'=>0, 'pay_confirm'=>1))->select();
+		$this->submissions = M('submission')->where(array('contest_id'=>C('CONTESTID'), 'ispaied'=>0, 'pay_confirm'=>1))->select();
 		$this->display();
 	}
 
