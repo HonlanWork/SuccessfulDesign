@@ -383,8 +383,6 @@ $(document).ready(function() {
     $('#main #newpassword2').keyup(function(event) {
         var np1 = $('#main #newpassword1').val();
         var np2 = $('#main #newpassword2').val();
-        console.log(np1);
-        console.log(np2);
         if (np1 == np2 && np1 != '') {
             $('#change_password').removeClass('disabled');
         }

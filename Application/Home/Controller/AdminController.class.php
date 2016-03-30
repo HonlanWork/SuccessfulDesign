@@ -70,5 +70,30 @@ class AdminController extends Controller{
 		M('submission')->where(array('id'=>I('id')))->save(array('issubmitted'=>0));
 		$this->redirect('Admin/submissions');
 	}
+
+	public function users() {
+		$this->users = M('user')->select();
+		$this->display();
+	}
+
+	public function reset_password() {
+		$user = M('user')->where(array('id'=>I('id')))->find();
+		M('user')->where(array('id'=>I('id')))->save(array('password'=>sha1($user['salt'].'successfuldesign')));
+		$this->redirect('Admin/users');
+	}
+
+	public function translations() {
+		$this->display();
+	}
+
+	public function translations_search() {
+		$translations = M('translation')->where(array('ch'=>I('keyword')))->select();
+        echo json_encode(array('translations'=>$translations));
+	}
+
+	public function translations_save() {
+		M('translation')->where(array('id'=>I('id')))->save(array('en'=>I('en')));
+		echo json_encode(array('en'=>I('en')));
+	}
 }
 ?>
