@@ -100,13 +100,27 @@ class AdminController extends Controller{
         $xlsName = "submission";
         $xlsCell = array(
             array('id','序号'),
-            array('name','姓名'),
-            array('mobile','手机'),
-            array('email','邮箱'),
-            array('company','公司'),
-            array('position','职位'),
-            array('other','备注'),
-            array('timestamp','申请时间')); 
+            array('titlec','中文名'),
+            array('titlee','英文名'),
+            array('category','分类'),
+            array('companyc','公司中文名'),
+            array('companye','公司英文名'),
+            array('position',''),
+            array('email',''), 
+            array('companyp',''), 
+            array('cellphone',''), 
+            array('addts',''), 
+            array('introductionc',''), 
+            array('introductione',''), 
+            array('demandc',''), 
+            array('demande',''), 
+            array('demande',''), 
+            array('demande',''), 
+            array('demande',''), 
+            array('demande',''), 
+            array('demande',''), 
+            array('demande ',''), 
+            ); 
         $xlsData = M('application')->where(array('admitted'=>2))->field('id,name,mobile,email,company,position,other,timestamp')->order('timestamp desc')->select();
 
         $xlsTitle = iconv('utf-8', 'gb2312', $xlsName);//文件名称

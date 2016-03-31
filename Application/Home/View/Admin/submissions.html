@@ -103,7 +103,7 @@
                             <th>操作</th>
                         </tr>
                         <foreach name="notpaid" item="v">
-                            <tr name="{$v['titlec']}" class="data">
+                            <tr class="data">
                                 <td>{$v.titlec}</td>
                                 <td>{$v.titlee}</td>
                                 <td>{$v.category}</td>
@@ -129,7 +129,7 @@
                             <th>操作</th>
                         </tr>
                         <foreach name="paid_but_notsubmitted" item="v">
-                            <tr name="{$v['titlec']}" class="data">
+                            <tr class="data">
                                 <td>{$v.titlec}</td>
                                 <td>{$v.titlee}</td>
                                 <td>{$v.category}</td>
@@ -155,7 +155,7 @@
                             <th>操作</th>
                         </tr>
                         <foreach name="submitted" item="v">
-                            <tr name="{$v['titlec']}" class="data">
+                            <tr class="data">
                                 <td>{$v.titlec}</td>
                                 <td>{$v.titlee}</td>
                                 <td>{$v.category}</td>
@@ -183,11 +183,18 @@ $(document).ready(function() {
         }
         else {
             $('#main table .data').each(function(index, el) {
-                if ($(this).attr('name').indexOf(keyword) >= 0) {
-                    $(this).show();
+                var flag = false;
+                var $p = $(this);
+                $p.children('td').each(function(i, e) {
+                    if ($(this).text().indexOf(keyword) >= 0) {
+                        flag = true;
+                    }
+                });
+                if (flag) {
+                    $p.show();
                 }
                 else {
-                    $(this).hide();
+                    $p.hide();
                 }
             });
         }
