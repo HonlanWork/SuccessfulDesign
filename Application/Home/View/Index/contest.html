@@ -68,7 +68,7 @@
     color: white;
     background-color: #ef5045;
     height: 80px;
-    width: 100px;
+    width: 10px;
     border-radius: 10px;
 }
 
@@ -236,11 +236,19 @@
                 <?php translate('空间')?>
             </button>
         </div>
+        <?php if (isset($_SESSION['lang']) and $_SESSION['lang'] == 'en') { ?>
+        <div class="category" style="font-size:12px;">
+            <button name="视觉">
+                <?php translate('视觉')?>
+            </button>
+        </div>
+        <?php } else{ ?>
         <div class="category">
             <button name="视觉">
                 <?php translate('视觉')?>
             </button>
         </div>
+        <?php } ?>
         <div class="category">
             <button name="营销">
                 <?php translate('营销')?>
