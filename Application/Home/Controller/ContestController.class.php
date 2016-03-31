@@ -277,7 +277,7 @@ class ContestController extends CommonController {
 		if (IS_POST) {
 			$submission = M('submission')->where(array('id'=>$_POST['id']))->find();
 			if ($submission['ispaied'] == 1) {
-				M('submission')->where(array('id'=>$_POST['id'], 'user_id'=>$_SESSION['uid']))->save(array('issubmitted'=>1));
+				M('submission')->where(array('id'=>$_POST['id'], 'user_id'=>$_SESSION['uid']))->save(array('issubmitted'=>1, 'submitts' => time()));
 				$this->redirect('Contest/submit', array('id'=>$_POST['id']));	
 			}
 			else {
