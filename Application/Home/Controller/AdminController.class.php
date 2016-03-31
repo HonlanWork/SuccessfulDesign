@@ -105,26 +105,31 @@ class AdminController extends Controller{
             array('category','分类'),
             array('companyc','公司中文名'),
             array('companye','公司英文名'),
-            array('position',''),
-            array('email',''), 
-            array('companyp',''), 
-            array('cellphone',''), 
-            array('addts',''), 
-            array('introductionc',''), 
-            array('introductione',''), 
-            array('demandc',''), 
-            array('demande',''), 
-            array('demande',''), 
-            array('demande',''), 
-            array('demande',''), 
-            array('demande',''), 
-            array('demande',''), 
-            array('demande ',''), 
+            array('position','职位'),
+            array('email','邮箱'), 
+            array('companyp','公司电话'), 
+            array('cellphone','手机'), 
+            array('addts','发布日期'), 
+            array('introductionc','简述中文'), 
+            array('introductione','简述英文'), 
+            array('demandc','项目需求中文'), 
+            array('demande','项目需求英文'), 
+            array('challengec','面临挑战中文'), 
+            array('challengee','面临挑战英文'), 
+            array('costc','预算评估中文'), 
+            array('coste','预算评估英文'), 
+            array('solutionc','设计解决方案中文'), 
+            array('solutione','设计解决方案英文'), 
+            array('conclusionc','项目成效总结中文'), 
+            array('conclusione','项目成效总结英文'), 
+            array('ispaied','是否支付'), 
+            array('issubmitted','是否提交'), 
+            array('submitts','提交时间')
             ); 
-        $xlsData = M('application')->where(array('admitted'=>2))->field('id,name,mobile,email,company,position,other,timestamp')->order('timestamp desc')->select();
+        $xlsData = M('submission')->where(array('contest_id'=>C('CONTESTID')))->field('id,titlec,titlee,category,companyc,companye,position,email,companyp,cellphone,addts,introductionc,introductione,demandc,demande,challengec,challengee,costc,coste,solutionc,solutione,conclusionc,conclusione,ispaied,issubmitted,submitts')->select();
 
         $xlsTitle = iconv('utf-8', 'gb2312', $xlsName);//文件名称
-        $fileName = date('YmdHis').'_waiting';//or $xlsTitle 文件名称可根据自己情况设定
+        $fileName = '作品汇总_'.date('YmdHis');//or $xlsTitle 文件名称可根据自己情况设定
         $cellNum = count($xlsCell);
         $dataNum = count($xlsData);
         vendor("PHPExcel.PHPExcel");
@@ -138,7 +143,7 @@ class AdminController extends Controller{
           // Miscellaneous glyphs, UTF-8   
         for($i = 0; $i < $dataNum; $i++){
             for($j = 0; $j < $cellNum; $j++){
-                if ($j == 7) {
+                if ($j == 25 && $xlsData[$i][$xlsCell[$j][0]] != '') {
                     $xlsData[$i][$xlsCell[$j][0]] = date('Y-m-d H:i:s', $xlsData[$i][$xlsCell[$j][0]]);  
                 }
                 $objPHPExcel->getActiveSheet(0)->setCellValue($cellName[$j].($i+2), $xlsData[$i][$xlsCell[$j][0]]);
@@ -154,8 +159,8 @@ class AdminController extends Controller{
     }
 
     public function export_csv(){
-        $data = M('application')->where(array('admitted'=>1))->field('id,name,mobile,email,company,position,other,timestamp')->order('timestamp desc')->select();
-        $str = "序号,姓名,手机,邮箱,公司,职位,备注,申请时间\n";
+        $data = M('submission')->where(array('contest_id'=>C('CONTESTID')))->field('id,titlec,titlee,category,companyc,companye,position,email,companyp,cellphone,addts,introductionc,introductione,demandc,demande,challengec,challengee,costc,coste,solutionc,solutione,conclusionc,conclusione,ispaied,issubmitted,submitts')->select();
+        $str = "序号,中文名,英文名,分类,公司中文名,公司英文名,职位,邮箱,公司电话,手机,发布日期,简述中文,简述英文,项目需求中文,项目需求英文,面临挑战中文,面临挑战英文,预算评估英文,设计解决方案中文,设计解决方案英文,项目成效总结中文,项目成效总结英文,是否支付,是否提交,提交时间\n";
         $str = iconv('utf-8', 'gb2312', $str);
         foreach ($data as $key => $value) {
             $str .= iconv('utf-8', 'gb2312', $value['id']).",".iconv('utf-8', 'gb2312', $value['name']).",".iconv('utf-8', 'gb2312', $value['mobile']).",".iconv('utf-8', 'gb2312', $value['email']).",".iconv('utf-8', 'gb2312', $value['company']).",".iconv('utf-8', 'gb2312', $value['position']).",".iconv('utf-8', 'gb2312', $value['other']).",".date('Y-m-d H:i:s',iconv('utf-8', 'gb2312', $value['timestamp']))."\n";

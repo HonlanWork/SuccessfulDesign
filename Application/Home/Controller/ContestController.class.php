@@ -42,6 +42,101 @@ class ContestController extends CommonController {
 		$this->display();
 	}
 
+	public function pay_test_handle() {
+		$api_key =  C('api_key');
+		$app_id = C('api_id');
+
+		$input_data = json_decode(file_get_contents('php://input'), true);
+		if (empty($input_data['channel']) || empty($input_data['amount'])) {
+		    echo 'channel or amount is empty';
+		    exit();
+		}
+		$channel = strtolower($input_data['channel']);
+		$amount = $input_data['amount'];
+		$orderNo = substr(md5(time()), 0, 12);
+
+		\Pingpp\Pingpp::setPrivateKeyPath(__PUBLIC__.'/rsa_private_key.pem');
+
+		/**
+		 * $extra 在使用某些渠道的时候，需要填入相应的参数，其它渠道则是 array()。
+		 * 以下 channel 仅为部分示例，未列出的 channel 请查看文档 https://pingxx.com/document/api#api-c-new
+		 */
+		$extra = array();
+		switch ($channel) {
+		    case 'alipay_wap':
+		        $extra = array(
+		            'success_url' => 'http://example.com/success',
+		            'cancel_url' => 'http://example.com/cancel'
+		        );
+		        break;
+		    case 'bfb_wap':
+		        $extra = array(
+		            'result_url' => 'http://example.com/result',
+		            'bfb_login' => true
+		        );
+		        break;
+		    case 'upacp_wap':
+		        $extra = array(
+		            'result_url' => 'http://example.com/result'
+		        );
+		        break;
+		    case 'wx_pub':
+		        $extra = array(
+		            'open_id' => 'openidxxxxxxxxxxxx'
+		        );
+		        break;
+		    case 'wx_pub_qr':
+		        $extra = array(
+		            'product_id' => 'Productid'
+		        );
+		        break;
+		    case 'yeepay_wap':
+		        $extra = array(
+		            'product_category' => '1',
+		            'identity_id'=> 'your identity_id',
+		            'identity_type' => 1,
+		            'terminal_type' => 1,
+		            'terminal_id'=>'your terminal_id',
+		            'user_ua'=>'your user_ua',
+		            'result_url'=>'http://example.com/result'
+		        );
+		        break;
+		    case 'jdpay_wap':
+		        $extra = array(
+		            'success_url' => 'http://example.com/success',
+		            'fail_url'=> 'http://example.com/fail',
+		            'token' => 'dsafadsfasdfadsjuyhfnhujkijunhaf'
+		        );
+		        break;
+		}
+
+		\Pingpp\Pingpp::setApiKey($api_key);
+		try {
+		    $ch = \Pingpp\Charge::create(
+		        array(
+		            'subject'   => 'Your Subject',
+		            'body'      => 'Your Body',
+		            'amount'    => $amount,
+		            'order_no'  => $orderNo,
+		            'currency'  => 'cny',
+		            'extra'     => $extra,
+		            'channel'   => $channel,
+		            'client_ip' => $_SERVER['REMOTE_ADDR'],
+		            'app'       => array('id' => $app_id)
+		        )
+		    );
+		    echo $ch;
+		} catch (\Pingpp\Error\Base $e) {
+		    // 捕获报错信息
+		    if ($e->getHttpStatus() != NULL) {
+		        header('Status: ' . $e->getHttpStatus());
+		        echo $e->getHttpBody();
+		    } else {
+		        echo $e->getMessage();
+		    }
+		}
+	}
+
 	public function pay_confirm() {
 		M('submission')->where(array('id'=>$_POST['id'], 'user_id'=>$_SESSION['uid']))->save(array('pay_confirm'=>1));
     	$email = M('email')->where(array('name'=>'完成支付'))->find();

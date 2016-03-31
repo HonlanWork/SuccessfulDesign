@@ -3,4 +3,5 @@
 /Application/Common/Conf/config.php
 /Public/upload/
 /Public/successfuldesign.sql
+/Public/rsa_private_key.pem
 /Codes/
