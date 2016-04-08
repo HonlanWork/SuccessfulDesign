@@ -157,21 +157,5 @@ class AdminController extends Controller{
         $objWriter->save('php://output'); 
         exit; 
     }
-
-    public function export_csv(){
-        $data = M('submission')->where(array('contest_id'=>C('CONTESTID')))->field('id,titlec,titlee,category,companyc,companye,position,email,companyp,cellphone,addts,introductionc,introductione,demandc,demande,challengec,challengee,costc,coste,solutionc,solutione,conclusionc,conclusione,ispaied,issubmitted,submitts')->select();
-        $str = "序号,中文名,英文名,分类,公司中文名,公司英文名,职位,邮箱,公司电话,手机,发布日期,简述中文,简述英文,项目需求中文,项目需求英文,面临挑战中文,面临挑战英文,预算评估英文,设计解决方案中文,设计解决方案英文,项目成效总结中文,项目成效总结英文,是否支付,是否提交,提交时间\n";
-        $str = iconv('utf-8', 'gb2312', $str);
-        foreach ($data as $key => $value) {
-            $str .= iconv('utf-8', 'gb2312', $value['id']).",".iconv('utf-8', 'gb2312', $value['name']).",".iconv('utf-8', 'gb2312', $value['mobile']).",".iconv('utf-8', 'gb2312', $value['email']).",".iconv('utf-8', 'gb2312', $value['company']).",".iconv('utf-8', 'gb2312', $value['position']).",".iconv('utf-8', 'gb2312', $value['other']).",".date('Y-m-d H:i:s',iconv('utf-8', 'gb2312', $value['timestamp']))."\n";
-        }
-        $filename = date('YmdHis').'_passed.csv';
-        header("Content-type:text/csv");   
-        header("Content-Disposition:attachment;filename=".$filename);   
-        header('Cache-Control:must-revalidate,post-check=0,pre-check=0');   
-        header('Expires:0');   
-        header('Pragma:public');
-        echo $str;
-    }
 }
 ?>
