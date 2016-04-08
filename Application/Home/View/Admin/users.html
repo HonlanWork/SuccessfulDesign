@@ -90,14 +90,26 @@
                     <th>邮箱/手机</th>
                     <th>公司中文/英文/电话</th>
                     <th>职位</th>
-                    <th>系统</th>
+                    <th>系统角色</th>
                     <th>操作</th>
                     <foreach name='users' item='v'>
                         <tr class="user">
                             <td>{$v.email}<br/>{$v.cellphone}</td>
                             <td>{$v.companyc}<br/>{$v.companye}<br/>{$v.companyp}</td>
                             <td>{$v.position}</td>
-                            <td>{$v.role}</td>
+                            <td>
+                                <?php
+                                    if ($v['role'] == 0) {
+                                        echo '普通';
+                                    }
+                                    elseif ($v['role'] == 1) {
+                                        echo '评委';
+                                    }
+                                    else {
+                                        echo '管理员';
+                                    }
+                                ?>
+                            </td>
                             <td style="min-width:120px;">
                                 <p><a href="{:U('Admin/reset_password', array('id'=>$v['id']))}">重置密码</a></p>
                             </td>
