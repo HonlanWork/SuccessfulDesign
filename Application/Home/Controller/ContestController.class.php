@@ -42,6 +42,11 @@ class ContestController extends CommonController {
 		$this->display();
 	}
 
+	public function pay_test(){
+		$this->app_id = C('app_id');
+		$this->display();
+	}
+
 	public function pay_test_handle() {
 		$api_key =  C('api_key');
 		$app_id = C('api_id');
@@ -168,7 +173,7 @@ class ContestController extends CommonController {
 			$this->redirect('Contest/pay',array('id'=>I('id')));
 		}
 		else if ($this->submission['issubmitted'] == 1) {
-			$this->redirect('Contest/submit',array('id'=>I('id')));
+			$this->redirect('User/submission',array('id'=>I('id')));
 		}
 		$this->display();
 	}
@@ -373,7 +378,7 @@ class ContestController extends CommonController {
 			$submission = M('submission')->where(array('id'=>$_POST['id']))->find();
 			if ($submission['ispaied'] == 1) {
 				M('submission')->where(array('id'=>$_POST['id'], 'user_id'=>$_SESSION['uid']))->save(array('issubmitted'=>1, 'submitts' => time()));
-				$this->redirect('Contest/submit', array('id'=>$_POST['id']));	
+				$this->redirect('User/submission', array('id'=>$_POST['id']));	
 			}
 			else {
 				$this->redirect('Contest/pay', array('id'=>$_POST['id']));

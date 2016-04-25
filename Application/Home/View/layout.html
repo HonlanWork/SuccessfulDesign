@@ -6,7 +6,7 @@
 <head>
     <meta charset='utf8' />
     <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
-    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
     <title>成功设计平台</title>
     <meta name='description' content='' />
     <meta name='keywords' content='' />
@@ -258,6 +258,9 @@
                                     <ul class="dropdown-menu">
                                         <li><a href="{:U('User/home')}"><span class="glyphicon glyphicon-user"></span><?php translate('个人资料')?></a></li>
                                         <li><a href="{:U('User/submissions')}"><span class="glyphicon glyphicon-list-alt"></span><?php translate('我的作品')?></a></li>
+                                        <!-- <if condition="isset($_SESSION['urole']) and $_SESSION['urole'] eq 1">
+                                            <li><a href="{:U('Judge/index')}"><span class="glyphicon glyphicon-eye-open"></span><?php translate('作品评审')?></a></li>
+                                        </if> -->
                                         <if condition="isset($_SESSION['urole']) and $_SESSION['urole'] eq 2">
                                             <li><a href="{:U('Admin/index')}"><span class="glyphicon glyphicon-cog"></span><?php translate('系统管理')?></a></li>
                                         </if>
@@ -301,6 +304,7 @@
     <footer class="well" style="margin-bottom:0;padding:20px;border-radius:0;margin-top:12px;">
         <p class="text-center" style="margin-bottom:0;font-size:14px;">© Copyright 2016 by Successful Design</p>
     </footer>
+    <script type="text/javascript" src="https://one.pingxx.com/lib/pingpp_one.js"></script>
 </body>
 
 </html>

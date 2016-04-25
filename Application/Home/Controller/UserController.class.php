@@ -42,10 +42,10 @@ class UserController extends CommonController {
 	}
 
 	public function submissions() {
-		$this->all = M('submission')->where(array('user_id'=>$_SESSION['uid']))->select();
-		$this->notcomplete = M('submission')->where(array('user_id'=>$_SESSION['uid'], 'iscomplete'=>0))->select();
-		$this->notpaied = M('submission')->where(array('user_id'=>$_SESSION['uid'], 'ispaied'=>0))->select();
-		$this->notsubmitted = M('submission')->where(array('user_id'=>$_SESSION['uid'], 'issubmitted'=>0))->select();
+		$this->all = M('submission')->where(array('contest_id'=>C('CONTESTID'),'user_id'=>$_SESSION['uid']))->select();
+		$this->notcomplete = M('submission')->where(array('contest_id'=>C('CONTESTID'),'user_id'=>$_SESSION['uid'], 'iscomplete'=>0))->select();
+		$this->notpaied = M('submission')->where(array('contest_id'=>C('CONTESTID'),'user_id'=>$_SESSION['uid'], 'ispaied'=>0))->select();
+		$this->notsubmitted = M('submission')->where(array('contest_id'=>C('CONTESTID'),'user_id'=>$_SESSION['uid'], 'issubmitted'=>0))->select();
 		$this->display();
 	}
 

@@ -45,9 +45,9 @@ class AdminController extends Controller{
 	}
 
 	public function submissions() {
-		$this->notpaid = M('submission')->where(array('ispaied'=>0))->select();
-		$this->paid_but_notsubmitted = M('submission')->where(array('ispaied'=>1, 'issubmitted'=>0))->select();
-		$this->submitted = M('submission')->where(array('ispaied'=>1, 'issubmitted'=>1))->select();
+		$this->notpaid = M('submission')->where(array('contest_id'=>C('CONTESTID'),'ispaied'=>0))->select();
+		$this->paid_but_notsubmitted = M('submission')->where(array('contest_id'=>C('CONTESTID'),'ispaied'=>1,'issubmitted'=>0))->select();
+		$this->submitted = M('submission')->where(array('contest_id'=>C('CONTESTID'),'ispaied'=>1,'issubmitted'=>1))->select();
 		$this->display();
 	}
 
@@ -72,7 +72,7 @@ class AdminController extends Controller{
 	}
 
 	public function users() {
-		$this->users = M('user')->select();
+		$this->users = M('user')->order('role desc')->select();
 		$this->display();
 	}
 
@@ -156,6 +156,56 @@ class AdminController extends Controller{
         $objWriter = \PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');  
         $objWriter->save('php://output'); 
         exit; 
+    }
+
+    public function set_as_common(){
+		M('user')->where(array('id'=>I('id')))->save(array('role'=>0));
+		$this->redirect('Admin/users');
+    }
+
+    public function set_as_judge(){
+		M('user')->where(array('id'=>I('id')))->save(array('role'=>1));
+		$this->redirect('Admin/users');
+    }
+
+    public function judge_first(){
+    	$assignments = M('judge_first')->where(array('contest_id'=>C('CONTESTID')))->select();
+    	$judges = array();
+    	for ($i = 0; $i < count($assignments); $i++) {
+    		if (!array_key_exists($assignments[$i]['user_id'], $judges)) {
+    			// 总数量，已完成
+    			$judges[$assignments[$i]['user_id']] = [0,0];
+    		}
+    		$judges[$assignments[$i]['user_id']][0] += 1;
+    		if ($assignments[$i]['yes_or_no'] != '') {
+    			$judges[$assignments[$i]['user_id']][1] += 1;
+    		}
+    	}
+    	$tmp = array();
+    	foreach ($judges as $key => $value) {
+    		$t = M('user')->where(array('id'=>$key))->find();
+    		$tmp[] = array('email'=>$t['email'], 'all'=>$value[0], 'finished'=>$value[1]);
+    	}
+    	$this->judges = $tmp;
+    	$this->display();
+    }
+
+    public function judge_first_assign(){
+    	$submissions = M('submission')->where(array('contest_id'=>C('CONTESTID'),'ispaied'=>1,'issubmitted'=>1))->select();
+    	$users = M('user')->where(array('role'=>1))->select();
+
+    	$number = 0;
+    	for ($i = 0; $i < count($submissions); $i++) { 
+    		for ($j = 0; $j < 3; $j++) { 
+    			M('judge_first')->add(array('contest_id'=>C('CONTESTID'),'submission_id'=>$submissions[$i]['id'],'user_id'=>$users[$number]['id'],'yes_or_no'=>'','timestamp'=>''));
+    			$number += 1;
+    			if ($number >= count($users)) {
+    				$number = 0;
+    			}
+    		}
+    	}
+
+    	$this->redirect('Admin/judge_first');
     }
 }
 ?>

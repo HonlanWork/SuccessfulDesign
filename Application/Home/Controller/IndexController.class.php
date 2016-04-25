@@ -4,7 +4,7 @@ use Think\Controller;
 class IndexController extends Controller {
     public function index(){
     	// $this->display();
-        $this->redirect('Index/contest', array('id'=>1));
+        $this->redirect('Index/contest', array('id'=>C('CONTESTID')));
     }
 
     // 比赛
