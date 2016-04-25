@@ -21,7 +21,6 @@ $(document).ready(function() {
                 debug: true //(可选，debug 模式下会将 charge_url 的返回结果透传回来)
             }, function(res) {
                 //debug 模式下获取 charge_url 的返回结果
-                console.log(res);
                 if (res.debug && res.chargeUrlOutput) {
                     console.log(res.chargeUrlOutput);
                 }
