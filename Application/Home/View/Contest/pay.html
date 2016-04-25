@@ -243,7 +243,7 @@
 $(document).ready(function() {
     if (parseInt($('#isadmin').text()) == 1) {
         document.addEventListener('pingpp_one_ready', function() {
-            document.getElementById('pay').addEventListener('click', function() {
+            document.getElementById('payonline').addEventListener('click', function() {
                 pingpp_one.init({
                     app_id: 'app_4O0O8KmzjHm5zbLW', //该应用在 ping++ 的应用 ID
                     order_no: '', //订单在商户系统中的订单号
