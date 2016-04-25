@@ -247,7 +247,7 @@ $(document).ready(function() {
                 pingpp_one.init({
                     app_id: 'app_4O0O8KmzjHm5zbLW', //该应用在 ping++ 的应用 ID
                     order_no: '', //订单在商户系统中的订单号
-                    amount: parseInt($('#fee').text()), //订单价格，单位：人民币 分
+                    amount: parseInt($('#fee').text()) * 100, //订单价格，单位：人民币 分
                     // 壹收款页面上需要展示的渠道，数组，数组顺序即页面展示出的渠道的顺序
                     // channel: ['alipay_wap', 'wx_pub', 'upacp_wap', 'yeepay_wap', 'jdpay_wap', 'bfb_wap'],
                     channel: ['alipay_wap'],
