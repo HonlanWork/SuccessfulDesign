@@ -148,6 +148,28 @@ class ContestController extends CommonController {
 		$this->redirect('Contest/info', array('id'=>I('id')));
 	}
 
+	public function pay_webhook(){
+		$event = json_decode(file_get_contents("php://input"));
+		
+		if (!isset($event->type)) {
+			header($_SERVER['SERVER_PROTOCOL'] . ' 400 Bad Request');
+			exit("fail");
+		}
+		switch ($event->type) {
+		    case "charge.succeeded":
+		        // 开发者在此处加入对支付异步通知的处理代码
+		        header($_SERVER['SERVER_PROTOCOL'] . ' 200 OK');
+		        break;
+		    case "refund.succeeded":
+		        // 开发者在此处加入对退款异步通知的处理代码
+		        header($_SERVER['SERVER_PROTOCOL'] . ' 200 OK');
+		        break;
+		    default:
+		        header($_SERVER['SERVER_PROTOCOL'] . ' 400 Bad Request');
+		        break;
+		}
+	}
+
 	public function pay_confirm() {
 		M('submission')->where(array('id'=>$_POST['id'], 'user_id'=>$_SESSION['uid']))->save(array('pay_confirm'=>1));
     	$email = M('email')->where(array('name'=>'完成支付'))->find();
