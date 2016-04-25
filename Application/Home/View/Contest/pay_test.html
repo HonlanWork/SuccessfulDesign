@@ -18,7 +18,7 @@ $(document).ready(function() {
                 //     b: 2
                 // }, //(可选，用户自定义参数，若存在自定义参数则壹收款会通过 POST 方法透传给 charge_url)
                 // open_id: 'wx1234567890', //(可选，使用微信公众号支付时必须传入)
-                debug: true //(可选，debug 模式下会将 charge_url 的返回结果透传回来)
+                debug: false //(可选，debug 模式下会将 charge_url 的返回结果透传回来)
             }, function(res) {
                 //debug 模式下获取 charge_url 的返回结果
                 if (res.debug && res.chargeUrlOutput) {
