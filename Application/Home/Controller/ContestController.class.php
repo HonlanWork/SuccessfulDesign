@@ -47,12 +47,7 @@ class ContestController extends CommonController {
 		$this->display();
 	}
 
-	public function pay_test(){
-		$this->app_id = C('API_ID');
-		$this->display();
-	}
-
-	public function pay_test_handle() {
+	public function pay_handle() {
 		$api_key =  C('API_KEY');
 		$api_id = C('API_ID');
 
@@ -64,15 +59,8 @@ class ContestController extends CommonController {
 		}
 		$channel = strtolower($input_data['channel']);
 		$amount = $input_data['amount'];
-		$orderNo = substr(md5(time()), 0, 12);
-
-		// if (empty($_GET['channel']) || empty($_GET['amount'])) {
-  //           echo 'channel or amount is empty';
-  //           exit();
-  //       }
-  //       $channel = strtolower($_GET['channel']);
-  //       $amount = $_GET['amount'];
-  //       $orderNo = substr(md5(time()), 0, 12);
+		$orderNo = substr(md5(time()), 0, 20);
+		M('submission')->where(array('id'=>$input_data['submission_id'], 'user_id'=>$_SESSION['uid']))->save(array('pay_code'=>$orderNo));
 
         \Pingpp\Pingpp::setPrivateKeyPath('Public/rsa_private_key.pem');
 
@@ -84,8 +72,8 @@ class ContestController extends CommonController {
 		switch ($channel) {
 		    case 'alipay_wap':
 		        $extra = array(
-		            'success_url' => C('SITE_PREFIX') . U('Contest/pay_test_success'),
-		            'cancel_url' => C('SITE_PREFIX') . U('Contest/pay_test_cancel')
+		            'success_url' => C('SITE_PREFIX') . U('Contest/pay_success',array('id'=>$input_data['submission_id'],'pay_code'=>$orderNo)),
+		            'cancel_url' => C('SITE_PREFIX') . U('Contest/pay',array('id'=>$input_data['submission_id']))
 		        );
 		        break;
 		    case 'bfb_wap':
@@ -133,8 +121,8 @@ class ContestController extends CommonController {
         try {
 		    $ch = \Pingpp\Charge::create(
 		        array(
-		            'subject'   => 'Your Subject',
-		            'body'      => 'Your Body',
+		            'subject'   => '2016成功设计大赛作品支付',
+		            'body'      => '快来支付吧',
 		            'amount'    => $amount,
 		            'order_no'  => $orderNo,
 		            'currency'  => 'cny',
@@ -155,11 +143,9 @@ class ContestController extends CommonController {
 		    }
 		}
 	}
-	public function pay_test_success(){
-		echo 'success';
-	}
-	public function pay_test_cancel(){
-		echo 'cancel';
+	public function pay_success(){
+		M('submission')->where(array('id'=>I('id'),'user_id'=>$_SESSION['uid'],'pay_code'=>I('pay_code')))->save(array('ispaied'=>1,'pay_confirm'=>0));
+		$this->redirect('Contest/info', array('id'=>I('id')));
 	}
 
 	public function pay_confirm() {

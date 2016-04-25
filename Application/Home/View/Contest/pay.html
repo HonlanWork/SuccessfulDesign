@@ -38,6 +38,7 @@
     border-bottom: 1px solid #ddd;
     display: none;
 }
+
 #main #pay .paymeans p {
     font-size: 13px;
     color: #888;
@@ -67,7 +68,8 @@
     box-shadow: 2px 2px 3px rgba(20, 20, 20, 0.4);
 }
 
-#main img.online:hover, #main img.offline:hover {
+#main img.online:hover,
+#main img.offline:hover {
     cursor: pointer;
 }
 
@@ -167,8 +169,8 @@
                                     <?php translate('支付费用（元）')?>
                                 </p>
                                 <if condition="time() lt $contest['early_bird_time']">{$contest.early_bird_fee}
-                                    <?php translate('（早鸟优惠）')?>
-                                    <else/>{$contest.fee}
+                                    <span id='fee'><?php translate('（早鸟优惠）')?></span>
+                                    <else/><span id='fee'>{$contest.fee}</span>
                                 </if>
                             </div>
                         </div>
@@ -177,12 +179,17 @@
                         </p>
                         <div style="margin-bottom:20px;">
                             <?php if (isset($_SESSION['lang']) and $_SESSION['lang'] == 'en') { ?>
-                            <img src="__PUBLIC__/img/contest2016/payofflineen.png" style="margin-right:3%;width:45%;max-width:120px;" alt="" class="offline">
-                            <img src="__PUBLIC__/img/contest2016/payonlineen.png" style="margin-left:3%;width:45%;max-width:120px;" alt="" class="online">
+                            <img src="__PUBLIC__/img/contest2016/payonlineen.png" style="margin-right:3%;width:45%;max-width:120px;" alt="" class="online" id="payonline">
+                            <img src="__PUBLIC__/img/contest2016/payofflineen.png" style="margin-left:3%;width:45%;max-width:120px;" alt="" class="offline">
                             <?php } else{ ?>
-                            <img src="__PUBLIC__/img/contest2016/payoffline.png" style="margin-right:3%;width:45%;max-width:120px;" alt="" class="offline">
-                            <img src="__PUBLIC__/img/contest2016/payonline.png" style="margin-left:3%;width:45%;max-width:120px;" alt="" class="online">
+                            <img src="__PUBLIC__/img/contest2016/payonline.png" style="margin-right:3%;width:45%;max-width:120px;" alt="" class="online" id="payonline">
+                            <img src="__PUBLIC__/img/contest2016/payoffline.png" style="margin-left:3%;width:45%;max-width:120px;" alt="" class="offline">
                             <?php } ?>
+                            <if condition="isset($_SESSION['urole']) and $_SESSION['urole'] eq 2">
+                                <p id="isadmin" style="display:none;">1</p>
+                                <else/>
+                                <p id="isadmin" style="display:none;">0</p>
+                            </if>
                         </div>
                         <div class="paymeans offline">
                             <p style="border-bottom:1px solid #ddd;padding-bottom:15px;margin-bottom:15px;">
@@ -218,10 +225,15 @@
                 </div>
                 <div id="pay-success">
                     <img src="__PUBLIC__/img/contest2016/check.png" style="width:50px;margin-bottom:20px;" alt="">
-                    <p style="text-align:left;color:#fdfdfd;"><?php translate('恭喜，你已经完成支付，将很快收到一封确认邮件')?></p>
-                    <p style="text-align:left;color:#fdfdfd;"><?php translate('请记住，在5月31日之前，你需要填写作品详情并提交')?></p>
-
-                    <a href="{:U('User/submission', array('id'=>$submission['id']))}"><?php translate('作品详情')?></a>
+                    <p style="text-align:left;color:#fdfdfd;">
+                        <?php translate('恭喜，你已经完成支付，将很快收到一封确认邮件')?>
+                    </p>
+                    <p style="text-align:left;color:#fdfdfd;">
+                        <?php translate('请记住，在5月31日之前，你需要填写作品详情并提交')?>
+                    </p>
+                    <a href="{:U('User/submission', array('id'=>$submission['id']))}">
+                        <?php translate('作品详情')?>
+                    </a>
                 </div>
             </div>
         </div>
@@ -229,6 +241,60 @@
 </form>
 <script>
 $(document).ready(function() {
+    if (parseInt($('#isadmin').text()) == 1) {
+        document.addEventListener('pingpp_one_ready', function() {
+            document.getElementById('pay').addEventListener('click', function() {
+                pingpp_one.init({
+                    app_id: 'app_4O0O8KmzjHm5zbLW', //该应用在 ping++ 的应用 ID
+                    order_no: '', //订单在商户系统中的订单号
+                    amount: parseInt($('#fee').text()), //订单价格，单位：人民币 分
+                    // 壹收款页面上需要展示的渠道，数组，数组顺序即页面展示出的渠道的顺序
+                    // channel: ['alipay_wap', 'wx_pub', 'upacp_wap', 'yeepay_wap', 'jdpay_wap', 'bfb_wap'],
+                    channel: ['alipay_wap'],
+                    charge_url: "{:U('Contest/pay_handle')}", //商户服务端创建订单的 url
+                    charge_param: {
+                        submission_id: {$submission.id},
+                    }, //(可选，用户自定义参数，若存在自定义参数则壹收款会通过 POST 方法透传给 charge_url)
+                    // open_id: 'wx1234567890', //(可选，使用微信公众号支付时必须传入)
+                    debug: false //(可选，debug 模式下会将 charge_url 的返回结果透传回来)
+                }, function(res) {
+                    //debug 模式下获取 charge_url 的返回结果
+                    if (res.debug && res.chargeUrlOutput) {
+                        console.log(res.chargeUrlOutput);
+                    }
+                    if (!res.status) {
+                        //处理错误
+                        alert(res.msg);
+                    } else {
+                        //debug 模式下调用 charge_url 后会暂停，可以调用 pingpp_one.resume 方法继续执行
+                        if (res.debug && !res.wxSuccess) {
+                            if (confirm('当前为 debug 模式，是否继续支付？')) {
+                                pingpp_one.resume();
+                            }
+                        }
+                        //若微信公众号渠道需要使用壹收款的支付成功页面，则在这里进行成功回调，
+                        //调用 pingpp_one.success 方法，你也可以自己定义回调函数
+                        //其他渠道的处理方法请见第 2 节
+                        else pingpp_one.success(function(res) {
+                            if (!res.status) {
+                                alert(res.msg);
+                            }
+                        }, function() {
+                            //这里处理支付成功页面点击“继续购物”按钮触发的方法，
+                            //例如：若你需要点击“继续购物”按钮跳转到你的购买页，
+                            //则在该方法内写入 window.location.href = "你的购买页面 url"
+                            window.location.href = 'http://yourdomain.com/payment_succeeded'; //示例
+                        });
+                    }
+                });
+            });
+        });
+    } else {
+        $('#main img.online').click(function(event) {
+            window.location.href = 'http://event.3188.la/229649539';
+        });
+    }
+
     if ($(window).width() < 768) {
         $('#main #pay').addClass('plain');
         $('#main #guide').addClass('plain');
@@ -250,33 +316,31 @@ $(document).ready(function() {
         $('#main .paymeans.online').hide();
         $('#main .paymeans.offline').show();
     });
-    $('#main img.online').click(function(event) {
-        window.location.href = 'http://event.3188.la/229649539';
-    });
+
     $('#main #confirm-payment button').click(function(event) {
         event.preventDefault();
-        $('#main #confirm-payment').fadeOut('fast', function(){
+        $('#main #confirm-payment').fadeOut('fast', function() {
             $('#main #pay-process').css('margin-bottom', '40px');
         });
         $.ajax({
-            url: "{:U('Contest/pay_confirm')}",
-            type: 'POST',
-            dataType: 'json',
-            data: {
-                id: {$submission.id}
-            },
-        })
-        .done(function() {
-            $('#main #pay-process').hide();
-            $('#main #pay-success').fadeIn('fast');
-        })
-        .fail(function() {
-            console.log("error");
-        })
-        .always(function() {
-            console.log("complete");
-        });
-        
+                url: "{:U('Contest/pay_confirm')}",
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                    id: {$submission.id}
+                },
+            })
+            .done(function() {
+                $('#main #pay-process').hide();
+                $('#main #pay-success').fadeIn('fast');
+            })
+            .fail(function() {
+                console.log("error");
+            })
+            .always(function() {
+                console.log("complete");
+            });
+
     });
 });
 </script>
