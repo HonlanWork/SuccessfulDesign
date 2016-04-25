@@ -43,15 +43,18 @@ class ContestController extends CommonController {
 	}
 
 	public function pay_test(){
-		$this->app_id = C('app_id');
+		$this->app_id = C('API_ID');
 		$this->display();
 	}
 
 	public function pay_test_handle() {
-		$api_key =  C('api_key');
-		$app_id = C('api_id');
+		$api_key =  C('API_KEY');
+		$api_id = C('API_ID');
+
+		Vendor('PingXX.init');
 
 		$input_data = json_decode(file_get_contents('php://input'), true);
+
 		if (empty($input_data['channel']) || empty($input_data['amount'])) {
 		    echo 'channel or amount is empty';
 		    exit();
@@ -60,7 +63,7 @@ class ContestController extends CommonController {
 		$amount = $input_data['amount'];
 		$orderNo = substr(md5(time()), 0, 12);
 
-		\Pingpp\Pingpp::setPrivateKeyPath(__PUBLIC__.'/rsa_private_key.pem');
+		\Pingpp\Pingpp::setPrivateKey(C('RSA_PRIVATE_KEY'));
 
 		/**
 		 * $extra 在使用某些渠道的时候，需要填入相应的参数，其它渠道则是 array()。
@@ -124,14 +127,15 @@ class ContestController extends CommonController {
 		            'amount'    => $amount,
 		            'order_no'  => $orderNo,
 		            'currency'  => 'cny',
-		            'extra'     => $extra,
+		            // 'extra'     => $extra,
 		            'channel'   => $channel,
 		            'client_ip' => $_SERVER['REMOTE_ADDR'],
-		            'app'       => array('id' => $app_id)
+		            'app'       => array('id' => $api_id)
 		        )
 		    );
 		    echo $ch;
 		} catch (\Pingpp\Error\Base $e) {
+			echo 111111111;
 		    // 捕获报错信息
 		    if ($e->getHttpStatus() != NULL) {
 		        header('Status: ' . $e->getHttpStatus());
