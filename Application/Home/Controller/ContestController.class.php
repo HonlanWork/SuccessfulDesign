@@ -144,7 +144,7 @@ class ContestController extends CommonController {
 		}
 	}
 	public function pay_success(){
-		M('submission')->where(array('id'=>I('id'),'user_id'=>$_SESSION['uid'],'pay_code'=>I('pay_code')))->save(array('ispaied'=>1,'pay_confirm'=>0));
+		M('submission')->where(array('id'=>I('id'),'user_id'=>$_SESSION['uid'],'pay_code'=>I('pay_code')))->save(array('ispaied'=>1,'pay_confirm'=>0,'pay_code'=>''));
 		$this->redirect('Contest/info', array('id'=>I('id')));
 	}
 
