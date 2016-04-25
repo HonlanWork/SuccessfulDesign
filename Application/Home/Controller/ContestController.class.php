@@ -51,7 +51,7 @@ class ContestController extends CommonController {
 		$api_key =  C('API_KEY');
 		$api_id = C('API_ID');
 
-		Vendor('PingXX.init');
+		vendor('PingXX.init');
 
 		$input_data = json_decode(file_get_contents('php://input'), true);
 
@@ -119,7 +119,7 @@ class ContestController extends CommonController {
 		}
 
 		\Pingpp\Pingpp::setApiKey($api_key);
-		try {
+		// try {
 		    $ch = \Pingpp\Charge::create(
 		        array(
 		            'subject'   => 'Your Subject',
@@ -133,17 +133,19 @@ class ContestController extends CommonController {
 		            'app'       => array('id' => $api_id)
 		        )
 		    );
+		    echo 111;
 		    echo $ch;
-		} catch (\Pingpp\Error\Base $e) {
-			echo 111111111;
-		    // 捕获报错信息
-		    if ($e->getHttpStatus() != NULL) {
-		        header('Status: ' . $e->getHttpStatus());
-		        echo $e->getHttpBody();
-		    } else {
-		        echo $e->getMessage();
-		    }
-		}
+		    echo 222;
+		// } catch (\Pingpp\Error\Base $e) {
+		// 	echo 111111111;
+		//     // 捕获报错信息
+		//     if ($e->getHttpStatus() != NULL) {
+		//         header('Status: ' . $e->getHttpStatus());
+		//         echo $e->getHttpBody();
+		//     } else {
+		//         echo $e->getMessage();
+		//     }
+		// }
 	}
 
 	public function pay_confirm() {
