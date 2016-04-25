@@ -84,8 +84,8 @@ class ContestController extends CommonController {
 		switch ($channel) {
 		    case 'alipay_wap':
 		        $extra = array(
-		            'success_url' => U('Contest/pay_test_success'),
-		            'cancel_url' => U('Contest/pay_test_cancel')
+		            'success_url' => C('SITE_PREFIX') . U('Contest/pay_test_success'),
+		            'cancel_url' => C('SITE_PREFIX') . U('Contest/pay_test_cancel')
 		        );
 		        break;
 		    case 'bfb_wap':
