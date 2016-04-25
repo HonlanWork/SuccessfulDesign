@@ -69,9 +69,4 @@ function translate_return($str){
 		}
 	}
 }
-
-function verify_signature($raw_data, $signature, $pub_key_path) {
-	$pub_key_contents = file_get_contents($pub_key_path);
-	return openssl_verify($raw_data, base64_decode($signature), $pub_key_contents, 'sha256');
-}
 ?>
