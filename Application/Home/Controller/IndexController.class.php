@@ -11,6 +11,10 @@ class IndexController extends Controller {
     public function contest(){
     	$contestId = I('id');
         session('kol', I('kol'));
+        if (I('kol') != '') {
+            $visit = M('kol')->where(array('code'=>I('kol')))->find();
+            M('kol')->where(array('code'=>I('kol')))->save(array('visit'=>($visit['visit'] + 1)));
+        }
     	$this->contest = M('contest')->where(array('id'=>$contestId))->find();
     	$this->display();
     }

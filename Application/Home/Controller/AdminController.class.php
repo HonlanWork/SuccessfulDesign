@@ -211,9 +211,8 @@ class AdminController extends Controller{
     public function kol(){
         $kol = M('kol')->where(array('contest_id'=>C('CONTESTID')))->select();
         for ($i = 0; $i < count($kol); $i++) { 
-            $kol[$i]['all'] = M('submission')->where(array('contest_id'=>C('CONTESTID'),'kol'=>$kol[$i]['code']))->count();
             $kol[$i]['pay'] = M('submission')->where(array('contest_id'=>C('CONTESTID'),'kol'=>$kol[$i]['code'],'ispaied'=>1))->count();
-            $kol[$i]['submit'] = M('submission')->where(array('contest_id'=>C('CONTESTID'),'kol'=>$kol[$i]['code'],'issubmitted'=>1))->count();
+            $kol[$i]['transform'] = round(100 * floatval($kol[$i]['pay']) / floatval($kol[$i]['visit'])).'%';
             $kol[$i]['code'] = U('Index/kol',array('code'=>$kol[$i]['code']),false,true);
         }
         $this->kol = $kol;
