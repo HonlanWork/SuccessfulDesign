@@ -207,5 +207,29 @@ class AdminController extends Controller{
 
     	$this->redirect('Admin/judge_first');
     }
+
+    public function kol(){
+        $kol = M('kol')->select();
+        for ($i = 0; $i < count($kol); $i++) { 
+            $kol[$i]['all'] = M('submission')->where(array('kol'=>$kol[$i]['code']))->count();
+            $kol[$i]['pay'] = M('submission')->where(array('kol'=>$kol[$i]['code'],'ispaied'=>1))->count();
+            $kol[$i]['submit'] = M('submission')->where(array('kol'=>$kol[$i]['code'],'issubmitted'=>1))->count();
+            $kol[$i]['code'] = U('Index/kol',array('code'=>$kol[$i]['code']),false,true);
+        }
+        $this->kol = $kol;
+        $this->display();
+    }
+
+    public function kol_add(){
+        $code = time().sha1(genRandStr());
+        M('kol')->add(array('name'=>I('name'),'code'=>$code));
+        vendor("phpqrcode.phpqrcode");
+        $value = U('Index/contest',array('kol'=>$code),false,true);
+        $filename = 'Public/upload/kol/'.$code.'.png'; 
+        $errorCorrectionLevel = "L"; 
+        $matrixPointSize = "6"; 
+        \QRcode::png($value, $filename, $errorCorrectionLevel, $matrixPointSize, 2);
+        $this->redirect('Admin/kol');
+    }
 }
 ?>

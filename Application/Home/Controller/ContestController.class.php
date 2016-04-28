@@ -26,7 +26,8 @@ class ContestController extends CommonController {
 				'position' => $user['position'],
 				'email' => $user['email'],
 				'cellphone' => $user['cellphone'],
-				'image'=>'/img/design.jpg'
+				'image' => '/img/design.jpg',
+				'kol' => $user['kol']
 				))->add();
 			$this->redirect('Contest/pay', array('id'=>$id));
 		}

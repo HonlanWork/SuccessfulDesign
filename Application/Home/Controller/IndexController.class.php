@@ -10,6 +10,7 @@ class IndexController extends Controller {
     // 比赛
     public function contest(){
     	$contestId = I('id');
+        session('kol', I('kol'));
     	$this->contest = M('contest')->where(array('id'=>$contestId))->find();
     	$this->display();
     }
@@ -107,7 +108,8 @@ class IndexController extends Controller {
                     "nickname" => I('email'),
                     "gender" => 1,
                     "portrait" => "/img/user.png",
-                    "introduction" => "暂无"
+                    "introduction" => "暂无",
+                    "kol" => $_SESSION['kol'] 
 					))->add();
 
 				$email = M('email')->where(array('name'=>'激活邮箱'))->find();
@@ -260,5 +262,12 @@ class IndexController extends Controller {
     public function language(){
         session('lang', I('language'));
         echo json_encode(array('language'=>I('language')));
+    }
+
+    public function kol(){
+        $kol = M('kol')->where(array('code'=>I('code')))->find();
+        $kol['qrcode'] = '/upload/kol/'.$kol['code'].'.png';
+        $this->kol = $kol;
+        $this->display();
     }
 }
