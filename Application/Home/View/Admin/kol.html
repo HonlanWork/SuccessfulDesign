@@ -107,7 +107,10 @@
             <foreach name="kol" item="v">
                 <tr>
                     <td>{$v.name}</td>
-                    <td><a href="{$v.code}" target="_blank">点我访问</a></td> 
+                    <td>
+                        <a href="{$v.code}" target="_blank">点我访问</a>
+                        <input type="text" class="form-control" value="{$v.code}" style="width:200px;">
+                    </td> 
                     <td>{$v.all}</td>   
                     <td>{$v.pay}</td>   
                     <td>{$v.submit}</td>   
