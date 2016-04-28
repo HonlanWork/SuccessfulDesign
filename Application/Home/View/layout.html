@@ -3,308 +3,323 @@
 <?php
     session('dictionary', null);
 ?>
-<head>
-    <meta charset='utf8' />
-    <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
-    <title>成功设计平台</title>
-    <meta name='description' content='' />
-    <meta name='keywords' content='' />
-    <meta name='author' content='hlzhang' />
-    <link rel="shortcut icon" href="__PUBLIC__/img/logo.png">
-    <script src="__PUBLIC__/lib/jquery.min.js"></script>
-    <link href="__PUBLIC__/lib/bootstrap.min.css" rel="stylesheet" />
-    <script src="__PUBLIC__/lib/bootstrap.min.js"></script>
-    <link href="__PUBLIC__/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-    <script src="__PUBLIC__/js/lrz.bundle.js"></script>
-    <style>
-    html {
-        margin: 0;
-        padding: 0;
-        color: #666;
-        font-family: "Microsoft Yahei";
-        background-image: url(__PUBLIC__/img/background.jpg);
-        background-size: cover;
-        background-attachment: fixed;
-    }
-    body {
-        background: transparent;
-        margin: 0;
-        padding: 0;
-        color: #666;
-        font-family: "Microsoft Yahei";
-    }
-    
-    a,
-    a:hover {
-        text-decoration: none;
-    }
-    
-    button {
-        outline: none !important;
-    }
-    
-    h3.title {
-        font-size: 27px;
-        text-align: center;
-        color: #444;
-        margin-bottom: 20px;
-        margin-top: 10px;
-    }
-    
-    .form-group .input-group-lg span {
-        color: #a1a1a1;
-        background-color: #f7f7f7;
-    }
-    
-    .form-group .input-group-lg .input-group-addon {
-        border: none !important;
-    }
-    
-    .form-group .input-group-lg input {
-        border: none !important;
-        outline: none;
-        color: #666 !important;
-        box-shadow: none;
-    }
-    
-    header {
-        height: 90px;
-        padding: 20px 0;
-        position: relative;
-        background-color: #fff;
-        margin-top: 12px;
-        margin: 0 auto;
-        border-top-left-radius: 5px;
-        border-top-right-radius: 5px;
-    }
-    
-    header img {
-        position: absolute;
-        left: 18px;
-        top: 10px;
-        width: 64px;
-    }
-    
-    header h3 {
-        margin: 0 0 8px 100px;
-        font-size: 24px;
-        color: #444;
-    }
-    
-    header h4 {
-        margin: 0 0 0 100px;
-        font-size: 15px;
-        color: #888;
-    }
-    
-    .navbar-default {
-        background-color: #fff;
-        border-radius: 0;
-        border-left: none;
-        border-right: none;
-        padding: 0 2%;
-        margin-bottom: 0;
-    }
-    
-    .navbar-default .navbar-nav>li>a {
-        color: #333;
-        font-weight: bold;
-        font-size: 16px;
-        padding-top: 20px;
-        padding-bottom: 20px;
-    }
-    
-    .navbar-default .navbar-nav>li>a:hover,
-    .navbar-default .navbar-nav>li>a.active {
-        color: #F05036;
-    }
-    
-    .navbar-default .navbar-right>li>a {
-        font-weight: lighter;
-        color: #555;
-        font-size: 14px;
-    }
-    
-    .navbar-default .navbar-right>li>a:hover {
-        background-color: #F6F6F6;
-    }
-    
-    .navbar-default .navbar-right .dropdown-menu {
-        min-width: 0;
-    }
-    
-    .navbar-default .navbar-right .dropdown-menu li a {
-        padding: 12px 36px 12px 30px;
-    }
-    
-    .navbar-default .navbar-right .dropdown-menu li a span {
-        margin-right: 10px;
-        position: relative;
-        top: 2px;
-    }
-    
-    .navbar-default .navbar-toggle {
-        border: none;
-    }
-    
-    header,
-    nav,
-    #main {
-        max-width: 1024px;
-        margin: 0 auto;
-    }
-    
-    header {
-        margin-top: 12px;
-    }
 
-    #main {
-        background-color: #fff;
-    }
-    .form-control {
-        background-color: #f8f8f8;
-    }
-    </style>
-    <script>
-    $(document).ready(function() {
-        $('#language').click(function(event) {
-            event.preventDefault();
-            var $language = $(this);
-            if ($language.hasClass('English')) {
-                $language.removeClass('English');
-                $.ajax({
-                        url: "{:U('Index/language')}",
-                        type: 'POST',
-                        dataType: 'json',
-                        data: {
-                            'language': 'ch'
-                        },
-                    })
-                    .done(function() {
-                        window.location.reload();
-                    })
-                    .fail(function() {
-                        console.log("error");
-                    })
-                    .always(function() {
-                        console.log("complete");
-                    });
-            } else {
-                $language.addClass('English');
-                $.ajax({
-                        url: "{:U('Index/language')}",
-                        type: 'POST',
-                        dataType: 'json',
-                        data: {
-                            'language': 'en'
-                        },
-                    })
-                    .done(function() {
-                        window.location.reload();
-                    })
-                    .fail(function() {
-                        console.log("error");
-                    })
-                    .always(function() {
-                        console.log("complete");
-                    });
-            }
+    <head>
+        <meta charset='utf8' />
+        <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+        <title>成功设计平台</title>
+        <meta name='description' content='' />
+        <meta name='keywords' content='' />
+        <meta name='author' content='hlzhang' />
+        <link rel="shortcut icon" href="__PUBLIC__/img/logo.png">
+        <script src="__PUBLIC__/lib/jquery.min.js"></script>
+        <link href="__PUBLIC__/lib/bootstrap.min.css" rel="stylesheet" />
+        <script src="__PUBLIC__/lib/bootstrap.min.js"></script>
+        <link href="__PUBLIC__/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+        <script src="__PUBLIC__/js/lrz.bundle.js"></script>
+        <style>
+        html {
+            margin: 0;
+            padding: 0;
+            color: #666;
+            font-family: "Microsoft Yahei";
+            background-image: url(__PUBLIC__/img/background.jpg);
+            background-size: cover;
+            background-attachment: fixed;
+        }
+        
+        html:before {
+            content: ' ';
+            position: fixed;
+            z-index: -1;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background: url(__PUBLIC__/img/background.jpg) center 0 no-repeat;
+            background-size: cover;
+        }
+        
+        body {
+            background: transparent;
+            margin: 0;
+            padding: 0;
+            color: #666;
+            font-family: "Microsoft Yahei";
+        }
+        
+        a,
+        a:hover {
+            text-decoration: none;
+        }
+        
+        button {
+            outline: none !important;
+        }
+        
+        h3.title {
+            font-size: 27px;
+            text-align: center;
+            color: #444;
+            margin-bottom: 20px;
+            margin-top: 10px;
+        }
+        
+        .form-group .input-group-lg span {
+            color: #a1a1a1;
+            background-color: #f7f7f7;
+        }
+        
+        .form-group .input-group-lg .input-group-addon {
+            border: none !important;
+        }
+        
+        .form-group .input-group-lg input {
+            border: none !important;
+            outline: none;
+            color: #666 !important;
+            box-shadow: none;
+        }
+        
+        header {
+            height: 90px;
+            padding: 20px 0;
+            position: relative;
+            background-color: #fff;
+            margin-top: 12px;
+            margin: 0 auto;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+        }
+        
+        header img {
+            position: absolute;
+            left: 18px;
+            top: 10px;
+            width: 64px;
+        }
+        
+        header h3 {
+            margin: 0 0 8px 100px;
+            font-size: 24px;
+            color: #444;
+        }
+        
+        header h4 {
+            margin: 0 0 0 100px;
+            font-size: 15px;
+            color: #888;
+        }
+        
+        .navbar-default {
+            background-color: #fff;
+            border-radius: 0;
+            border-left: none;
+            border-right: none;
+            padding: 0 2%;
+            margin-bottom: 0;
+        }
+        
+        .navbar-default .navbar-nav>li>a {
+            color: #333;
+            font-weight: bold;
+            font-size: 16px;
+            padding-top: 20px;
+            padding-bottom: 20px;
+        }
+        
+        .navbar-default .navbar-nav>li>a:hover,
+        .navbar-default .navbar-nav>li>a.active {
+            color: #F05036;
+        }
+        
+        .navbar-default .navbar-right>li>a {
+            font-weight: lighter;
+            color: #555;
+            font-size: 14px;
+        }
+        
+        .navbar-default .navbar-right>li>a:hover {
+            background-color: #F6F6F6;
+        }
+        
+        .navbar-default .navbar-right .dropdown-menu {
+            min-width: 0;
+        }
+        
+        .navbar-default .navbar-right .dropdown-menu li a {
+            padding: 12px 36px 12px 30px;
+        }
+        
+        .navbar-default .navbar-right .dropdown-menu li a span {
+            margin-right: 10px;
+            position: relative;
+            top: 2px;
+        }
+        
+        .navbar-default .navbar-toggle {
+            border: none;
+        }
+        
+        header,
+        nav,
+        #main {
+            max-width: 1024px;
+            margin: 0 auto;
+        }
+        
+        header {
+            margin-top: 12px;
+        }
+        
+        #main {
+            background-color: #fff;
+        }
+        
+        .form-control {
+            background-color: #f8f8f8;
+        }
+        </style>
+        <script>
+        $(document).ready(function() {
+            $('#language').click(function(event) {
+                event.preventDefault();
+                var $language = $(this);
+                if ($language.hasClass('English')) {
+                    $language.removeClass('English');
+                    $.ajax({
+                            url: "{:U('Index/language')}",
+                            type: 'POST',
+                            dataType: 'json',
+                            data: {
+                                'language': 'ch'
+                            },
+                        })
+                        .done(function() {
+                            window.location.reload();
+                        })
+                        .fail(function() {
+                            console.log("error");
+                        })
+                        .always(function() {
+                            console.log("complete");
+                        });
+                } else {
+                    $language.addClass('English');
+                    $.ajax({
+                            url: "{:U('Index/language')}",
+                            type: 'POST',
+                            dataType: 'json',
+                            data: {
+                                'language': 'en'
+                            },
+                        })
+                        .done(function() {
+                            window.location.reload();
+                        })
+                        .fail(function() {
+                            console.log("error");
+                        })
+                        .always(function() {
+                            console.log("complete");
+                        });
+                }
+            });
         });
-    });
-    </script>
-</head>
+        </script>
+    </head>
 
-<body>
-    <div style="margin-left:12px;margin-right:12px;">
-        <div style="box-shadow:2px -2px 3px rgba(20,20,20,0.3);margin:0 auto;max-width:1024px;border-top-left-radius:5px;border-top-right-radius:5px;">
-            <header>
-                <a href="{:U('Index/contest',array('id'=>1))}">
-                    <img src="__PUBLIC__/img/logo.png" alt="">
-                    <h3>成功设计</h3>
-                    <h4>SUCCESSFUL DESIGN</h4>
-                </a>
-            </header>
-            <nav class="navbar navbar-default">
-                <div class="container-fluid">
-                    <!-- Brand and toggle get grouped for better mobile display -->
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                    </div>
-                    <!-- Collect the nav links, forms, and other content for toggling -->
-                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                        <ul class="nav navbar-nav">
-                            <li><a href="{:U('Index/contest',array('id'=>1))}"><span class="glyphicon glyphicon-home" style="color:#F05036;"></span></a></li>
-                            <li>
-                                <a href="{:U('Index/contest',array('id'=>1))}">
-                                    <?php translate('大赛')?>
-                                </a>
-                            </li>
-                            <!-- <li><a href="#">设计</a></li>
+    <body>
+        <div style="margin-left:12px;margin-right:12px;">
+            <div style="box-shadow:2px -2px 3px rgba(20,20,20,0.3);margin:0 auto;max-width:1024px;border-top-left-radius:5px;border-top-right-radius:5px;">
+                <header>
+                    <a href="{:U('Index/contest',array('id'=>1))}">
+                        <img src="__PUBLIC__/img/logo.png" alt="">
+                        <h3>成功设计</h3>
+                        <h4>SUCCESSFUL DESIGN</h4>
+                    </a>
+                </header>
+                <nav class="navbar navbar-default">
+                    <div class="container-fluid">
+                        <!-- Brand and toggle get grouped for better mobile display -->
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                        </div>
+                        <!-- Collect the nav links, forms, and other content for toggling -->
+                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                            <ul class="nav navbar-nav">
+                                <li><a href="{:U('Index/contest',array('id'=>1))}"><span class="glyphicon glyphicon-home" style="color:#F05036;"></span></a></li>
+                                <li>
+                                    <a href="{:U('Index/contest',array('id'=>1))}">
+                                        <?php translate('大赛')?>
+                                    </a>
+                                </li>
+                                <!-- <li><a href="#">设计</a></li>
                     <li><a href="#">资讯</a></li>
                     <li><a href="#">孵化器</a></li> -->
-                        </ul>
-                        <ul class="nav navbar-nav navbar-right">
-                            <if condition="isset($_SESSION['uid'])">
-                                <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="padding:0;">
-                                        <img src="__PUBLIC__{$_SESSION['uportrait']}" style="width:40px;height:40px;border-radius:50%;margin:10px 15px 10px 15px;">
-                                    </a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="{:U('User/home')}"><span class="glyphicon glyphicon-user"></span><?php translate('个人资料')?></a></li>
-                                        <li><a href="{:U('User/submissions')}"><span class="glyphicon glyphicon-list-alt"></span><?php translate('我的作品')?></a></li>
-                                        <!-- <if condition="isset($_SESSION['urole']) and $_SESSION['urole'] eq 1">
+                            </ul>
+                            <ul class="nav navbar-nav navbar-right">
+                                <if condition="isset($_SESSION['uid'])">
+                                    <li class="dropdown">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="padding:0;">
+                                            <img src="__PUBLIC__{$_SESSION['uportrait']}" style="width:40px;height:40px;border-radius:50%;margin:10px 15px 10px 15px;">
+                                        </a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="{:U('User/home')}"><span class="glyphicon glyphicon-user"></span><?php translate('个人资料')?></a></li>
+                                            <li><a href="{:U('User/submissions')}"><span class="glyphicon glyphicon-list-alt"></span><?php translate('我的作品')?></a></li>
+                                            <!-- <if condition="isset($_SESSION['urole']) and $_SESSION['urole'] eq 1">
                                             <li><a href="{:U('Judge/index')}"><span class="glyphicon glyphicon-eye-open"></span><?php translate('作品评审')?></a></li>
                                         </if> -->
-                                        <if condition="isset($_SESSION['urole']) and $_SESSION['urole'] eq 2">
-                                            <li><a href="{:U('Admin/index')}"><span class="glyphicon glyphicon-cog"></span><?php translate('系统管理')?></a></li>
-                                        </if>
-                                        <li><a href="{:U('Index/logout')}"><span class="glyphicon glyphicon-off"></span><?php translate('退出登录')?></a></li>
-                                    </ul>
-                                </li>
-                                <else/>
-                                <li>
-                                    <a href="{:U('Index/login')}">
-                                        <?php translate('登录')?>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="{:U('Index/register')}">
-                                        <?php translate('注册')?>
-                                    </a>
-                                </li>
-                            </if>
-                            <li>
-                                <if condition="isset($_SESSION['lang']) and $_SESSION['lang'] == 'en'">
-                                    <a href="" id="language" class="English">
-                                        <?php translate('English')?>
-                                    </a>
+                                            <if condition="isset($_SESSION['urole']) and $_SESSION['urole'] eq 2">
+                                                <li><a href="{:U('Admin/index')}"><span class="glyphicon glyphicon-cog"></span><?php translate('系统管理')?></a></li>
+                                            </if>
+                                            <li><a href="{:U('Index/logout')}"><span class="glyphicon glyphicon-off"></span><?php translate('退出登录')?></a></li>
+                                        </ul>
+                                    </li>
                                     <else/>
-                                    <a href="" id="language">
-                                        <?php translate('English')?>
-                                    </a>
+                                    <li>
+                                        <a href="{:U('Index/login')}">
+                                            <?php translate('登录')?>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{:U('Index/register')}">
+                                            <?php translate('注册')?>
+                                        </a>
+                                    </li>
                                 </if>
-                            </li>
-                        </ul>
+                                <li>
+                                    <if condition="isset($_SESSION['lang']) and $_SESSION['lang'] == 'en'">
+                                        <a href="" id="language" class="English">
+                                            <?php translate('English')?>
+                                        </a>
+                                        <else/>
+                                        <a href="" id="language">
+                                            <?php translate('English')?>
+                                        </a>
+                                    </if>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- /.navbar-collapse -->
                     </div>
-                    <!-- /.navbar-collapse -->
-                </div>
-                <!-- /.container-fluid -->
-            </nav>
+                    <!-- /.container-fluid -->
+                </nav>
+            </div>
+            <div id="main">
+                {__CONTENT__}
+            </div>
         </div>
-        <div id="main">
-            {__CONTENT__}
-        </div>
-    </div>
-    <footer class="well" style="margin-bottom:0;padding:20px;border-radius:0;margin-top:12px;">
-        <p class="text-center" style="margin-bottom:0;font-size:14px;">© Copyright 2016 by Successful Design</p>
-    </footer>
-    <script type="text/javascript" src="https://one.pingxx.com/lib/pingpp_one.js"></script>
-</body>
+        <footer class="well" style="margin-bottom:0;padding:20px;border-radius:0;margin-top:12px;">
+            <p class="text-center" style="margin-bottom:0;font-size:14px;">© Copyright 2016 by Successful Design</p>
+        </footer>
+        <script type="text/javascript" src="https://one.pingxx.com/lib/pingpp_one.js"></script>
+    </body>
 
 </html>
