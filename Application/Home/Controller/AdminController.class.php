@@ -209,11 +209,11 @@ class AdminController extends Controller{
     }
 
     public function kol(){
-        $kol = M('kol')->select();
+        $kol = M('kol')->where(array('contest_id'=>C('CONTESTID')))->select();
         for ($i = 0; $i < count($kol); $i++) { 
-            $kol[$i]['all'] = M('submission')->where(array('kol'=>$kol[$i]['code']))->count();
-            $kol[$i]['pay'] = M('submission')->where(array('kol'=>$kol[$i]['code'],'ispaied'=>1))->count();
-            $kol[$i]['submit'] = M('submission')->where(array('kol'=>$kol[$i]['code'],'issubmitted'=>1))->count();
+            $kol[$i]['all'] = M('submission')->where(array('contest_id'=>C('CONTESTID'),'kol'=>$kol[$i]['code']))->count();
+            $kol[$i]['pay'] = M('submission')->where(array('contest_id'=>C('CONTESTID'),'kol'=>$kol[$i]['code'],'ispaied'=>1))->count();
+            $kol[$i]['submit'] = M('submission')->where(array('contest_id'=>C('CONTESTID'),'kol'=>$kol[$i]['code'],'issubmitted'=>1))->count();
             $kol[$i]['code'] = U('Index/kol',array('code'=>$kol[$i]['code']),false,true);
         }
         $this->kol = $kol;
@@ -222,7 +222,7 @@ class AdminController extends Controller{
 
     public function kol_add(){
         $code = time().sha1(genRandStr());
-        M('kol')->add(array('name'=>I('name'),'code'=>$code));
+        M('kol')->add(array('contest_id'=>C('CONTESTID'),'name'=>I('name'),'code'=>$code));
         vendor("phpqrcode.phpqrcode");
         $value = U('Index/contest',array('kol'=>$code),false,true);
         $filename = 'Public/upload/kol/'.$code.'.png'; 
