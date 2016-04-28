@@ -230,5 +230,13 @@ class AdminController extends Controller{
         \QRcode::png($value, $filename, $errorCorrectionLevel, $matrixPointSize, 2);
         $this->redirect('Admin/kol');
     }
+
+    public function kol_delete(){
+        $kol = M('kol')->where(array('id'=>I('id')))->find();
+        M('kol')->where(array('id'=>I('id')))->delete();
+        M('user')->where(array('kol'=>$kol['code']))->save(array('kol'=>''));
+        M('submission')->where(array('kol'=>$kol['code']))->save(array('kol'=>''));
+        $this->redirect('Admin/kol');
+    }
 }
 ?>

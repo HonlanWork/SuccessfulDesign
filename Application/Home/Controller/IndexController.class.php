@@ -11,10 +11,6 @@ class IndexController extends Controller {
     public function contest(){
     	$contestId = I('id');
         session('kol', I('kol'));
-        if (I('kol') != '') {
-            $visit = M('kol')->where(array('code'=>I('kol')))->find();
-            M('kol')->where(array('code'=>I('kol')))->save(array('visit'=>($visit['visit'] + 1)));
-        }
     	$this->contest = M('contest')->where(array('id'=>$contestId))->find();
     	$this->display();
     }
@@ -270,6 +266,7 @@ class IndexController extends Controller {
 
     public function kol(){
         $kol = M('kol')->where(array('code'=>I('code')))->find();
+        M('kol')->where(array('code'=>I('code')))->save(array('visit'=>($kol['visit'] + 1)));
         $kol['qrcode'] = '/upload/kol/'.$kol['code'].'.png';
         $this->kol = $kol;
         $this->display();

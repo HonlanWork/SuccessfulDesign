@@ -103,6 +103,7 @@
                 <th>浏览量</th>
                 <th>报名数</th>
                 <th>转化率</th>
+                <th>操作</th>
             </tr>
             <foreach name="kol" item="v">
                 <tr>
@@ -113,7 +114,8 @@
                     </td> 
                     <td>{$v.visit}</td>   
                     <td>{$v.pay}</td>   
-                    <td>{$v.transform}</td>   
+                    <td>{$v.transform}</td> 
+                    <td><a href="{:U('Admin/kol_delete', array('id'=>$v['id']))}">删除</a></td>  
                 </tr>
             </foreach>
         </table>
