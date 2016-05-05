@@ -204,8 +204,12 @@ class AdminController extends Controller{
     			}
     		}
     	}
-
     	$this->redirect('Admin/judge_first');
+    }
+
+    public function judge_first_delete(){
+        M('judge_first')->where(array('contest_id'=>C('CONTESTID')))->delete();
+        $this->redirect('Admin/judge_first');
     }
 
     public function kol(){

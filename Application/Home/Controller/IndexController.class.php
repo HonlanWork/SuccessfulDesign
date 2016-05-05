@@ -98,6 +98,12 @@ class IndexController extends Controller {
 					$activate_key .= rand(0, 9);
 				}
                 $salt = genRandStr();
+                if (isset($_SESSION['kol'])) {
+                    $kol = $_SESSION['kol'];
+                }
+                else {
+                    $kol = '';
+                }
 				M('user')->data(array(
 					"email" => I('email'),
 					"password" => sha1($salt.I('password')),

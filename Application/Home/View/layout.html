@@ -261,9 +261,9 @@
                                         <ul class="dropdown-menu">
                                             <li><a href="{:U('User/home')}"><span class="glyphicon glyphicon-user"></span><?php translate('个人资料')?></a></li>
                                             <li><a href="{:U('User/submissions')}"><span class="glyphicon glyphicon-list-alt"></span><?php translate('我的作品')?></a></li>
-                                            <!-- <if condition="isset($_SESSION['urole']) and $_SESSION['urole'] eq 1">
-                                            <li><a href="{:U('Judge/index')}"><span class="glyphicon glyphicon-eye-open"></span><?php translate('作品评审')?></a></li>
-                                        </if> -->
+                                            <if condition="isset($_SESSION['urole']) and $_SESSION['urole'] eq 1">
+                                                <li><a href="{:U('Judge/index')}"><span class="glyphicon glyphicon-eye-open"></span><?php translate('作品评审')?></a></li>
+                                            </if>
                                             <if condition="isset($_SESSION['urole']) and $_SESSION['urole'] eq 2">
                                                 <li><a href="{:U('Admin/index')}"><span class="glyphicon glyphicon-cog"></span><?php translate('系统管理')?></a></li>
                                             </if>

@@ -6,18 +6,25 @@
     border-bottom-left-radius: 5px;
     margin-bottom: 60px;
 }	
+#main h3 {
+	margin-top: 0;
+	font-size: 22px;
+}
+#main h4 {
+	font-size: 18px;
+}  
+#main p {
+	font-size: 12px;
+}
 #section1 {
 	text-align: center;
 }
-#section1 h3 {
-	margin-top: 0;
-}
-#section1 p {
-	font-size: 12px;
-}
 #section2 {
 	text-align: center;
-	height: 120px;
+	margin-top: 30px;
+}
+#section21 span, #section22 span {
+	margin-right: 6px;
 }
 #section3 {
 	text-align: center;
@@ -39,8 +46,8 @@
 }
 </style>
 <div id="section1">
+	<h3>评分标准</h3>
 	<div class="row">
-		<h3>评分标准</h3>
 		<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
 			<h4>策略</h4>
 			<p>巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉</p>
@@ -56,25 +63,43 @@
 	</div>
 </div>
 <div id="section2">
-	<h3>评分进度</h3>
-	<!-- <div id="section21">
-		第一轮评审
+	<h3 style="text-align:center;margin-bottom:20px;">评分进度</h3>
+	<div id="section21">
+		<p>
+			<span>第一轮评审</span>
+			<if condition='$first eq -1'>
+				尚未开始
+				<elseif condition='$first eq 0'/>
+				进行中
+				<else/>
+				已结束
+			</if>
+		</p>
 	</div>
 	<div id="section22">
-		第二轮评审
-	</div> -->
+		<p>
+			<span>第二轮评审</span>
+			<if condition='$second eq -1'>
+				尚未开始
+				<elseif condition='$second eq 0'/>
+				进行中
+				<else/>
+				已结束
+			</if>
+		</p>
+	</div>
 </div>
 <div id="section3">
 	<div class="row">
 		<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-			<if condition="$first eq 1">
+			<if condition="$first eq 0">
 				<a href="{:U('Judge/first')}" class="judge">第一轮评审</a>
 				<else/>
 				<span class="judge">第一轮评审</span>
 			</if>
 		</div>
 		<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-			<if condition="$second eq 1">
+			<if condition="$second eq 0">
 				<a href="{:U('Judge/second')}" class="judge">第二轮评审</a>
 				<else/>
 				<span class="judge">第二轮评审</span>

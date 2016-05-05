@@ -88,9 +88,10 @@
     </div>
     <div class="col-xs-12 col-sm-10 col-md-10 col-lg-10">
         <h3 style="margin-top:10px;margin-bottom:20px;">第一轮评审</h3>
-        <if condition="count($judges) eq 0">
-            <a href="{:U('Admin/judge_first_assign')}" class="btn btn-default" style="color:#666;margin-bottom:20px;font-size:12px;">分配作品</a>
-        </if>
+        <div>
+            <a href="{:U('Admin/judge_first_assign')}" class="btn btn-success" style="margin-bottom:20px;font-size:12px;">分配作品</a>
+            <a href="{:U('Admin/judge_first_delete')}" class="btn btn-danger" style="margin-bottom:20px;margin-left:10px;font-size:12px;">清空评审</a>
+        </div>
         <table class="table table-hover">
             <tr>
                 <th>评委邮箱</th>

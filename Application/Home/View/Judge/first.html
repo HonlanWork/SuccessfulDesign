@@ -6,8 +6,9 @@
     border-bottom-left-radius: 5px;
     margin-bottom: 60px;
 }
-#main a {
-	color: white;
+
+#main a.start {
+    color: white;
     background-color: #ff7c34;
     border: none;
     padding: 10px 30px;
@@ -18,22 +19,66 @@
     position: relative;
     top: 40px;
 }
+
+#main p {
+    font-size: 12px;
+}
+
+#section1 #process {
+    height: 50px;
+    position: relative;
+}
+
+#section1 #process #left,
+#section1 #process #right {
+    float: left;
+    height: 50px;
+}
+
+#section2 {
+    margin-top: 20px;
+}
+
+#section2 .cell {
+    display: inline-block;
+    margin-left: 15px;
+    margin-right: 15px;
+    width: 120px;
+    height: 80px;
+}
+
+#section2 .cell .mask {
+    width: 120px;
+    height: 80px;
+}
 </style>
 <div id="section1">
-	<h3 style="margin-top:0;">第一轮评审</h3>	
-	<p>评分进度</p>
-	<div id="process">
-		
-	</div>
+    <h4 style="margin-top:0;">第一轮评审</h4>
+    <p>评分进度</p>
+    <div id="process">
+        <div style="position:absolute;right:20px;bottom:4px;font-size:12px;color:#fff;"><span style="font-size:30px;margin-right:8px;font-style:italic;">{$left}<span style="margin-left:2px;">%</span></span>已完成</div>
+        <div id="left" style="background-color:#01e381;width:{$left}%;"></div>
+        <div id="right" style="background-color:#b3b4b6;width:{$right}%;"></div>
+    </div>
 </div>
 <div id="section2">
-	<p>全部作品</p>
-	<div id="submissions">
-		
-	</div>
-	<p style="font-size:12px;color:#FFBCBC;">* 请注意第一轮评审从5月1日开始</p>	
-	<p style="font-size:12px;color:#FFBCBC;">** 第一轮评审需在5月31日之前完成</p>
-	<div style="text-align:center;">
-		<a href="">继续评审</a>
-	</div>
+    <p>全部作品</p>
+    <div id="submissions" style="text-align:center;margin-bottom:20px;">
+        <foreach name="data" item="v">
+            <a href="{:U('Judge/first_detail',array('offset'=>$v['offset']))}">
+                <div class="cell" style="background-image:url(__PUBLIC__{$v['image']});background-size:cover;">
+                    <if condition="$v['yes_or_no'] eq 'yes'">
+                        <div class="mask" style="background-color:rgba(254,0,0,0.4);"></div>
+                        <elseif condition="$v['yes_or_no'] eq 'no'" />
+                        <div class="mask" style="background-color:rgba(1,227,129,0.4);"></div>
+                    </if>
+                </div>
+            </a>
+        </foreach>
+    </div>
+    <p style="font-size:12px;color:#FFBCBC;">* 请注意第一轮评审从5月1日开始</p>
+    <p style="font-size:12px;color:#FFBCBC;">** 第一轮评审需在5月31日之前完成</p>
+    <div style="text-align:center;">
+        <a href="{:U('Judge/first_detail',array('offset'=>$start))}" class="start">继续评审</a>
+    </div>
 </div>
