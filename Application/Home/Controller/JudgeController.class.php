@@ -6,6 +6,12 @@ class JudgeController extends Controller{
 		if(!isset($_SESSION['urole']) || $_SESSION['urole'] != 1){
 			$this->redirect('Index/contest', array('id'=>C('CONTESTID')));
 		}
+
+		$current = intval(time());
+		$contest = M('contest')->where(array('id'=>C('CONTESTID')))->find();
+		if ($current < $contest['judge_first_from'] && $current > $contest['judge_second_to']) {
+			$this->redirect('Index/contest', array('id'=>C('CONTESTID')));
+		}
 	}
 
 	public function index(){
