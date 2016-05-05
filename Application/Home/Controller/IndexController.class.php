@@ -115,7 +115,7 @@ class IndexController extends Controller {
                     "gender" => 1,
                     "portrait" => "/img/user.png",
                     "introduction" => "暂无",
-                    "kol" => $_SESSION['kol'] 
+                    "kol" => $kol
 					))->add();
 
 				$email = M('email')->where(array('name'=>'激活邮箱'))->find();
