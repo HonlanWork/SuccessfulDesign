@@ -95,7 +95,7 @@ class JudgeController extends Controller{
 	public function first_in() {
 		// offset id
 		$offset = I('offset');
-		M('judge_first')-where(array('contest_id'=>C('CONTESTID'),'user_id'=>$_SESSION['uid'],'submission_id'=>I('id')))->save(array('yes_or_no'=>'yes','timestamp'=>time()));
+		M('judge_first')->where(array('contest_id'=>C('CONTESTID'),'user_id'=>$_SESSION['uid'],'submission_id'=>I('id')))->save(array('yes_or_no'=>'yes','timestamp'=>time()));
 		$total = M('judge_first')->where(array('contest_id'=>C('CONTESTID'),'user_id'=>$_SESSION['uid']))->count();
 		$offset += 1;
 		if ($offset == $total) {
@@ -109,7 +109,7 @@ class JudgeController extends Controller{
 	public function first_out() {
 		// offset id
 		$offset = I('offset');
-		M('judge_first')-where(array('contest_id'=>C('CONTESTID'),'user_id'=>$_SESSION['uid'],'submission_id'=>I('id')))->save(array('yes_or_no'=>'no','timestamp'=>time()));
+		M('judge_first')->where(array('contest_id'=>C('CONTESTID'),'user_id'=>$_SESSION['uid'],'submission_id'=>I('id')))->save(array('yes_or_no'=>'no','timestamp'=>time()));
 		$total = M('judge_first')->where(array('contest_id'=>C('CONTESTID'),'user_id'=>$_SESSION['uid']))->count();
 		$offset += 1;
 		if ($offset == $total) {
