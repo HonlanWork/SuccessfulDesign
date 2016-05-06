@@ -24,7 +24,7 @@ class JudgeController extends Controller{
 		if ($current < intval($contest['judge_second_from'])) {
 			$this->second = -1;
 		}
-		if (intval($contest['judge_second_from']) <= $current && $current <= intval($contest['judge_second_to'])) {
+		elseif (intval($contest['judge_second_from']) <= $current && $current <= intval($contest['judge_second_to'])) {
 			$this->second = 0;
 		}
 		else {
