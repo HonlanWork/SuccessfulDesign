@@ -9,6 +9,7 @@ class AdminController extends Controller{
 	}
 
 	public function index(){
+        layout('admin');
 		$this->display();
 	}
 
@@ -20,6 +21,7 @@ class AdminController extends Controller{
         $contest['judge_second_from'] = date('Y-m-d', $contest['judge_second_from']);
         $contest['judge_second_to'] = date('Y-m-d', $contest['judge_second_to']);
         $this->contest = $contest;
+        layout('admin');
         $this->display();
     }
 
@@ -40,7 +42,8 @@ class AdminController extends Controller{
 
 	public function contest_pay_confirm(){
 		$this->submissions = M('submission')->where(array('contest_id'=>C('CONTESTID'), 'ispaied'=>0, 'pay_confirm'=>1))->select();
-		$this->display();
+        layout('admin');
+        $this->display();
 	}
 
 	public function contest_pay_yes(){
@@ -74,7 +77,8 @@ class AdminController extends Controller{
 		$this->notpaid = M('submission')->where(array('contest_id'=>C('CONTESTID'),'ispaied'=>0))->select();
 		$this->paid_but_notsubmitted = M('submission')->where(array('contest_id'=>C('CONTESTID'),'ispaied'=>1,'issubmitted'=>0))->select();
 		$this->submitted = M('submission')->where(array('contest_id'=>C('CONTESTID'),'ispaied'=>1,'issubmitted'=>1))->select();
-		$this->display();
+        layout('admin');
+        $this->display();
 	}
 
 	public function mark_as_paid() {
@@ -99,6 +103,7 @@ class AdminController extends Controller{
 
 	public function users() {
 		$this->users = M('user')->order('role desc')->select();
+        layout('admin');
 		$this->display();
 	}
 
@@ -109,6 +114,7 @@ class AdminController extends Controller{
 	}
 
 	public function translations() {
+        layout('admin');
 		$this->display();
 	}
 
@@ -213,6 +219,7 @@ class AdminController extends Controller{
     		$tmp[] = array('email'=>$t['email'], 'all'=>$value[0], 'finished'=>$value[1]);
     	}
     	$this->judges = $tmp;
+        layout('admin');
     	$this->display();
     }
 
@@ -246,6 +253,7 @@ class AdminController extends Controller{
             $kol[$i]['code'] = U('Index/kol',array('code'=>$kol[$i]['code']),false,true);
         }
         $this->kol = $kol;
+        layout('admin');
         $this->display();
     }
 

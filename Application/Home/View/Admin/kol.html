@@ -1,128 +1,38 @@
 <style>
-#main {
-    padding: 30px 6%;
-    box-shadow: 2px 2px 3px rgba(20, 20, 20, 0.3);
-    border-bottom-right-radius: 5px;
-    border-bottom-left-radius: 5px;
-}
-
-#main ul.admin-nav {
-    list-style-type: none;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    padding-left: 0;
-    margin-bottom: 10px;
-}
-
-#main ul.admin-nav p {
-    margin-bottom: 0;
-    padding: 10px 20px;
-    border-bottom: 1px solid #ddd;
-}
-
-#main ul.admin-nav p:hover {
-    cursor: pointer;
-}
-
-#main ul.admin-nav li {
-    border-bottom: 1px solid #ddd;
-    font-size: 13px;
-    padding: 8px 20px;
-    padding-left: 30px;
-    background-color: #eee;
-}
-
-#main ul.admin-nav a {
-    text-decoration: none;
-    color: #bbb;
-}
-
-#main ul.admin-nav a:hover {
-    text-decoration: none;
-    color: #888;
-}
-
-#main ul.admin-nav a:last-child {
-    border-bottom: none;
-}
-
 #main table {
     font-size: 12px;
     margin-top: 20px;
 }
 </style>
-<div class="row">
-    <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2">
-        <ul class="admin-nav">
-            <p>比赛管理</p>
-            <a href="{:U('Admin/contest')}">
-                <li>大赛信息</li>
-            </a>
-            <a href="{:U('Admin/contest_pay_confirm')}">
-                <li>审核支付</li>
-            </a>
-            <a href="{:U('Admin/submissions')}">
-                <li>作品管理</li>
-            </a>
-            <a href="{:U('Admin/judge_first')}">
-                <li>第一轮评审</li>
-            </a>
-            <a href="{:U('Admin/judge_second')}">
-                <li>第二轮评审</li>
-            </a>
-        </ul>
-        <ul class="admin-nav">
-            <p>用户管理</p>
-            <a href="{:U('Admin/users')}">
-                <li>所有用户</li>
-            </a>
-        </ul>
-        <ul class="admin-nav">
-            <p>网站管理</p>
-            <a href="{:U('Admin/translations')}">
-                <li>编辑翻译</li>
-            </a>
-        </ul>
-        <ul class="admin-nav">
-            <p>KOL管理</p>
-            <a href="{:U('Admin/kol')}">
-                <li>KOL统计</li>
-            </a>
-        </ul>
+<h3 style="margin-top:10px;margin-bottom:20px;">KOL统计</h3>
+<form method="post" action="{:U('kol_add')}" class="form-inline">
+    <p style="display:inline-block;margin-right:12px;">新增KOL推广链接</p>
+    <div class="form-group">
+        <input type="text" class="form-control" name="name" placeholder="姓名">
+        <button class="btn btn-success" style="margin-left:12px;">添加</button>
     </div>
-    <div class="col-xs-12 col-sm-10 col-md-10 col-lg-10">
-        <h3 style="margin-top:10px;margin-bottom:20px;">KOL统计</h3>
-        <form method="post" action="{:U('kol_add')}" class="form-inline">
-            <p style="display:inline-block;margin-right:12px;">新增KOL推广链接</p>
-            <div class="form-group">
-                    <input type="text" class="form-control" name="name" placeholder="姓名">
-                <button class="btn btn-success" style="margin-left:12px;">添加</button>
-            </div>
-        </form>
-        <table class="table table-hover">
-            <tr>
-                <th>KOL姓名</th>
-                <th>推广链接</th>
-                <th>浏览量</th>
-                <th>报名数</th>
-                <th>转化率</th>
-                <th>操作</th>
-            </tr>
-            <foreach name="kol" item="v">
-                <tr>
-                    <td>{$v.name}</td>
-                    <td>
-                        <a href="{$v.code}" target="_blank">点我访问</a>
-                        <input type="text" class="form-control" value="{$v.code}" style="width:200px;font-size:12px;margin-top:5px;">
-                    </td> 
-                    <td>{$v.visit}</td>   
-                    <td>{$v.pay}</td>   
-                    <td>{$v.transform}</td> 
-                    <td><a href="{:U('Admin/kol_delete', array('id'=>$v['id']))}">删除</a></td>  
-                </tr>
-            </foreach>
-        </table>
-    </div>
-</div>
+</form>
+<table class="table table-hover">
+    <tr>
+        <th>KOL姓名</th>
+        <th>推广链接</th>
+        <th>浏览量</th>
+        <th>报名数</th>
+        <th>转化率</th>
+        <th>操作</th>
+    </tr>
+    <foreach name="kol" item="v">
+        <tr>
+            <td>{$v.name}</td>
+            <td>
+                <a href="{$v.code}" target="_blank">点我访问</a>
+                <input type="text" class="form-control" value="{$v.code}" style="width:200px;font-size:12px;margin-top:5px;">
+            </td>
+            <td>{$v.visit}</td>
+            <td>{$v.pay}</td>
+            <td>{$v.transform}</td>
+            <td><a href="{:U('Admin/kol_delete', array('id'=>$v['id']))}">删除</a></td>
+        </tr>
+    </foreach>
+</table>
 <script>
-</script>

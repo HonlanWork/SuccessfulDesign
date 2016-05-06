@@ -1,118 +1,31 @@
 <style>
-#main {
-    padding: 30px 6%;
-    box-shadow: 2px 2px 3px rgba(20, 20, 20, 0.3);
-    border-bottom-right-radius: 5px;
-    border-bottom-left-radius: 5px;
-}
-
-#main ul.admin-nav {
-    list-style-type: none;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    padding-left: 0;
-    margin-bottom: 10px;
-}
-
-#main ul.admin-nav p {
-    margin-bottom: 0;
-    padding: 10px 20px;
-    border-bottom: 1px solid #ddd;
-}
-
-#main ul.admin-nav p:hover {
-    cursor: pointer;
-}
-
-#main ul.admin-nav li {
-    border-bottom: 1px solid #ddd;
-    font-size: 13px;
-    padding: 8px 20px;
-    padding-left: 30px;
-    background-color: #eee;
-}
-
-#main ul.admin-nav a {
-    text-decoration: none;
-    color: #bbb;
-}
-
-#main ul.admin-nav a:hover {
-    text-decoration: none;
-    color: #888;
-}
-
-#main ul.admin-nav a:last-child {
-    border-bottom: none;
-}
-
 #main table {
     font-size: 12px;
     margin-top: 20px;
 }
+
 #main input#filter {
     width: 180px;
     display: inline-block;
     margin-right: 20px;
 }
+
 #main input.en {
     font-size: 12px;
 }
 </style>
-<div class="row">
-    <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2">
-        <ul class="admin-nav">
-            <p>比赛管理</p>
-            <a href="{:U('Admin/contest')}">
-                <li>大赛信息</li>
-            </a>
-            <a href="{:U('Admin/contest_pay_confirm')}">
-                <li>审核支付</li>
-            </a>
-            <a href="{:U('Admin/submissions')}">
-                <li>作品管理</li>
-            </a>
-            <a href="{:U('Admin/judge_first')}">
-                <li>第一轮评审</li>
-            </a>
-            <a href="{:U('Admin/judge_second')}">
-                <li>第二轮评审</li>
-            </a>
-        </ul>
-        <ul class="admin-nav">
-            <p>用户管理</p>
-            <a href="{:U('Admin/users')}">
-                <li>所有用户</li>
-            </a>
-        </ul>
-        <ul class="admin-nav">
-            <p>网站管理</p>
-            <a href="{:U('Admin/translations')}">
-                <li>编辑翻译</li>
-            </a>
-        </ul>
-        <ul class="admin-nav">
-            <p>KOL管理</p>
-            <a href="{:U('Admin/kol')}">
-                <li>KOL统计</li>
-            </a>
-        </ul>
-    </div>
-    <div class="col-xs-12 col-sm-10 col-md-10 col-lg-10">
-        <h3 style="margin-top:10px;margin-bottom:20px;">编辑翻译</h3>
-        <p>在搜索框中输入要编辑翻译的中文内容，例如“产品”，点击放大镜，就会出现和“产品”对应的翻译内容，编辑英文一栏对应的文本，编辑完毕后点击“保存修改”，即可更新该条目对应的翻译。</p>
-        <div>
-            <input type="text" class="form-control" id="filter">
-            <button id="search" class="btn btn-default"><span class="fa fa-fw fa-search"></span></button>
-            <table class="table table-hover">
-                <tr>
-                    <th>中文</th>
-                    <th>英文</th>
-                    <th>操作</th>
-                </tr> 
-            </table>
-        </div>
-    </div>
+<h3 style="margin-top:10px;margin-bottom:20px;">编辑翻译</h3>
+<p>在搜索框中输入要编辑翻译的中文内容，例如“产品”，点击放大镜，就会出现和“产品”对应的翻译内容，编辑英文一栏对应的文本，编辑完毕后点击“保存修改”，即可更新该条目对应的翻译。</p>
+<div>
+    <input type="text" class="form-control" id="filter">
+    <button id="search" class="btn btn-default"><span class="fa fa-fw fa-search"></span></button>
+    <table class="table table-hover">
+        <tr>
+            <th>中文</th>
+            <th>英文</th>
+            <th>操作</th>
+        </tr>
+    </table>
 </div>
 <script>
 $(document).ready(function() {
@@ -123,27 +36,27 @@ $(document).ready(function() {
         }
 
         $.ajax({
-            url: "{:U('Admin/translations_search')}",
-            type: 'POST',
-            dataType: 'json',
-            data: {
-                keyword: keyword
-            },
-        })
-        .done(function(data) {
-            $('#main  tr.translation').remove();
-            for (var i = 0; i < data['translations'].length; i++) {
-                var $p = "<tr class='translation'><td>" + data['translations'][i].ch + "</td><td><input type='text' class='form-control' value='" + data['translations'][i].en + "'></td><td><button class='btn btn-default save' name='" + data['translations'][i].id + "'>保存修改</button></td></tr>";
-                $('#main table').append($p);
-            }
-            console.log("success");
-        })
-        .fail(function() {
-            console.log("error");
-        })
-        .always(function() {
-            console.log("complete");
-        }); 
+                url: "{:U('Admin/translations_search')}",
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                    keyword: keyword
+                },
+            })
+            .done(function(data) {
+                $('#main  tr.translation').remove();
+                for (var i = 0; i < data['translations'].length; i++) {
+                    var $p = "<tr class='translation'><td>" + data['translations'][i].ch + "</td><td><input type='text' class='form-control' value='" + data['translations'][i].en + "'></td><td><button class='btn btn-default save' name='" + data['translations'][i].id + "'>保存修改</button></td></tr>";
+                    $('#main table').append($p);
+                }
+                console.log("success");
+            })
+            .fail(function() {
+                console.log("error");
+            })
+            .always(function() {
+                console.log("complete");
+            });
     });
 
     $('#main').on('click', 'button.save', function(event) {
@@ -152,24 +65,24 @@ $(document).ready(function() {
         var id = $(this).attr('name');
         var en = $(this).parent().prev('td').children('input').val();
         $.ajax({
-            url: '{:U("Admin/translations_save")}',
-            type: 'POST',
-            dataType: 'json',
-            data: {
-                id: id,
-                en: en
-            },
-        })
-        .done(function(data) {
-            $button.addClass('disabled').html('已保存');
-            console.log("success");
-        })
-        .fail(function() {
-            console.log("error");
-        })
-        .always(function() {
-            console.log("complete");
-        });
-    });    
+                url: '{:U("Admin/translations_save")}',
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                    id: id,
+                    en: en
+                },
+            })
+            .done(function(data) {
+                $button.addClass('disabled').html('已保存');
+                console.log("success");
+            })
+            .fail(function() {
+                console.log("error");
+            })
+            .always(function() {
+                console.log("complete");
+            });
+    });
 });
 </script>
