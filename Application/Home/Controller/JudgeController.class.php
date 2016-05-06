@@ -12,19 +12,19 @@ class JudgeController extends Controller{
 		$current = intval(time());
 		$contest = M('contest')->where(array('id'=>C('CONTESTID')))->find();
 
-		if ($current < $contest['judge_first_from']) {
+		if ($current < intval($contest['judge_first_from'])) {
 			$this->first = -1;
 		}
-		elseif ($contest['judge_first_from'] <= $current && $current <= $contest['judge_first_to']) {
+		elseif (intval($contest['judge_first_from']) <= $current && $current <= intval($contest['judge_first_to'])) {
 			$this->first = 0;
 		}
 		else {
 			$this->first = 1;
 		}
-		if ($current < $contest['judge_second_from']) {
+		if ($current < intval($contest['judge_second_from'])) {
 			$this->second = -1;
 		}
-		if ($contest['judge_second_from'] <= $current && $current <= $contest['judge_second_to']) {
+		if (intval($contest['judge_second_from']) <= $current && $current <= intval($contest['judge_second_to'])) {
 			$this->second = 0;
 		}
 		else {
