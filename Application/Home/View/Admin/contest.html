@@ -45,6 +45,10 @@
 #main ul.admin-nav a:last-child {
     border-bottom: none;
 }
+#main p {
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
 </style>
 <div class="row">
     <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2">
@@ -86,8 +90,29 @@
         </ul>
     </div>
     <div class="col-xs-12 col-sm-10 col-md-10 col-lg-10">
-        <p>欢迎来到系统管理员后台!</p>
-        <p>点击左边相应选项进行操作 :)</p>
+        <form action="{:U('Admin/contest_edit')}" method="post" class="form">
+            <div class="form-group">
+                <p>大赛名称</p>
+                <input type="text" class="form-control" name="name" value="{$contest['name']}">
+                <p>年份</p>
+                <input type="text" class="form-control" name="year" value="{$contest['year']}">
+                <p>费用</p>
+                <input type="text" class="form-control" name="fee" value="{$contest['fee']}">
+                <p>早鸟优惠截止时间</p>
+                <input type="date" class="form-control" name="early_bird_time" value="{$contest['early_bird_time']}">
+                <p>早鸟优惠费用</p>
+                <input type="text" class="form-control" name="early_bird_fee" value="{$contest['early_bird_fee']}">
+                <p>第一轮评审开始时间</p>
+                <input type="date" class="form-control" name="judge_first_from" value="{$contest['judge_first_from']}">
+                <p>第一轮评审结束时间</p>
+                <input type="date" class="form-control" name="judge_first_to" value="{$contest['judge_first_to']}">
+                <p>第二轮评审开始时间</p>
+                <input type="date" class="form-control" name="judge_second_from" value="{$contest['judge_second_from']}">
+                <p>第二轮评审结束时间</p>
+                <input type="date" class="form-control" name="judge_second_to" value="{$contest['judge_second_to']}">
+            </div>
+            <button type="submit" class="btn btn-default">修改</button>
+        </form>
     </div>
 </div>
 <script>

@@ -12,6 +12,32 @@ class AdminController extends Controller{
 		$this->display();
 	}
 
+    public function contest(){
+        $contest = M('contest')->where(array('id'=>C('CONTESTID')))->find();
+        $contest['early_bird_time'] = date('Y-m-d', $contest['early_bird_time']);
+        $contest['judge_first_from'] = date('Y-m-d', $contest['judge_first_from']);
+        $contest['judge_first_to'] = date('Y-m-d', $contest['judge_first_to']);
+        $contest['judge_second_from'] = date('Y-m-d', $contest['judge_second_from']);
+        $contest['judge_second_to'] = date('Y-m-d', $contest['judge_second_to']);
+        $this->contest = $contest;
+        $this->display();
+    }
+
+    public function contest_edit(){
+        M('contest')->where(array('id'=>C('CONTESTID')))->save(array(
+            'name' => I('name'),
+            'year' => I('year'),
+            'fee' => I('fee'),
+            'early_bird_time' => I('early_bird_time'),
+            'early_bird_fee' => I('early_bird_fee'),
+            'judge_first_from' => I('judge_first_from'),
+            'judge_first_to' => I('judge_first_to'),
+            'judge_second_from' => I('judge_second_from'),
+            'judge_second_to' => I('judge_second_to'),
+            ));
+        $this->redirect('Admin/contest');
+    }
+
 	public function contest_pay_confirm(){
 		$this->submissions = M('submission')->where(array('contest_id'=>C('CONTESTID'), 'ispaied'=>0, 'pay_confirm'=>1))->select();
 		$this->display();
