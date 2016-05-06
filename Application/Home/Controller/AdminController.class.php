@@ -276,5 +276,27 @@ class AdminController extends Controller{
         M('submission')->where(array('kol'=>$kol['code']))->save(array('kol'=>''));
         $this->redirect('Admin/kol');
     }
+
+    public function invitation() {
+        $this->invitations = M('invitation')->where(array('contest_id'=>C('CONTESTID')))->select();
+        layout('admin');
+        $this->display();
+    }
+
+    public function invitation_add() {
+        M('invitation')->data(array(
+            'contest_id' => C('CONTESTID'),
+            'code' => md5(genRandStr()),
+            'count' => I('count'),
+            'remain' => I('count'),
+            'name' => I('name'),
+            ));
+        $this->redirect('Admin/invitation');
+    }
+
+    public function invitation_delete(){
+        M('invitation')->where(array('contest_id'=>C('CONTESTID'), 'id'=>I('id')))->delete();
+        $this->redirect('Admin/invitation');
+    }
 }
 ?>
