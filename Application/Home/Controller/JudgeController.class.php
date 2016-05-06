@@ -62,6 +62,61 @@ class JudgeController extends Controller{
 	}
 
 	public function first_detail() {
+		// offset
+		$ids = M('judge_first')->where(array('contest_id'=>C('CONTESTID'),'user_id'=>$_SESSION['uid']))->select();
+		$total = count($ids);
 
+		$count = 0;
+		for ($i = 0; $i < $total; $i++) { 
+			if ($ids[$i]['yes_or_no'] != '') {
+				$count += 1;
+			}
+		}
+		$this->left = intval(100 * $count / floatval($total));
+		$this->right = 100 - $this->left;
+
+		$submission = M('submission')->where(array('contest_id'=>C('CONTESTID'), 'id'=>$ids[intval(I('offset'))]['submission_id']))->find();
+		// $submission = M('submission')->where(array('contest_id'=>C('CONTESTID'), 'id'=>230))->find();
+
+		$images = array();
+		for ($i = 1; $i <= 6; $i++) { 
+			if ($submission['image'.$i] != '') {
+				array_push($images, $submission['image'.$i]);
+			}
+		}
+		$this->images = $images;
+
+		$this->total = $total;
+		$this->submission = $submission;
+		$this->offset = I('offset');
+		$this->display();
+	}
+
+	public function first_in() {
+		// offset id
+		$offset = I('offset');
+		M('judge_first')-where(array('contest_id'=>C('CONTESTID'),'user_id'=>$_SESSION['uid'],'submission_id'=>I('id')))->save(array('yes_or_no'=>'yes','timestamp'=>time()));
+		$total = M('judge_first')->where(array('contest_id'=>C('CONTESTID'),'user_id'=>$_SESSION['uid']))->count();
+		$offset += 1;
+		if ($offset == $total) {
+			$this->redirect('Judge/first');
+		}
+		else {
+			$this->redirect('Judge/first_detail', array('offset'=>$offset));
+		}
+	}
+
+	public function first_out() {
+		// offset id
+		$offset = I('offset');
+		M('judge_first')-where(array('contest_id'=>C('CONTESTID'),'user_id'=>$_SESSION['uid'],'submission_id'=>I('id')))->save(array('yes_or_no'=>'no','timestamp'=>time()));
+		$total = M('judge_first')->where(array('contest_id'=>C('CONTESTID'),'user_id'=>$_SESSION['uid']))->count();
+		$offset += 1;
+		if ($offset == $total) {
+			$this->redirect('Judge/first');
+		}
+		else {
+			$this->redirect('Judge/first_detail', array('offset'=>$offset));
+		}
 	}
 }
