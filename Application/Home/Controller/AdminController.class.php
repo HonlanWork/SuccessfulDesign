@@ -28,12 +28,12 @@ class AdminController extends Controller{
             'name' => I('name'),
             'year' => I('year'),
             'fee' => I('fee'),
-            'early_bird_time' => I('early_bird_time'),
+            'early_bird_time' => strtotime(I('early_bird_time')),
             'early_bird_fee' => I('early_bird_fee'),
-            'judge_first_from' => I('judge_first_from'),
-            'judge_first_to' => I('judge_first_to'),
-            'judge_second_from' => I('judge_second_from'),
-            'judge_second_to' => I('judge_second_to'),
+            'judge_first_from' => strtotime(I('judge_first_from')),
+            'judge_first_to' => strtotime(I('judge_first_to')),
+            'judge_second_from' => strtotime(I('judge_second_from')),
+            'judge_second_to' => strtotime(I('judge_second_to')),
             ));
         $this->redirect('Admin/contest');
     }
