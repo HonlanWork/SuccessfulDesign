@@ -290,6 +290,7 @@ class AdminController extends Controller{
             'count' => I('count'),
             'remain' => I('count'),
             'name' => I('name'),
+            'submissions' => ''
             ))->add();
         $this->redirect('Admin/invitation');
     }
