@@ -174,6 +174,21 @@ class ContestController extends CommonController {
 		echo json_encode(array('result'=>'ok'));
 	}
 
+	public function pay_by_code() {
+		$invitation = M('invitation')->where(array('contest_id'=>C('CONTESTID'), 'code'=>I('code')))->find();
+		if (!$invitation) {
+			echo json_encode(array('result'=>'error','error'=>translate_return('邀请码无效')));
+		}
+		else if($invitation['remain'] == 0){
+			echo json_encode(array('result'=>'error','error'=>translate_return('邀请码次数已用尽')));
+		}
+		else {
+			M('invitation')->where(array('contest_id'=>C('CONTESTID'), 'code'=>I('code')))->setDec('remain');
+			M('submission')->where(array('contest_id'=>C('CONTESTID'), 'id'=>I('submission_id'), 'user_id'=>$_SESSION['uid']))->save(array('ispaied'=>1,'pay_confirm'=>0));
+			echo json_encode(array('result'=>'ok'));
+		}
+	}
+
 	public function info() {
 		$this->submission = M('submission')->where(array('id'=>I('id'), 'user_id'=>$_SESSION['uid']))->find();
 		if ($this->submission['ispaied'] == 0) {

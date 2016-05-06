@@ -286,11 +286,11 @@ class AdminController extends Controller{
     public function invitation_add() {
         M('invitation')->data(array(
             'contest_id' => C('CONTESTID'),
-            'code' => md5(genRandStr()),
+            'code' => substr(md5(genRandStr()), 0, 12),
             'count' => I('count'),
             'remain' => I('count'),
             'name' => I('name'),
-            ));
+            ))->add();
         $this->redirect('Admin/invitation');
     }
 

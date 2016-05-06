@@ -216,6 +216,16 @@
                                 <?php translate('人民币：102290021133')?>
                             </p>
                         </div>
+                        <div id="invitation">
+                            <p>
+                                <?php translate('邀请码支付')?>
+                            </p>
+                            <div>
+                                <input type="text" placeholder="<?php translate('邀请码')?>" class="form-control" style="width:200px;display:inline-block;">
+                                <button class="btn btn-default" style="color:#888;display:inline-block;position:relative;top:-2px;margin-left:6px;"><?php translate('使用')?></button>
+                            </div>
+                            <p id="error" style="display:none;color:#EF5045;font-size:12px;margin-top:10px;margin-bottom:0;"></p>
+                        </div>
                     </div>
                 </div>
                 <div style="text-align:center;" id="confirm-payment">
@@ -340,7 +350,34 @@ $(document).ready(function() {
             .always(function() {
                 console.log("complete");
             });
+    });
 
+    $('#main #invitation button').click(function(event) {
+        event.preventDefault();
+        $.ajax({
+            url: "{:U('Contest/pay_by_code')}",
+            type: 'POST',
+            dataType: 'json',
+            data: {
+                code: $('#main #invitation input').val(),
+                submission_id: {$submission.id}
+            },
+        })
+        .done(function(data) {
+            if (data['result'] == 'ok') {
+                $('#main #invitation #error').hide();
+                window.location.href = "{:U('Contest/info',array('id'=>$submission['id']))}";
+            }
+            else if (data['result'] == 'error') {
+                $('#main #invitation #error').text(data['error']).show();
+            }
+        })
+        .fail(function() {
+            console.log("error");
+        })
+        .always(function() {
+            console.log("complete");
+        });
     });
 });
 </script>
