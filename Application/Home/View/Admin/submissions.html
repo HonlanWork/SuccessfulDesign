@@ -11,7 +11,10 @@
     right: 0;
 }
 </style>
-<h3 style="margin-top:10px;margin-bottom:20px;">作品管理<a href="{:U('Admin/export_excel')}" style="margin-left:20px;margin-right:10px;font-size:12px;" class="btn btn-success">导出excel</a></h3>
+<h3 style="margin-top:10px;margin-bottom:20px;">
+    作品管理
+    <a href="{:U('Admin/export_excel')}" style="margin-left:20px;margin-right:10px;font-size:12px;" class="btn btn-success">导出excel</a>
+</h3>
 <div style="position:relative;">
     <input type="text" class="form-control">
     <ul class="nav nav-tabs" role="tablist">
@@ -21,6 +24,7 @@
     </ul>
     <div class="tab-content">
         <div role="tabpanel" class="tab-pane fade in active" id="notpaid">
+            <p style="margin-top:15px;">{$count1} 件未支付作品</p>
             <table class="table table-hover">
                 <tr>
                     <th>作品中文名</th>
@@ -47,6 +51,7 @@
             </table>
         </div>
         <div role="tabpanel" class="tab-pane fade" id="paid_but_notsubmitted">
+            <p style="margin-top:15px;">{$count2} 件已支付未提交作品</p>
             <table class="table table-hover">
                 <tr>
                     <th>作品中文名</th>
@@ -73,6 +78,7 @@
             </table>
         </div>
         <div role="tabpanel" class="tab-pane fade" id="submitted">
+            <p style="margin-top:15px;">{$count3} 件已提交作品</p>
             <table class="table table-hover">
                 <tr>
                     <th>作品中文名</th>

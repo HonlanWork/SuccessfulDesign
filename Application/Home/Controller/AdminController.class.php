@@ -78,8 +78,11 @@ class AdminController extends Controller{
     // 作品管理 
 	public function submissions() {
 		$this->notpaid = M('submission')->where(array('contest_id'=>C('CONTESTID'),'ispaied'=>0))->select();
+        $this->count1 = count($this->notpaid);
 		$this->paid_but_notsubmitted = M('submission')->where(array('contest_id'=>C('CONTESTID'),'ispaied'=>1,'issubmitted'=>0))->select();
+        $this->count2 = count($this->paid_but_notsubmitted);
 		$this->submitted = M('submission')->where(array('contest_id'=>C('CONTESTID'),'ispaied'=>1,'issubmitted'=>1))->select();
+        $this->count3 = count($this->submitted);
         layout('admin');
         $this->display();
 	}
