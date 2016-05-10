@@ -297,7 +297,6 @@ class AdminController extends Controller{
     public function judge_second() {
         $assignments = M('judge_second')->where(array('contest_id'=>C('CONTESTID')))->select();
         $judges = array();
-
         for ($i = 0; $i < count($assignments); $i++) { 
             if (!array_key_exists($assignments[$i]['user_id'], $judges)) {
                 $judges[$assignments[$i]['user_id']] = [0, 0];
@@ -308,12 +307,43 @@ class AdminController extends Controller{
             }
         }
         $tmp = array();
-
         foreach ($judges as $key => $value) {
             $t = M('user')->where(array('id'=>$key))->find();
             $tmp[] = array('email'=>$t['email'], 'all'=>$value[0], 'finished'=>$value[1]);
         }
         $this->judges = $tmp;
+
+        $data = array();
+        for ($i = 0; $i < count($assignments); $i++) { 
+            if (!array_key_exists($assignments[$i]['submission_id'], $data)) {
+                $data[$assignments[$i]['submission_id']] = [0, 0, 0];
+            }
+            $data[$assignments[$i]['submission_id']][0] += 1;
+            if ($assignments[$i]['is_judged'] == 1) {
+                $data[$assignments[$i]['submission_id']][1] += 1;
+                $data[$assignments[$i]['submission_id']][2] += $assignments[$i]['strategy'] + $assignments[$i]['process'] + $assignments[$i]['result'];
+            }
+        }
+        $stat = array('-1' => 0, '0~5' => 0, '5~10' => 0, '10~15' => 0);
+        foreach ($data as $key => $value) {
+            if ($value[0] != $value[1]) {
+                $stat['-1'] += 1;
+            }
+            else {
+                $tmp = floatval($value[2]) / $value[1];
+                if ($tmp <= 5) {
+                    $stat['0~5'] += 1;
+                }
+                elseif ($tmp <= 10) {
+                    $stat['5~10'] += 1;
+                }
+                else {
+                    $stat['10~15'] += 1;
+                }
+            }
+        }
+        $this->stat = $stat;
+
         layout('admin');
         $this->display();
     }
