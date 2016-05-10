@@ -13,6 +13,7 @@ class AdminController extends Controller{
 		$this->display();
 	}
 
+    // 大赛信息
     public function contest(){
         $contest = M('contest')->where(array('id'=>C('CONTESTID')))->find();
         $contest['early_bird_time'] = date('Y-m-d', $contest['early_bird_time']);
@@ -40,6 +41,7 @@ class AdminController extends Controller{
         $this->redirect('Admin/contest');
     }
 
+    // 审核支付
 	public function contest_pay_confirm(){
 		$this->submissions = M('submission')->where(array('contest_id'=>C('CONTESTID'), 'ispaied'=>0, 'pay_confirm'=>1))->select();
         layout('admin');
@@ -73,6 +75,7 @@ class AdminController extends Controller{
 		$this->redirect('Admin/contest_pay_confirm');
 	}
 
+    // 作品管理 
 	public function submissions() {
 		$this->notpaid = M('submission')->where(array('contest_id'=>C('CONTESTID'),'ispaied'=>0))->select();
 		$this->paid_but_notsubmitted = M('submission')->where(array('contest_id'=>C('CONTESTID'),'ispaied'=>1,'issubmitted'=>0))->select();
@@ -101,34 +104,7 @@ class AdminController extends Controller{
 		$this->redirect('Admin/submissions');
 	}
 
-	public function users() {
-		$this->users = M('user')->order('role desc')->select();
-        layout('admin');
-		$this->display();
-	}
-
-	public function reset_password() {
-		$user = M('user')->where(array('id'=>I('id')))->find();
-		M('user')->where(array('id'=>I('id')))->save(array('password'=>sha1($user['salt'].'123456')));
-		$this->redirect('Admin/users');
-	}
-
-	public function translations() {
-        layout('admin');
-		$this->display();
-	}
-
-	public function translations_search() {
-		$translations = M('translation')->where(array('ch'=>I('keyword')))->select();
-        echo json_encode(array('translations'=>$translations));
-	}
-
-	public function translations_save() {
-		M('translation')->where(array('id'=>I('id')))->save(array('en'=>I('en')));
-		echo json_encode(array('en'=>I('en')));
-	}
-
-	public function export_excel(){
+    public function export_excel(){
         $xlsName = "submission";
         $xlsCell = array(
             array('id','序号'),
@@ -190,16 +166,46 @@ class AdminController extends Controller{
         exit; 
     }
 
-    public function set_as_common(){
-		M('user')->where(array('id'=>I('id')))->save(array('role'=>0));
+    // 用户管理
+	public function users() {
+		$this->users = M('user')->order('role desc')->select();
+        layout('admin');
+		$this->display();
+	}
+
+	public function reset_password() {
+		$user = M('user')->where(array('id'=>I('id')))->find();
+		M('user')->where(array('id'=>I('id')))->save(array('password'=>sha1($user['salt'].'123456')));
 		$this->redirect('Admin/users');
+	}
+
+    public function set_as_common(){
+        M('user')->where(array('id'=>I('id')))->save(array('role'=>0));
+        $this->redirect('Admin/users');
     }
 
     public function set_as_judge(){
-		M('user')->where(array('id'=>I('id')))->save(array('role'=>1));
-		$this->redirect('Admin/users');
+        M('user')->where(array('id'=>I('id')))->save(array('role'=>1));
+        $this->redirect('Admin/users');
     }
 
+    // 编辑翻译
+	public function translations() {
+        layout('admin');
+		$this->display();
+	}
+
+	public function translations_search() {
+		$translations = M('translation')->where(array('ch'=>I('keyword')))->select();
+        echo json_encode(array('translations'=>$translations));
+	}
+
+	public function translations_save() {
+		M('translation')->where(array('id'=>I('id')))->save(array('en'=>I('en')));
+		echo json_encode(array('en'=>I('en')));
+	}
+
+    // 第一轮审核
     public function judge_first(){
     	$assignments = M('judge_first')->where(array('contest_id'=>C('CONTESTID')))->select();
     	$judges = array();
@@ -219,11 +225,50 @@ class AdminController extends Controller{
     		$tmp[] = array('email'=>$t['email'], 'all'=>$value[0], 'finished'=>$value[1]);
     	}
     	$this->judges = $tmp;
+
+        $data = array();
+        for ($i = 0; $i < count($assignments); $i++) { 
+            if (!array_key_exists($assignments[$i]['submission_id'], $data)) {
+                // 已评审数量，yes数量
+                $data[$assignments[$i]['submission_id']] = [0, 0];
+            }
+            if ($assignments[$i]['yes_or_no'] != '') {
+                $data[$assignments[$i]['submission_id']][0] += 1;
+                if ($assignments[$i]['yes_or_no'] == 'yes') {
+                    $data[$assignments[$i]['submission_id']][1] += 1;
+                }
+            }
+        }
+
+        $stat = array('-1' => 0, '0' => 0, '1' => 0, '2' => 0, '3' => 0);
+        foreach ($data as $key => $value) {
+            if ($value[0] != 3) {
+                $stat['-1'] += 1;
+            }
+            else {
+                if ($value[1] == 0) {
+                    $stat['0'] += 1;
+                }
+                if ($value[1] == 1) {
+                    $stat['1'] += 1;
+                }
+                if ($value[1] == 2) {
+                    $stat['2'] += 1;
+                }
+                if ($value[1] == 3) {
+                    $stat['3'] += 1;
+                }
+            }
+        }
+        $this->stat = $stat;
+
         layout('admin');
     	$this->display();
     }
 
     public function judge_first_assign(){
+        M('judge_first')->where(array('contest_id'=>C('CONTESTID')))->delete();
+
     	$submissions = M('submission')->where(array('contest_id'=>C('CONTESTID'),'ispaied'=>1,'issubmitted'=>1))->select();
     	$users = M('user')->where(array('role'=>1))->select();
 
@@ -245,6 +290,73 @@ class AdminController extends Controller{
         $this->redirect('Admin/judge_first');
     }
 
+    // 第二轮评审
+    public function judge_second() {
+        $assignments = M('judge_second')->where(array('contest_id'=>C('CONTESTID')))->select();
+        $judges = array();
+
+        for ($i = 0; $i < count($assignments); $i++) { 
+            if (!array_key_exists($assignments[$i]['user_id'], $judges)) {
+                $judges[$assignments[$i]['user_id']] = [0, 0];
+            }
+            $judges[$assignments[$i]['user_id']][0] += 1;
+            if ($assignments[$i]['is_judged'] == 1) {
+                $judges[$assignments[$i]['user_id']][1] += 1;
+            }
+        }
+        $tmp = array();
+
+        foreach ($judges as $key => $value) {
+            $t = M('user')->where(array('id'=>$key))->find();
+            $tmp[] = array('email'=>$t['email'], 'all'=>$value[0], 'finished'=>$value[1]);
+        }
+        $this->judges = $tmp;
+        layout('admin');
+        $this->display();
+    }
+
+    public function judge_second_assign(){
+        M('judge_second')->where(array('contest_id'=>C('CONTESTID')))->delete();
+
+        M('submission')->where(array('contest_id'=>C('CONTESTID')))->save(array('judge_first'=>''));
+        $assignments = M('judge_first')->where(array('contest_id'=>C('CONTESTID')))->select();
+        $data = array();
+        for ($i = 0; $i < count($assignments); $i++) { 
+            if (!array_key_exists($assignments[$i]['submission_id'], $data)) {
+                // 已评审数量，yes数量
+                $data[$assignments[$i]['submission_id']] = 0;
+            }
+            if ($assignments[$i]['yes_or_no'] == 'yes') {
+                $data[$assignments[$i]['submission_id']] += 1;
+            }
+        }
+        foreach ($data as $key => $value) {
+            if ($value >= 2) {
+                M('submission')->where(array('contest_id'=>C('CONTESTID'), 'id'=>$key))->save(array('judge_first'=>'yes'));
+            }
+            else {
+                M('submission')->where(array('contest_id'=>C('CONTESTID'), 'id'=>$key))->save(array('judge_first'=>'no'));
+            }
+        }
+
+        $submissions = M('submission')->where(array('contest_id'=>C('CONTESTID'), 'judge_first'=>'yes'))->select();
+
+        $judges = M('user')->where(array('role'=>1))->select();
+
+        for ($i = 0; $i < count($submissions); $i++) { 
+            for ($j = 0; $j < count($judges); $j++) { 
+                M('judge_second')->add(array('contest_id'=>C('CONTESTID'), 'submission_id'=>$submissions[$i]['id'], 'user_id'=>$judges[$j]['id'], 'strategy'=>0, 'process'=>0, 'result'=>0, 'comment'=>'', 'timestamp'=>'', 'is_judged'=>0));
+            }
+        }
+        $this->redirect('Admin/judge_second');
+    }
+
+    public function judge_second_delete(){
+        M('judge_second')->where(array('contest_id'=>C('CONTESTID')))->delete();
+        $this->redirect('Admin/judge_second');
+    }
+
+    // kol管理
     public function kol(){
         $kol = M('kol')->where(array('contest_id'=>C('CONTESTID')))->select();
         for ($i = 0; $i < count($kol); $i++) { 
@@ -277,6 +389,7 @@ class AdminController extends Controller{
         $this->redirect('Admin/kol');
     }
 
+    // 邀请码管理
     public function invitation() {
         $this->invitations = M('invitation')->where(array('contest_id'=>C('CONTESTID')))->select();
         layout('admin');

@@ -1,0 +1,449 @@
+<style>
+#main {
+    padding: 20px 6%;
+    margin-bottom: 30px;
+    box-shadow: 2px 2px 3px rgba(20, 20, 20, 0.3);
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+#main .key {
+    width: 112px;
+    color: #666;
+    position: absolute;
+    left: 0;
+}
+
+#main .value {
+    margin-left: 132px;
+    min-height: 20px;
+    color: #888;
+}
+
+#section1 #process {
+    height: 50px;
+    position: relative;
+}
+
+#main #section1 #process #left,
+#main #section1 #process #right {
+    float: left;
+    height: 50px;
+}
+
+#main a#back {
+    color: #999;
+    text-decoration: none;
+}
+
+#main a#back:hover {
+    text-decoration: none;
+    color: #666;
+}
+
+#main #detail {
+    max-height: 400px;
+    overflow-y: scroll;
+}
+
+#main #detail .row {
+    padding-bottom: 12px;
+    border-top: 1px solid #ddd;
+}
+
+#main #detail .row p:first-child {
+    color: #666;
+    margin-top: 12px;
+}
+
+#main #detail .row p:last-child {
+    font-size: 13px;
+    margin-bottom: 0;
+    color: #888;
+}
+#main #section3 #strategy:hover, #main #section3 #process, #main #section3 #result:hover {
+    cursor: pointer;
+}
+#main #section3 span.fa {
+    padding: 5px 0;
+    font-size: 16px;
+    width: 16px;
+}
+#main #section3 span.fa:hover {
+    cursor: pointer;
+}
+#main #section3 span.fa.inactive {
+    color: #bbb;
+}
+#main #section3 span.fa.active {
+    color: #febf3c;
+}
+#main #section3 span.fa.unhover {
+    color: #bbb !important;
+}
+#main #section3 span.fa.hover {
+    color: #febf3c !important;
+}
+#main #section3 button {
+    color: white;
+    background-color: #ff7c34;
+    border: none;
+    padding: 10px 30px;
+    border-radius: 5px;
+    font-size: 14px;
+    box-shadow: 2px 2px 3px rgba(20, 20, 20, 0.4);
+    text-decoration: none;
+}
+</style>
+<div id="section1">
+    <div>
+        <a href="{:U('Judge/second')}" id="back">
+            <span class="fa fa-fw fa-chevron-circle-left" style="font-size:20px;position:relative;top:2px;"></span> 返回
+        </a>
+        <h4 style="margin-top:0;text-align:center;font-size:20px;">第二轮评审</h4>
+    </div>
+    <p>评分进度</p>
+    <div id="process">
+        <div style="position:absolute;right:20px;bottom:4px;font-size:12px;color:#fff;"><span style="font-size:30px;margin-right:8px;font-style:italic;">{$left}<span style="margin-left:2px;">%</span></span>已完成</div>
+        <div id="left" style="background-color:#01e381;width:{$left}%;"></div>
+        <div id="right" style="background-color:#b3b4b6;width:{$right}%;"></div>
+    </div>
+</div>
+<div id="section2">
+    <h3 style="font-size:20px;color:#444;margin-bottom:20px;">{$submission.titlec}
+        <small style="margin-left:8px;font-size:15px;">{$submission.titlee}<span style="margin-left:10px;font-size:14px;font-style:italic;">{$submission.category|translate=###}</span></small>
+    </h3>
+    <div class="panel panel-default" id="detail">
+        <div class="panel-body" style="padding-bottom:5px;">
+            <div style="position:relative;">
+                <p class="key">
+                    <?php translate('发布日期')?>
+                </p>
+                <p class="value">{$submission.addts}</p>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                    <div style="position:relative;">
+                        <p>
+                            <?php translate('简述（英文）')?>
+                        </p>
+                        <p>{$submission.introductione}</p>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                    <div style="position:relative;">
+                        <p>
+                            <?php translate('简述（中文）')?>
+                        </p>
+                        <p>{$submission.introductionc}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                    <div style="position:relative;">
+                        <p>
+                            <?php translate('项目需求（英文）')?>
+                        </p>
+                        <p>{$submission.demande}</p>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                    <div style="position:relative;">
+                        <p>
+                            <?php translate('项目需求（中文）')?>
+                        </p>
+                        <p>{$submission.demandc}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                    <div style="position:relative;">
+                        <p>
+                            <?php translate('面临挑战（英文）')?>
+                        </p>
+                        <p>{$submission.challengee}</p>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                    <div style="position:relative;">
+                        <p>
+                            <?php translate('面临挑战（中文）')?>
+                        </p>
+                        <p>{$submission.challengec}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                    <div style="position:relative;">
+                        <p>
+                            <?php translate('预算评估（英文）')?>
+                        </p>
+                        <p>{$submission.coste}</p>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                    <div style="position:relative;">
+                        <p>
+                            <?php translate('预算评估（中文）')?>
+                        </p>
+                        <p>{$submission.costc}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                    <div style="position:relative;">
+                        <p>
+                            <?php translate('设计解决方案（英文）')?>
+                        </p>
+                        <p>{$submission.solutione}</p>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                    <div style="position:relative;">
+                        <p>
+                            <?php translate('设计解决方案（中文）')?>
+                        </p>
+                        <p>{$submission.solutionc}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                    <div style="position:relative;">
+                        <p>
+                            <?php translate('项目成效总结（英文）')?>
+                        </p>
+                        <p>{$submission.conclusione}</p>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                    <div style="position:relative;">
+                        <p>
+                            <?php translate('项目成效总结（中文）')?>
+                        </p>
+                        <p>{$submission.conclusione}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="attachments">
+        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" style="border-radius:3px;box-shadow:1px 1px 3px rgba(20,20,20,0.4);margin-bottom:12px;max-width:500px;">
+            <ol class="carousel-indicators" style="bottom:0;">
+                <?php for ($i = 0; $i < count($images); $i++) { if ($i == 0) { ?>
+                <li data-target="#carousel-example-generic" data-slide-to="<?php echo $i; ?>" class="active"></li>
+                <?php } else { ?>
+                <li data-target="#carousel-example-generic" data-slide-to="<?php echo $i; ?>"></li>
+                <?php }} ?>
+            </ol>
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner" role="listbox" style="border-radius:3px;">
+                <?php for ($i = 0; $i < count($images); $i++) { ?>
+                <div class="item<?php if($i == 0) echo " active"; ?>">
+                    <img src="__PUBLIC__<?php echo $images[$i]?>" style="width:100%;border-radius:3px;">
+                </div>
+                <?php } ?>
+            </div>
+            <!-- Controls -->
+            <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev" style="border-top-left-radius:3px;border-bottom-left-radius:3px;">
+                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next" style="border-top-right-radius:3px;border-bottom-right-radius:3px;">
+                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+        <if condition="$submission['video'] neq ''">
+            <video controls="controls" loop="loop" preload="auto" style="width:100%;max-width:500px;height:auto;border-radius:3px;margin-top:10px;">
+                <source src="__PUBLIC__{$submission['video']}" type="video/mp4" style="border-radius:3px;">
+            </video>
+        </if>
+        <if condition="$submission['file'] neq ''">
+            <p style="margin-bottom:0;margin-top:12px;">
+                <?php translate('补充文件')?>
+                <a href="__PUBLIC__{$submission['file']}" style="margin-left:6px;">
+                    <?php echo substr($submission['file'], strrpos($submission['file'], '/') + 1);?>
+                </a>
+            </p>
+        </if>
+    </div>
+</div>
+<div id="section3">
+    <div style="text-align:center;margin-top:20px;margin-bottom:10px;">
+        <div id="strategy">
+            <span style="margin-right:12px;">策略</span>
+            <if condition="$submission['is_judged'] eq 1 and $submission['strategy'] egt 1">
+                <span class="fa fa-fw fa-star active" name='1'></span>
+                <else/>
+                <span class="fa fa-fw fa-star inactive" name='1'></span>
+            </if>
+            <if condition="$submission['is_judged'] eq 1 and $submission['strategy'] egt 2">
+                <span class="fa fa-fw fa-star active" name='2'></span>
+                <else/>
+                <span class="fa fa-fw fa-star inactive" name='2'></span>
+            </if>
+            <if condition="$submission['is_judged'] eq 1 and $submission['strategy'] egt 3">
+                <span class="fa fa-fw fa-star active" name='3'></span>
+                <else/>
+                <span class="fa fa-fw fa-star inactive" name='3'></span>
+            </if>
+            <if condition="$submission['is_judged'] eq 1 and $submission['strategy'] egt 4">
+                <span class="fa fa-fw fa-star active" name='4'></span>
+                <else/>
+                <span class="fa fa-fw fa-star inactive" name='4'></span>
+            </if>
+            <if condition="$submission['is_judged'] eq 1 and $submission['strategy'] egt 5">
+                <span class="fa fa-fw fa-star active" name='5'></span>
+                <else/>
+                <span class="fa fa-fw fa-star inactive" name='5'></span>
+            </if>
+            <span style="margin-left:6px;" class="subscore">
+                <if condition="$submission['is_judged'] eq 1">
+                    {$submission.strategy}
+                    <else/>
+                    &nbsp;&nbsp;
+                </if>
+            </span>
+        </div>
+        <div id="process">
+            <span style="margin-right:12px;">流程</span>
+            <if condition="$submission['is_judged'] eq 1 and $submission['process'] egt 1">
+                <span class="fa fa-fw fa-star active" name='1'></span>
+                <else/>
+                <span class="fa fa-fw fa-star inactive" name='1'></span>
+            </if>
+            <if condition="$submission['is_judged'] eq 1 and $submission['process'] egt 2">
+                <span class="fa fa-fw fa-star active" name='2'></span>
+                <else/>
+                <span class="fa fa-fw fa-star inactive" name='2'></span>
+            </if>
+            <if condition="$submission['is_judged'] eq 1 and $submission['process'] egt 3">
+                <span class="fa fa-fw fa-star active" name='3'></span>
+                <else/>
+                <span class="fa fa-fw fa-star inactive" name='3'></span>
+            </if>
+            <if condition="$submission['is_judged'] eq 1 and $submission['process'] egt 4">
+                <span class="fa fa-fw fa-star active" name='4'></span>
+                <else/>
+                <span class="fa fa-fw fa-star inactive" name='4'></span>
+            </if>
+            <if condition="$submission['is_judged'] eq 1 and $submission['process'] egt 5">
+                <span class="fa fa-fw fa-star active" name='5'></span>
+                <else/>
+                <span class="fa fa-fw fa-star inactive" name='5'></span>
+            </if>
+            <span style="margin-left:6px;" class="subscore">
+                <if condition="$submission['is_judged'] eq 1">
+                    {$submission.process}
+                    <else/>
+                    &nbsp;&nbsp;
+                </if>
+            </span>
+        </div>
+        <div id="result">
+            <span style="margin-right:12px;">成效</span>
+            <if condition="$submission['is_judged'] eq 1 and $submission['result'] egt 1">
+                <span class="fa fa-fw fa-star active" name='1'></span>
+                <else/>
+                <span class="fa fa-fw fa-star inactive" name='1'></span>
+            </if>
+            <if condition="$submission['is_judged'] eq 1 and $submission['result'] egt 2">
+                <span class="fa fa-fw fa-star active" name='2'></span>
+                <else/>
+                <span class="fa fa-fw fa-star inactive" name='2'></span>
+            </if>
+            <if condition="$submission['is_judged'] eq 1 and $submission['result'] egt 3">
+                <span class="fa fa-fw fa-star active" name='3'></span>
+                <else/>
+                <span class="fa fa-fw fa-star inactive" name='3'></span>
+            </if>
+            <if condition="$submission['is_judged'] eq 1 and $submission['result'] egt 4">
+                <span class="fa fa-fw fa-star active" name='4'></span>
+                <else/>
+                <span class="fa fa-fw fa-star inactive" name='4'></span>
+            </if>
+            <if condition="$submission['is_judged'] eq 1 and $submission['result'] egt 5">
+                <span class="fa fa-fw fa-star active" name='5'></span>
+                <else/>
+                <span class="fa fa-fw fa-star inactive" name='5'></span>
+            </if>
+            <span style="margin-left:6px;" class="subscore">
+                <if condition="$submission['is_judged'] eq 1">
+                    {$submission.result}
+                    <else/>
+                    &nbsp;&nbsp;
+                </if>
+            </span>
+        </div>
+    </div>
+    <form action="{:U('second_submit')}" type="post">
+        <p style="font-size:12px;margin-bottom:20px;">总分：<span id="score">
+            <if condition="$submission['is_judged'] eq 1">
+                <?php echo $submission['strategy'] + $submission['process'] + $submission['result']; ?>
+            </if>
+        </span></p>
+        <p style="font-size:12px;">评价：</p>
+        <textarea name="comment" cols="30" rows="5" class="form-control" style="resize:none;"></textarea>
+        <input type="text" name="strategy" style="display:none;">
+        <input type="text" name="process" style="display:none;">
+        <input type="text" name="result" style="display:none;">
+        <input type="text" name="id" value="{$submission['id']}" style="display:none;">
+        <input type="text" name="offset" value="{$offset}" style="display:none;">
+        <div style="text-align:center;margin-top:20px;">
+            <button type="submit" class="btn <?php if($submission['is_judged'] == 0) echo 'disabled';?>">提交</button>
+        </div>
+    </form>
+</div>
+<script>
+$(document).ready(function() {
+    $('#carousel-example-generic').carousel('pause');
+
+    $('#main #section3 span.fa').hover(function() {
+        var current = $(this).attr('name');
+        $(this).addClass('hover');
+        $(this).siblings('span.fa').each(function(index, el) {
+            if ($(this).attr('name') <= current) {
+                $(this).addClass('hover');
+            }
+            else {
+                $(this).addClass('unhover');
+            }
+        });
+    }, function() {
+        $(this).removeClass('hover');
+        $(this).siblings('span.fa').removeClass('hover').removeClass('unhover');
+    });
+
+    $('#main #section3 span.fa').click(function(event) {
+        var current = $(this).attr('name');
+        $(this).removeClass('inactive').addClass('active');
+        $(this).siblings('span.subscore').text(current);
+        var strategy = parseInt($('#strategy span.subscore').text());
+        var process = parseInt($('#process span.subscore').text());
+        var result = parseInt($('#result span.subscore').text());
+        if (!isNaN(strategy) && !isNaN(process) && !isNaN(result)) {
+            $('#section3 #score').text(strategy + process + result);
+            $('input[name="strategy"]').val(strategy);
+            $('input[name="process"]').val(process);
+            $('input[name="result"]').val(result);
+            $('#main #section3 button').removeClass('disabled');
+        }
+        else {
+            $('#main #section3 button').addClass('disabled');
+        }
+        $(this).siblings('span.fa').each(function(index, el) {
+            if ($(this).attr('name') <= current) {
+                $(this).removeClass('inactive').addClass('active');
+            }
+            else {
+                $(this).removeClass('active').addClass('inactive');
+            }
+        });
+    });
+});
+</script>
