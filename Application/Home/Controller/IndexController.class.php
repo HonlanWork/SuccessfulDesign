@@ -277,4 +277,8 @@ class IndexController extends Controller {
         $this->kol = $kol;
         $this->display();
     }
+
+    public function product(){
+        $this->display();
+    }
 }
