@@ -8,6 +8,13 @@ class ContestController extends CommonController {
 	}
 
 	public function apply() {
+		$from = I('from');
+		if ($from != 'home') {
+			$count = M('submission')->where(array('contest_id'=>C('CONTESTID'),'user_id'=>$_SESSION['uid']))->count();
+			if ($count > 0) {
+				$this->redirect('User/submissions');
+			}
+		}
 		$this->display();
 	}
 
