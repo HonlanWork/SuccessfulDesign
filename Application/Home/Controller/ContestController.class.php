@@ -52,6 +52,13 @@ class ContestController extends CommonController {
 		elseif ($this->submission['pay_confirm'] == 1) {
 			$this->redirect('User/submission', array('id'=>I('id')));
 		}
+		if (isset($_SESSION['urole']) && $_SESSION['urole'] == 2) {
+			$this->admin = 1;
+		}
+		else {
+			$this->admin = 0;
+		}
+		$this->admin
 		$this->display();
 	}
 
@@ -130,7 +137,7 @@ class ContestController extends CommonController {
 		    $ch = \Pingpp\Charge::create(
 		        array(
 		            'subject'   => '2016成功设计大赛作品支付',
-		            'body'      => '快来支付吧',
+		            'body'      => '',
 		            'amount'    => $amount,
 		            'order_no'  => $orderNo,
 		            'currency'  => 'cny',

@@ -185,11 +185,6 @@
                             <img src="__PUBLIC__/img/contest2016/payonline.png" style="margin-right:3%;width:45%;max-width:120px;" alt="" class="online" id="payonline">
                             <img src="__PUBLIC__/img/contest2016/payoffline.png" style="margin-left:3%;width:45%;max-width:120px;" alt="" class="offline">
                             <?php } ?>
-                            <if condition="isset($_SESSION['urole']) and $_SESSION['urole'] eq 2">
-                                <p id="isadmin" style="display:none;">1</p>
-                                <else/>
-                                <p id="isadmin" style="display:none;">0</p>
-                            </if>
                         </div>
                         <div class="paymeans offline">
                             <p style="border-bottom:1px solid #ddd;padding-bottom:15px;margin-bottom:15px;">
@@ -251,7 +246,7 @@
 </form>
 <script>
 $(document).ready(function() {
-    if (parseInt($('#isadmin').text()) == 1) {
+    if (parseInt($admin == 1) {
         document.addEventListener('pingpp_one_ready', function() {
             document.getElementById('payonline').addEventListener('click', function() {
                 pingpp_one.init({
