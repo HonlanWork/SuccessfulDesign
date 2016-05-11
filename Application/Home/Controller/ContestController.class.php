@@ -52,12 +52,6 @@ class ContestController extends CommonController {
 		elseif ($this->submission['pay_confirm'] == 1) {
 			$this->redirect('User/submission', array('id'=>I('id')));
 		}
-		if (isset($_SESSION['urole']) && $_SESSION['urole'] == 2) {
-			$this->admin = 1;
-		}
-		else {
-			$this->admin = 0;
-		}
 		$this->display();
 	}
 
