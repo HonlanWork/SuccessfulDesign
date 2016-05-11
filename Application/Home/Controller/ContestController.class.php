@@ -130,7 +130,7 @@ class ContestController extends CommonController {
 		    $ch = \Pingpp\Charge::create(
 		        array(
 		            'subject'   => '2016成功设计大赛作品支付',
-		            'body'      => '',
+		            'body'      => '快来支付吧',
 		            'amount'    => $amount,
 		            'order_no'  => $orderNo,
 		            'currency'  => 'cny',
