@@ -246,7 +246,7 @@
 </form>
 <script>
 $(document).ready(function() {
-    if (parseInt($admin == 1) {
+    if ($admin == 1) {
         document.addEventListener('pingpp_one_ready', function() {
             document.getElementById('payonline').addEventListener('click', function() {
                 pingpp_one.init({
