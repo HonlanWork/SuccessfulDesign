@@ -58,7 +58,6 @@ class ContestController extends CommonController {
 		else {
 			$this->admin = 0;
 		}
-		$this->admin
 		$this->display();
 	}
 
