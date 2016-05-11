@@ -281,4 +281,8 @@ class IndexController extends Controller {
     public function product(){
         $this->display();
     }
+
+    public function cart(){
+        $this->display();
+    }
 }
