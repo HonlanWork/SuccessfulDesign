@@ -52,6 +52,14 @@ class ContestController extends CommonController {
 		elseif ($this->submission['pay_confirm'] == 1) {
 			$this->redirect('User/submission', array('id'=>I('id')));
 		}
+		
+		if (time() < $this->contest['early_bird_time']) {
+			$this->price = $this->contest['early_bird_fee'];
+		}
+		else {
+			$this->price = $this->contest['fee'];
+		}
+
 		$this->display();
 	}
 
