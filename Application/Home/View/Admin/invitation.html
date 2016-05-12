@@ -14,6 +14,7 @@
     <div class="form-group">
         <input type="text" class="form-control" name="name" placeholder="合作伙伴名称">
         <input type="text" class="form-control" name="count" placeholder="使用次数">
+        <input type="text" class="form-control" name="discount" placeholder="优惠比">
         <button class="btn btn-success">添加</button>
     </div>
 </form>
@@ -23,6 +24,7 @@
         <th>邀请码</th>
         <th>初始次数</th>
         <th>剩余次数</th>
+        <th>优惠比</th>
         <th>操作</th>
     </tr>
     <foreach name="invitations" item="v">
@@ -33,6 +35,7 @@
             </td>
             <td>{$v.count}</td>
             <td>{$v.remain}</td>
+            <td>{$v.discount}</td>
             <td><a href="{:U('Admin/invitation_delete', array('id'=>$v['id']))}">删除</a></td>
         </tr>
     </foreach>

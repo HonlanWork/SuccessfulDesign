@@ -181,16 +181,24 @@
                         <div style="margin-bottom:20px;">
                             <?php if (isset($_SESSION['lang']) and $_SESSION['lang'] == 'en') { ?>
                             <img src="__PUBLIC__/img/contest2016/payonlineen.png" style="margin-right:3%;width:45%;max-width:120px;" alt="" class="online" id="payonline">
-                            <img src="__PUBLIC__/img/contest2016/payofflineen.png" style="margin-left:3%;width:45%;max-width:120px;" alt="" class="offline">
+                            <img src="__PUBLIC__/img/contest2016/payofflineen.png" style="margin-left:3%;width:45%;max-width:120px;" alt="" class="offline" id="payoffline">
                             <?php } else{ ?>
                             <img src="__PUBLIC__/img/contest2016/payonline.png" style="margin-right:3%;width:45%;max-width:120px;" alt="" class="online" id="payonline">
-                            <img src="__PUBLIC__/img/contest2016/payoffline.png" style="margin-left:3%;width:45%;max-width:120px;" alt="" class="offline">
+                            <img src="__PUBLIC__/img/contest2016/payoffline.png" style="margin-left:3%;width:45%;max-width:120px;" alt="" class="offline" id="payoffline">
                             <?php } ?>
                             <if condition="isset($_SESSION['urole']) and $_SESSION['urole'] eq 2">
                                 <p id="isadmin" style="display:none;">1</p>
                                 <else/>
                                 <p id="isadmin" style="display:none;">0</p>
                             </if>
+                        </div>
+                        <div class="paymeans online">
+                            <p>使用即时支付，支付完成后即可马上编辑作品信息，更加快捷，支持支付宝</p>
+                            <button class="btn btn-default" id="pingxx" style="color:#888;margin-top:10px;margin-bottom:10px;">即时支付</button>
+                        </div>
+                        <div class="paymeans online">
+                            <p>使用第三方平台31会议支付，支付完成后需等待管理员确认之后方可编辑作品信息，进度较慢，但支持更多支付渠道</p>
+                            <button class="btn btn-default" id="31pay" style="color:#888;margin-top:10px;margin-bottom:10px;">31会议</button>
                         </div>
                         <div class="paymeans offline">
                             <p style="border-bottom:1px solid #ddd;padding-bottom:15px;margin-bottom:15px;">
@@ -208,7 +216,7 @@
                                 <?php translate('帐号：1001211309207989444')?>
                             </p>
                         </div>
-                        <div class="paymeans offline" style="border-bottom:none;padding-bottom:0;margin-bottom:0;">
+                        <div class="paymeans offline" style="padding-bottom:0;margin-bottom:0;">
                             <img src="__PUBLIC__/img/contest2016/HSBC.png" style="width:45%;max-width:120px;margin-bottom:12px;" alt="">
                             <p>
                                 <?php translate('外币：ICBKCNBJSHI')?>
@@ -217,7 +225,7 @@
                                 <?php translate('人民币：102290021133')?>
                             </p>
                         </div>
-                        <div id="invitation">
+                        <div id="invitation" style="margin-top:20px;">
                             <p>
                                 <?php translate('邀请码支付')?>
                             </p>
@@ -252,9 +260,12 @@
 </form>
 <script>
 $(document).ready(function() {
+    $('#main button').click(function(event) {
+        event.preventDefault();
+    });
     if (parseInt($('#isadmin').text()) == 1) {
         document.addEventListener('pingpp_one_ready', function() {
-            document.getElementById('payonline').addEventListener('click', function() {
+            document.getElementById('pingxx').addEventListener('click', function() {
                 pingpp_one.init({
                     app_id: 'app_4O0O8KmzjHm5zbLW', //该应用在 ping++ 的应用 ID
                     order_no: '', //订单在商户系统中的订单号
@@ -306,7 +317,7 @@ $(document).ready(function() {
         // });
 
         document.addEventListener('pingpp_one_ready', function() {
-            document.getElementById('payonline').addEventListener('click', function() {
+            document.getElementById('pingxx').addEventListener('click', function() {
                 pingpp_one.init({
                     app_id: 'app_4O0O8KmzjHm5zbLW', //该应用在 ping++ 的应用 ID
                     order_no: '', //订单在商户系统中的订单号
@@ -355,6 +366,10 @@ $(document).ready(function() {
         });
     }
 
+    $('#main #31pay').click(function(event) {
+        window.location.href = 'http://event.3188.la/229649539';
+    });
+
     if ($(window).width() < 768) {
         $('#main #pay').addClass('plain');
         $('#main #guide').addClass('plain');
@@ -372,9 +387,14 @@ $(document).ready(function() {
         }
     });
 
-    $('#main img.offline').click(function(event) {
+    $('#main img#payoffline').click(function(event) {
         $('#main .paymeans.online').hide();
         $('#main .paymeans.offline').show();
+    });
+
+    $('#main img#payonline').click(function(event) {
+        $('#main .paymeans.offline').hide();
+        $('#main .paymeans.online').show();
     });
 
     $('#main #confirm-payment button').click(function(event) {
