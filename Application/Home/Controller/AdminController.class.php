@@ -437,7 +437,8 @@ class AdminController extends Controller{
             'remain' => I('count'),
             'name' => I('name'),
             'submissions' => '',
-            'discount' => I('discount')
+            // 'discount' => I('discount')
+            'discount' => 0
             ))->add();
         $this->redirect('Admin/invitation');
     }
