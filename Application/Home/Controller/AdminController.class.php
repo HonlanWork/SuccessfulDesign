@@ -192,6 +192,11 @@ class AdminController extends Controller{
         $this->redirect('Admin/users');
     }
 
+    public function activate(){
+        M('user')->where(array('id'=>I('id')))->save(array('activate'=>1,'activate_key'=>''));
+        $this->redirect('Admin/users');
+    }
+
     // 编辑翻译
 	public function translations() {
         layout('admin');

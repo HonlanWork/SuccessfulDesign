@@ -43,6 +43,9 @@
                         ?>
                     </td>
                     <td style="min-width:120px;">
+                        <if condition="$v['activate'] eq 0">
+                            <p><a href="{:U('Admin/activate', array('id'=>$v['id']))}">激活用户</a></p>
+                        </if>
                         <p><a href="{:U('Admin/reset_password', array('id'=>$v['id']))}">重置密码</a></p>
                         <?php if ($v['role'] == 0) { ?>
                         <p><a href="{:U('Admin/set_as_judge', array('id'=>$v['id']))}">升为评委</a></p>
