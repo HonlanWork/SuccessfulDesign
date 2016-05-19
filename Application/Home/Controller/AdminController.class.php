@@ -83,9 +83,11 @@ class AdminController extends Controller{
         $this->count2 = count($this->paid_but_notsubmitted);
 		$this->submitted = M('submission')->where(array('contest_id'=>C('CONTESTID'),'ispaied'=>1,'issubmitted'=>1))->select();
         $this->count3 = count($this->submitted);
+
+        $all = M('submission')->where(array('contest_id'=>C('CONTESTID')))->select();
         $tmp = array();
-        for ($i = 0; $i < count($this->submitted); $i++) { 
-            $cate = $this->submitted[$i]['category'];
+        for ($i = 0; $i < count($all); $i++) { 
+            $cate = $all[$i]['category'];
             if (array_key_exists($cate, $tmp)) {
                 $tmp[$cate] += 1;
             }
@@ -193,6 +195,12 @@ class AdminController extends Controller{
         layout('admin');
 		$this->display();
 	}
+
+    public function user() {
+        $this->user = M('user')->where(array('id'=>I('id')))->find();
+        layout('admin');
+        $this->display();
+    }
 
 	public function reset_password() {
 		$user = M('user')->where(array('id'=>I('id')))->find();

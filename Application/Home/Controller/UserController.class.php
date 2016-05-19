@@ -70,6 +70,15 @@ class UserController extends CommonController {
 		$map['contest_id']  = array('neq', C('CONTESTID'));
 		$map['user_id'] = array('eq', $_SESSION['uid']);
 		$this->submissions = M('submission')->where($map)->select();
+		$contests = M('contest')->select();
+		for ($i = 0; $i < count($this->submissions); $i++) { 
+			for ($j = 0; $j < count($contests); $j++) { 
+				if ($contests[$j]['id'] == $this->submissions[$i]['contest_id']) {
+					$this->submissions[$i]['year'] = $contests[$j]['year'];
+					break;
+				}
+			}
+		}
 		$this->display();
 	}
 
