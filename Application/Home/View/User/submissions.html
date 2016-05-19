@@ -39,7 +39,7 @@
     text-align: center;
 }
 
-#main .sd_btn {
+#main #add_new, #main #past_submissions {
     color: white;
     background-color: #ff7c34;
     border: none;
@@ -55,10 +55,10 @@
 }
 </style>
 <div style="position:relative;">
-    <a href="{:U('User/past_submissions')}" class="sd_btn">
+    <a href="{:U('User/past_submissions')}" id="past_submissions">
         <?php translate('往季作品')?>
     </a>
-    <a href="{:U('Contest/apply',array('from'=>'home'))}" class="btn btn-success" style="position:absolute;top:55px;right:0px;" id="add_new" class="sd_btn">
+    <a href="{:U('Contest/apply',array('from'=>'home'))}" class="btn btn-success" style="position:absolute;top:55px;right:0px;" id="add_new">
         <?php translate('添加新作品')?>
     </a>
     <!-- Nav tabs -->
