@@ -83,7 +83,25 @@ class AdminController extends Controller{
         $this->count2 = count($this->paid_but_notsubmitted);
 		$this->submitted = M('submission')->where(array('contest_id'=>C('CONTESTID'),'ispaied'=>1,'issubmitted'=>1))->select();
         $this->count3 = count($this->submitted);
+        $tmp = array();
+        for ($i = 0; $i < count($this->submitted); $i++) { 
+            $cate = $this->submitted[$i]['category'];
+            if (array_key_exists($cate, $tmp)) {
+                $tmp[$cate] += 1;
+            }
+            else {
+                $tmp[$cate] = 1;
+            }
+        }
+        $category = array();
+        $category[0] = array();
+        $category[1] = array();
+        foreach ($tmp as $key => $value) {
+            $category[0][] = $key;
+            $category[1][] = $value;
+        }
         layout('admin');
+        $this->category = json_encode($category);
         $this->display();
 	}
 

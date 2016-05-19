@@ -43,7 +43,7 @@
     color: white;
     background-color: #ff7c34;
     border: none;
-    padding: 8px 24px;
+    padding: 8px 16px;
     border-radius: 5px;
     font-size: 13px;
     position: relative;
@@ -55,10 +55,10 @@
 }
 </style>
 <div style="position:relative;">
-    <a href="{:U('User/past_submissions')}" id="past_submissions">
+    <a href="{:U('User/past_submissions')}" id="past_submissions" class="btn btn-default" style="font-size:13px;position:absolute;top:55px;right:110px;">
         <?php translate('往季作品')?>
     </a>
-    <a href="{:U('Contest/apply',array('from'=>'home'))}" class="btn btn-success" style="position:absolute;top:55px;right:0px;" id="add_new">
+    <a href="{:U('Contest/apply',array('from'=>'home'))}" class="btn btn-success" style="font-size:13px;position:absolute;top:55px;right:0px;" id="add_new">
         <?php translate('添加新作品')?>
     </a>
     <!-- Nav tabs -->

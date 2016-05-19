@@ -26,7 +26,46 @@
 }
 </style>
 <div style="position:relative;">
-    <a href="{:U('User/submissions')}" class="btn btn-success" style="position:absolute;top:55px;right:0px;" id="submissions">
+    <a href="{:U('User/submissions')}" class="btn btn-success" style="position:absolute;top:-5px;right:0px;" id="submissions">
         <?php translate('当季作品')?>
     </a>
+    <h4 style="font-size:20px;margin-bottom:20px;color:#444;"><?php translate('往季作品')?></h4>
+    <table class="table table-hover">
+        <tr>
+            <th>
+                <?php translate('赛季')?>
+            </th>
+            <th>
+                <?php translate('作品名称')?>
+            </th>
+            <th>
+                <?php translate('信息完整度')?>
+            </th>
+        </tr>
+        <if condition="count($submissions) eq 0">
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </if>
+        <foreach name="submissions" item="v">
+            <tr class='cell'>
+                <td style="width:55%;">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                            <img src="__PUBLIC__{$v['image']}" alt="" style="width:100%;max-width:250px;margin:5px auto;border-radius:3px;box-shadow:1px 1px 3px rgba(20,20,20,0.4);">
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                            <p style="font-size:13px;margin-top:10px;color:#666;">{$v.titlee}</p>
+                            <p style="font-size:13px;color:#666;">{$v.titlec}</p>
+                        </div>
+                    </div>
+                </td>
+                <td style="width:15%;min-width:60px;">
+                    <p style="margin-top:10px;color:#888;">{$v.completeness}%</p>
+                </td>
+            </tr>
+        </foreach>
+    </table>
 </div>

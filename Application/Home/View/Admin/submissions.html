@@ -4,6 +4,12 @@
     margin-top: 20px;
 }
 
+#main #stat {
+    width: 100%;
+    height: 250px;
+    margin-bottom: 30px;
+}
+
 #main input.form-control {
     width: 180px;
     position: absolute;
@@ -11,10 +17,14 @@
     right: 0;
 }
 </style>
+<script src="__PUBLIC__/js/echarts.min.js"></script>
+<script src="__PUBLIC__/js/macarons.js"></script>
 <h3 style="margin-top:10px;margin-bottom:20px;">
     作品管理
     <a href="{:U('Admin/export_excel')}" style="margin-left:20px;margin-right:10px;font-size:12px;" class="btn btn-success">导出excel</a>
 </h3>
+<div id="stat">
+</div>
 <div style="position:relative;">
     <input type="text" class="form-control">
     <ul class="nav nav-tabs" role="tablist">
@@ -129,5 +139,40 @@ $(document).ready(function() {
             });
         }
     });
+
+    var stat = echarts.init(document.getElementById('stat'), 'macarons');
+    var option = {
+        title: {
+            text: '作品类别分布',
+        },
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: { // 坐标轴指示器，坐标轴触发有效
+                type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+            },
+        },
+        grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            containLabel: true
+        },
+        xAxis: {
+            type: 'category',
+            splitLine: {
+                show: false
+            },
+            data: {$category}[0]
+        },
+        yAxis: {
+            type: 'value'
+        },
+        series: [{
+            name: '数量',
+            type: 'bar',
+            data: {$category}[1]
+        }]
+    };
+    stat.setOption(option);
 });
 </script>
