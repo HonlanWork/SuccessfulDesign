@@ -1,0 +1,207 @@
+<style>
+#main {
+    padding: 20px 6%;
+    margin-bottom: 30px;
+    box-shadow: 2px 2px 3px rgba(20, 20, 20, 0.3);
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+#main .key {
+    width: 112px;
+    color: #666;
+    position: absolute;
+    left: 0;
+}
+
+#main .value {
+    margin-left: 132px;
+    min-height: 20px;
+    color: #888;
+}
+
+#main #detail {
+    max-height: 400px;
+    overflow-y: scroll;
+}
+
+#main #detail .row {
+    padding-bottom: 12px;
+    border-top: 1px solid #ddd;
+}
+
+#main #detail .row p:first-child {
+    color: #666;
+    margin-top: 12px;
+}
+
+#main #detail .row p:last-child {
+    font-size: 13px;
+    margin-bottom: 0;
+    color: #888;
+}
+</style>
+<div id="section2">
+    <h3 style="font-size:20px;color:#444;margin-bottom:20px;">{$submission.titlec}
+        <small style="margin-left:8px;font-size:15px;">{$submission.titlee}<span style="margin-left:10px;font-size:14px;font-style:italic;">{$submission.category|translate=###}</span></small>
+    </h3>
+    <div class="panel panel-default" id="detail">
+        <div class="panel-body" style="padding-bottom:5px;">
+            <div style="position:relative;">
+                <p class="key">
+                    <?php translate('发布日期')?>
+                </p>
+                <p class="value">{$submission.addts}</p>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                    <div style="position:relative;">
+                        <p>
+                            <?php translate('简述（英文）')?>
+                        </p>
+                        <p>{$submission.introductione}</p>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                    <div style="position:relative;">
+                        <p>
+                            <?php translate('简述（中文）')?>
+                        </p>
+                        <p>{$submission.introductionc}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                    <div style="position:relative;">
+                        <p>
+                            <?php translate('项目需求（英文）')?>
+                        </p>
+                        <p>{$submission.demande}</p>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                    <div style="position:relative;">
+                        <p>
+                            <?php translate('项目需求（中文）')?>
+                        </p>
+                        <p>{$submission.demandc}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                    <div style="position:relative;">
+                        <p>
+                            <?php translate('面临挑战（英文）')?>
+                        </p>
+                        <p>{$submission.challengee}</p>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                    <div style="position:relative;">
+                        <p>
+                            <?php translate('面临挑战（中文）')?>
+                        </p>
+                        <p>{$submission.challengec}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                    <div style="position:relative;">
+                        <p>
+                            <?php translate('预算评估（英文）')?>
+                        </p>
+                        <p>{$submission.coste}</p>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                    <div style="position:relative;">
+                        <p>
+                            <?php translate('预算评估（中文）')?>
+                        </p>
+                        <p>{$submission.costc}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                    <div style="position:relative;">
+                        <p>
+                            <?php translate('设计解决方案（英文）')?>
+                        </p>
+                        <p>{$submission.solutione}</p>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                    <div style="position:relative;">
+                        <p>
+                            <?php translate('设计解决方案（中文）')?>
+                        </p>
+                        <p>{$submission.solutionc}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                    <div style="position:relative;">
+                        <p>
+                            <?php translate('项目成效总结（英文）')?>
+                        </p>
+                        <p>{$submission.conclusione}</p>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                    <div style="position:relative;">
+                        <p>
+                            <?php translate('项目成效总结（中文）')?>
+                        </p>
+                        <p>{$submission.conclusione}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="attachments">
+        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" style="border-radius:3px;box-shadow:1px 1px 3px rgba(20,20,20,0.4);margin-bottom:12px;max-width:500px;">
+            <ol class="carousel-indicators" style="bottom:0;">
+                <?php for ($i = 0; $i < count($images); $i++) { if ($i == 0) { ?>
+                <li data-target="#carousel-example-generic" data-slide-to="<?php echo $i; ?>" class="active"></li>
+                <?php } else { ?>
+                <li data-target="#carousel-example-generic" data-slide-to="<?php echo $i; ?>"></li>
+                <?php }} ?>
+            </ol>
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner" role="listbox" style="border-radius:3px;">
+                <?php for ($i = 0; $i < count($images); $i++) { ?>
+                <div class="item<?php if($i == 0) echo " active"; ?>">
+                    <img src="__PUBLIC__<?php echo $images[$i]?>" style="width:100%;border-radius:3px;">
+                </div>
+                <?php } ?>
+            </div>
+            <!-- Controls -->
+            <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev" style="border-top-left-radius:3px;border-bottom-left-radius:3px;">
+                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next" style="border-top-right-radius:3px;border-bottom-right-radius:3px;">
+                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+        <if condition="$submission['video'] neq ''">
+            <video controls="controls" loop="loop" preload="auto" style="width:100%;max-width:500px;height:auto;border-radius:3px;margin-top:10px;">
+                <source src="__PUBLIC__{$submission['video']}" type="video/mp4" style="border-radius:3px;">
+            </video>
+        </if>
+        <if condition="$submission['file'] neq ''">
+            <p style="margin-bottom:0;margin-top:12px;">
+                <?php translate('补充文件')?>
+                <a href="__PUBLIC__{$submission['file']}" style="margin-left:6px;">
+                    <?php echo substr($submission['file'], strrpos($submission['file'], '/') + 1);?>
+                </a>
+            </p>
+        </if>
+    </div>
+</div>

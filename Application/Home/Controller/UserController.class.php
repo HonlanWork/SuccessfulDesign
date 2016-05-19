@@ -51,11 +51,33 @@ class UserController extends CommonController {
 
 	public function submission() {
 		if ($_SESSION['urole'] == 2) {
-			$this->submission = M('submission')->where(array('id'=>I('id')))->find();
+			$this->submission = M('submission')->where(array('contest_id'=>C('CONTESTID'), 'id'=>I('id')))->find();
 		}
 		else {
-			$this->submission = M('submission')->where(array('id'=>I('id'), 'user_id'=>$_SESSION['uid']))->find();
+			$this->submission = M('submission')->where(array('contest_id'=>C('CONTESTID'), 'id'=>I('id'), 'user_id'=>$_SESSION['uid']))->find();
 		}
+		$images = array();
+		for ($i = 1; $i <= 6; $i++) { 
+			if ($this->submission['image'.$i] != '') {
+				array_push($images, $this->submission['image'.$i]);
+			}
+		}
+		$this->images = $images;
+		$this->display();
+	}
+
+	public function past_submissions() {
+		$map['contest_id']  = array('neq', C('CONTESTID'));
+		$map['user_id'] = array('eq', $_SESSION['uid']);
+		$this->submissions = M('submission')->where($map)->select();
+		$this->display();
+	}
+
+	public function past_submission() {
+		$map['contest_id']  = array('neq', C('CONTESTID'));
+		$map['id'] = array('eq', I('id'));
+		$this->submission = M('submission')->where($map)->find();
+		
 		$images = array();
 		for ($i = 1; $i <= 6; $i++) { 
 			if ($this->submission['image'.$i] != '') {
