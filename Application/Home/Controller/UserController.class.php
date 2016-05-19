@@ -69,16 +69,17 @@ class UserController extends CommonController {
 	public function past_submissions() {
 		$map['contest_id']  = array('neq', C('CONTESTID'));
 		$map['user_id'] = array('eq', $_SESSION['uid']);
-		$this->submissions = M('submission')->where($map)->select();
+		$submissions = M('submission')->where($map)->select();
 		$contests = M('contest')->select();
-		for ($i = 0; $i < count($this->submissions); $i++) { 
+		for ($i = 0; $i < count($submissions); $i++) { 
 			for ($j = 0; $j < count($contests); $j++) { 
-				if ($contests[$j]['id'] == $this->submissions[$i]['contest_id']) {
-					$this->submissions[$i]['year'] = $contests[$j]['year'];
+				if ($contests[$j]['id'] == $submissions[$i]['contest_id']) {
+					$submissions[$i]['year'] = $contests[$j]['year'];
 					break;
 				}
 			}
 		}
+		$this->submissions = $submissions;
 		$this->display();
 	}
 
