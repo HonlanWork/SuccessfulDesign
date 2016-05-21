@@ -74,7 +74,7 @@ class UserController extends CommonController {
 		for ($i = 0; $i < count($submissions); $i++) { 
 			for ($j = 0; $j < count($contests); $j++) { 
 				if ($contests[$j]['id'] == $submissions[$i]['contest_id']) {
-					$submissions[$i]['year'] = $contests[$j]['year'];
+					$submissions[$i]['year'] = intval($contests[$j]['year']);
 					break;
 				}
 			}
