@@ -79,6 +79,13 @@ class UserController extends CommonController {
 				}
 			}
 		}
+		function cmp($a, $b) {
+			if ($a['year'] == $b['year']) {
+				return 0;
+			}
+			return ($a['year'] < $b['year']) ? 1 : -1;
+		}
+		usort($submissions, "cmp");
 		$this->submissions = $submissions;
 		$this->display();
 	}
