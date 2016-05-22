@@ -2,28 +2,167 @@
 #main {
     padding: 10px 6%;
     padding-top: 30px;
-    margin-bottom: 60px;
+    margin-bottom: 30px;
     box-shadow: 2px 2px 3px rgba(20, 20, 20, 0.3);
     border-bottom-right-radius: 5px;
     border-bottom-left-radius: 5px;
 }
+
 #main .cell {
+    height: 200px;
+    overflow: hidden;
+    background-size: cover;
+    background-position: middle;
+    text-align: center;
+    position: relative;
+    margin-bottom: 20px;
+    padding: 20px;
+    padding-top: 30px;
+    vertical-align: middle;
+}
+#main .cell h5 {
+	font-size: 13px;
+	color: #fff;
+	z-index: 99;
+}
+#main .cell h6 {
+	font-size: 12px;
+	color: #eee;
+	z-index: 99;
+}
+#main .cell p {
+	font-size: 12px;
+	color: #ddd;
+	z-index: 99;
+}
+#main .cell h4 {
+	font-size: 14px;
+	color: #fff;
+	z-index: 99;
+}
+#main .mask {
+	width: 100%;
 	height: 200px;
-	overflow: hidden;
-	background-size: cover;
-	background-position: middle;
+	position: absolute;
+	top: 0;
+	left: 0;
+	background-color: rgba(40,40,40,0.6);
+}
+
+#main button {
+    color: white;
+    background-color: #ff7c34;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 5px;
+    font-size: 13px;
+    box-shadow: 2px 2px 3px rgba(20, 20, 20, 0.4);
+}
+
+#main .link {
+    display: inline-block;
+    padding: 6px;
+}
+#main .link.active {
+	color: #bbb;
+	margin-left: 5px;
 }
 </style>
 <div class="row">
-	<div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
-		<div class="row">
-			<foreach name="submission" item="v">
-				<div class="cell" style="background-image:url(__PUBLIC__{$v.image});">
-					<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-					</div>
-				</div>
-			</foreach>
-		</div>
-	</div>
-	<div class="col-xs-12 col-sm-3 col-md-3 col-lg-3"></div>
+    <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
+        <form action="">
+            <div class="form-group">
+                <select class="form-control" name="year" style="margin-bottom:10px;">
+                	<if condition="$year eq 'all'">
+                		<option value="all" selected="selected">
+	                        <?php translate("全部")?>
+	                    </option>
+                		<else/>
+                		<option value="all">
+	                        <?php translate("全部")?>
+	                    </option>
+                	</if>
+                    <foreach name="years" item="y">
+                    	<if condition="$year eq $y">
+                    		<option value="{$y}" selected="selected">{$y}</option>
+                    		<else/>
+                    		<option value="{$y}">{$y}</option>
+                    	</if>
+                    </foreach>
+                </select>
+                <select class="form-control" name="category" style="margin-bottom:15px;">
+                	<if condition="$category eq 'all'">
+                		<option value="all" selected="selected">
+	                        <?php translate("全部")?>
+	                    </option>
+                		<else/>
+                		<option value="all">
+	                        <?php translate("全部")?>
+	                    </option>
+                	</if>
+                    <foreach name="categories" item="c">
+                    	<if condition="$category eq $c['category']">
+                    		<option value="{$c['category']}" selected="selected">
+	                            {$c.category}
+	                        </option>
+                    		<else/>
+                    		<option value="{$c['category']}">
+	                            {$c.category}
+	                        </option>
+                    	</if>
+                    </foreach>
+                </select>
+                <button class="btn btn-default" style="width:100%;">
+                    <?php translate("搜索")?>
+                </button>
+            </div>
+        </form>
+    </div>
+    <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
+        	<h4 style="margin-top:0;">{$total}<span style="margin-left:6px"><?php translate("件作品")?></span></h4>
+        <div class="row">
+            <foreach name="submissions" item="v">
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                	<a href="{:U('User/past_submission',array('id'=>$v['id']))}">
+                		<div class="cell" style="background-image:url(__PUBLIC__{$v.image});">
+                			<h5>{$v.titlec}</h5>
+                			<h6>{$v.titlee}</h6>
+                			<p>{$v.year} {$v.category}</p>
+                			<h4>{$v.result}</h4>
+                			<div class="mask"></div>
+                		</div>
+                	</a>
+                </div>
+            </foreach>
+        </div>
+        <div style="margin-top:20px;margin-bottom:20px;">
+            <a href="{:U('Index/awards',array('year'=>$year,'category'=>$category,'page'=>$first))}" class="link">
+                <?php translate('首页')?>
+            </a>
+            <a href="{:U('Index/awards',array('year'=>$year,'category'=>$category,'page'=>$previous))}" class="link">
+                <?php translate('上一页')?>
+            </a>
+            <foreach name="index" item="i">
+            	<if condition="$i eq $page">
+            		<span class="link active">{$i + 1}</span>
+            		<else/>
+            		<a href="{:U('Index/awards',array('year'=>$year,'category'=>$category,'page'=>$i))}" class="link">{$i + 1}</a>
+            	</if>
+            </foreach>
+            <a href="{:U('Index/awards',array('year'=>$year,'category'=>$category,'page'=>$next))}" class="link">
+                <?php translate('下一页')?>
+            </a>
+            <a href="{:U('Index/awards',array('year'=>$year,'category'=>$category,'page'=>$last))}" class="link">
+                <?php translate('末页')?>
+            </a>
+        </div>
+    </div>
 </div>
+<script>
+$(document).ready(function() {
+    $('#main button').click(function(event) {
+        event.preventDefault();
+        window.location.href = "{:U('Index/awards')}" + '/year/' + $('#main select[name="year"]').val() + '/category/' + $('#main select[name="category"]').val() + '/page/0';
+    });
+});
+</script>

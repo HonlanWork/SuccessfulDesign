@@ -287,12 +287,14 @@ class IndexController extends Controller {
     }
 
     public function awards(){
+        $map = array();
         $map['result'] = array('neq', '');
-        if (I('category') != '') {
+        if (I('category') != 'all') {
             $map['category'] = array('eq', I('category'));
         }
+        $this->category = I('category');
 
-        if (I('year') != '') {
+        if (I('year') != 'all') {
             $year = intval(I('year'));
             $contests = M('contest')->select();
             for ($i = 0; $i < count($contests); $i++) { 
@@ -302,9 +304,61 @@ class IndexController extends Controller {
                 }
             }
         }
+        $this->year = I('year');
         
         $submissions = M('submission')->field('id,titlec,titlee,category,result,image')->where($map)->select();
         $contests = M('contest')->select();
+
+        if (I('page') == '') {
+            $page = 0;
+        }
+        else {
+            $page = intval(I('page'));
+        }
+        $total = count($submissions);
+        $this->first = 0;
+        if ($total == 0) {
+            $this->last = 0;
+        }
+        else if ($total % 10 == 0) {
+            $this->last = intval($total) / 10 - 1;
+        }
+        else {
+            $this->last = floor($total / 10);
+        }
+        if ($page == 0) {
+            $this->previous = 0;
+        }
+        else {
+            $this->previous = $page  - 1;
+        }
+        if ($page == $this->last) {
+            $this->next = $this->last;
+        }
+        else {
+            $this->next = $page + 1;
+        }
+
+        if ($page < 2) {
+            $this->start = 0;
+        }
+        else {
+            $this->start = $page - 2;
+        }
+        $end = $this->start + 4;
+        if ($end > $this->last) {
+            $end = $this->last;
+        }
+        $this->end = $end;
+        $index = array();
+        for ($i = $this->start; $i <= $this->end; $i++) { 
+            array_push($index, $i);
+        }
+        $this->index = $index;
+        $this->page = $page;
+        $this->total = $total;
+
+        $submissions = array_slice($submissions, $page * 10, 10);
         
         for ($i = 0; $i < count($submissions); $i++) { 
             for ($j = 0; $j < count($contests); $j++) { 
@@ -315,6 +369,15 @@ class IndexController extends Controller {
             }
         }
         $this->submissions = $submissions;
+
+        $years = array();
+        $tmp = date("Y") - 1;
+        for ($i = $tmp; $i >= 2006; $i--) {
+            array_push($years, $i);
+        }
+        $this->years = $years;
+
+        $this->categories = M()->query("select distinct(category) from submission where result != ''");
         $this->display();
     }
 }
