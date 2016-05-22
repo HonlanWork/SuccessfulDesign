@@ -285,4 +285,36 @@ class IndexController extends Controller {
     public function cart(){
         $this->display();
     }
+
+    public function awards(){
+        $map['result'] = array('neq', '');
+        if (I('category') != '') {
+            $map['category'] = array('eq', I('category'));
+        }
+
+        if (I('year') != '') {
+            $year = intval(I('year'));
+            $contests = M('contest')->select();
+            for ($i = 0; $i < count($contests); $i++) { 
+                if (intval($contests[$i]['year']) == $year) {
+                    $map['contest_id'] = array('eq',  $contests[$i]['id']);
+                    break;
+                }
+            }
+        }
+        
+        $submissions = M('submission')->field('id,titlec,titlee,category,result,image')->where($map)->select();
+        $contests = M('contest')->select();
+        
+        for ($i = 0; $i < count($submissions); $i++) { 
+            for ($j = 0; $j < count($contests); $j++) { 
+                if ($contests[$j]['id'] == $submissions[$i]['contest_id']) {
+                    $submissions[$i]['year'] = intval($contests[$j]['year']);
+                    break;
+                }
+            }
+        }
+        $this->submissions = $submissions;
+        $this->display();
+    }
 }

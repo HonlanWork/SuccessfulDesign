@@ -1,0 +1,29 @@
+<style>
+#main {
+    padding: 10px 6%;
+    padding-top: 30px;
+    margin-bottom: 60px;
+    box-shadow: 2px 2px 3px rgba(20, 20, 20, 0.3);
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+#main .cell {
+	height: 200px;
+	overflow: hidden;
+	background-size: cover;
+	background-position: middle;
+}
+</style>
+<div class="row">
+	<div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
+		<div class="row">
+			<foreach name="submission" item="v">
+				<div class="cell" style="background-image:url(__PUBLIC__{$v.image});">
+					<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+					</div>
+				</div>
+			</foreach>
+		</div>
+	</div>
+	<div class="col-xs-12 col-sm-3 col-md-3 col-lg-3"></div>
+</div>
