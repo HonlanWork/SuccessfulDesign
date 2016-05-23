@@ -131,6 +131,7 @@ $(document).ready(function() {
         });
     });
     $('.modal .fa-angle-left').click(function(event) {
+        console.log(1111);
         offset -= 1;
         $.ajax({
             url: '{:U("Index/moment_picture")}',
@@ -149,7 +150,8 @@ $(document).ready(function() {
         .always(function() {
         });
     });
-    $('.modal .fa-angle-left').click(function(event) {
+    $('.modal .fa-angle-right').click(function(event) {
+        console.log(2222);
         offset += 1;
         $.ajax({
             url: '{:U("Index/moment_picture")}',
