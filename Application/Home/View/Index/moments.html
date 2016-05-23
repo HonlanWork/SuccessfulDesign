@@ -115,7 +115,7 @@ $(document).ready(function() {
         $('.modal').modal();
     });
 
-    $('#myModal').on('hidden.bs.modal', function (e) {
+    $('.modal').on('hidden.bs.modal', function (e) {
         console.log(11111);
         $('.modal .modal-body video').attr("autoplay", "false").attr('src', ''); 
     });
