@@ -104,6 +104,7 @@
 $(document).ready(function() {
     var offset = 0;
     var isVideo = 0;
+    var pid = -1;
 
     $('#pictures .cell').click(function(event) {
         isVideo = 0;
@@ -112,12 +113,13 @@ $(document).ready(function() {
         $('.modal .modal-header h4').text(title);
         $('.modal .modal-body #img').show();
         $('.modal .modal-body video').hide();
+        pid = $(this).attr('name');
         $.ajax({
             url: '{:U("Index/moment_picture")}',
             type: 'POST',
             dataType: 'json',
             data: {
-                pid: $(this).attr('name'),
+                pid: pid,
                 offset: offset
             }
         })
@@ -131,14 +133,13 @@ $(document).ready(function() {
         });
     });
     $('.modal .fa-angle-left').click(function(event) {
-        console.log(1111);
         offset -= 1;
         $.ajax({
             url: '{:U("Index/moment_picture")}',
             type: 'POST',
             dataType: 'json',
             data: {
-                pid: $(this).attr('name'),
+                pid: pid,
                 offset: offset
             }
         })
@@ -151,14 +152,13 @@ $(document).ready(function() {
         });
     });
     $('.modal .fa-angle-right').click(function(event) {
-        console.log(2222);
         offset += 1;
         $.ajax({
             url: '{:U("Index/moment_picture")}',
             type: 'POST',
             dataType: 'json',
             data: {
-                pid: $(this).attr('name'),
+                pid: pid,
                 offset: offset
             }
         })
