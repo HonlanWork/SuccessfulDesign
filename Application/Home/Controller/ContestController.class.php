@@ -207,7 +207,7 @@ class ContestController extends CommonController {
 			}
 			M('invitation')->where(array('contest_id'=>C('CONTESTID'), 'code'=>I('code')))->setDec('remain');
 			M('invitation')->where(array('contest_id'=>C('CONTESTID'), 'code'=>I('code')))->save(array('submissions'=>$tmp));
-			M('submission')->where(array('contest_id'=>C('CONTESTID'), 'id'=>I('submission_id'), 'user_id'=>$_SESSION['uid']))->save(array('ispaied'=>1,'pay_confirm'=>0));
+			M('submission')->where(array('contest_id'=>C('CONTESTID'), 'id'=>I('submission_id'), 'user_id'=>$_SESSION['uid']))->save(array('ispaied'=>1,'pay_confirm'=>0,'invitation'=>$invitation['name']));
 			echo json_encode(array('result'=>'ok'));
 		}
 	}
