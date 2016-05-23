@@ -52,7 +52,7 @@
                         <td>{$v.email}</td>
                         <td>{$v.companyc}</td>
                         <td style="min-width:120px;">
-                            <p><a href="{:U('User/submission', array('id'=>$v['id']))}">详情</a></p>
+                            <p><a href="{:U('User/submission', array('id'=>$v['id']))}">详情</a> <a href="{:U('Admin/delete_submission',array('id'=>$v['id']))}">删除</a></p>
                             <p><a href="{:U('Admin/mark_as_paid', array('id'=>$v['id']))}">改为已支付</a></p>
                             <p><a href="{:U('Admin/mark_as_submitted', array('id'=>$v['id']))}">改为已提交</a></p>
                         </td>

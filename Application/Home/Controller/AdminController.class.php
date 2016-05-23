@@ -127,6 +127,11 @@ class AdminController extends Controller{
 		$this->redirect('Admin/submissions');
 	}
 
+    public function delete_submission(){
+        M('submission')->where(array('id'=>I('id')))->delete();
+        $this->redirect('Admin/submissions');
+    }
+
     public function export_excel(){
         $xlsName = "submission";
         $xlsCell = array(
