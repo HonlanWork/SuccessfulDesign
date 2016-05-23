@@ -1,0 +1,70 @@
+<style>
+#main {
+    padding: 10px 6%;
+    padding-top: 30px;
+    margin-bottom: 30px;
+    box-shadow: 2px 2px 3px rgba(20, 20, 20, 0.3);
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+#main .cell {
+    height: 200px;
+    overflow: hidden;
+    background-size: cover;
+    background-position: middle;
+    text-align: center;
+    position: relative;
+    margin-bottom: 20px;
+    vertical-align: middle;
+}
+
+#main .cell h5 {
+    font-size: 14px;
+    color: #fff;
+}
+
+#main .mask {
+    padding: 20px;
+    padding-top: 30px;
+    width: 100%;
+    height: 200px;
+    background-color: rgba(40, 40, 40, 0.6);
+}
+</style>
+<div id="pictures">
+    <h4><?php translate("图片")?></h4>
+    <div class="row">
+        <foreach name="pictures" item="v">
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                <div class="cell" style="background-image:url(__PUBLIC__{$v.image});">
+                    <div class="mask">
+                        <?php if (isset($_SESSION['lang']) and $_SESSION['lang'] == 'en') { ?>
+                        <h5>{$v.titlec}</h5>
+                        <?php } else { ?>
+                        <h5>{$v.titlee}</h5>
+                        <?php } ?>
+                    </div>
+                </div>
+            </div>
+        </foreach>
+    </div>
+</div>
+<div id="videos">
+    <h4><?php translate("视频")?></h4>
+    <div class="row">
+        <foreach name="videos" item="v">
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                <div class="cell" style="background-image:url(__PUBLIC__{$v.image});">
+                    <div class="mask">
+                        <?php if (isset($_SESSION['lang']) and $_SESSION['lang'] == 'en') { ?>
+                        <h5>{$v.titlec}</h5>
+                        <?php } else { ?>
+                        <h5>{$v.titlee}</h5>
+                        <?php } ?>
+                    </div>
+                </div>
+            </div>
+        </foreach>
+    </div>
+</div>

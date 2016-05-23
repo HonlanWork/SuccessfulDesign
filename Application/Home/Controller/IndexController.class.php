@@ -382,8 +382,18 @@ class IndexController extends Controller {
         $this->display();
     }
 
-    public function downloads() {
+    public function downloads(){
         $this->downloads = M('download')->order('name desc')->select();
+        $this->display();
+    }
+
+    public function moments(){
+        $pictures = M('video')->where(array('src'=>''))->order('sort asc')->select();
+        $map = array();
+        $map['src'] = array('neq', '');
+        $videos = M('video')->where($map)->order('sort asc')->select();
+        $this->pictures = $pictures;
+        $this->videos = $videos;
         $this->display();
     }
 }
