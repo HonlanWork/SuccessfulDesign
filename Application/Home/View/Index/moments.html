@@ -115,6 +115,7 @@ $(document).ready(function() {
         $('.modal .modal-body img').hide();
         $('.modal .modal-body video').show();
         $('.modal .modal-body video source').attr('src', $(this).children('.mask').children('p').text());
+        $('.modal .modal-body video').attr("autoplay","true");
         $('.modal').modal();
     });
 });
