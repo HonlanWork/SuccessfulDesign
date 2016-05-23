@@ -83,9 +83,7 @@
             </div>
             <div class="modal-body">
                 <img src="" alt="">
-                <video controls="controls" muted preload="no" auto-play="false" style="width:100%;height:auto;border-radius:3px;">
-                    <source src="" type="video/mp4">
-                    <!-- <source src="/Public/upload/moment/videos/5921601589_1463978347.mp4" type="video/mp4"> -->
+                <video controls="controls" muted preload="no" auto-play="false" style="width:100%;height:auto;border-radius:3px;" src="">
                 </video>
             </div>
             <div class="modal-footer">
@@ -114,7 +112,7 @@ $(document).ready(function() {
         $('.modal .modal-header h4').text(title);
         $('.modal .modal-body img').hide();
         $('.modal .modal-body video').show();
-        $('.modal .modal-body video source').attr('src', $(this).children('.mask').children('p').text());
+        $('.modal .modal-body video').attr('src', $(this).children('.mask').children('p').text());
         $('.modal .modal-body video').attr("autoplay","true");
         $('.modal').modal();
     });
