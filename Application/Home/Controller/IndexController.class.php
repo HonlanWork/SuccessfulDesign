@@ -383,7 +383,7 @@ class IndexController extends Controller {
     }
 
     public function downloads() {
-        $this->downloads = M('download')->select();
+        $this->downloads = M('download')->order('name desc')->select();
         $this->display();
     }
 }

@@ -18,7 +18,7 @@
     <foreach name="downloads" item="v">
         <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
             <div class="cell">
-                <img src="__PUBLIC__{$v.thumb}" alt="">
+                <div style="background-image:url(__PUBLIC__{$v.thumb});background-size:cover;background-position:middle;height:200px;"></div>
                 <a href="__PUBLIC__{$v.url}"><p>{$v.name}</p></a>
             </div>
         </div>
