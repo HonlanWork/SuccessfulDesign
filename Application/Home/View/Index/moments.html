@@ -36,6 +36,9 @@
     height: 160px;
     background-color: rgba(40, 40, 40, 0.5);
 }
+#main .modal .fa:hover {
+    cursor: pointer;
+}
 </style>
 <div id="pictures">
     <h4 style="margin-top:0;margin-bottom:15px;"><?php translate("图片")?></h4>
@@ -84,8 +87,8 @@
             <div class="modal-body">
                 <div id="img" style="position:relative;">
                     <img src="" alt="" style="width:100%;height:auto;">
-                    <span class="fa fa-fw fa-angle-left" style="font-size:30px;position:absolute;left:50px;bottom:30px;color:#fff;"></span>
-                    <span class="fa fa-fw fa-angle-right" style="font-size:30px;position:absolute;right:50px;bottom:30px;color:#fff;"></span>
+                    <span class="fa fa-fw fa-angle-left" style="font-size:60px;position:absolute;left:30px;bottom:30px;color:#fff;opacity:0.8;"></span>
+                    <span class="fa fa-fw fa-angle-right" style="font-size:60px;position:absolute;right:30px;bottom:30px;color:#fff;opacity:0.8;"></span>
                 </div>
                 <video controls="controls" preload="no" auto-play="false" style="width:100%;height:auto;border-radius:3px;">
                 </video>
@@ -121,6 +124,44 @@ $(document).ready(function() {
         .done(function(data) {
             $('.modal .modal-body #img img').attr('src', "__PUBLIC__" + data['pic'][0]['src']);
             $('.modal').modal();
+        })
+        .fail(function() {
+        })
+        .always(function() {
+        });
+    });
+    $('.modal .fa-angle-left').click(function(event) {
+        offset -= 1;
+        $.ajax({
+            url: '{:U("Index/moment_picture")}',
+            type: 'POST',
+            dataType: 'json',
+            data: {
+                pid: $(this).attr('name'),
+                offset: offset
+            }
+        })
+        .done(function(data) {
+            $('.modal .modal-body #img img').attr('src', "__PUBLIC__" + data['pic']['src']);
+        })
+        .fail(function() {
+        })
+        .always(function() {
+        });
+    });
+    $('.modal .fa-angle-left').click(function(event) {
+        offset += 1;
+        $.ajax({
+            url: '{:U("Index/moment_picture")}',
+            type: 'POST',
+            dataType: 'json',
+            data: {
+                pid: $(this).attr('name'),
+                offset: offset
+            }
+        })
+        .done(function(data) {
+            $('.modal .modal-body #img img').attr('src', "__PUBLIC__" + data['pic'][0]['src']);
         })
         .fail(function() {
         })

@@ -398,7 +398,14 @@ class IndexController extends Controller {
     }
 
     public function moment_picture() {
-        $pic = M('picture')->where(array('parent_id'=>I('pid')))->order('sort asc')->limit(intval(I('offset')), 1)->select();
-        echo json_encode(array('pic'=>$pic));
+        $pic = M('picture')->where(array('parent_id'=>I('pid')))->order('sort asc')->select();
+        $offset = I('offset');
+        while ($offset < 0) {
+            $offset += count($pic);
+        }
+        while ($offset >= count($pic)) {
+            $offset -= count($pic);
+        }
+        echo json_encode(array('pic'=>$pic[$offset]));
     }
 }
