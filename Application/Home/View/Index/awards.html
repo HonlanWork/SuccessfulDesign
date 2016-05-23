@@ -16,36 +16,29 @@
     text-align: center;
     position: relative;
     margin-bottom: 20px;
-    padding: 20px;
-    padding-top: 30px;
     vertical-align: middle;
 }
 #main .cell h5 {
 	font-size: 13px;
 	color: #fff;
-	z-index: 99;
 }
 #main .cell h6 {
 	font-size: 12px;
-	color: #eee;
-	z-index: 99;
+	color: #fff;
 }
 #main .cell p {
 	font-size: 12px;
-	color: #ddd;
-	z-index: 99;
+	color: #fff;
 }
 #main .cell h4 {
 	font-size: 14px;
 	color: #fff;
-	z-index: 99;
 }
 #main .mask {
+	padding: 20px;
+	padding-top: 30px;
 	width: 100%;
 	height: 200px;
-	position: absolute;
-	top: 0;
-	left: 0;
 	background-color: rgba(40,40,40,0.6);
 }
 
@@ -125,11 +118,12 @@
                 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                 	<a href="{:U('User/past_submission',array('id'=>$v['id']))}">
                 		<div class="cell" style="background-image:url(__PUBLIC__{$v.image});">
-                			<h5>{$v.titlec}</h5>
-                			<h6>{$v.titlee}</h6>
-                			<p>{$v.year} {$v.category}</p>
-                			<h4>{$v.result}</h4>
-                			<div class="mask"></div>
+                			<div class="mask">
+                				<h5>{$v.titlec}</h5>
+	                			<h6>{$v.titlee}</h6>
+	                			<p>{$v.year} {$v.category}</p>
+	                			<h4>{$v.result}</h4>
+                			</div>
                 		</div>
                 	</a>
                 </div>
