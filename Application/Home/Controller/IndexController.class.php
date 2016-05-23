@@ -396,4 +396,9 @@ class IndexController extends Controller {
         $this->videos = $videos;
         $this->display();
     }
+
+    public function moment_picture() {
+        $pic = M('picture')->where(array('parent_id'=>I('pid')))->order('sort asc')->limit(intval(I('offset')), 1)->select();
+        echo json_encode(array('pic'=>$pic));
+    }
 }

@@ -42,7 +42,7 @@
     <div class="row">
         <foreach name="pictures" item="v">
             <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
-                <div class="cell" style="background-image:url(__PUBLIC__{$v.image});">
+                <div class="cell" style="background-image:url(__PUBLIC__{$v.image});" name="{$v.id}">
                     <div class="mask">
                         <?php if (isset($_SESSION['lang']) and $_SESSION['lang'] == 'en') { ?>
                         <h5>{$v.titlee}</h5>
@@ -82,7 +82,11 @@
                 <h4 class="modal-title" style="font-size:15px;"></h4>
             </div>
             <div class="modal-body">
-                <img src="" alt="">
+                <div id="img" style="position:relative;">
+                    <img src="" alt="" style="width:100%;height:auto;">
+                    <span class="fa fa-fw fa-angle-left" style="font-size:30px;position:absolute;left:50px;bottom:30px;color:#fff;"></span>
+                    <span class="fa fa-fw fa-angle-right" style="font-size:30px;position:absolute;right:50px;bottom:30px;color:#fff;"></span>
+                </div>
                 <video controls="controls" preload="no" auto-play="false" style="width:100%;height:auto;border-radius:3px;">
                 </video>
             </div>
@@ -100,17 +104,36 @@ $(document).ready(function() {
 
     $('#pictures .cell').click(function(event) {
         isVideo = 0;
+        offset = 0;
         var title = $(this).children('.mask').children('h5').text();
         $('.modal .modal-header h4').text(title);
-        $('.modal .modal-body img').show();
+        $('.modal .modal-body #img').show();
         $('.modal .modal-body video').hide();
-        $('.modal').modal();
+        $.ajax({
+            url: '{:U("Index/moment_picture")}',
+            type: 'POST',
+            dataType: 'json',
+            data: {
+                pid: $(this).attr('name'),
+                offset: offset
+            }
+        })
+        .done(function(data) {
+            $('.modal .modal-body #img img').attr('src', "__PUBLIC__" + data['pic'][0]['src']);
+            $('.modal').modal();
+        })
+        .fail(function() {
+        })
+        .always(function() {
+        });
     });
+
+
     $('#videos .cell').click(function(event) {
         isVideo = 1;
         var title = $(this).children('.mask').children('h5').text();
         $('.modal .modal-header h4').text(title);
-        $('.modal .modal-body img').hide();
+        $('.modal .modal-body #img').hide();
         $('.modal .modal-body video').attr("autoplay","true").attr('src', $(this).children('.mask').children('p').text()).show();
         $('.modal').modal();
     });
