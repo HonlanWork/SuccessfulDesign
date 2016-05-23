@@ -155,9 +155,10 @@ class AdminController extends Controller{
             array('conclusione','项目成效总结英文'), 
             array('ispaied','是否支付'), 
             array('issubmitted','是否提交'), 
-            array('submitts','提交时间')
+            array('submitts','提交时间'),
+            array('invitation','合伙伙伴'),
             ); 
-        $xlsData = M('submission')->where(array('contest_id'=>C('CONTESTID')))->field('id,titlec,titlee,category,companyc,companye,position,email,companyp,cellphone,addts,introductionc,introductione,demandc,demande,challengec,challengee,costc,coste,solutionc,solutione,conclusionc,conclusione,ispaied,issubmitted,submitts')->select();
+        $xlsData = M('submission')->where(array('contest_id'=>C('CONTESTID')))->field('id,titlec,titlee,category,companyc,companye,position,email,companyp,cellphone,addts,introductionc,introductione,demandc,demande,challengec,challengee,costc,coste,solutionc,solutione,conclusionc,conclusione,ispaied,issubmitted,submitts,invitation')->select();
 
         $xlsTitle = iconv('utf-8', 'gb2312', $xlsName);//文件名称
         $fileName = '作品汇总_'.date('YmdHis');//or $xlsTitle 文件名称可根据自己情况设定
