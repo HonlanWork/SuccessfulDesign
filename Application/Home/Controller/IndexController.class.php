@@ -306,7 +306,7 @@ class IndexController extends Controller {
         }
         $this->year = I('year');
         
-        $submissions = M('submission')->field('id,titlec,titlee,category,result,image')->where($map)->select();
+        $submissions = M('submission')->field('id,contest_id,titlec,titlee,category,result,image')->where($map)->select();
         $contests = M('contest')->select();
 
         if (I('page') == '') {
@@ -368,6 +368,7 @@ class IndexController extends Controller {
                 }
             }
         }
+        
         $this->submissions = $submissions;
 
         $years = array();
