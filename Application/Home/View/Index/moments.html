@@ -110,7 +110,7 @@ $(document).ready(function() {
         $('.modal .modal-header h4').text(title);
         $('.modal .modal-body img').hide();
         $('.modal .modal-body video').remove();
-        $('.modal .modal-body').append('<video controls="controls" muted preload="no" auto-play="true" style="width:100%;height:auto;border-radius:3px;" src="' + $(this).children('.mask').children('p').text() + '"></video>');
+        $('.modal .modal-body').append('<video controls="controls" muted preload="true" auto-play="true" style="width:100%;height:auto;border-radius:3px;" src="' + $(this).children('.mask').children('p').text() + '"></video>');
         $('.modal').modal();
     });
 });
