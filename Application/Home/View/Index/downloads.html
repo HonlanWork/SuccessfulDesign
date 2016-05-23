@@ -1,0 +1,30 @@
+<style>
+#main {
+    padding: 10px 6%;
+    padding-top: 30px;
+    margin-bottom: 30px;
+    box-shadow: 2px 2px 3px rgba(20, 20, 20, 0.3);
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+#main .cell {
+    margin-bottom: 20px;
+}
+#main .cell img {
+    width: 100%;
+}
+</style>
+<div class="row">
+    <foreach name="downloads" item="v">
+        <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
+            <div class="cell">
+                <img src="{$v.thumb}" alt="">
+                <a href="{$v.url}"><p>{$v.name}</p></a>
+            </div>
+        </div>
+    </foreach>
+</div>
+<script>
+$(document).ready(function() {
+});
+</script>

@@ -381,4 +381,9 @@ class IndexController extends Controller {
         $this->categories = M()->query("select distinct(category) from submission where result != ''");
         $this->display();
     }
+
+    public function downloads() {
+        $this->downloads = M('download')->select();
+        $this->display();
+    }
 }
