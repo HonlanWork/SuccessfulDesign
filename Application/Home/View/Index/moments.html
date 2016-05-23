@@ -114,5 +114,9 @@ $(document).ready(function() {
         $('.modal .modal-body video').attr("autoplay","true").attr('src', $(this).children('.mask').children('p').text()).show();
         $('.modal').modal();
     });
+
+    $('#myModal').on('hidden.bs.modal', function (e) {
+        $('.modal .modal-body video').attr("autoplay", "false").attr('src', ''); 
+    });
 });
 </script>
