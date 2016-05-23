@@ -122,7 +122,7 @@ $(document).ready(function() {
             }
         })
         .done(function(data) {
-            $('.modal .modal-body #img img').attr('src', "__PUBLIC__" + data['pic'][0]['src']);
+            $('.modal .modal-body #img img').attr('src', "__PUBLIC__" + data['pic']['src']);
             $('.modal').modal();
         })
         .fail(function() {
@@ -161,7 +161,7 @@ $(document).ready(function() {
             }
         })
         .done(function(data) {
-            $('.modal .modal-body #img img').attr('src', "__PUBLIC__" + data['pic'][0]['src']);
+            $('.modal .modal-body #img img').attr('src', "__PUBLIC__" + data['pic']['src']);
         })
         .fail(function() {
         })
