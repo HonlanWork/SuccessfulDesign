@@ -204,8 +204,14 @@ class AdminController extends Controller{
 
     public function user() {
         $this->user = M('user')->where(array('id'=>I('id')))->find();
+        $this->categories = M()->query("select distinct(category) from submission where contest_id=".C('CONTESTID'));
         layout('admin');
         $this->display();
+    }
+
+    public function user_edit() {
+        M('user')->where(array('id'=>I('id')))->save(array('category'=>I('category'),'note'=>I('note')));
+        $this->redirect('Admin/user', array('id'=>I('id')));
     }
 
 	public function reset_password() {

@@ -1,0 +1,52 @@
+<style>
+#main textarea {
+	resize: none;
+	width: 100%;
+}
+</style>
+<h3 style="margin-top:10px;margin-bottom:20px;">管理用户</h3>
+<div style="padding:12px;border:1px solid #ddd;border-radius:5px;margin-bottom:15px;">
+	<h4 style="margin-top:10px;">邮箱 {$user.email}</h4>
+	<p>昵称 {$user.nickname}</p>
+	<p>手机 {$user.cellphone}</p>
+	<p>公司 {$user.companyc} {$user.companye}</p>
+	<p>公司电话 {$user.companyp}</p>
+	<p>职位 {$user.position}</p>
+	<?php if ($user['role'] == 0) { ?>
+	<p>角色 普通</p>
+	<?php } elseif ($user['role'] == 1) { ?>
+	<p>角色 评委</p>
+	<?php } ?>	
+</div>	
+<form action="{:U('Admin/user_edit')}" type="post">
+	<div style="padding:12px;border:1px solid #ddd;border-radius:5px;">
+		<if condition="$user['activate'] eq 0">
+		    <p><a href="{:U('Admin/activate', array('id'=>$user['id']))}">激活用户</a></p>
+		</if>
+		<p><a href="{:U('Admin/reset_password', array('id'=>$user['id']))}">重置密码</a></p>
+		<?php if ($user['role'] == 0) { ?>
+		<p><a href="{:U('Admin/set_as_judge', array('id'=>$user['id']))}">升为评委</a></p>
+		<?php } elseif ($user['role'] == 1) { ?>
+		<p><a href="{:U('Admin/set_as_common', array('id'=>$user['id']))}">降为普通</a></p>
+		<span>评委类别</span>
+		<select class="form-control" style="width:200px;display:inline-block;margin-left:10px;margin-bottom:10px;" name="category">
+			<if condition="$user['category'] eq ''">
+				<option value='' selected="selected"></option>
+				<else/>
+				<option value=''></option>
+			</if>
+			<foreach name="categories" item="v">
+				<if condition="$user['category'] eq $v['category']">
+					<option value="{$v['category']}" selected="selected">{$v.category}</option>
+					<else/>
+					<option value="{$v['category']}">{$v.category}</option>
+				</if>
+			</foreach>
+		</select>
+		<?php } ?>	
+		<p>用户备注</p>
+		<textarea name="note" rows="5" class="form-control" style="display:inline-block;">{$user.note}</textarea>
+		<input type="text" name="id" value="{$user['id']}" style="display:none;">
+		<button class="btn btn-success" style="margin-top:10px;">保存</button>
+	</div>
+</form>
