@@ -100,8 +100,6 @@
 }
 
 #main select[name="gender"] {
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
     appearance: none;
     -o-appearance: none;
     -ms-appearance: none;
@@ -224,17 +222,17 @@
                     <div style="padding-left:120px;">
                         <div class="form-group">
                             <p>
-                                <?php translate('昵称')?>
+                                <?php translate('姓名')?> <b style="color:red;">*</b>
                             </p>
                             <input type="text" name="nickname" class="form-control" value="{$user['nickname']}">
                         </div>
                         <div class="form-group">
                             <p>
-                                <?php translate('性别')?>
+                                <?php translate('性别')?> <b style="color:red;">*</b>
                             </p>
                             <select class="form-control" name="gender">
                                 <if condition="$user.gender == 1">
-                                    <option value="1" selected=selected>
+                                    <option value="1" selected="selected">
                                         <?php translate('男')?>
                                     </option>
                                     <option value="0">
@@ -244,7 +242,7 @@
                                     <option value="1">
                                         <?php translate('男')?>
                                     </option>
-                                    <option value="0" selected=selected>
+                                    <option value="0" selected="selected">
                                         <?php translate('女')?>
                                     </option>
                                 </if>
@@ -252,7 +250,7 @@
                         </div>
                         <div class="form-group">
                             <p>
-                                <?php translate('手机')?>
+                                <?php translate('手机')?> <b style="color:red;">*</b>
                             </p>
                             <input type="text" name="cellphone" class="form-control" value="{$user['cellphone']}">
                         </div>
@@ -282,25 +280,25 @@
                 <div id="job-info-edit">
                     <div class="form-group">
                         <p>
-                            <?php translate('公司名称（中文）')?>
+                            <?php translate('公司名称（中文）')?> <b style="color:red;">*</b>
                         </p>
                         <input type="text" name="companyc" class="form-control" value="{$user['companyc']}">
                     </div>
                     <div class="form-group">
                         <p>
-                            <?php translate('公司名称（英文）')?>
+                            <?php translate('公司名称（英文）')?> <b style="color:red;">*</b>
                         </p>
                         <input type="text" name="companye" class="form-control" value="{$user['companye']}">
                     </div>
                     <div class="form-group">
                         <p>
-                            <?php translate('公司地址（中文）')?>
+                            <?php translate('公司地址（中文）')?> <b style="color:red;">*</b>
                         </p>
                         <input type="text" name="companyac" class="form-control" value="{$user['companyac']}">
                     </div>
                     <div class="form-group">
                         <p>
-                            <?php translate('公司地址（英文）')?>
+                            <?php translate('公司地址（英文）')?> <b style="color:red;">*</b>
                         </p>
                         <input type="text" name="companyae" class="form-control" value="{$user['companyae']}">
                     </div>
@@ -310,7 +308,7 @@
                 <div id="other-info-edit">
                     <div class="form-group">
                         <p>
-                            <?php translate('职位')?>
+                            <?php translate('职位')?> <b style="color:red;">*</b>
                         </p>
                         <input type="text" name="position" class="form-control" value="{$user['position']}">
                     </div>

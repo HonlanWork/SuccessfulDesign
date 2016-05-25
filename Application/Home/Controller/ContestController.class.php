@@ -32,6 +32,7 @@ class ContestController extends CommonController {
 				'companyp' => $user['companyp'],
 				'position' => $user['position'],
 				'email' => $user['email'],
+				'nickname' => $user['nickname'],
 				'cellphone' => $user['cellphone'],
 				'image' => '/img/design.jpg',
 				'kol' => $user['kol']
@@ -239,6 +240,7 @@ class ContestController extends CommonController {
 				'companyp' => $_POST['companyp'],
 				'position' => $_POST['position'],
 				'email' => $_POST['email'],
+				'nickname' => $_POST['nickname'],
 				'cellphone' => $_POST['cellphone'],
 				'addts' => $_POST['addts'],
 				'introductione' => $_POST['introductione'],

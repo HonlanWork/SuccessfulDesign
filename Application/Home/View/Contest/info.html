@@ -187,6 +187,14 @@ select.form-control {
                                 <table class="table table-bordered">
                                     <tr>
                                         <td style="min-width:115px;">
+                                            <span style="font-size:12px;"><?php translate('姓名')?> <b style="color:red;">*</b></span>
+                                        </td>
+                                        <td style="padding:0;background-color:#F8F8F8;">
+                                            <input type="text" name="nickname" class="form-control" value="{$submission['nickname']}" style="border:none;">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="min-width:115px;">
                                             <span style="font-size:12px;"><?php translate('公司电话')?></span>
                                         </td>
                                         <td style="padding:0;background-color:#F8F8F8;">
@@ -195,7 +203,7 @@ select.form-control {
                                     </tr>
                                     <tr>
                                         <td style="min-width:115px;">
-                                            <span style="font-size:12px;"><?php translate('手机')?></span>
+                                            <span style="font-size:12px;"><?php translate('手机')?> <b style="color:red;">*</b></span>
                                         </td>
                                         <td style="padding:0;background-color:#F8F8F8;">
                                             <input type="text" name="cellphone" class="form-control" value="{$submission['cellphone']}" style="border:none;">
@@ -203,7 +211,7 @@ select.form-control {
                                     </tr>
                                     <tr>
                                         <td style="min-width:115px;">
-                                            <span style="font-size:12px;"><?php translate('邮箱')?></span>
+                                            <span style="font-size:12px;"><?php translate('邮箱')?> <b style="color:red;">*</b></span>
                                         </td>
                                         <td style="padding:0;background-color:#F8F8F8;">
                                             <input type="text" name="email" class="form-control" value="{$submission['email']}" style="border:none;">
