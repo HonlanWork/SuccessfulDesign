@@ -343,6 +343,9 @@ class ContestController extends CommonController {
 			if ($data['cellphone'] != '') {
 				$completeness += 1;
 			}
+			if ($data['nickname'] != '') {
+				$completeness += 1;
+			}
 			if ($data['addts'] != '') {
 				$completeness += 1;
 			}
@@ -382,13 +385,13 @@ class ContestController extends CommonController {
 			if ($data['conclusione'] != '') {
 				$completeness += 1;
 			}
-			if ($completeness == 22) {
+			if ($completeness == 23) {
 				$data['iscomplete'] = 1;
 			}
 			else {
 				$data['iscomplete'] = 0;
 			}
-			$data['completeness'] = round(floatval($completeness * 100) / 22, 1);
+			$data['completeness'] = round(floatval($completeness * 100) / 23, 1);
 
 			M('submission')->where(array('id'=>$_POST['id'],'contest_id'=>$_POST['contest_id'], 'user_id'=>$_SESSION['uid']))->save($data);
 			
