@@ -78,6 +78,7 @@ class ContestController extends CommonController {
 		$amount = $input_data['amount'];
 		$orderNo = substr(md5(time()), 0, 20);
 		M('submission')->where(array('id'=>$input_data['submission_id'], 'user_id'=>$_SESSION['uid']))->save(array('pay_code'=>$orderNo));
+		$submission = M('submission')->where(array('id'=>$input_data['submission_id'], 'user_id'=>$_SESSION['uid']))->find();
 
         \Pingpp\Pingpp::setPrivateKeyPath('Public/rsa_private_key.pem');
 
@@ -138,7 +139,7 @@ class ContestController extends CommonController {
         try {
 		    $ch = \Pingpp\Charge::create(
 		        array(
-		            'subject'   => '2016成功设计大赛作品支付',
+		            'subject'   => '成功设计大赛作品 '.$submission['titlec'].' '.$submission['titlee'],
 		            'body'      => '快来支付吧',
 		            'amount'    => $amount,
 		            'order_no'  => $orderNo,
