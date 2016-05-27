@@ -107,29 +107,15 @@
         <?php translate('个人信息')?>
             <button class="indicator"><span class="fa fa-fw fa-angle-double-up"></span></button>
     </div>
-    <div class="panel-body">
+    <div class="panel-body" style="padding-bottom:0;">
         <div class="row">
             <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                 <div style="position:relative;margin-bottom:25px;">
                     <p class="key">
-                        <?php translate('公司名称（中文）')?>
+                        <?php translate('姓名')?>
                     </p>
-                    <p class="value">{$submission.companyc}</p>
+                    <p class="value">{$submission.nickname}</p>
                 </div>
-                <div style="position:relative;margin-bottom:25px;">
-                    <p class="key">
-                        <?php translate('公司名称（英文）')?>
-                    </p>
-                    <p class="value">{$submission.companye}</p>
-                </div>
-                <div style="position:relative;margin-bottom:25px;">
-                    <p class="key">
-                        <?php translate('公司电话')?>
-                    </p>
-                    <p class="value">{$submission.companyp}</p>
-                </div>
-            </div>
-            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                 <div style="position:relative;margin-bottom:25px;">
                     <p class="key">
                         <?php translate('邮箱')?>
@@ -143,10 +129,30 @@
                     <p class="value">{$submission.cellphone}</p>
                 </div>
                 <div style="position:relative;">
-                    <p class="key" style="margin-bottom:0;">
+                    <p class="key" style="margin-bottom:25px;">
                         <?php translate('职位')?>
                     </p>
-                    <p class="value" style="margin-bottom:0;">{$submission.position}</p>
+                    <p class="value" style="margin-bottom:25px;">{$submission.position}</p>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                <div style="position:relative;margin-bottom:25px;">
+                    <p class="key">
+                        <?php translate('公司名称（中文）')?>
+                    </p>
+                    <p class="value">{$submission.companyc}</p>
+                </div>
+                <div style="position:relative;margin-bottom:25px;">
+                    <p class="key">
+                        <?php translate('公司名称（英文）')?>
+                    </p>
+                    <p class="value">{$submission.companye}</p>
+                </div>
+                <div style="position:relative;margin-bottom:15px;">
+                    <p class="key">
+                        <?php translate('公司电话')?>
+                    </p>
+                    <p class="value">{$submission.companyp}</p>
                 </div>
             </div>
         </div>
