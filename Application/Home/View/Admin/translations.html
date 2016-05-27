@@ -46,7 +46,7 @@ $(document).ready(function() {
             .done(function(data) {
                 $('#main  tr.translation').remove();
                 for (var i = 0; i < data['translations'].length; i++) {
-                    var $p = "<tr class='translation'><td>" + data['translations'][i].ch + "</td><td><input type='text' class='form-control' value='" + data['translations'][i].en + "'></td><td><button class='btn btn-default save' name='" + data['translations'][i].id + "'>保存修改</button></td></tr>";
+                    var $p = "<tr class='translation'><td>" + data['translations'][i].ch + "</td><td><input type='text' class='form-control' style='font-size:12px;width:300px;' value='" + data['translations'][i].en + "'></td><td><button class='btn btn-default save' style='font-size:12px;color:#666;' name='" + data['translations'][i].id + "'>保存修改</button></td></tr>";
                     $('#main table').append($p);
                 }
                 console.log("success");

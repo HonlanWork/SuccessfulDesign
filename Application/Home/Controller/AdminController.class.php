@@ -242,7 +242,9 @@ class AdminController extends Controller{
 	}
 
 	public function translations_search() {
-		$translations = M('translation')->where(array('ch'=>I('keyword')))->select();
+        $map = array();
+        $map['ch'] = array('like', '%'.I('keyword').'%');
+		$translations = M('translation')->where($map)->select();
         echo json_encode(array('translations'=>$translations));
 	}
 
