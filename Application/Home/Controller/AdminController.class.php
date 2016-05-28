@@ -211,7 +211,7 @@ class AdminController extends Controller{
 
     public function user_edit() {
         M('user')->where(array('id'=>I('id')))->save(array('category'=>I('category'),'note'=>I('note')));
-        $this->redirect('Admin/user', array('id'=>I('id')));
+        $this->redirect('Admin/users');
     }
 
 	public function reset_password() {

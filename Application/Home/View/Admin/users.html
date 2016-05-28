@@ -19,7 +19,7 @@
             <th>邮箱/手机</th>
             <th>公司中文/英文/电话</th>
             <th>职位</th>
-            <th>系统角色</th>
+            <th style="width:80px;">系统角色</th>
             <th>操作</th>
             <foreach name='users' item='v'>
                 <tr class="user">
@@ -29,13 +29,15 @@
                         <br/>{$v.companye}
                         <br/>{$v.companyp}</td>
                     <td>{$v.position}</td>
-                    <td>
+                    <td style="width:80px;">
                         <?php 
                         if ($v['role'] == 0) {
                             echo '普通';
                         }
                         elseif ($v['role'] == 1) {
                             echo '评委';
+                            echo '<br/>';
+                            echo $v['category'];
                         }
                         else {
                             echo '管理员';
