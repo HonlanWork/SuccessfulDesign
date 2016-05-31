@@ -29,20 +29,16 @@
 		<?php } elseif ($user['role'] == 1) { ?>
 		<p><a href="{:U('Admin/set_as_common', array('id'=>$user['id']))}">降为普通</a></p>
 		<span>评委类别</span>
-		<select class="form-control" style="width:200px;display:inline-block;margin-left:10px;margin-bottom:10px;" name="category">
-			<if condition="$user['category'] eq ''">
-				<option value='' selected="selected"></option>
-				<else/>
-				<option value=''></option>
-			</if>
+		<div style="margin-top:10px;margin-bottom:15px;">
 			<foreach name="categories" item="v">
-				<if condition="$user['category'] eq $v['category']">
-					<option value="{$v['category']}" selected="selected">{$v.category}</option>
+				<if condition="$v[1] eq 1">
+					<input type="checkbox" name="{$v[0]}" value="{$v[0]}" checked="checked" class="category"><span style='margin-right:15px;margin-left:5px;'>{$v[0]}</span>
 					<else/>
-					<option value="{$v['category']}">{$v.category}</option>
+					<input type="checkbox" name="{$v[0]}" value="{$v[0]}" class="category"><span style='margin-right:15px;margin-left:5px;'>{$v[0]}</span>
 				</if>
 			</foreach>
-		</select>
+			<input type="text" name="categories" value="{$category}" style="display:none;">
+		</div>
 		<?php } ?>	
 		<p>用户备注</p>
 		<textarea name="note" rows="5" class="form-control" style="display:inline-block;">{$user.note}</textarea>
@@ -50,3 +46,21 @@
 		<button class="btn btn-success" style="margin-top:10px;">保存</button>
 	</div>
 </form>
+<script>
+$(document).ready(function() {
+	$('#main input.category').click(function(event) {
+		var categories = '';
+		$('#main input.category').each(function(index, el) {
+			if ($('#main input.category')[index].checked) {
+				if (categories == '') {
+					categories += $(this).attr('name');
+				}
+				else {
+					categories += ',' + $(this).attr('name');
+				}
+			}
+		});
+		$('#main input[name="categories"]').val(categories);
+	});
+});
+</script>

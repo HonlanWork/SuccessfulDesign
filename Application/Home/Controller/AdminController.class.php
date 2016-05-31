@@ -203,14 +203,34 @@ class AdminController extends Controller{
 	}
 
     public function user() {
-        $this->user = M('user')->where(array('id'=>I('id')))->find();
-        $this->categories = M()->query("select distinct(category) from submission where contest_id=".C('CONTESTID'));
+        $user = M('user')->where(array('id'=>I('id')))->find();
+        $categories = M()->query("select distinct(category) from submission where contest_id=".C('CONTESTID'));
+        $this->category = $user['category'];
+        $category = split(',', $user['category']);
+        $tmp = [];
+        for ($i = 0; $i < count($categories); $i++) {
+            $flag = false;
+            for ($j = 0; $j < count($category); $j++) { 
+                if ($categories[$i]['category'] == $category[$j]) {
+                    $flag = true;
+                    break;
+                }
+            }
+            if ($flag) {
+                $tmp[] = [$categories[$i]['category'], 1];
+             } 
+             else {
+                $tmp[] = [$categories[$i]['category'], 0];
+             }
+        }
+        $this->categories = $tmp;
+        $this->user = $user;
         layout('admin');
         $this->display();
     }
 
     public function user_edit() {
-        M('user')->where(array('id'=>I('id')))->save(array('category'=>I('category'),'note'=>I('note')));
+        M('user')->where(array('id'=>I('id')))->save(array('category'=>I('categories'),'note'=>I('note')));
         $this->redirect('Admin/users');
     }
 
