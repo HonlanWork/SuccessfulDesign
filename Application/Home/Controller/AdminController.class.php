@@ -108,7 +108,7 @@ class AdminController extends Controller{
 	}
 
 	public function mark_as_paid() {
-		M('submission')->where(array('id'=>I('id')))->save(array('ispaied'=>1));
+		M('submission')->where(array('id'=>I('id')))->save(array('ispaied'=>1, 'pay_confirm'=>0, 'issubmitted'=>0));
 		$this->redirect('Admin/submissions');
 	}
 
@@ -118,12 +118,12 @@ class AdminController extends Controller{
 	}
 
 	public function mark_as_submitted() {
-		M('submission')->where(array('id'=>I('id')))->save(array('ispaied'=>1, 'issubmitted'=>1));
+		M('submission')->where(array('id'=>I('id')))->save(array('ispaied'=>1, 'pay_confirm'=>0, 'issubmitted'=>1));
 		$this->redirect('Admin/submissions');
 	}
 
 	public function mark_as_notsubmitted() {
-		M('submission')->where(array('id'=>I('id')))->save(array('issubmitted'=>0));
+		M('submission')->where(array('id'=>I('id')))->save(array('ispaied'=>1, 'pay_confirm'=>0, 'issubmitted'=>0));
 		$this->redirect('Admin/submissions');
 	}
 
