@@ -167,28 +167,35 @@ class ContestController extends CommonController {
 	}
 
 	public function pay_confirm() {
-		M('submission')->where(array('id'=>$_POST['id'], 'user_id'=>$_SESSION['uid']))->save(array('pay_confirm'=>1));
-    	$email = M('email')->where(array('name'=>'完成支付'))->find();
-    	$email_content = $email['content'];
-    	if(count(explode("\n", $email_content)) == 1 ){
-    		$email_content = explode("\r", $email_content);
-    	} else {
-    		$email_content = explode("\n", $email_content);
-    	}
-    	$temp = '';
-    	foreach ($email_content as $key => $value) {
-    		$temp .= $value."<br/>";
-    	}
-    	$email_content = $temp;
-    	$submission = M('submission')->where(array('id'=>$_POST['id'], 'user_id'=>$_SESSION['uid']))->find();
-    	$tmp = '作品中文名称：'.$submission['titlec'].'<br/>作品英文名称：'.$submission['titlee'].'<br/>作品类别：'.$submission['category'];
-        $email_content = explode("^^^", $email_content);
-    	$email_content = $email_content[0].$tmp.$email_content[1];
-    	$admins = M('user')->where(array('role'=>2))->select();
-    	foreach ($admins as $key => $value) {
-    		SendMail($value['email'], $email['title'], $email_content);
-    	}
-		echo json_encode(array('result'=>'ok'));
+		$submission = M('submission')->where(array('id'=>$_POST['id'], 'user_id'=>$_SESSION['uid']))->find();
+		if ($submission['ispaied'] == 1) {
+			echo json_encode(array('result'=>'paid'));
+		}
+		else {
+			M('submission')->where(array('id'=>$_POST['id'], 'user_id'=>$_SESSION['uid']))->save(array('pay_confirm'=>1));
+	    	$email = M('email')->where(array('name'=>'完成支付'))->find();
+	    	$email_content = $email['content'];
+	    	if(count(explode("\n", $email_content)) == 1 ){
+	    		$email_content = explode("\r", $email_content);
+	    	} else {
+	    		$email_content = explode("\n", $email_content);
+	    	}
+	    	$temp = '';
+	    	foreach ($email_content as $key => $value) {
+	    		$temp .= $value."<br/>";
+	    	}
+	    	$email_content = $temp;
+	    	$submission = M('submission')->where(array('id'=>$_POST['id'], 'user_id'=>$_SESSION['uid']))->find();
+	    	$tmp = '作品中文名称：'.$submission['titlec'].'<br/>作品英文名称：'.$submission['titlee'].'<br/>作品类别：'.$submission['category'];
+	        $email_content = explode("^^^", $email_content);
+	    	$email_content = $email_content[0].$tmp.$email_content[1];
+	    	$admins = M('user')->where(array('role'=>2))->select();
+	    	foreach ($admins as $key => $value) {
+	    		SendMail($value['email'], $email['title'], $email_content);
+	    	}
+			echo json_encode(array('result'=>'ok'));
+		}
+		
 	}
 
 	public function pay_by_code() {

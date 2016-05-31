@@ -418,9 +418,14 @@ $(document).ready(function() {
                     id: {$submission.id}
                 },
             })
-            .done(function() {
-                $('#main #pay-process').hide();
-                $('#main #pay-success').fadeIn('fast');
+            .done(function(data) {
+                if (data['result'] == 'paid') {
+                    window.location.href = "{:U('Contest/info',array('id'=>$submission['id']))}";
+                }
+                else if (data['result'] == 'ok') {
+                    $('#main #pay-process').hide();
+                    $('#main #pay-success').fadeIn('fast');
+                }
             })
             .fail(function() {
                 console.log("error");
