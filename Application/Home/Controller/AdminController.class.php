@@ -340,16 +340,44 @@ class AdminController extends Controller{
     	$submissions = M('submission')->where(array('contest_id'=>C('CONTESTID'),'ispaied'=>1,'issubmitted'=>1))->select();
     	$users = M('user')->where(array('role'=>1))->select();
 
-    	$number = 0;
-    	for ($i = 0; $i < count($submissions); $i++) { 
-    		for ($j = 0; $j < 3; $j++) { 
-    			M('judge_first')->add(array('contest_id'=>C('CONTESTID'),'submission_id'=>$submissions[$i]['id'],'user_id'=>$users[$number]['id'],'yes_or_no'=>'','timestamp'=>''));
-    			$number += 1;
-    			if ($number >= count($users)) {
-    				$number = 0;
-    			}
+        $mapping = array();
+    	for ($i = 0; $i < count($submissions); $i++) {
+            $sum = 0;
+            if (array_key_exists($submissions[$i]['category'], $mapping)) {
+                $mapping[$submissions[$i]['category']] = 0;
+            }
+
+    		for ($j = $mapping[$submissions[$i]['category']]; ; $j++) {
+                if ($j == count($users)) {
+                    $j = 0;
+                }
+                $flag = false;
+                $tmp = split(',', $users[$j]['category']);
+                echo count($tmp);
+                for ($k = 0; $k < count($tmp); $k++) {
+                    if ($tmp[$k] == $submissions[$i]['category']) {
+                        $flag = true;
+                        break;
+                    }
+                }
+                if ($flag) {
+                    M('judge_first')->add(array('contest_id'=>C('CONTESTID'),'submission_id'=>$submissions[$i]['id'],'user_id'=>$users[$j]['id'],'yes_or_no'=>'','timestamp'=>''));
+                    $sum += 1;
+                    echo $submissions[$i]['category'], $mapping[$submissions[$i]['category']];
+                    echo ' ';
+                    $mapping[$submissions[$i]['category']] = $j + 1;
+
+                    if ($mapping[$submissions[$i]['category']] == count($users)) {
+                        $mapping[$submissions[$i]['category']] = 0;
+                    }
+
+                    if ($sum == 3) {
+                        break;
+                    }
+                }
     		}
     	}
+        die;
     	$this->redirect('Admin/judge_first');
     }
 

@@ -76,7 +76,8 @@ class ContestController extends CommonController {
 		}
 		$channel = strtolower($input_data['channel']);
 		$amount = $input_data['amount'];
-		$orderNo = substr(md5(time()), 0, 20);
+		// $orderNo = substr(md5(time()), 0, 20);
+		$orderNo = $input_data['order_no'];
 		M('submission')->where(array('id'=>$input_data['submission_id'], 'user_id'=>$_SESSION['uid']))->save(array('pay_code'=>$orderNo));
 		$submission = M('submission')->where(array('id'=>$input_data['submission_id'], 'user_id'=>$_SESSION['uid']))->find();
 

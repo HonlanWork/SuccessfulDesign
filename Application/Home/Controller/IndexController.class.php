@@ -7,6 +7,17 @@ class IndexController extends Controller {
         $this->redirect('Index/contest', array('id'=>C('CONTESTID')));
     }
 
+    public function logging(){
+        $log = array(
+            'part' => I('part'),
+            'content' => I('content'),
+            'ip' => get_client_ip(),
+            'timestamp' => time()
+            );
+        M('logging')->add($log);
+        echo json_encode(array('result'=>'ok'));
+    }
+
     // 比赛
     public function contest(){
     	$contestId = I('id');

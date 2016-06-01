@@ -271,12 +271,19 @@ $(document).ready(function() {
     $('#main button').click(function(event) {
         event.preventDefault();
     });
+    var order_no = '';
+    // var tmp = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    var tmp = '0123456789';
+    for (var i = 0; i < 30; i++) {
+        order_no += tmp.charAt(Math.floor(Math.random() * tmp.length));
+    }
+    order_no = {$submission.id} + order_no;
     if (parseInt($('#isadmin').text()) == 1) {
         document.addEventListener('pingpp_one_ready', function() {
             document.getElementById('pingxx').addEventListener('click', function() {
                 pingpp_one.init({
                     app_id: 'app_4O0O8KmzjHm5zbLW', //该应用在 ping++ 的应用 ID
-                    order_no: '', //订单在商户系统中的订单号
+                    order_no: order_no, //订单在商户系统中的订单号
                     amount: 1, //订单价格，单位：人民币 分
                     // 壹收款页面上需要展示的渠道，数组，数组顺序即页面展示出的渠道的顺序
                     // channel: ['alipay_wap', 'wx_pub', 'upacp_wap', 'yeepay_wap', 'jdpay_wap', 'bfb_wap'],
@@ -295,6 +302,24 @@ $(document).ready(function() {
                     if (!res.status) {
                         //处理错误
                         alert(res.msg);
+                        $.ajax({
+                            url: "{:U('Index/logging')}",
+                            type: 'POST',
+                            dataType: 'json',
+                            data: {
+                                part: 'pay',
+                                content: res.chargeUrlOutput,
+                            },
+                        })
+                        .done(function() {
+                            console.log("success");
+                        })
+                        .fail(function() {
+                            console.log("error");
+                        })
+                        .always(function() {
+                            console.log("complete");
+                        });
                     } else {
                         //debug 模式下调用 charge_url 后会暂停，可以调用 pingpp_one.resume 方法继续执行
                         if (res.debug && !res.wxSuccess) {
