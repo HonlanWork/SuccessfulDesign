@@ -278,7 +278,6 @@ $(document).ready(function() {
         order_no += tmp.charAt(Math.floor(Math.random() * tmp.length));
     }
     order_no = {$submission.id} + order_no;
-    console.log(order_no);
     if (parseInt($('#isadmin').text()) == 1) {
         document.addEventListener('pingpp_one_ready', function() {
             document.getElementById('pingxx').addEventListener('click', function() {
@@ -354,7 +353,7 @@ $(document).ready(function() {
             document.getElementById('pingxx').addEventListener('click', function() {
                 pingpp_one.init({
                     app_id: 'app_4O0O8KmzjHm5zbLW', //该应用在 ping++ 的应用 ID
-                    order_no: '', //订单在商户系统中的订单号
+                    order_no: order_no, //订单在商户系统中的订单号
                     amount: parseInt({$price}) * 100, //订单价格，单位：人民币 分
                     // amount: 1, //订单价格，单位：人民币 分
                     // 壹收款页面上需要展示的渠道，数组，数组顺序即页面展示出的渠道的顺序
