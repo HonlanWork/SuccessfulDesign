@@ -136,16 +136,7 @@ class ContestController extends CommonController {
 		        break;
 		}
 
-		$subject = '';
-		if ($submission['titlec'] != '') {
-			$subject = $submission['titlec'];
-		}
-		else {
-			$subject = $submission['titlee'];
-		}
-		if (strlen($subject) > 30) {
-			$subject = substr($subject, 0, 30);
-		}
+		$subject = '成功设计大赛作品 '.$submission['id'];
 
         \Pingpp\Pingpp::setApiKey($api_key);
         try {
