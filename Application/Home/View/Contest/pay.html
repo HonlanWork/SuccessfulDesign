@@ -278,6 +278,7 @@ $(document).ready(function() {
         order_no += tmp.charAt(Math.floor(Math.random() * tmp.length));
     }
     order_no = {$submission.id} + order_no;
+    console.log(order_no);
     if (parseInt($('#isadmin').text()) == 1) {
         document.addEventListener('pingpp_one_ready', function() {
             document.getElementById('pingxx').addEventListener('click', function() {
