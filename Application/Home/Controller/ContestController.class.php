@@ -135,12 +135,20 @@ class ContestController extends CommonController {
 		        );
 		        break;
 		}
-        
+
+		$subject = '';
+		if ($submission['titlec'] != '') {
+			$subject = $submission['titlec'];
+		}
+		else {
+			$subject = $submission['titlee'];
+		}
+
         \Pingpp\Pingpp::setApiKey($api_key);
         try {
 		    $ch = \Pingpp\Charge::create(
 		        array(
-		            'subject'   => '成功设计大赛作品 '.$submission['titlec'].' '.$submission['titlee'],
+		            'subject'   => $subject,
 		            'body'      => '快来支付吧',
 		            'amount'    => $amount,
 		            'order_no'  => $orderNo,
