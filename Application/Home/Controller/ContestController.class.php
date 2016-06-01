@@ -143,6 +143,9 @@ class ContestController extends CommonController {
 		else {
 			$subject = $submission['titlee'];
 		}
+		if (strlen($subject) > 30) {
+			$subject = substr($subject, 0, 30);
+		}
 
         \Pingpp\Pingpp::setApiKey($api_key);
         try {
