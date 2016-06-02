@@ -235,6 +235,30 @@ class AdminController extends Controller{
         $this->display();
     }
 
+    public function user_add(){
+        layout('admin');
+        $this->display();
+    }
+
+    public function user_add_handle(){
+        $salt = genRandStr();
+
+        M('user')->data(array(
+            'email' => I('email'),
+            'password' => sha1($salt.I('password')),
+            'salt' => $salt,
+            'activate' => 1,
+            'role' => I('role'),
+            "nickname" => I('email'),
+            "gender" => 1,
+            "portrait" => "/img/user.png",
+            "introduction" => "暂无",
+            'kol' => ''
+            ))->add();
+
+        $this->redirect('Admin/users');
+    }
+
     public function user_edit() {
         M('user')->where(array('id'=>I('id')))->save(array('category'=>I('categories'),'note'=>I('note')));
         $this->redirect('Admin/users');

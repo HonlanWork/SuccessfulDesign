@@ -1,0 +1,33 @@
+<h3 style="margin-top:10px;margin-bottom:20px;">添加用户</h3>
+<form action="{:U('Admin/user_add_handle')}" method="post">
+	<div class="form-group">
+		<input type="text" class="form-control" name="email" placeholder="邮箱" style="width:300px;margin-bottom:15px;">
+		<input type="text" class="form-control" name="password" placeholder="密码" style="width:300px;margin-bottom:15px;">
+		<input type="text" class="form-control" name="password1" placeholder="确认密码" style="width:300px;margin-bottom:15px;">
+		<select name="role" class="form-control" style="width:300px;margin-bottom:20px;">
+			<option value="0">普通</option>
+			<option value="1">评委</option>
+		</select>
+		<button type="submit" class="btn btn-success disabled">添加</button>
+	</div>
+</form>
+<script>
+$(document).ready(function() {
+	$('#main input[name="password"]').keyup(function(event) {
+		if ($(this).val() == '' || $(this).val() != $('#main input[name="password1"]').val()) {
+			$('#main button').addClass('disabled');
+		}
+		else {
+			$('#main button').removeClass('disabled');
+		}
+	});
+	$('#main input[name="password1"]').keyup(function(event) {
+		if ($(this).val() == '' || $(this).val() != $('#main input[name="password"]').val()) {
+			$('#main button').addClass('disabled');
+		}
+		else {
+			$('#main button').removeClass('disabled');
+		}
+	});
+});
+</script>
