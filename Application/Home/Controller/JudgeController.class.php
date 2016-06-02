@@ -181,7 +181,7 @@ class JudgeController extends Controller{
 	}
 
 	public function second_submit() {
-		M('judge_second')->where(array('contest_id'=>C('CONTESTID'),'user_id'=>$_SESSION['uid'],'submission_id'=>I('id')))->save(array('strategy'=>I('strategy'),'process'=>I('process'),'result'=>I('result'),'comment'=>I('comment'),'timestamp'=>time(),'is_judged'=>1));
+		M('judge_second')->where(array('contest_id'=>C('CONTESTID'),'user_id'=>$_SESSION['uid'],'submission_id'=>I('id')))->save(array('strategy'=>I('strategy'),'process'=>I('process'),'result'=>I('result'),'total'=>(I('strategy') + I('process') + I('result')),'comment'=>I('comment'),'timestamp'=>time(),'is_judged'=>1));
 		$offset = I('offset');
 		$total = M('judge_second')->where(array('contest_id'=>C('CONTESTID'),'user_id'=>$_SESSION['uid']))->count();
 		$offset += 1;

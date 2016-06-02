@@ -508,7 +508,7 @@ class AdminController extends Controller{
                     }
                 }
                 if ($flag) {
-                    M('judge_second')->add(array('contest_id'=>C('CONTESTID'), 'submission_id'=>$submissions[$i]['id'], 'user_id'=>$judges[$j]['id'], 'strategy'=>0, 'process'=>0, 'result'=>0, 'comment'=>'', 'timestamp'=>'', 'is_judged'=>0));
+                    M('judge_second')->add(array('contest_id'=>C('CONTESTID'), 'submission_id'=>$submissions[$i]['id'], 'user_id'=>$judges[$j]['id'], 'strategy'=>0, 'process'=>0, 'result'=>0, 'total'=>0, 'comment'=>'', 'timestamp'=>'', 'is_judged'=>0));
 
                     $sum += 1;
                     $begin = $j + 1;
