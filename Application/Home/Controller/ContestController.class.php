@@ -15,6 +15,11 @@ class ContestController extends CommonController {
 				$this->redirect('User/submissions');
 			}
 		}
+		$contest = M('contest')->where(array('id'=>C('CONTESTID')))->find();
+		if ($contest['open'] == 0) {
+			$this->redirect('User/submissions');
+		}
+
 		$this->display();
 	}
 

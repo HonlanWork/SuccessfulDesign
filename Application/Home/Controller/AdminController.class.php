@@ -41,6 +41,12 @@ class AdminController extends Controller{
         $this->redirect('Admin/contest');
     }
 
+    public function contest_close(){
+        M('contest')->where(array('id'=>C('CONTESTID')))->save(array('open'=>0));
+        M('submission')->where(array('contest_id'=>C('CONTESTID'),'ispaied'=>1,'issubmitted'=>0))->save(array('ispaied'=>1,'issubmitted'=>1));
+        $this->redirect('Admin/contest');
+    }
+
     // 审核支付
 	public function contest_pay_confirm(){
 		$this->submissions = M('submission')->where(array('contest_id'=>C('CONTESTID'), 'ispaied'=>0, 'pay_confirm'=>1))->select();

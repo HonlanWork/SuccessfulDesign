@@ -28,3 +28,24 @@
     </div>
     <button type="submit" class="btn btn-success">修改</button>
 </form>
+<div style="margin-top:20px;">
+    <h3 style="margin-top:30px;margin-bottom:20px;">关闭比赛</h3>
+    <if condition="$contest['open'] eq 1">
+        <a href="" class="btn btn-danger" id="close">关闭</a>
+        <a href="{:U('Admin/contest_close')}" class="btn btn-danger" id="close_again" style="display:none;">确定关闭？</a>
+        <else/>
+        <p>已关闭</p>
+    </if>
+    <p style="margin-top:15px;">所有用户无法再新建作品，并且所有已支付的作品都将自动更改为已提交</p>
+    <p style="color:red;">请在需要关闭比赛的时候再点击</p>
+</div>
+<script>
+$(document).ready(function() {
+    $('#main #close').click(function() {
+        event.preventDefault();
+        $p = $(this);
+        $p.hide();
+        $p.siblings('a#close_again').show();
+    });
+});
+</script>
