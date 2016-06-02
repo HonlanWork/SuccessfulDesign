@@ -65,13 +65,13 @@
 <div id="section1">
     <div>
         <a href="{:U('Judge/first')}" id="back">
-            <span class="fa fa-fw fa-chevron-circle-left" style="font-size:20px;position:relative;top:2px;"></span> 返回
+            <span class="fa fa-fw fa-chevron-circle-left" style="font-size:20px;position:relative;top:2px;"></span> <?php translate("返回")?>
         </a>
-        <h4 style="margin-top:0;text-align:center;font-size:20px;">第一轮评审</h4>
+        <h4 style="margin-top:0;text-align:center;font-size:20px;"><?php translate("第一轮评审")?></h4>
     </div>
-    <p>评分进度</p>
+    <p><?php translate("评审进度")?></p>
     <div id="process">
-        <div style="position:absolute;right:20px;bottom:4px;font-size:12px;color:#fff;"><span style="font-size:30px;margin-right:8px;font-style:italic;">{$left}<span style="margin-left:2px;">%</span></span>已完成</div>
+        <div style="position:absolute;right:20px;bottom:4px;font-size:12px;color:#fff;"><span style="font-size:30px;margin-right:8px;font-style:italic;">{$left}<span style="margin-left:2px;">%</span></span><?php translate("已完成")?></div>
         <div id="left" style="background-color:#01e381;width:{$left}%;"></div>
         <div id="right" style="background-color:#b3b4b6;width:{$right}%;"></div>
     </div>
@@ -243,12 +243,12 @@
 <div id="section3" style="position:relative;height:85px;padding-top:20px;">
     <div style="width:50%;display:inline-block;padding-right:10px;position:absolute;left:0;">
         <a href="{:U('Judge/first_out', array('id'=>$submission['id'],'offset'=>$offset))}">
-            <div style="background-color:rgb(254,0,0);color:#f2f2f2;font-size:16px;padding:15px 20px;border-radius:3px;box-shadow:1px 1px 3px rgba(20,20,20,0.4);text-align:center;">淘汰</div>
+            <div style="background-color:rgb(254,0,0);color:#f2f2f2;font-size:16px;padding:15px 20px;border-radius:3px;box-shadow:1px 1px 3px rgba(20,20,20,0.4);text-align:center;"><?php translate("淘汰")?></div>
         </a>   
     </div>
     <div style="width:50%;display:inline-block;padding-left:10px;position:absolute;right:0;">
         <a href="{:U('Judge/first_in', array('id'=>$submission['id'],'offset'=>$offset))}">
-            <div style="background-color:rgb(1,227,129);color:#f2f2f2;font-size:16px;padding:15px 20px;border-radius:3px;box-shadow:1px 1px 3px rgba(20,20,20,0.4);text-align:center;">入围</div>
+            <div style="background-color:rgb(1,227,129);color:#f2f2f2;font-size:16px;padding:15px 20px;border-radius:3px;box-shadow:1px 1px 3px rgba(20,20,20,0.4);text-align:center;"><?php translate("入围")?></div>
         </a>
     </div>
 </div>

@@ -66,16 +66,16 @@
 }
 </style>
 <div id="section1">
-    <h4 style="margin-top:0;">第二轮评审</h4>
-    <p>评分进度</p>
+    <h4 style="margin-top:0;"><?php translate("第二轮评审")?></h4>
+    <p><?php translate("评审进度")?></p>
     <div id="process">
-        <div style="position:absolute;right:20px;bottom:4px;font-size:12px;color:#fff;"><span style="font-size:30px;margin-right:8px;font-style:italic;">{$left}<span style="margin-left:2px;">%</span></span>已完成</div>
+        <div style="position:absolute;right:20px;bottom:4px;font-size:12px;color:#fff;"><span style="font-size:30px;margin-right:8px;font-style:italic;">{$left}<span style="margin-left:2px;">%</span></span><?php translate("已完成")?></div>
         <div id="left" style="background-color:#01e381;width:{$left}%;"></div>
         <div id="right" style="background-color:#b3b4b6;width:{$right}%;"></div>
     </div>
 </div>
 <div id="section2">
-    <p>全部作品</p>
+    <p><?php translate("全部作品")?></p>
     <div id="submissions" style="margin-bottom:20px;text-align:center;">
         <foreach name="data" item="v">
             <a href="{:U('Judge/second_detail',array('offset'=>$v['offset']))}">
@@ -88,9 +88,9 @@
             </a>
         </foreach>
     </div>
-    <p style="font-size:12px;color:#FFBCBC;">* 请注意第二轮评审从6月1日开始</p>
-    <p style="font-size:12px;color:#FFBCBC;">** 第二轮评审需在6月31日之前完成</p>
+    <p style="font-size:12px;color:#FFBCBC;"><?php translate("* 请注意第二轮评审从6月1日开始")?></p>
+    <p style="font-size:12px;color:#FFBCBC;"><?php translate("** 第二轮评审需在6月31日之前完成")?></p>
     <div style="text-align:center;">
-        <a href="{:U('Judge/second_detail',array('offset'=>$start))}" class="start">继续评审</a>
+        <a href="{:U('Judge/second_detail',array('offset'=>$start))}" class="start"><?php translate("继续评审")?></a>
     </div>
 </div>

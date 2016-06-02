@@ -78,13 +78,13 @@
 <div id="section1">
     <div>
         <a href="{:U('Judge/second')}" id="back">
-            <span class="fa fa-fw fa-chevron-circle-left" style="font-size:20px;position:relative;top:2px;"></span> 返回
+            <span class="fa fa-fw fa-chevron-circle-left" style="font-size:20px;position:relative;top:2px;"></span> <?php translate("返回")?>
         </a>
-        <h4 style="margin-top:0;text-align:center;font-size:20px;">第二轮评审</h4>
+        <h4 style="margin-top:0;text-align:center;font-size:20px;"><?php translate("第二轮评审")?></h4>
     </div>
-    <p>评分进度</p>
+    <p><?php translate("评审进度")?></p>
     <div id="process">
-        <div style="position:absolute;right:20px;bottom:4px;font-size:12px;color:#fff;"><span style="font-size:30px;margin-right:8px;font-style:italic;">{$left}<span style="margin-left:2px;">%</span></span>已完成</div>
+        <div style="position:absolute;right:20px;bottom:4px;font-size:12px;color:#fff;"><span style="font-size:30px;margin-right:8px;font-style:italic;">{$left}<span style="margin-left:2px;">%</span></span><?php translate("已完成")?></div>
         <div id="left" style="background-color:#01e381;width:{$left}%;"></div>
         <div id="right" style="background-color:#b3b4b6;width:{$right}%;"></div>
     </div>
@@ -256,21 +256,21 @@
 <div id="section3">
     <div style="margin-top:25px;margin-bottom:20px;">
         <div id="strategy" style="margin-bottom:10px;">
-            <span style="margin-right:12px;">策略</span>
+            <span style="margin-right:12px;"><?php translate("策略")?></span>
             <div class="nstSlider" style="background-color:#eee;width:200px;display:inline-block;position:relative;top:5px;" data-range_min="0" data-range_max="30" data-cur_min="{$submission['strategy']}" data-cur_max="{$submission['strategy']}" name="strategy">
                 <div class="leftGrip" style="background-color:#ff7c34;outline:none;"></div>
             </div>
             <span style="margin-left:6px;" class="subscore">{$submission.result}</span>
         </div>
         <div id="process" style="margin-bottom:10px;">
-            <span style="margin-right:12px;">流程</span>
+            <span style="margin-right:12px;"><?php translate("流程")?></span>
             <div class="nstSlider" style="background-color:#eee;width:200px;display:inline-block;position:relative;top:5px;" data-range_min="0" data-range_max="30" data-cur_min="{$submission['process']}" data-cur_max="{$submission['process']}" name="process">
                 <div class="leftGrip" style="background-color:#ff7c34;outline:none;"></div>
             </div>
             <span style="margin-left:6px;" class="subscore">{$submission.result}</span>
         </div>
         <div id="result" style="margin-bottom:10px;">
-            <span style="margin-right:12px;">成效</span>
+            <span style="margin-right:12px;"><?php translate("成效")?></span>
             <div class="nstSlider" style="background-color:#eee;width:200px;display:inline-block;position:relative;top:5px;" data-range_min="0" data-range_max="30" data-cur_min="{$submission['result']}" data-cur_max="{$submission['result']}" name="result">
                 <div class="leftGrip" style="background-color:#ff7c34;outline:none;"></div>
             </div>
@@ -278,7 +278,7 @@
         </div>
     </div>
     <form action="{:U('second_submit')}" type="post">
-        <p style="font-size:12px;margin-bottom:20px;">总分：<span id="score" style="font-size:16px;color:#ff7c34;margin-left:10px;">
+        <p style="font-size:12px;margin-bottom:20px;"><?php translate("总分：")?><span id="score" style="font-size:16px;color:#ff7c34;margin-left:10px;">
             <if condition="$submission['is_judged'] eq 1">
                 <?php echo $submission['strategy'] + $submission['process'] + $submission['result']; ?>
             </if>
