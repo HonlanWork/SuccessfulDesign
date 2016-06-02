@@ -58,6 +58,8 @@ class JudgeController extends Controller{
 		$this->right = 100 - $this->left;
 		$this->data = $data;
 		$this->start = $start;
+		$this->yes = M('judge_first')->where(array('contest_id'=>C('CONTESTID'),'user_id'=>$_SESSION['uid'],'yes_or_no'=>'yes'))->count();
+		$this->no = M('judge_first')->where(array('contest_id'=>C('CONTESTID'),'user_id'=>$_SESSION['uid'],'yes_or_no'=>'no'))->count();
 		$this->display();
 	}
 

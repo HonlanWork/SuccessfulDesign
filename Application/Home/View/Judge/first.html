@@ -55,7 +55,7 @@
 </style>
 <div id="section1">
     <h4 style="margin-top:0;"><?php translate("第一轮评审")?></h4>
-    <p><?php translate("评审进度")?></p>
+    <p style="position:relative;"><?php translate("评审进度")?><span style="position:absolute;right:0;"><span style="color:rgb(254,0,0);"><?php translate("淘汰")?> {$no}</span><span style="color:rgb(1,227,129);margin-left:12px;"><?php translate("入围")?> {$yes}</span></span></p>
     <div id="process">
         <div style="position:absolute;right:20px;bottom:4px;font-size:12px;color:#fff;"><span style="font-size:30px;margin-right:8px;font-style:italic;">{$left}<span style="margin-left:2px;">%</span></span><?php translate("已完成")?></div>
         <div id="left" style="background-color:#01e381;width:{$left}%;"></div>
