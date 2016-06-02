@@ -61,29 +61,7 @@
     margin-bottom: 0;
     color: #888;
 }
-#main #section3 #strategy:hover, #main #section3 #process, #main #section3 #result:hover {
-    cursor: pointer;
-}
-#main #section3 span.fa {
-    padding: 5px 0;
-    font-size: 16px;
-    width: 16px;
-}
-#main #section3 span.fa:hover {
-    cursor: pointer;
-}
-#main #section3 span.fa.inactive {
-    color: #bbb;
-}
-#main #section3 span.fa.active {
-    color: #febf3c;
-}
-#main #section3 span.fa.unhover {
-    color: #bbb !important;
-}
-#main #section3 span.fa.hover {
-    color: #febf3c !important;
-}
+
 #main #section3 button {
     color: white;
     background-color: #ff7c34;
@@ -95,6 +73,8 @@
     text-decoration: none;
 }
 </style>
+<script src="__PUBLIC__/js/jquery.nstSlider.min.js"></script>
+<link rel="stylesheet" href="__PUBLIC__/css/jquery.nstSlider.css">
 <div id="section1">
     <div>
         <a href="{:U('Judge/second')}" id="back">
@@ -274,128 +254,44 @@
     </div>
 </div>
 <div id="section3">
-    <div style="text-align:center;margin-top:20px;margin-bottom:10px;">
-        <div id="strategy">
+    <div style="margin-top:25px;margin-bottom:20px;">
+        <div id="strategy" style="margin-bottom:10px;">
             <span style="margin-right:12px;">策略</span>
-            <if condition="$submission['is_judged'] eq 1 and $submission['strategy'] egt 1">
-                <span class="fa fa-fw fa-star active" name='1'></span>
-                <else/>
-                <span class="fa fa-fw fa-star inactive" name='1'></span>
-            </if>
-            <if condition="$submission['is_judged'] eq 1 and $submission['strategy'] egt 2">
-                <span class="fa fa-fw fa-star active" name='2'></span>
-                <else/>
-                <span class="fa fa-fw fa-star inactive" name='2'></span>
-            </if>
-            <if condition="$submission['is_judged'] eq 1 and $submission['strategy'] egt 3">
-                <span class="fa fa-fw fa-star active" name='3'></span>
-                <else/>
-                <span class="fa fa-fw fa-star inactive" name='3'></span>
-            </if>
-            <if condition="$submission['is_judged'] eq 1 and $submission['strategy'] egt 4">
-                <span class="fa fa-fw fa-star active" name='4'></span>
-                <else/>
-                <span class="fa fa-fw fa-star inactive" name='4'></span>
-            </if>
-            <if condition="$submission['is_judged'] eq 1 and $submission['strategy'] egt 5">
-                <span class="fa fa-fw fa-star active" name='5'></span>
-                <else/>
-                <span class="fa fa-fw fa-star inactive" name='5'></span>
-            </if>
-            <span style="margin-left:6px;" class="subscore">
-                <if condition="$submission['is_judged'] eq 1">
-                    {$submission.strategy}
-                    <else/>
-                    &nbsp;&nbsp;
-                </if>
-            </span>
+            <div class="nstSlider" style="background-color:#eee;width:200px;display:inline-block;position:relative;top:5px;" data-range_min="0" data-range_max="30" data-cur_min="{$submission['strategy']}" data-cur_max="{$submission['strategy']}" name="strategy">
+                <div class="leftGrip" style="background-color:#ff7c34;outline:none;"></div>
+            </div>
+            <span style="margin-left:6px;" class="subscore">{$submission.result}</span>
         </div>
-        <div id="process">
+        <div id="process" style="margin-bottom:10px;">
             <span style="margin-right:12px;">流程</span>
-            <if condition="$submission['is_judged'] eq 1 and $submission['process'] egt 1">
-                <span class="fa fa-fw fa-star active" name='1'></span>
-                <else/>
-                <span class="fa fa-fw fa-star inactive" name='1'></span>
-            </if>
-            <if condition="$submission['is_judged'] eq 1 and $submission['process'] egt 2">
-                <span class="fa fa-fw fa-star active" name='2'></span>
-                <else/>
-                <span class="fa fa-fw fa-star inactive" name='2'></span>
-            </if>
-            <if condition="$submission['is_judged'] eq 1 and $submission['process'] egt 3">
-                <span class="fa fa-fw fa-star active" name='3'></span>
-                <else/>
-                <span class="fa fa-fw fa-star inactive" name='3'></span>
-            </if>
-            <if condition="$submission['is_judged'] eq 1 and $submission['process'] egt 4">
-                <span class="fa fa-fw fa-star active" name='4'></span>
-                <else/>
-                <span class="fa fa-fw fa-star inactive" name='4'></span>
-            </if>
-            <if condition="$submission['is_judged'] eq 1 and $submission['process'] egt 5">
-                <span class="fa fa-fw fa-star active" name='5'></span>
-                <else/>
-                <span class="fa fa-fw fa-star inactive" name='5'></span>
-            </if>
-            <span style="margin-left:6px;" class="subscore">
-                <if condition="$submission['is_judged'] eq 1">
-                    {$submission.process}
-                    <else/>
-                    &nbsp;&nbsp;
-                </if>
-            </span>
+            <div class="nstSlider" style="background-color:#eee;width:200px;display:inline-block;position:relative;top:5px;" data-range_min="0" data-range_max="30" data-cur_min="{$submission['process']}" data-cur_max="{$submission['process']}" name="process">
+                <div class="leftGrip" style="background-color:#ff7c34;outline:none;"></div>
+            </div>
+            <span style="margin-left:6px;" class="subscore">{$submission.result}</span>
         </div>
-        <div id="result">
+        <div id="result" style="margin-bottom:10px;">
             <span style="margin-right:12px;">成效</span>
-            <if condition="$submission['is_judged'] eq 1 and $submission['result'] egt 1">
-                <span class="fa fa-fw fa-star active" name='1'></span>
-                <else/>
-                <span class="fa fa-fw fa-star inactive" name='1'></span>
-            </if>
-            <if condition="$submission['is_judged'] eq 1 and $submission['result'] egt 2">
-                <span class="fa fa-fw fa-star active" name='2'></span>
-                <else/>
-                <span class="fa fa-fw fa-star inactive" name='2'></span>
-            </if>
-            <if condition="$submission['is_judged'] eq 1 and $submission['result'] egt 3">
-                <span class="fa fa-fw fa-star active" name='3'></span>
-                <else/>
-                <span class="fa fa-fw fa-star inactive" name='3'></span>
-            </if>
-            <if condition="$submission['is_judged'] eq 1 and $submission['result'] egt 4">
-                <span class="fa fa-fw fa-star active" name='4'></span>
-                <else/>
-                <span class="fa fa-fw fa-star inactive" name='4'></span>
-            </if>
-            <if condition="$submission['is_judged'] eq 1 and $submission['result'] egt 5">
-                <span class="fa fa-fw fa-star active" name='5'></span>
-                <else/>
-                <span class="fa fa-fw fa-star inactive" name='5'></span>
-            </if>
-            <span style="margin-left:6px;" class="subscore">
-                <if condition="$submission['is_judged'] eq 1">
-                    {$submission.result}
-                    <else/>
-                    &nbsp;&nbsp;
-                </if>
-            </span>
+            <div class="nstSlider" style="background-color:#eee;width:200px;display:inline-block;position:relative;top:5px;" data-range_min="0" data-range_max="30" data-cur_min="{$submission['result']}" data-cur_max="{$submission['result']}" name="result">
+                <div class="leftGrip" style="background-color:#ff7c34;outline:none;"></div>
+            </div>
+            <span style="margin-left:6px;" class="subscore">{$submission.result}</span>
         </div>
     </div>
     <form action="{:U('second_submit')}" type="post">
-        <p style="font-size:12px;margin-bottom:20px;">总分：<span id="score">
+        <p style="font-size:12px;margin-bottom:20px;">总分：<span id="score" style="font-size:16px;color:#ff7c34;margin-left:10px;">
             <if condition="$submission['is_judged'] eq 1">
                 <?php echo $submission['strategy'] + $submission['process'] + $submission['result']; ?>
             </if>
         </span></p>
         <p style="font-size:12px;">评价：</p>
-        <textarea name="comment" cols="30" rows="5" class="form-control" style="resize:none;"></textarea>
-        <input type="text" name="strategy" style="display:none;">
-        <input type="text" name="process" style="display:none;">
-        <input type="text" name="result" style="display:none;">
+        <textarea name="comment" cols="30" rows="5" class="form-control" style="resize:none;">{$submission.comment}</textarea>
+        <input type="text" name="strategy" value="{$submission['strategy']}" style="display:none;">
+        <input type="text" name="process" value="{$submission['process']}" style="display:none;">
+        <input type="text" name="result" value="{$submission['result']}" style="display:none;">
         <input type="text" name="id" value="{$submission['id']}" style="display:none;">
         <input type="text" name="offset" value="{$offset}" style="display:none;">
         <div style="text-align:center;margin-top:20px;">
-            <button type="submit" class="btn <?php if($submission['is_judged'] == 0) echo 'disabled';?>">提交</button>
+            <button type="submit" class="btn">提交</button>
         </div>
     </form>
 </div>
@@ -403,47 +299,13 @@
 $(document).ready(function() {
     $('#carousel-example-generic').carousel('pause');
 
-    $('#main #section3 span.fa').hover(function() {
-        var current = $(this).attr('name');
-        $(this).addClass('hover');
-        $(this).siblings('span.fa').each(function(index, el) {
-            if ($(this).attr('name') <= current) {
-                $(this).addClass('hover');
-            }
-            else {
-                $(this).addClass('unhover');
-            }
-        });
-    }, function() {
-        $(this).removeClass('hover');
-        $(this).siblings('span.fa').removeClass('hover').removeClass('unhover');
-    });
-
-    $('#main #section3 span.fa').click(function(event) {
-        var current = $(this).attr('name');
-        $(this).removeClass('inactive').addClass('active');
-        $(this).siblings('span.subscore').text(current);
-        var strategy = parseInt($('#strategy span.subscore').text());
-        var process = parseInt($('#process span.subscore').text());
-        var result = parseInt($('#result span.subscore').text());
-        if (!isNaN(strategy) && !isNaN(process) && !isNaN(result)) {
-            $('#section3 #score').text(strategy + process + result);
-            $('input[name="strategy"]').val(strategy);
-            $('input[name="process"]').val(process);
-            $('input[name="result"]').val(result);
-            $('#main #section3 button').removeClass('disabled');
+    $('.nstSlider').nstSlider({
+        "left_grip_selector": ".leftGrip",
+        "value_changed_callback": function(cause, leftValue, rightValue) {
+            $(this).siblings('span.subscore').text(leftValue);
+            $('#main #score').text(parseInt($('#main #strategy .subscore').text()) + parseInt($('#main #process .subscore').text()) + parseInt($('#main #result .subscore').text()));
+            $('#main input[name="' + $(this).attr('name') + '"]').val(leftValue);
         }
-        else {
-            $('#main #section3 button').addClass('disabled');
-        }
-        $(this).siblings('span.fa').each(function(index, el) {
-            if ($(this).attr('name') <= current) {
-                $(this).removeClass('inactive').addClass('active');
-            }
-            else {
-                $(this).removeClass('active').addClass('inactive');
-            }
-        });
     });
 });
 </script>

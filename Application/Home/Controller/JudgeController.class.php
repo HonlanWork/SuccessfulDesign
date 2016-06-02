@@ -166,7 +166,7 @@ class JudgeController extends Controller{
 		$submission['strategy'] = $ids[intval(I('offset'))]['strategy'];
 		$submission['process'] = $ids[intval(I('offset'))]['process'];
 		$submission['result'] = $ids[intval(I('offset'))]['result'];
-		$submission['comment'] = $ids[intval(I('offset'))]['comments'];
+		$submission['comment'] = $ids[intval(I('offset'))]['comment'];
 
 		$images = array();
 		for ($i = 1; $i <= 6; $i++) { 
