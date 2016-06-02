@@ -50,15 +50,15 @@
 	<div class="row">
 		<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
 			<h4><?php translate("策略")?></h4>
-			<p><?php translate("是否有明确的目标和策略?<br/>为何启动该设计项目,有否达到预期的效果或影响?<br/>遇到了哪些挑战和难题?")?></p>
+			<p style="text-align:left;"><?php translate("是否有明确的目标和策略?<br/>为何启动该设计项目,有否达到预期的效果或影响?<br/>遇到了哪些挑战和难题?")?></p>
 		</div>
 		<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
 			<h4><?php translate("流程")?></h4>
-			<p><?php translate("在过程中,是否系统性地对设计项目进行了管理?<br/>采用了什么方法来管理?<br/>运用了哪些资源?投入了多少资金(是否合理)?<br/>设计项目什么时候开始?持续多长时间?")?></p>
+			<p style="text-align:left;"><?php translate("在过程中,是否系统性地对设计项目进行了管理?<br/>采用了什么方法来管理?<br/>运用了哪些资源?投入了多少资金(是否合理)?<br/>设计项目什么时候开始?持续多长时间?")?></p>
 		</div>
 		<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
 			<h4><?php translate("成效")?></h4>
-			<p><?php translate("它的结果有标准衡量吗?例如:利润,销售额,市场情况,渠道。<br/>是否带来了社会效益?具体效益是什么?受益者是谁?<br/>是否是原创?是否带来了益处?实施情况如何?是否有令人称颂之处?<br/>是否完成了最初的策略目标,或者超额完成了目标?")?></p>
+			<p style="text-align:left;"><?php translate("它的结果有标准衡量吗?例如:利润,销售额,市场情况,渠道。<br/>是否带来了社会效益?具体效益是什么?受益者是谁?<br/>是否是原创?是否带来了益处?实施情况如何?是否有令人称颂之处?<br/>是否完成了最初的策略目标,或者超额完成了目标?")?></p>
 		</div>
 	</div>
 </div>
@@ -68,11 +68,11 @@
 		<p>
 			<span><?php translate("第一轮评审")?></span>
 			<if condition='$first eq -1'>
-				<?php translate("尚未开始")?>
+				<?php translate("尚未开始");?>
 				<elseif condition='$first eq 0'/>
-				<?php translate("进行中")?>
+				<?php translate("进行中");?>
 				<elseif condition='$first eq 1'/>
-				<?php translate("已结束")?>
+				<?php translate("已结束");?>
 			</if>
 		</p>
 	</div>
@@ -80,11 +80,11 @@
 		<p>
 			<span><?php translate("第二轮评审")?></span>
 			<if condition='$second eq -1'>
-				<?php translate("尚未开始")?>
+				<?php translate("尚未开始");?>
 				<elseif condition='$second eq 0'/>
-				<?php translate("进行中")?>
+				<?php translate("进行中");?>
 				<elseif condition='$second eq 1'/>
-				<?php translate("已结束")?>
+				<?php translate("已结束");?>
 			</if>
 		</p>
 	</div>
