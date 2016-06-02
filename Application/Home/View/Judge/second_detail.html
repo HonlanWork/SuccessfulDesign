@@ -283,7 +283,7 @@
                 <?php echo $submission['strategy'] + $submission['process'] + $submission['result']; ?>
             </if>
         </span></p>
-        <p style="font-size:12px;">评价：</p>
+        <p style="font-size:12px;"><?php translate("评价：")?></p>
         <textarea name="comment" cols="30" rows="5" class="form-control" style="resize:none;">{$submission.comment}</textarea>
         <input type="text" name="strategy" value="{$submission['strategy']}" style="display:none;">
         <input type="text" name="process" value="{$submission['process']}" style="display:none;">
@@ -291,7 +291,7 @@
         <input type="text" name="id" value="{$submission['id']}" style="display:none;">
         <input type="text" name="offset" value="{$offset}" style="display:none;">
         <div style="text-align:center;margin-top:20px;">
-            <button type="submit" class="btn">提交</button>
+            <button type="submit" class="btn"><?php translate("提交")?></button>
         </div>
     </form>
 </div>
