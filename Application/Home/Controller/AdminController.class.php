@@ -241,12 +241,12 @@ class AdminController extends Controller{
 	}
 
     public function set_as_common(){
-        M('user')->where(array('id'=>I('id')))->save(array('role'=>0));
+        M('user')->where(array('id'=>I('id')))->save(array('role'=>0,'judge_code'=>''));
         $this->redirect('Admin/users');
     }
 
     public function set_as_judge(){
-        M('user')->where(array('id'=>I('id')))->save(array('role'=>1));
+        M('user')->where(array('id'=>I('id')))->save(array('role'=>1,'judge_code'=>sha1(genRandStr())));
         $this->redirect('Admin/users');
     }
 
@@ -340,20 +340,16 @@ class AdminController extends Controller{
     	$submissions = M('submission')->where(array('contest_id'=>C('CONTESTID'),'ispaied'=>1,'issubmitted'=>1))->select();
     	$users = M('user')->where(array('role'=>1))->select();
 
-        $mapping = array();
+        $begin = 0;
     	for ($i = 0; $i < count($submissions); $i++) {
             $sum = 0;
-            if (array_key_exists($submissions[$i]['category'], $mapping)) {
-                $mapping[$submissions[$i]['category']] = 0;
-            }
 
-    		for ($j = $mapping[$submissions[$i]['category']]; ; $j++) {
+    		for ($j = $begin; ; $j++) {
                 if ($j == count($users)) {
                     $j = 0;
                 }
                 $flag = false;
                 $tmp = split(',', $users[$j]['category']);
-                echo count($tmp);
                 for ($k = 0; $k < count($tmp); $k++) {
                     if ($tmp[$k] == $submissions[$i]['category']) {
                         $flag = true;
@@ -363,12 +359,10 @@ class AdminController extends Controller{
                 if ($flag) {
                     M('judge_first')->add(array('contest_id'=>C('CONTESTID'),'submission_id'=>$submissions[$i]['id'],'user_id'=>$users[$j]['id'],'yes_or_no'=>'','timestamp'=>''));
                     $sum += 1;
-                    echo $submissions[$i]['category'], $mapping[$submissions[$i]['category']];
-                    echo ' ';
-                    $mapping[$submissions[$i]['category']] = $j + 1;
+                    $begin = $j + 1;
 
-                    if ($mapping[$submissions[$i]['category']] == count($users)) {
-                        $mapping[$submissions[$i]['category']] = 0;
+                    if ($begin == count($users)) {
+                        $begin = 0;
                     }
 
                     if ($sum == 3) {
@@ -377,7 +371,6 @@ class AdminController extends Controller{
                 }
     		}
     	}
-        die;
     	$this->redirect('Admin/judge_first');
     }
 
@@ -417,21 +410,21 @@ class AdminController extends Controller{
                 $data[$assignments[$i]['submission_id']][2] += $assignments[$i]['strategy'] + $assignments[$i]['process'] + $assignments[$i]['result'];
             }
         }
-        $stat = array('-1' => 0, '0~5' => 0, '5~10' => 0, '10~15' => 0);
+        $stat = array('-1' => 0, '0~30' => 0, '30~60' => 0, '60~90' => 0);
         foreach ($data as $key => $value) {
             if ($value[0] != $value[1]) {
                 $stat['-1'] += 1;
             }
             else {
                 $tmp = floatval($value[2]) / $value[1];
-                if ($tmp <= 5) {
-                    $stat['0~5'] += 1;
+                if ($tmp <= 30) {
+                    $stat['0~30'] += 1;
                 }
-                elseif ($tmp <= 10) {
-                    $stat['5~10'] += 1;
+                elseif ($tmp <= 60) {
+                    $stat['30~60'] += 1;
                 }
                 else {
-                    $stat['10~15'] += 1;
+                    $stat['60~90'] += 1;
                 }
             }
         }
@@ -466,14 +459,41 @@ class AdminController extends Controller{
         }
 
         $submissions = M('submission')->where(array('contest_id'=>C('CONTESTID'), 'judge_first'=>'yes'))->select();
-
         $judges = M('user')->where(array('role'=>1))->select();
 
-        for ($i = 0; $i < count($submissions); $i++) { 
-            for ($j = 0; $j < count($judges); $j++) { 
-                M('judge_second')->add(array('contest_id'=>C('CONTESTID'), 'submission_id'=>$submissions[$i]['id'], 'user_id'=>$judges[$j]['id'], 'strategy'=>0, 'process'=>0, 'result'=>0, 'comment'=>'', 'timestamp'=>'', 'is_judged'=>0));
+        $begin = 0;
+        for ($i = 0; $i < count($submissions); $i++) {
+            $sum = 0;
+
+            for ($j = $begin; ; $j++) {
+                if ($j == count($judges)) {
+                    $j = 0;
+                }
+                $flag = false;
+                $tmp = split(',', $judges[$j]['category']);
+                for ($k = 0; $k < count($tmp); $k++) {
+                    if ($tmp[$k] == $submissions[$i]['category']) {
+                        $flag = true;
+                        break;
+                    }
+                }
+                if ($flag) {
+                    M('judge_second')->add(array('contest_id'=>C('CONTESTID'), 'submission_id'=>$submissions[$i]['id'], 'user_id'=>$judges[$j]['id'], 'strategy'=>0, 'process'=>0, 'result'=>0, 'comment'=>'', 'timestamp'=>'', 'is_judged'=>0));
+
+                    $sum += 1;
+                    $begin = $j + 1;
+
+                    if ($begin == count($judges)) {
+                        $begin = 0;
+                    }
+
+                    if ($sum == 5) {
+                        break;
+                    }
+                }
             }
         }
+
         $this->redirect('Admin/judge_second');
     }
 

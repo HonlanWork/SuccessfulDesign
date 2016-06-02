@@ -46,7 +46,7 @@ $(document).ready(function() {
         legend: {
             orient: 'vertical',
             left: 'left',
-            data: ['评审未完成', '0~5分', '5~10分', '10~15分']
+            data: ['评审未完成', '0~30分', '30~60分', '60~90分']
         },
         series: [{
             name: '第二轮评审统计',
@@ -57,14 +57,14 @@ $(document).ready(function() {
                 value: {$stat['-1']},
                 name: '评审未完成'
             }, {
-                value: {$stat['0~5']},
-                name: '0~5分'
+                value: {$stat['0~30']},
+                name: '0~30分'
             }, {
-                value: {$stat['5~10']},
-                name: '5~10分'
+                value: {$stat['30~60']},
+                name: '30~60分'
             }, {
-                value: {$stat['10~15']},
-                name: '10~15分'
+                value: {$stat['60~90']},
+                name: '60~90分'
             }],
             itemStyle: {
                 emphasis: {
