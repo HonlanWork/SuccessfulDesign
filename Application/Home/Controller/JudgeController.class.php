@@ -36,6 +36,9 @@ class JudgeController extends Controller{
 			$this->second = 1;
 		}
 
+		$user = M('user')->where(array('id'=>$_SESSION['uid']))->find();
+		$this->submit = $user['judge_submit'];
+
 		$this->display();
 	}
 
@@ -198,5 +201,10 @@ class JudgeController extends Controller{
 		else {
 			$this->redirect('Judge/second_detail', array('offset'=>$offset));
 		}
+	}
+
+	public function submit(){
+		M('user')->where(array('id'=>$_SESSION['uid']))->save(array('judge_submit'=>1));
+		$this->redirect('Judge/index');
 	}
 }

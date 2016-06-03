@@ -28,14 +28,13 @@
 }
 #section3 {
 	text-align: center;
-	position: relative;
-    top: 40px;
+	margin-top: 30px;
 }
 #section3 .judge {
 	color: white;
     background-color: #ff7c34;
     border: none;
-    padding: 10px 30px;
+    padding: 10px 15px;
     border-radius: 5px;
     font-size: 14px;
     box-shadow: 2px 2px 3px rgba(20, 20, 20, 0.4);
@@ -92,19 +91,26 @@
 <div id="section3">
 	<div class="row">
 		<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-			<if condition="$first eq 0">
+			<if condition="$first eq 0 and $submit eq 0">
 				<a href="{:U('Judge/first')}" class="judge"><?php translate("第一轮评审")?></a>
 				<else/>
 				<span class="judge"><?php translate("第一轮评审")?></span>
 			</if>
 		</div>
 		<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-			<if condition="$second eq 0">
+			<if condition="$second eq 0 and $submit eq 0">
 				<a href="{:U('Judge/second')}" class="judge"><?php translate("第二轮评审")?></a>
 				<else/>
 				<span class="judge"><?php translate("第二轮评审")?></span>
 			</if>
 		</div>
+	</div>
+	<div style="margin-top:20px;position:relative;top:40px;">
+		<if condition="$submit eq 0">
+			<a href="{:U('Judge/submit')}" class="judge"><?php translate("提交评审")?></a>
+			<else/>
+			<span class="judge"><?php translate("已提交")?></span>
+		</if>
 	</div>
 </div>
 
