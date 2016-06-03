@@ -93,6 +93,16 @@
                         <div class="mask" style="background-color:rgba(40,40,40,0.6);"></div>
                         <div class="score">{$v.score}</div>
                     </if>
+                    <p style="width:120px;height:34px;overflow-y:hidden;color:#666;font-size:12px;padding-left:10px;padding-right:10px;margin-top:5px;">
+                        <?php
+                            if (isset($_SESSION['lang']) and $_SESSION['lang'] == 'en') {
+                                echo $v['titlee'];
+                            }
+                            else {
+                                echo $v['titlec'];
+                            }
+                        ?>
+                    </p>
                 </div>
             </a>
         </foreach>
