@@ -3,7 +3,10 @@ namespace Home\Controller;
 use Think\Controller;
 class JudgeController extends Controller{
 	public function _initialize(){
-		if(!isset($_SESSION['urole']) || $_SESSION['urole'] != 1){
+		if(!isset($_SESSION['urole'])){
+			$this->redirect('Index/login');
+		}
+		elseif ($_SESSION['urole'] != 1) {
 			$this->redirect('Index/contest', array('id'=>C('CONTESTID')));
 		}
 	}
