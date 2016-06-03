@@ -4,6 +4,8 @@ use Think\Controller;
 class JudgeController extends Controller{
 	public function _initialize(){
 		if(!isset($_SESSION['urole'])){
+			$url = strstr($_SERVER["REQUEST_URI"], 'Home');
+			session('url', $url);
 			$this->redirect('Index/login');
 		}
 		elseif ($_SESSION['urole'] != 1) {
