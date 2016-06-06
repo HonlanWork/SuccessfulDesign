@@ -62,7 +62,10 @@ class IndexController extends Controller {
                 session('uemail', $user['email']);
                 session('uportrait', $user['portrait']);
 				session('urole', $user['role']);
-				if (isset($_SESSION['url'])) {
+                if ($_SESSION['urole'] == 1) {
+                    $this->redirect('Judge/index');
+                }
+				elseif (isset($_SESSION['url'])) {
 					$url = $_SESSION['url'];
 					session('url', null);
 					$this->redirect($url);
