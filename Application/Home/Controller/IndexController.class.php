@@ -201,6 +201,8 @@ class IndexController extends Controller {
     public function logout(){
     	session('uid', null);
     	session('uemail', null);
+        session('urole', null);
+        session('uportrait', null);
     	$this->redirect('Index/login');
     }
 
