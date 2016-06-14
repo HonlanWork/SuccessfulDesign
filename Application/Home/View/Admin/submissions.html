@@ -106,7 +106,7 @@
                         <td>{$v.email}</td>
                         <td>{$v.companyc}</td>
                         <td style="min-width:120px;">
-                            <p><a href="{:U('User/submission', array('id'=>$v['id']))}">详情</a></p>
+                            <p><a href="{:U('User/submission', array('id'=>$v['id']))}" target="_blank">详情</a></p>
                             <p><a href="{:U('Admin/mark_as_notpaid', array('id'=>$v['id']))}">改为未支付</a></p>
                             <p><a href="{:U('Admin/mark_as_notsubmitted', array('id'=>$v['id']))}">改为未提交</a></p>
                         </td>
