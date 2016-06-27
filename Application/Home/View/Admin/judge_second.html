@@ -12,8 +12,10 @@
 <script src="__PUBLIC__/js/macarons.js"></script>
 <h3 style="margin-top:10px;margin-bottom:20px;">第二轮评审</h3>
 <div>
-    <a href="{:U('Admin/judge_second_assign')}" class="btn btn-success" style="margin-bottom:20px;font-size:12px;">分配作品</a>
-    <a href="{:U('Admin/judge_second_delete')}" class="btn btn-danger" style="margin-bottom:20px;margin-left:10px;font-size:12px;">清空评审</a>
+    <a href="#" class="btn btn-danger" style="margin-bottom:10px;font-size:12px;" id="assign">清空现有评审并重新分配</a>
+    <a href="{:U('Admin/judge_second_assign')}" class="btn btn-danger" style="margin-bottom:10px;font-size:12px;display:none;" id="reassign">你真的确定吗？</a>
+    <p style="font-size:12px;color:#d9534f;margin-bottom:20px;">点击以上按钮将删除现有的全部评审记录，并重新分配作品，谨防误点！</p>
+    <!-- <a href="{:U('Admin/judge_second_delete')}" class="btn btn-danger" style="margin-bottom:20px;margin-left:10px;font-size:12px;">清空评审</a> -->
 </div>
 <table class="table table-hover">
     <tr>
@@ -33,6 +35,12 @@
 </div>  
 <script>
 $(document).ready(function() {
+    $('#assign').click(function(event) {
+        event.preventDefault();
+        $(this).hide();
+        $('#reassign').show();
+    });
+
     var stat = echarts.init(document.getElementById('stat'), 'macarons');
     var option = {
         title: {
