@@ -418,6 +418,7 @@ class AdminController extends Controller{
             array('id','序号'),
             array('titlec','中文名'),
             array('titlee','英文名'),
+            array('judge_first_extra','是否人工入围'),
             array('judge_result','评审结果'),
             array('judge1','评委1'),
             array('judge2','评委2'),
