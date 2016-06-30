@@ -323,7 +323,7 @@ class AdminController extends Controller{
     	$tmp = array();
     	foreach ($judges as $key => $value) {
     		$t = M('user')->where(array('id'=>$key))->find();
-    		$tmp[] = array('email'=>$t['email'], 'all'=>$value[0], 'finished'=>$value[1], 'inrate'=>floatval($value[2]) / floatval($value[0]));
+    		$tmp[] = array('email'=>$t['email'], 'all'=>$value[0], 'finished'=>$value[1], 'inrate'=>sprintf("%.2f", floatval($value[2]) / floatval($value[0])));
     	}
     	$this->judges = $tmp;
 
