@@ -632,7 +632,7 @@ class AdminController extends Controller{
                         $begin = 0;
                     }
 
-                    if ($sum == 5) {
+                    if ($sum == 3) {
                         break;
                     }
                 }
