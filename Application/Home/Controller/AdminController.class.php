@@ -446,7 +446,7 @@ class AdminController extends Controller{
         $judges = M('user')->where(array('role'=>1))->select();
         $tmp = array();
         for ($i = 0; $i < count($judges); $i++) { 
-            $tmp[$judges[$i]['id']] = $tmp[$judges[$i]['email']];
+            $tmp[$judges[$i]['id']] = $judges[$i]['email'];
         }
         $judges = $tmp;
         $judgements = M('judge_first')->where(array('contest_id'=>C('CONTESTID')))->select();
