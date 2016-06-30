@@ -309,18 +309,21 @@ class AdminController extends Controller{
     	$judges = array();
     	for ($i = 0; $i < count($assignments); $i++) {
     		if (!array_key_exists($assignments[$i]['user_id'], $judges)) {
-    			// 总数量，已完成
-    			$judges[$assignments[$i]['user_id']] = [0,0];
+    			// 总数量，已完成，通过率
+    			$judges[$assignments[$i]['user_id']] = [0,0,0];
     		}
     		$judges[$assignments[$i]['user_id']][0] += 1;
     		if ($assignments[$i]['yes_or_no'] != '') {
     			$judges[$assignments[$i]['user_id']][1] += 1;
     		}
+            if ($assignments[$i]['yes_or_no'] == 'yes') {
+                $judges[$assignments[$i]['user_id']][2] += 1;
+            }
     	}
     	$tmp = array();
     	foreach ($judges as $key => $value) {
     		$t = M('user')->where(array('id'=>$key))->find();
-    		$tmp[] = array('email'=>$t['email'], 'all'=>$value[0], 'finished'=>$value[1]);
+    		$tmp[] = array('email'=>$t['email'], 'all'=>$value[0], 'finished'=>$value[1], 'inrate'=>floatval($value[2]) / floatval($value[0]));
     	}
     	$this->judges = $tmp;
 
