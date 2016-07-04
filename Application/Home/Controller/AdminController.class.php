@@ -530,17 +530,18 @@ class AdminController extends Controller{
         $judges = array();
         for ($i = 0; $i < count($assignments); $i++) { 
             if (!array_key_exists($assignments[$i]['user_id'], $judges)) {
-                $judges[$assignments[$i]['user_id']] = [0, 0];
+                $judges[$assignments[$i]['user_id']] = [0, 0, 0];
             }
             $judges[$assignments[$i]['user_id']][0] += 1;
             if ($assignments[$i]['is_judged'] == 1) {
                 $judges[$assignments[$i]['user_id']][1] += 1;
+                $judges[$assignments[$i]['user_id']][2] += floatval($assignments[$i]['total']);
             }
         }
         $tmp = array();
         foreach ($judges as $key => $value) {
             $t = M('user')->where(array('id'=>$key))->find();
-            $tmp[] = array('email'=>$t['email'], 'all'=>$value[0], 'finished'=>$value[1]);
+            $tmp[] = array('email'=>$t['email'], 'all'=>$value[0], 'finished'=>$value[1], 'score'=>round(floatval($value[2])/floatval($value[1]), 4));
         }
         $this->judges = $tmp;
 

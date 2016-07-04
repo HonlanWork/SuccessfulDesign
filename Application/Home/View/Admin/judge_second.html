@@ -22,12 +22,14 @@
         <th>评委邮箱</th>
         <th>需审核数量</th>
         <th>已完成数量</th>
+        <th>平均打分</th>
     </tr>
     <foreach name="judges" item="v">
         <tr>
             <td>{$v.email}</td>
             <td>{$v.all}</td>
             <td>{$v.finished}</td>
+            <td>{$v.score}</td>
         </tr>
     </foreach>
 </table>
