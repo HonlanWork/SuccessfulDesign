@@ -765,6 +765,18 @@ class AdminController extends Controller{
             $xlsData[$i]['process3'] = $process3;
             $xlsData[$i]['result3'] = $result3;
         }
+
+        usort($xlsData, function($a, $b) {
+            if ($a['total'] == $b['total']) {
+                return 0;   
+            }
+            elseif ($a[0] > $b[0]) {
+                return -1;
+            }
+            else {
+                return 1;
+            }
+        });
        
         $objPHPExcel = new \PHPExcel();
         $cellName = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','AA','AB','AC','AD','AE','AF','AG','AH','AI','AJ','AK','AL','AM','AN','AO','AP','AQ','AR','AS','AT','AU','AV','AW','AX','AY','AZ');
