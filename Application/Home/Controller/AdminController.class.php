@@ -652,6 +652,141 @@ class AdminController extends Controller{
         $this->redirect('Admin/judge_second');
     }
 
+    public function judge_second_export(){
+        $xlsName = "submission";
+        $xlsCell = array(
+            array('id','序号'),
+            array('titlec','中文名'),
+            array('titlee','英文名'),
+            array('total','最终得分'),
+            array('judge1','评委1'),
+            array('strategy1','策略1'),
+            array('process1','过程1'),
+            array('result1','结果1'),
+            array('judge2','评委2'),
+            array('strategy2','策略2'),
+            array('process2','过程2'),
+            array('result2','结果2'),
+            array('judge3','评委3'),
+            array('strategy3','策略3'),
+            array('process3','过程3'),
+            array('result3','结果3'),
+            array('category','分类'),
+            array('companyc','公司中文名'),
+            array('companye','公司英文名'),
+            array('position','职位'),
+            array('email','邮箱'), 
+            array('companyp','公司电话'), 
+            array('cellphone','手机'), 
+            array('addts','发布日期'), 
+            array('introductionc','简述中文'), 
+            array('introductione','简述英文'), 
+            array('demandc','项目需求中文'), 
+            array('demande','项目需求英文'), 
+            array('challengec','面临挑战中文'), 
+            array('challengee','面临挑战英文'), 
+            array('costc','预算评估中文'), 
+            array('coste','预算评估英文'), 
+            array('solutionc','设计解决方案中文'), 
+            array('solutione','设计解决方案英文'), 
+            array('conclusionc','项目成效总结中文'), 
+            array('conclusione','项目成效总结英文'), 
+            array('invitation','合伙伙伴'),
+            ); 
+        $xlsData = M('submission')->where(array('contest_id'=>C('CONTESTID'), 'issubmitted'=>1))->select();
+
+        $judges = M('user')->where(array('role'=>1))->select();
+        $tmp = array();
+        for ($i = 0; $i < count($judges); $i++) { 
+            $tmp[$judges[$i]['id']] = $judges[$i]['email'];
+        }
+        $judges = $tmp;
+        $judgements = M('judge_second')->where(array('contest_id'=>C('CONTESTID')))->select();
+
+        $xlsTitle = iconv('utf-8', 'gb2312', $xlsName);//文件名称
+        $fileName = '第二轮评审结果_'.date('YmdHis');//or $xlsTitle 文件名称可根据自己情况设定
+        $cellNum = count($xlsCell);
+        $dataNum = count($xlsData);
+        vendor("PHPExcel.PHPExcel");
+
+        for ($i = 0; $i < count($xlsData); $i++) {
+            $judge1 = '';
+            $strategy1 = '';
+            $process1 = '';
+            $result1 = '';
+            $judge2 = '';
+            $strategy2 = '';
+            $process2 = '';
+            $result2 = '';
+            $judge3 = '';
+            $strategy3 = '';
+            $process3 = '';
+            $result3 = '';
+            $total = 0;
+            $judge_count = 0;
+            for ($j = 0; $j < count($judgements); $j++) { 
+                if ($judgements[$j]['submission_id'] == $xlsData[$i]['id']) {
+                    $judge_count += 1;
+                    if ($judge_count == 1) {
+                        $judge1 = $judges[$judgements[$j]['user_id']];
+                        $strategy1 = $judgements[$j]['strategy'];
+                        $process1 = $judgements[$j]['process'];
+                        $result1 = $judgements[$j]['result'];
+                        $total += intval($judgements[$j]['total']);
+                    }
+                    elseif ($judge_count == 2) {
+                        $judge2 = $judges[$judgements[$j]['user_id']];
+                        $strategy2 = $judgements[$j]['strategy'];
+                        $process2 = $judgements[$j]['process'];
+                        $result2 = $judgements[$j]['result'];
+                        $total += intval($judgements[$j]['total']);
+                    }
+                    if ($judge_count == 3) {
+                        $judge3 = $judges[$judgements[$j]['user_id']];
+                        $strategy3 = $judgements[$j]['strategy'];
+                        $process3 = $judgements[$j]['process'];
+                        $result3 = $judgements[$j]['result'];
+                        $total += intval($judgements[$j]['total']);
+                        break;
+                    }
+                }
+            }
+            $xlsData[$i]['total'] = $total;
+            $xlsData[$i]['judge1'] = $judge1;
+            $xlsData[$i]['strategy1'] = $strategy1;
+            $xlsData[$i]['process1'] = $process1;
+            $xlsData[$i]['result1'] = $result1;
+            $xlsData[$i]['judge2'] = $judge2;
+            $xlsData[$i]['strategy2'] = $strategy2;
+            $xlsData[$i]['process2'] = $process2;
+            $xlsData[$i]['result2'] = $result2;
+            $xlsData[$i]['judge3'] = $judge3;
+            $xlsData[$i]['strategy3'] = $strategy3;
+            $xlsData[$i]['process3'] = $process3;
+            $xlsData[$i]['result3'] = $result3;
+        }
+       
+        $objPHPExcel = new \PHPExcel();
+        $cellName = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','AA','AB','AC','AD','AE','AF','AG','AH','AI','AJ','AK','AL','AM','AN','AO','AP','AQ','AR','AS','AT','AU','AV','AW','AX','AY','AZ');
+        
+        for($i = 0; $i < $cellNum; $i++){
+            $objPHPExcel->setActiveSheetIndex(0)->setCellValue($cellName[$i].'1', $xlsCell[$i][1]); 
+        } 
+          // Miscellaneous glyphs, UTF-8   
+        for($i = 0; $i < $dataNum; $i++){
+            for($j = 0; $j < $cellNum; $j++){
+                $objPHPExcel->getActiveSheet(0)->setCellValue($cellName[$j].($i+2), $xlsData[$i][$xlsCell[$j][0]]);
+            }             
+        }  
+        
+        header('pragma:public');
+        header('Content-type:application/vnd.ms-excel;charset=utf-8;name="'.$xlsTitle.'.xls"');
+        header("Content-Disposition:attachment;filename=$fileName.xls");//attachment新窗口打印inline本窗口打印
+        $objWriter = \PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');  
+        $objWriter->save('php://output'); 
+        exit; 
+    }
+
     // kol管理
     public function kol(){
         $kol = M('kol')->where(array('contest_id'=>C('CONTESTID')))->select();
