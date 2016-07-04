@@ -751,7 +751,7 @@ class AdminController extends Controller{
                     }
                 }
             }
-            $xlsData[$i]['total'] = $total;
+            $xlsData[$i]['total'] = round(floatval($total) / 3, 1);
             $xlsData[$i]['judge1'] = $judge1;
             $xlsData[$i]['strategy1'] = $strategy1;
             $xlsData[$i]['process1'] = $process1;
@@ -770,7 +770,7 @@ class AdminController extends Controller{
             if ($a['total'] == $b['total']) {
                 return 0;   
             }
-            elseif ($a[0] > $b[0]) {
+            elseif ($a['total'] > $b['total']) {
                 return -1;
             }
             else {
