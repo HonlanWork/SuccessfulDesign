@@ -541,7 +541,11 @@ class AdminController extends Controller{
         $tmp = array();
         foreach ($judges as $key => $value) {
             $t = M('user')->where(array('id'=>$key))->find();
-            $tmp[] = array('email'=>$t['email'], 'all'=>$value[0], 'finished'=>$value[1], 'score'=>round(floatval($value[2])/floatval($value[1]), 4));
+            $score = 0;
+            if ($value[1] != 0) {
+                $score = round(floatval($value[2]) / floatval($value[1]), 4);
+            }
+            $tmp[] = array('email'=>$t['email'], 'all'=>$value[0], 'finished'=>$value[1], 'score'=>$score);
         }
         $this->judges = $tmp;
 
