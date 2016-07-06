@@ -466,7 +466,8 @@ class ContestController extends CommonController {
 		$map['user_id'] = array('eq', $_SESSION['uid']);
 		$map['result'] = array('neq', '');
 		$submissions = M('submission')->where($map)->select();
-		if (count($map) == 0) {
+		if (count($submissions) == 0) {
+			$this->submissions = $submissions;
 			$this->redirect('Index/contest', array('id'=>C('CONTESTID')));
 		}
 		else {
