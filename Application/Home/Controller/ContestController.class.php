@@ -461,12 +461,21 @@ class ContestController extends CommonController {
 	}
 
 	public function promotion(){
-		$submissions = M('submission')->where(array('contest_id'=>C('CONTESTID'), 'user_id'=>$_SESSION['uid']))->select();
-		$this->display();
+		$map = array();
+		$map['contest_id'] = array('eq', C('CONTESTID'));
+		$map['user_id'] = array('eq', $_SESSION['uid']);
+		$map['result'] = array('neq', '');
+		$submissions = M('submission')->where($map)->select();
+		if (count($map) == 0) {
+			$this->redirect('Index/contest', array('id'=>C('CONTESTID')));
+		}
+		else {
+			$this->display();
+		}
 	}
 
 	public function promotion_pay(){
-		
+
 	}
 
 	public function promotion_pay_success(){
