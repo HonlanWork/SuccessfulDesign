@@ -459,4 +459,17 @@ class ContestController extends CommonController {
 		M('submission')->where(array('id'=>I('id'), 'user_id'=>$_SESSION['uid'], 'ispaied'=>0))->delete();
 		$this->redirect('User/submissions');
 	}
+
+	public function promotion(){
+		$submissions = M('submission')->where(array('contest_id'=>C('CONTESTID'), 'user_id'=>$_SESSION['uid']))->select();
+		$this->display();
+	}
+
+	public function promotion_pay(){
+		
+	}
+
+	public function promotion_pay_success(){
+
+	}
 }
