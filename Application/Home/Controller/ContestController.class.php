@@ -51,6 +51,9 @@ class ContestController extends CommonController {
 
 	public function pay() {
 		$this->contest = M('contest')->where(array('id'=>C('CONTESTID')))->find();
+		if ($this->contest['open'] == 0) {
+			$this->redirect('User/submissions');
+		}
 		$this->submission = M('submission')->field('id,titlee,titlec,category,ispaied,pay_confirm')->where(array('id'=>I('id'), 'user_id'=>$_SESSION['uid']))->find();
 		if ($this->submission['ispaied'] == 1) {
 			$this->redirect('Contest/info', array('id'=>I('id')));
