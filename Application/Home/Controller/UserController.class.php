@@ -46,7 +46,7 @@ class UserController extends CommonController {
 		$this->notcomplete = M('submission')->where(array('contest_id'=>C('CONTESTID'),'user_id'=>$_SESSION['uid'], 'iscomplete'=>0))->select();
 		$this->notpaied = M('submission')->where(array('contest_id'=>C('CONTESTID'),'user_id'=>$_SESSION['uid'], 'ispaied'=>0))->select();
 		$this->notsubmitted = M('submission')->where(array('contest_id'=>C('CONTESTID'),'user_id'=>$_SESSION['uid'], 'issubmitted'=>0))->select();
-		$promotions = M('promotion')->where(array('contest_id'=>C('CONTESTID'),'user_id'=>$_SESSION['uid'], 'ispaied'=>1))->select();
+		$promotions = M('promotion')->where(array('contest_id'=>C('CONTESTID'),'user_id'=>$_SESSION['uid'], 'ispaied'=>1))->order('timestamp desc')->select();
 		$names = ['双页年鉴展示', '专题报道', '媒体推广', '微信传播', '3D展示', '实物展示', '增订奖杯&奖状', '增订年鉴'];
 		for ($i = 0; $i < count($promotions); $i++) {
 			$tmp = '';
@@ -74,6 +74,10 @@ class UserController extends CommonController {
 				}
 			}
 			$promotions[$i]['promotion'] = $tmp;
+
+			$tmp_sub = M('submission')->where(array('id'=>$promotions[$i]['submission_id']))->find();
+			$promotions[$i]['titlec'] = $tmp_sub['titlec'];
+			$promotions[$i]['titlee'] = $tmp_sub['titlee'];
 		}
 		$this->promotions = $promotions;
 		$this->display();
