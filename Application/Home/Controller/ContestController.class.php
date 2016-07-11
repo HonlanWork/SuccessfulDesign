@@ -513,7 +513,7 @@ class ContestController extends CommonController {
 		}
 		$amount *= 100;
 		$orderNo = $input_data['order_no'];
-		M('promotion')->data(array('contest_id'=>C('CONTESTID'), 'user_id'=>$_SESSION['uid'], 'submission_id'=>$submission_id, 'promotion_code'=>$orderNo, 'promotion'=>$promotion, 'timestamp'=>time()))->add();
+		M('promotion')->data(array('contest_id'=>C('CONTESTID'), 'user_id'=>$_SESSION['uid'], 'submission_id'=>$submission_id, 'promotion_code'=>$orderNo, 'promotion'=>$promotion, 'timestamp'=>time(), 'price'=>$amount / 100))->add();
 
         \Pingpp\Pingpp::setPrivateKeyPath('Public/rsa_private_key.pem');
 
