@@ -161,7 +161,11 @@
                 <?php translate('每项服务仅针对1件获奖作品，如多件作品获奖，请根据获奖件数多选')?>
             </li>
             <li>
-                <?php translate('每项服务细则具体阐述，请参考PPT介绍')?>
+                <?php if (isset($_SESSION['lang']) and $_SESSION['lang'] == 'en') { ?>
+                <a href="__PUBLIC__/upload/download/2016 SDA promotion package_EN_rcg.pptx"><?php translate('每项服务细则具体阐述，请参考PPT介绍')?></a>
+                <?php } else{ ?>
+                <a href="__PUBLIC__/upload/download/2016成功设计大赛推广方案.pptx"><?php translate('每项服务细则具体阐述，请参考PPT介绍')?></a>
+                <?php } ?>
             </li>
         </ul>
         <div class="row">
@@ -237,7 +241,11 @@
                 <?php translate('不同服务可<b>多选</b>，<b>无排他性</b>，每项服务也可<b>重复选择</b>')?>
             </li>
             <li>
-                <?php translate('每项服务细则具体阐述，请参考PPT介绍')?>
+                <?php if (isset($_SESSION['lang']) and $_SESSION['lang'] == 'en') { ?>
+                <a href="__PUBLIC__/upload/download/2016 SDA promotion package_EN_rcg.pptx"><?php translate('每项服务细则具体阐述，请参考PPT介绍')?></a>
+                <?php } else{ ?>
+                <a href="__PUBLIC__/upload/download/2016成功设计大赛推广方案.pptx"><?php translate('每项服务细则具体阐述，请参考PPT介绍')?></a>
+                <?php } ?>
             </li>
         </ul>
         <div class="row">
@@ -378,7 +386,7 @@
         <?php translate('增订奖杯&奖状或年鉴')?>
     </p>
     <div class="row">
-        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-3">
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
             <div class="choice3" id="26" name="500">
                 <?php translate('增订奖杯&奖状')?>
                 <button class="minus"><span class="fa fa-fw fa-minus"></span></button>
@@ -386,7 +394,7 @@
                 <button class="plus"><span class="fa fa-fw fa-plus"></span></button>
             </div>
         </div>
-        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-3">
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
             <div class="choice3" id="27" name="200">
                 <?php translate('增订年鉴')?>
                 <button class="minus"><span class="fa fa-fw fa-minus"></span></button>
