@@ -66,10 +66,10 @@ class UserController extends CommonController {
 			for ($j = 1; $j < count($promotions[$i]['promotion']); $j++) { 
 				if ($promotions[$i]['promotion'][$j] != 0) {
 					if ($promotions[$i]['promotion'][$j] == 1) {
-						$tmp .= ' '.$names[$j - 1];
+						$tmp .= ' '.translate_return($names[$j - 1]);
 					}
 					else {
-						$tmp .= ' '.$names[$j - 1].'x'.$promotions[$i]['promotion'][$j];
+						$tmp .= ' '.translate_return($names[$j - 1]).'x'.$promotions[$i]['promotion'][$j];
 					}
 				}
 			}
