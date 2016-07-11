@@ -66,9 +66,84 @@
 
 #main #section2 {
     padding: 30px 6%;
+    padding-bottom: 10px;
     background-color: #f2f2f2;
     border-bottom-right-radius: 5px;
     border-bottom-left-radius: 5px;
+}
+
+#main .choice1 {
+    width: 100%;
+    text-align: center;
+    color: #ef5045;
+    border: 1px solid #ef5045;
+    background-color: transparent;
+    padding: 12px;
+    font-size: 14px;
+    border-radius: 4px;
+    margin-bottom: 12px;
+}
+
+#main .choice1:hover,
+#main .choice1.active {
+    color: #fff;
+    background-color: #ef5045;
+    cursor: pointer;
+}
+
+#main .choice2 {
+    width: 100%;
+    text-align: center;
+    color: #ef5045;
+    border: 1px solid #ef5045;
+    background-color: transparent;
+    padding: 12px;
+    font-size: 14px;
+    border-radius: 4px;
+    margin-bottom: 12px;
+    position: relative;
+}
+
+#main .choice2:hover {
+    cursor: pointer;
+}
+
+#main .choice2.active {
+    color: #fff;
+    background-color: #ef5045;
+    cursor: pointer;
+}
+
+#main #buy {
+    color: white;
+    background-color: #ff7c34;
+    border: none;
+    padding: 12px 40px;
+    border-radius: 5px;
+    font-size: 14px;
+    position: relative;
+    top: 0px;
+    margin-bottom: -30px;
+    box-shadow: 2px 2px 3px rgba(20, 20, 20, 0.4);
+}
+
+#main .choice3 {
+    width: 100%;
+    text-align: left;
+    color: #ef5045;
+    font-size: 14px;
+    margin-bottom: 12px;
+}
+
+#main .choice3 button {
+    outline: none;
+    border: none;
+    background-color: transparent;
+    color: #888;
+}
+
+#main .choice3 span {
+    color: #888;
 }
 </style>
 <div id="section1">
@@ -231,9 +306,244 @@
 </div>
 <div id="section2">
     <h3 style="font-size:20px;margin-bottom:30px;color:#333;"><?php translate('购买推广服务')?></h3>
+    <p>
+        <?php translate('选择需要推广的获奖作品')?>
+    </p>
+    <select class="form-control" name="submission">
+        <foreach name="submissions" item="v">
+            <option value="{$v['id']}">{$v.titlec} {$v.titlee}</option>
+        </foreach>
+    </select>
+    <p style="margin-top:12px;">
+        <?php translate('选择一项标准推广服务')?>
+    </p>
+    <div class="row">
+        <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3">
+            <div class="choice1" id="1a" name="3000">
+                <?php translate('A 基础推广服务')?>
+            </div>
+        </div>
+        <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3">
+            <div class="choice1" id="1b" name="8000">
+                <?php translate('B 展示推广服务')?>
+            </div>
+        </div>
+        <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3">
+            <div class="choice1" id="1c" name="12000">
+                <?php translate('C 闪耀推广服务')?>
+            </div>
+        </div>
+        <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3">
+            <div class="choice1" id="1d" name="18000">
+                <?php translate('D 成功推广服务')?>
+            </div>
+        </div>
+    </div>
+    <p style="margin-top:12px;">
+        <?php translate('自由选择增值推广服务')?>
+    </p>
+    <div class="row">
+        <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3">
+            <div class="choice2" id="20" name="3000">
+                <?php translate('双页年鉴展示')?>
+            </div>
+        </div>
+        <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3">
+            <div class="choice2" id="21" name="15000">
+                <?php translate('专题报道')?>
+            </div>
+        </div>
+        <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3">
+            <div class="choice2" id="22" name="10000">
+                <?php translate('媒体推广')?>
+            </div>
+        </div>
+        <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3">
+            <div class="choice2" id="23" name="1000">
+                <?php translate('微信传播')?>
+            </div>
+        </div>
+        <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3">
+            <div class="choice2" id="24" name="5000">
+                <?php translate('3D展示')?>
+            </div>
+        </div>
+        <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3">
+            <div class="choice2" id="25" name="12000">
+                <?php translate('实物展示')?>
+            </div>
+        </div>
+    </div>
+    <p style="margin-top:12px;">
+        <?php translate('增订奖杯&奖状或年鉴')?>
+    </p>
+    <div class="row">
+        <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3">
+            <div class="choice3" id="26" name="500">
+                <?php translate('增订奖杯&奖状')?>
+                <button class="minus"><span class="fa fa-fw fa-minus"></span></button>
+                <span class="number">0</span>
+                <button class="plus"><span class="fa fa-fw fa-plus"></span></button>
+            </div>
+        </div>
+        <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3">
+            <div class="choice3" id="27" name="200">
+                <?php translate('增订年鉴')?>
+                <button class="minus"><span class="fa fa-fw fa-minus"></span></button>
+                <span class="number">0</span>
+                <button class="plus"><span class="fa fa-fw fa-plus"></span></button>
+            </div>
+        </div>
+    </div>
+    <p style="margin-top:12px;">
+        <?php translate('需支付')?>
+    </p>
+    <p id="total_price" style="font-size:20px;color:#ef5045;">RMB 0</p>
+    <div style="text-align:center;">
+        <button class="btn btn-default" id="buy">
+            <?php translate('购买')?>
+        </button>
+    </div>
 </div>
 <script>
 $(document).ready(function() {
+    var submission_id = '';
+    var choice1 = '';
+    var choice2 = [0, 0, 0, 0, 0, 0, 0, 0];
+    var prices = [3000, 15000, 10000, 1000, 5000, 12000, 500, 200];
+    $('.choice1').click(function(event) {
+        $('.choice1').removeClass('active');
+        $(this).addClass('active');
+        choice1 = $(this).attr('id');
+        cal_total();
+    });
+    $('.choice2').click(function(event) {
+        $(this).toggleClass('active');
+        if ($(this).hasClass('active')) {
+            choice2[parseInt($(this).attr('id')[1])] = 1;
+        } else {
+            choice2[parseInt($(this).attr('id')[1])] = 0;
+        }
+        cal_total();
+    });
+    $('.choice3 .minus').click(function(event) {
+        var num = parseInt($(this).siblings('span').text());
+        if (num == 0) {
+            choice2[parseInt($(this).parent('.choice3').attr('id')[1])] = 0;
+        } else {
+            num -= 1;
+            $(this).siblings('span').text(num);
+            choice2[parseInt($(this).parent('.choice3').attr('id')[1])] = num;
+        }
+        cal_total();
+    });
+    $('.choice3 .plus').click(function(event) {
+        var num = parseInt($(this).siblings('span').text());
+        num += 1;
+        $(this).siblings('span').text(num);
+        choice2[parseInt($(this).parent('.choice3').attr('id')[1])] = num;
+        cal_total();
+    });
 
+    function cal_total() {
+        submission_id = $('select[name="submission"] option:selected').val();
+        var total = 0;
+        if (choice1 == '1a') {
+            total += 3000;
+        } else if (choice1 == '1b') {
+            total += 8000;
+        } else if (choice1 == '1c') {
+            total += 12000;
+        } else if (choice1 == '1d') {
+            total += 18000;
+        }
+
+        for (var i = 0; i < prices.length; i++) {
+            total += prices[i] * choice2[i];
+        }
+
+        $('#total_price').text('RMB ' + total);
+    }
+
+    $('#main #buy').click(function(event) {
+        event.preventDefault();
+    });
+
+    document.addEventListener('pingpp_one_ready', function() {
+        document.getElementById('buy').addEventListener('click', function() {
+            if (choice1 != '') {
+                var order_no = '';
+                // var tmp = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+                var tmp = '0123456789';
+                for (var i = 0; i < 30; i++) {
+                    order_no += tmp.charAt(Math.floor(Math.random() * tmp.length));
+                }
+                order_no = submission_id + order_no;
+                pingpp_one.init({
+                    app_id: 'app_4O0O8KmzjHm5zbLW', //该应用在 ping++ 的应用 ID
+                    order_no: order_no, //订单在商户系统中的订单号
+                    amount: 0, //订单价格，单位：人民币 分
+                    // 壹收款页面上需要展示的渠道，数组，数组顺序即页面展示出的渠道的顺序
+                    // channel: ['alipay_wap', 'wx_pub', 'upacp_wap', 'yeepay_wap', 'jdpay_wap', 'bfb_wap'],
+                    channel: ['alipay_wap'],
+                    charge_url: "{:U('Contest/promotion_pay')}", //商户服务端创建订单的 url
+                    charge_param: {
+                        submission_id: submission_id,
+                        choice1: choice1,
+                        choice2: choice2
+                    }, //(可选，用户自定义参数，若存在自定义参数则壹收款会通过 POST 方法透传给 charge_url)
+                    // open_id: 'wx1234567890', //(可选，使用微信公众号支付时必须传入)
+                    debug: false //(可选，debug 模式下会将 charge_url 的返回结果透传回来)
+                }, function(res) {
+                    //debug 模式下获取 charge_url 的返回结果
+                    if (res.debug && res.chargeUrlOutput) {
+                        console.log(res.chargeUrlOutput);
+                    }
+                    if (!res.status) {
+                        //处理错误
+                        alert(res.msg);
+                        $.ajax({
+                                url: "{:U('Index/logging')}",
+                                type: 'POST',
+                                dataType: 'json',
+                                data: {
+                                    part: 'promotion',
+                                    content: res.chargeUrlOutput,
+                                },
+                            })
+                            .done(function() {
+                                console.log("success");
+                            })
+                            .fail(function() {
+                                console.log("error");
+                            })
+                            .always(function() {
+                                console.log("complete");
+                            });
+                    } else {
+                        //debug 模式下调用 charge_url 后会暂停，可以调用 pingpp_one.resume 方法继续执行
+                        if (res.debug && !res.wxSuccess) {
+                            if (confirm('当前为 debug 模式，是否继续支付？')) {
+                                pingpp_one.resume();
+                            }
+                        }
+                        //若微信公众号渠道需要使用壹收款的支付成功页面，则在这里进行成功回调，
+                        //调用 pingpp_one.success 方法，你也可以自己定义回调函数
+                        //其他渠道的处理方法请见第 2 节
+                        else pingpp_one.success(function(res) {
+                            if (!res.status) {
+                                alert(res.msg);
+                            }
+                        }, function() {
+                            //这里处理支付成功页面点击“继续购物”按钮触发的方法，
+                            //例如：若你需要点击“继续购物”按钮跳转到你的购买页，
+                            //则在该方法内写入 window.location.href = "你的购买页面 url"
+                            window.location.href = 'http://yourdomain.com/payment_succeeded'; //示例
+                        });
+                    }
+                });
+            }
+        });
+    });
 });
 </script>

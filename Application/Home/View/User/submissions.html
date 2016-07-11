@@ -438,6 +438,37 @@
             </table>
         </div>
     </div>
+    <div>
+        <h4 style="font-size:20px;margin-top:20px;margin-bottom:20px;color:#444;"><?php translate('我的推广')?></h4>
+        <table class="table table-hover">
+            <tr>
+                <th>
+                    <?php translate('作品名称')?>
+                </th>
+                <th>
+                    <?php translate('推广服务')?>
+                </th>
+                <th>
+                    <?php translate('购买时间')?>
+                </th>
+            </tr>
+            <foreach name="promotions" item="v">
+                <tr>
+                    <td>
+                        <p style="font-size:13px;margin-top:10px;color:#666;">{$v.titlee}</p>
+                        <p style="font-size:13px;color:#666;">{$v.titlec}</p>
+                    </td>
+                    <td>
+                        {$v.promotion}
+                    </td>
+                    <td>
+                        {$v.timestamp|date='Y-m-d H:i:s',###}
+                    </td>
+                </tr>
+            </foreach>
+        </table>
+        
+    </div>
     <div style="text-align:center;">
         <a href="{:U('Contest/promotion')}" class="join">
             <?php translate('推广服务')?>

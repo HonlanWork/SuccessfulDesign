@@ -470,19 +470,157 @@ class ContestController extends CommonController {
 		$map['result'] = array('neq', '');
 		$submissions = M('submission')->where($map)->select();
 		if (count($submissions) == 0) {
-			$this->submissions = $submissions;
 			$this->redirect('Index/contest', array('id'=>C('CONTESTID')));
 		}
 		else {
+			$this->submissions = $submissions;
 			$this->display();
 		}
 	}
 
 	public function promotion_pay(){
+		$api_key =  C('API_KEY');
+		$api_id = C('API_ID');
 
+		$input_data = json_decode(file_get_contents('php://input'), true);
+
+		if (empty($input_data['channel']) || empty($input_data['amount'])) {
+		    echo 'channel or amount is empty';
+		    exit();
+		}
+		$channel = strtolower($input_data['channel']);
+		$submission_id = $input_data['submission_id'];
+		$amount = 0;
+		$choice1 = $input_data['choice1'];
+		if ($choice1 == '1a') {
+			$amount = 3000;
+		}
+		elseif ($choice1 == '1b') {
+			$amount = 8000;
+		}
+		elseif ($choice1 == '1c') {
+			$amount = 12000;
+		}
+		elseif ($choice1 == '1d') {
+			$amount = 18000;
+		}
+		$choice2 = $input_data['choice2'];
+		$prices = [3000, 15000, 10000, 1000, 5000, 12000, 500, 200];
+		$promotion = $choice1;
+		for ($i = 0; $i < count($choice2); $i++) { 
+			$amount += $choice2[$i] * $prices[$i];
+			$promotion .= ','.$choice2[$i];
+		}
+		$amount *= 100
+		$orderNo = $input_data['order_no'];
+		M('promotion')->data(array('contest_id'=>C('CONTESTID'), 'user_id'=>$_SESSION['uid'], 'submission_id'=>$submission_id, 'promotion_code'=>$orderNo, 'promotion'=>$promotion, 'timestamp'=>time()))->add();
+
+        \Pingpp\Pingpp::setPrivateKeyPath('Public/rsa_private_key.pem');
+
+        /**
+		 * $extra 在使用某些渠道的时候，需要填入相应的参数，其它渠道则是 array()。
+		 * 以下 channel 仅为部分示例，未列出的 channel 请查看文档 https://pingxx.com/document/api#api-c-new
+		 */
+		$extra = array();
+		switch ($channel) {
+		    case 'alipay_wap':
+		        $extra = array(
+		            'success_url' => C('SITE_PREFIX') . U('Contest/promotion_pay_success', array('submission_id'=>$input_data['submission_id'],'promotion_code'=>$orderNo)),
+		            'cancel_url' => C('SITE_PREFIX') . U('Contest/promotion')
+		        );
+		        break;
+		    case 'bfb_wap':
+		        $extra = array(
+		            'result_url' => 'http://example.com/result',
+		            'bfb_login' => true
+		        );
+		        break;
+		    case 'upacp_wap':
+		        $extra = array(
+		            'result_url' => 'http://example.com/result'
+		        );
+		        break;
+		    case 'wx_pub':
+		        $extra = array(
+		            'open_id' => 'openidxxxxxxxxxxxx'
+		        );
+		        break;
+		    case 'wx_pub_qr':
+		        $extra = array(
+		            'product_id' => 'Productid'
+		        );
+		        break;
+		    case 'yeepay_wap':
+		        $extra = array(
+		            'product_category' => '1',
+		            'identity_id'=> 'your identity_id',
+		            'identity_type' => 1,
+		            'terminal_type' => 1,
+		            'terminal_id'=>'your terminal_id',
+		            'user_ua'=>'your user_ua',
+		            'result_url'=>'http://example.com/result'
+		        );
+		        break;
+		    case 'jdpay_wap':
+		        $extra = array(
+		            'success_url' => 'http://example.com/success',
+		            'fail_url'=> 'http://example.com/fail',
+		            'token' => 'dsafadsfasdfadsjuyhfnhujkijunhaf'
+		        );
+		        break;
+		}
+
+		$subject = '成功设计大赛作品推广 '.$submission_id;
+
+        \Pingpp\Pingpp::setApiKey($api_key);
+        try {
+		    $ch = \Pingpp\Charge::create(
+		        array(
+		            'subject'   => $subject,
+		            'body'      => '快来支付吧',
+		            'amount'    => $amount,
+		            'order_no'  => $orderNo,
+		            'currency'  => 'cny',
+		            'extra'     => $extra,
+		            'channel'   => $channel,
+		            'client_ip' => get_client_ip(),
+		            'app'       => array('id' => $api_id)
+		        )
+		    );
+		    echo $ch;
+		} catch (\Pingpp\Error\Base $e) {
+		    // 捕获报错信息
+		    if ($e->getHttpStatus() != NULL) {
+		        header('Status: ' . $e->getHttpStatus());
+		        echo $e->getHttpBody();
+		    } else {
+		        echo $e->getMessage();
+		    }
+		}
 	}
 
 	public function promotion_pay_success(){
-
+		M('promotion')->where(array('submission_id'=>I('submission_id'),'user_id'=>$_SESSION['uid'],'pay_code'=>I('pay_code')))->save(array('ispaied'=>1,'promotion_code'=>''));
+		$email = M('email')->where(array('name'=>'购买推广'))->find();
+    	$email_content = $email['content'];
+    	if(count(explode("\n", $email_content)) == 1 ){
+    		$email_content = explode("\r", $email_content);
+    	} else {
+    		$email_content = explode("\n", $email_content);
+    	}
+    	$temp = '';
+    	foreach ($email_content as $key => $value) {
+    		$temp .= $value."<br/>";
+    	}
+    	$email_content = $temp;
+    	$submission = M('submission')->where(array('id'=>I('submission_id'), 'user_id'=>$_SESSION['uid']))->find();
+    	$tmp = '作品中文名称：'.$submission['titlec'].'<br/>作品英文名称：'.$submission['titlee'].'<br/>作品类别：'.$submission['category'];
+        $email_content = explode("^^^", $email_content);
+    	$email_content = $email_content[0].$tmp.$email_content[1];
+    	$admins = M('user')->where(array('role'=>2))->select();
+    	foreach ($admins as $key => $value) {
+    		SendMail($value['email'], $email['title'], $email_content);
+    	}
+		$this->redirect('User/submissions', array('id'=>I('id')));
 	}
 }

@@ -46,6 +46,36 @@ class UserController extends CommonController {
 		$this->notcomplete = M('submission')->where(array('contest_id'=>C('CONTESTID'),'user_id'=>$_SESSION['uid'], 'iscomplete'=>0))->select();
 		$this->notpaied = M('submission')->where(array('contest_id'=>C('CONTESTID'),'user_id'=>$_SESSION['uid'], 'ispaied'=>0))->select();
 		$this->notsubmitted = M('submission')->where(array('contest_id'=>C('CONTESTID'),'user_id'=>$_SESSION['uid'], 'issubmitted'=>0))->select();
+		$promotions = M('promotion')->where(array('contest_id'=>C('CONTESTID'),'user_id'=>$_SESSION['uid'], 'ispaied'=>1))->select();
+		$names = ['双页年鉴展示', '专题报道', '媒体推广', '微信传播', '3D展示', '实物展示', '增订奖杯&奖状', '增订年鉴'];
+		for ($i = 0; $i < count($promotions); $i++) {
+			$tmp = '';
+			$promotions[$i]['promotion'] = explode(',', $promotions[$i]['promotion']);
+			if ($promotions[$i]['promotion'][0] == '1a') {
+				$tmp = translate_return('A 基础推广服务');
+			}
+			elseif ($promotions[$i]['promotion'][0] == '1b') {
+				$tmp = translate_return('B 展示推广服务');
+			}
+			elseif ($promotions[$i]['promotion'][0] == '1c') {
+				$tmp = translate_return('C 闪耀推广服务');
+			}
+			elseif ($promotions[$i]['promotion'][0] == '1d') {
+				$tmp = translate_return('D 成功推广服务');
+			}
+			for ($j = 1; $j < count($promotions[$i]['promotion']); $j++) { 
+				if ($promotions[$i]['promotion'][$j] != 0) {
+					if ($promotions[$i]['promotion'][$j] == 1) {
+						$tmp .= ' '.$names[$j - 1];
+					}
+					else {
+						$tmp .= ' '.$names[$j - 1].'x'.$promotions[$i]['promotion'][$j];
+					}
+				}
+			}
+			$promotions[$i]['promotion'] = $tmp;
+		}
+		$this->promotions = $promotions;
 		$this->display();
 	}
 
