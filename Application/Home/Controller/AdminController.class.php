@@ -857,5 +857,45 @@ class AdminController extends Controller{
         M('invitation')->where(array('contest_id'=>C('CONTESTID'), 'id'=>I('id')))->delete();
         $this->redirect('Admin/invitation');
     }
+
+    // 作品推广管理
+    public function promotion(){
+        $promotions = M('promotion')->where(array('contest_id'=>C('CONTESTID'), 'ispaied'=>1))->order('timestamp desc')->select();
+        $names = ['双页年鉴展示', '专题报道', '媒体推广', '微信传播', '3D展示', '实物展示', '增订奖杯&奖状', '增订年鉴'];
+        for ($i = 0; $i < count($promotions); $i++) {
+            $tmp = '';
+            $promotions[$i]['promotion'] = explode(',', $promotions[$i]['promotion']);
+            if ($promotions[$i]['promotion'][0] == '1a') {
+                $tmp = translate_return('A 基础推广服务');
+            }
+            elseif ($promotions[$i]['promotion'][0] == '1b') {
+                $tmp = translate_return('B 展示推广服务');
+            }
+            elseif ($promotions[$i]['promotion'][0] == '1c') {
+                $tmp = translate_return('C 闪耀推广服务');
+            }
+            elseif ($promotions[$i]['promotion'][0] == '1d') {
+                $tmp = translate_return('D 成功推广服务');
+            }
+            for ($j = 1; $j < count($promotions[$i]['promotion']); $j++) { 
+                if ($promotions[$i]['promotion'][$j] != 0) {
+                    if ($promotions[$i]['promotion'][$j] == 1) {
+                        $tmp .= ' '.$names[$j - 1];
+                    }
+                    else {
+                        $tmp .= ' '.$names[$j - 1].'x'.$promotions[$i]['promotion'][$j];
+                    }
+                }
+            }
+            $promotions[$i]['promotion'] = $tmp;
+
+            $tmp_sub = M('submission')->where(array('id'=>$promotions[$i]['submission_id']))->find();
+            $promotions[$i]['titlec'] = $tmp_sub['titlec'];
+            $promotions[$i]['titlee'] = $tmp_sub['titlee'];
+            $promotions[$i]['email'] = $tmp_sub['email'];
+        }
+        $this->promotions = $promotions;
+        $this->display();
+    }
 }
 ?>

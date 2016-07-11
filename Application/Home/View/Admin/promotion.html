@@ -1,0 +1,46 @@
+<style>
+#main table {
+    font-size: 12px;
+    margin-top: 20px;
+}
+</style>
+<h3 style="margin-top:10px;margin-bottom:20px;">作品推广</h3>
+<table class="table table-hover">
+    <tr>
+        <th>
+            作品名称
+        </th>
+        <th>
+            作者邮箱
+        </th>
+        <th>
+            推广服务
+        </th>
+        <th>
+            购买时间
+        </th>
+        <th>
+            服务费用
+        </th>
+    </tr>
+    <foreach name="promotions" item="v">
+        <tr>
+            <td>
+                <p style="font-size:13px;color:#666;">{$v.titlee}</p>
+                <p style="font-size:13px;color:#666;margin-bottom:0;">{$v.titlec}</p>
+            </td>
+            <td>
+                {$v.email}
+            </td> 
+            <td>
+                {$v.promotion}
+            </td>
+            <td>
+                {$v.timestamp|date='Y-m-d H:i:s',###}
+            </td>
+            <td>
+                RMB {$v.price}
+            </td>
+        </tr>
+    </foreach>
+</table>
