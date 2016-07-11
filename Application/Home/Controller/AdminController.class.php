@@ -895,6 +895,7 @@ class AdminController extends Controller{
             $promotions[$i]['email'] = $tmp_sub['email'];
         }
         $this->promotions = $promotions;
+        layout('admin');
         $this->display();
     }
 }
