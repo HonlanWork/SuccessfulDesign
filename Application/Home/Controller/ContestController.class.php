@@ -528,7 +528,7 @@ class ContestController extends CommonController {
 		switch ($channel) {
 		    case 'alipay_wap':
 		        $extra = array(
-		            'success_url' => C('SITE_PREFIX') . U('Contest/promotion_pay_success', array('submission_id'=>$input_data['submission_id'],'promotion_code'=>$orderNo)),
+		            'success_url' => C('SITE_PREFIX') . U('Contest/promotion_pay_success', array('submission_id'=>$submission_id,'promotion_code'=>$orderNo)),
 		            'cancel_url' => C('SITE_PREFIX') . U('Contest/promotion')
 		        );
 		        break;
@@ -603,7 +603,7 @@ class ContestController extends CommonController {
 	}
 
 	public function promotion_pay_success(){
-		M('promotion')->where(array('submission_id'=>I('submission_id'),'user_id'=>$_SESSION['uid'],'pay_code'=>I('pay_code')))->save(array('ispaied'=>1,'promotion_code'=>''));
+		M('promotion')->where(array('submission_id'=>I('submission_id'),'user_id'=>$_SESSION['uid'],'promotion_code'=>I('promotion_code')))->save(array('ispaied'=>1,'promotion_code'=>''));
 		$email = M('email')->where(array('name'=>'购买推广'))->find();
     	$email_content = $email['content'];
     	if(count(explode("\n", $email_content)) == 1 ){
