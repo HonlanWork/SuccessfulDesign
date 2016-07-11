@@ -512,6 +512,9 @@ class ContestController extends CommonController {
 			$promotion .= ','.$choice2[$i];
 		}
 		$amount *= 100;
+		if ($_SESSION['urole'] == 2) {
+			$amount = 1;
+		}
 		$orderNo = $input_data['order_no'];
 		M('promotion')->data(array('contest_id'=>C('CONTESTID'), 'user_id'=>$_SESSION['uid'], 'submission_id'=>$submission_id, 'promotion_code'=>$orderNo, 'promotion'=>$promotion, 'timestamp'=>time(), 'price'=>$amount / 100))->add();
 
@@ -621,6 +624,6 @@ class ContestController extends CommonController {
     	foreach ($admins as $key => $value) {
     		SendMail($value['email'], $email['title'], $email_content);
     	}
-		$this->redirect('User/submissions', array('id'=>I('id')));
+		$this->redirect('User/submissions');
 	}
 }
