@@ -15,24 +15,33 @@
 }
 
 #main #basic .promotion1 {
-    margin: 15px 10px;
-    padding: 6px 10px 5px 15px;
+    margin: 15px 0px;
+    padding: 6px 10px 15px 15px;
     border: 1px solid rgba(160, 160, 160, 0.5);
-    border-bottom: none;
-    border-top-left-radius: 4px;
-    border-top-right-radius: 4px;
+    border-radius: 4px;
+    position: relative;
+    /*opacity: 0;*/
 }
-#main #basic .promotion1 a {
-    color: #666;
+#main #basic .promotion1:hover {
+    cursor: pointer;
+    background-color: #ff6948;
+    border: 1px solid #ff6948;
+}
+#main #basic .promotion1 b {
     font-size: 13px;
-    margin: 3px 6px;
     display: inline-block;
+    margin-right: 6px;
 }
-
+#main #basic .promotion1:hover b {
+    color: #fff;
+}
 #main #basic .promotion1 h5 {
     line-height: 1.2;
     color: #ff6948;
     font-size: 16px;
+}
+#main #basic .promotion1:hover h5 {
+    color: #fff;
 }
 
 #main #basic .promotion1 h5 span {
@@ -42,9 +51,12 @@
 #main #basic .promotion1 h5 small {
     display: block;
     color: #ff6948;
-    margin-left: 18px;
+    margin-left: 5px;
     margin-top: 5px;
     line-height: 1.2;
+}
+#main #basic .promotion1:hover h5 small {
+    color: #fff;
 }
 
 #main #additional .promotion2 {
@@ -74,6 +86,7 @@
 }
 
 #main #section2 {
+    display: none;
     padding: 30px 6%;
     padding-bottom: 10px;
     background-color: #fff;
@@ -156,6 +169,7 @@
 }
 
 #section3 {
+    display: none;
     padding: 30px 6%;
     padding-bottom: 10px;
     background-color: #f2f2f2;
@@ -166,9 +180,11 @@
     padding-right: 6px;
 }
 #section3 .detail h5 {
+    font-size: 16px;
+    font-weight: bold;
     text-align: center;
-    margin-top: 12px;
-    margin-bottom: 6px;
+    margin-top: -10px;
+    margin-bottom: 10px;
 }
 #section3 .detail img {
     border-radius: 4px;
@@ -176,6 +192,15 @@
 }
 #section3 .detail p {
     color: #888;
+    margin-top: 10px;
+}
+#back {
+    color: #999;
+    margin-bottom: -20px;
+}
+#back:hover {
+    color: #666;
+    cursor: pointer;
 }
 </style>
 <div id="section1">
@@ -201,17 +226,19 @@
             </li-->
         </ul>
         <div class="row">
-            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+            <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
                 <div class="promotion1" id="promotion1a">
-                    <h5><?php translate('A 基础推广服务')?><span>RMB 3,000</span><small><?php translate('帮助您最大化您的获奖收益')?><small></h5>
+                    <h5><?php translate('A 基础推广服务')?><span>RMB 3,000</span><small><?php translate('帮助您最大化您的获奖收益')?></small></h5>
                     <div>
-                        <a href="#detail1"><b><?php translate('奖杯 & 奖状')?></b></span></a>
-                        <a href="#detail2"><b><?php translate('年鉴展示')?></b></a>
-                        <a href="#detail3"><b><?php translate('颁奖典礼')?></b></a>
-                        <a href="#detail4"><b><?php translate('创新赋能大会')?></b></a>
-                        <a href="#detail5"><b><?php translate('获奖标示')?></b></a>
-                        <b style="color:#aaa;margin:3px 6px;"><?php translate('新闻通稿')?></b>
+                        <b><?php translate('奖杯 & 奖状')?></b></span>
+                        <b><?php translate('年鉴展示')?></b>
+                        <b><?php translate('颁奖典礼')?></b>
+                        <b><?php translate('创新赋能大会')?></b>
+                        <b><?php translate('获奖标示')?></b>
+                        <b><?php translate('新闻通稿')?></b>
                     </div>
+                    <!-- <p style="margin-bottom:0;font-size:13px;color:#666;text-align:right;margin-top:12px;"><?php translate('详情')?></p> -->
+
                     <!--ul>
                         <li>
                             <?php translate('<b>奖杯 & 奖状</b>：1套专属获奖证书和奖杯')?></li>
@@ -228,15 +255,17 @@
                     </ul-->
                 </div>
             </div>
-            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+            <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
                 <div class="promotion1" id="promotion1b">
-                    <h5><?php translate('B 展示推广服务')?><span>RMB 8,000</span><small><?php translate('整合多方媒体资源，协助您的品牌获得广泛有效传播')?><small></h5>
+                    <h5><?php translate('B 展示推广服务')?><span>RMB 8,000</span><small><?php translate('整合多方媒体资源，协助您的品牌获得广泛有效传播')?></small></h5>
                     <div>
-                        <a href="#detail7"><b><?php translate('媒体推广')?></b></a>
-                        <a href="#detail8"><b><?php translate('微信传播')?></b></a>
-                        <a href="#detail6"><b><?php translate('双页年鉴展示')?></b></a>
-                        <b style="color:#aaa;margin:3px 6px;"><?php translate('A 类中的所有服务')?></b>
+                        <b><?php translate('媒体推广')?></b>
+                        <b><?php translate('微信传播')?></b>
+                        <b><?php translate('双页年鉴展示')?></b>
+                        <b><?php translate('A 类中的所有服务')?></b>
                     </div>
+                    <!-- <p style="margin-bottom:0;font-size:13px;color:#666;text-align:right;margin-top:12px;"><?php translate('详情')?></p> -->
+
                     <!--ul>
                         <li>
                             <?php translate('<b>媒体报道</b>：专业编辑撰写推广文案，并在30家门户/行业网络媒体报道，彰显您的设计理念，提升品牌价值 （媒体类型可订制）')?></li>
@@ -249,11 +278,9 @@
                     </ul-->
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+            <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
                 <div class="promotion1" id="promotion1c">
-                    <h5><?php translate('C 闪耀推广服务')?><span>RMB 12,000</span><small><?php translate('活动现场，运用Pin3D 展示技术，多维立体展示您的获奖设计作品，获得更多的合作机会')?><small></h5>
+                    <h5><?php translate('C 闪耀推广服务')?><span>RMB 12,000</span><small><?php translate('活动现场，运用Pin3D 展示技术，多维立体展示您的获奖设计作品，获得更多的合作机会')?></small></h5>
                     <!--ul>
                         <li>
                             <?php translate('<b>3D 展示</b>：现场大屏，通过3D互动方式展示获奖设计和品牌，配合典礼当天的媒体Tour，获得更多的合作机会')?></li>
@@ -261,19 +288,21 @@
                             <?php translate('<b>B 类中的所有服务</b>')?></li>
                     </ul-->
                     <div>
-                        <a href="#detail10"><b><?php translate('3D 展示')?></b></a>
-                        <b style="color:#aaa;margin:3px 6px;"><?php translate('B 类中的所有服务')?></b>
+                        <b><?php translate('3D 展示')?></b>
+                        <b><?php translate('B 类中的所有服务')?></b>
                     </div>
+                    <!-- <p style="margin-bottom:0;font-size:13px;color:#666;text-align:right;margin-top:12px;"><?php translate('详情')?></p> -->
                 </div>
             </div>
-            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+            <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
                 <div class="promotion1" id="promotion1d">
-                    <h5><?php translate('D 成功推广服务')?><span>RMB 18,000</span><small><?php translate('活动现场专属展区，立体真实地展示和推广您的品牌，为您提供与潜在客户和合作伙伴建立关系的机会')?><small></h5>
+                    <h5><?php translate('D 成功推广服务')?><span>RMB 18,000</span><small><?php translate('活动现场专属展区，立体真实地展示和推广您的品牌，为您提供与潜在客户和合作伙伴建立关系的机会')?></small></h5>
                     <div>
-                        <a href="#detail11"><b><?php translate('实物展示')?></b></a>
-                        <a href="#detail12"><b><?php translate('广告宣传')?></b></a>
-                        <b style="color:#aaa;margin:3px 6px;"><?php translate('B 类中的所有服务')?></b>
+                        <b><?php translate('实物展示')?></b>
+                        <b><?php translate('广告宣传')?></b>
+                        <b><?php translate('B 类中的所有服务')?></b>
                     </div>
+                    <!-- <p style="margin-bottom:0;font-size:13px;color:#666;text-align:right;margin-top:12px;"><?php translate('详情')?></p> -->
                     <!--ul>
                         <li>
                             <?php translate('<b>实物展示</b>：活动现场专属展区，活动当天还将在展区安排VIP /媒体 Tour，详细讲解展示作品的设计理念和背后故事')?></li>
@@ -369,100 +398,156 @@
     </div>
 </div>
 <div id="section3">
-    <h3 style="font-size:20px;margin-bottom:30px;color:#333;"><?php translate('推广服务细则')?></h3>
+    <!-- <h3 style="font-size:20px;margin-bottom:30px;color:#333;"><?php translate('推广服务细则')?></h3> -->
+    <div id="back">
+        <span class="fa fa-fw fa-chevron-circle-left" style="font-size:20px;position:relative;top:2px;"></span> <?php translate("返回")?>
+    </div>
+    <h3 style="font-size:20px;margin-bottom:20px;color:#ff6948;text-align:center;" id="title1" class="package"><?php translate('A 基础推广服务')?><span style="margin-left:5px;">RMB 3,000</span></h3>
+    <h3 style="font-size:20px;margin-bottom:20px;color:#ff6948;text-align:center;" id="title2" class="package"><?php translate('B 展示推广服务')?><span style="margin-left:5px;">RMB 8,000</span></h3>
+    <h3 style="font-size:20px;margin-bottom:20px;color:#ff6948;text-align:center;" id="title3" class="package"><?php translate('C 闪耀推广服务')?><span style="margin-left:5px;">RMB 12,000</span></h3>
+    <h3 style="font-size:20px;margin-bottom:20px;color:#ff6948;text-align:center;" id="title4" class="package"><?php translate('D 成功推广服务')?><span style="margin-left:5px;">RMB 18,000</span></h3>
+    <p style="margin-bottom:20px;font-size:12px;"><?php translate('套餐包含以下推广服务')?></p>
     <div class="row">
-        <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3">
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 p1 p2 p3 p4">
             <div class="detail" id="detail1">
-                <img src="__PUBLIC__/img/contest2016/promotion1.png" style="width:100%" alt="">
                 <h5><?php translate('奖杯 & 奖状')?></h5>
+                <img src="__PUBLIC__/img/contest2016/promotion1.png" style="width:100%" alt="">
                 <p><?php translate('为您的获奖作品定制专属获奖证书和奖杯，可在各大活动现场和展厅展示您的荣誉，提供您的品牌价值和可信度，彰显您的获奖殊荣。')?></p>
             </div>
         </div>
-        <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3">
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 p1 p2 p3 p4">
             <div class="detail" id="detail2">
-                <img src="__PUBLIC__/img/contest2016/promotion2.png" style="width:100%" alt="">
                 <h5><?php translate('年鉴展示')?></h5>
+                <img src="__PUBLIC__/img/contest2016/promotion2.png" style="width:100%" alt="">
                 <p><?php translate('在年鉴上以整页篇幅展示您的获奖作品，传递您的设计理念和品牌价值并将会发送给所有的参赛者、评委、媒体合作伙伴等合作机构。')?></p>
             </div>
         </div>
-        <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3">
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 p1 p2 p3 p4">
             <div class="detail" id="detail3">
-                <img src="__PUBLIC__/img/contest2016/promotion3.png" style="width:100%" alt="">
                 <h5><?php translate('颁奖典礼')?></h5>
+                <img src="__PUBLIC__/img/contest2016/promotion3.png" style="width:100%" alt="">
                 <p><?php translate('参加年度颁奖典礼，展现您的获奖殊荣，同时向业内设计大咖展示您的成功设计，建立行业链接和合作机会。')?></p>
             </div>
         </div>
-        <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3">
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 p1 p2 p3 p4">
             <div class="detail" id="detail4">
-                <img src="__PUBLIC__/img/contest2016/promotion4.png" style="width:100%" alt="">
                 <h5><?php translate('创新赋能大会')?></h5>
+                <img src="__PUBLIC__/img/contest2016/promotion4.png" style="width:100%" alt="">
                 <p><?php translate('参与大咖互动分享，向商业领袖传达示您设计概念，彼此交流碰撞，建立合作机会。')?></p>
             </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3">
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 p1 p2 p3 p4">
             <div class="detail" id="detail5">
-                <img src="__PUBLIC__/img/contest2016/promotion5.png" style="width:100%" alt="">
                 <h5><?php translate('获奖标示')?></h5>
+                <img src="__PUBLIC__/img/contest2016/promotion5.png" style="width:100%" alt="">
                 <p><?php translate('得奖者有权使用大赛标识作为宣传素材，可运用在网站、介绍册、包装、展览及广告等宣传媒介，增强您品牌推广的价值。')?></p>
             </div>
         </div>
-        <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3">
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 p2 p3 p4">
             <div class="detail" id="detail6">
-                <img src="__PUBLIC__/img/contest2016/promotion6.png" style="width:100%" alt="">
                 <h5><?php translate('双页年鉴展示')?></h5>
+                <img src="__PUBLIC__/img/contest2016/promotion6.png" style="width:100%" alt="">
                 <p><?php translate('用双页篇幅，更加全面立体地展示获奖作品图片及宣传文案，向6000+位设计及商业领袖展示您的成功设计。')?></p>
             </div>
         </div>
-        <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3">
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
             <div class="detail" id="detail7">
-                <img src="__PUBLIC__/img/contest2016/promotion7.png" style="width:100%" alt="">
                 <h5><?php translate('专题报道')?></h5>
+                <img src="__PUBLIC__/img/contest2016/promotion7.png" style="width:100%" alt="">
                 <p><?php translate('专业编辑进行一对一采访，在年鉴上双语报道，并推送至30家专业媒体（媒体类型可定制）更加深入地展示您的作品内核。')?></p>
             </div>
         </div>
-        <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3">
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 p2 p3 p4">
             <div class="detail" id="detail8">
-                <img src="__PUBLIC__/img/contest2016/promotion8.png" style="width:100%" alt="">
                 <h5><?php translate('微信传播')?></h5>
+                <img src="__PUBLIC__/img/contest2016/promotion8.png" style="width:100%" alt="">
                 <p><?php translate('成功设计平台微信头条发布，直接受众35000+，间接辐射100000+，向大众分享您的设计理念和故事。')?></p>
             </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3">
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 p2 p3 p4">
             <div class="detail" id="detail9">
-                <img src="__PUBLIC__/img/contest2016/promotion9.png" style="width:100%" alt="">
                 <h5><?php translate('媒体推广')?></h5>
+                <img src="__PUBLIC__/img/contest2016/promotion9.png" style="width:100%" alt="">
                 <p><?php translate('专业编辑撰写推广文案，并在30家门户/行业网络媒体报道 ，彰显您的设计理念，提升品牌价值 （媒体类型可订制）。')?></p>
             </div>
         </div>
-        <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3">
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 p3">
             <div class="detail" id="detail10">
-                <img src="__PUBLIC__/img/contest2016/promotion10.png" style="width:100%" alt="">
                 <h5><?php translate('3D 展示')?></h5>
+                <img src="__PUBLIC__/img/contest2016/promotion10.png" style="width:100%" alt="">
                 <p><?php translate('现场大屏，运用Pin3D 展示技术，多维立体展示您的获奖设计作品，获得更多的合作机会和资源对接。')?></p>
             </div>
         </div>
-        <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3">
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 p4">
             <div class="detail" id="detail11">
-                <img src="__PUBLIC__/img/contest2016/promotion11.png" style="width:100%" alt="">
                 <h5><?php translate('实物展示')?></h5>
+                <img src="__PUBLIC__/img/contest2016/promotion11.png" style="width:100%" alt="">
                 <p><?php translate('活动现场专属展区，立体、真实展示您的获奖作品和品牌；活动当天还将在展区安排VIP /媒体 Tour，详细讲解您展示作品的设计理念和背后故事，为您提供与潜在客户和合作伙伴建立关系的机会。')?></p>
             </div>
         </div>
-        <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3">
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 p4">
             <div class="detail" id="detail12">
-                <img src="__PUBLIC__/img/contest2016/promotion12.png" style="width:100%" alt="">
                 <h5><?php translate('广告宣传')?></h5>
+                <img src="__PUBLIC__/img/contest2016/promotion12.png" style="width:100%" alt="">
+                <p><?php translate('在大赛年鉴中广告宣传页用1页的篇幅推广获奖设计的品牌和公司，更全面的展示您设计背后的品牌及公司主体。')?></p>
+            </div>
+        </div>
+    </div>
+    <h3 style="font-size:20px;margin-bottom:40px;color:#ff6948;margin-top:0;text-align:center;" id="title1"><?php translate('套餐未包含以下增值推广服务')?></h3>
+    <div class="row">
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 p1">
+            <div class="detail" id="detail6">
+                <h5><?php translate('双页年鉴展示')?></h5>
+                <img src="__PUBLIC__/img/contest2016/promotion6.png" style="width:100%" alt="">
+                <p><?php translate('用双页篇幅，更加全面立体地展示获奖作品图片及宣传文案，向6000+位设计及商业领袖展示您的成功设计。')?></p>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 p1 p2 p3 p4">
+            <div class="detail" id="detail7">
+                <h5><?php translate('专题报道')?></h5>
+                <img src="__PUBLIC__/img/contest2016/promotion7.png" style="width:100%" alt="">
+                <p><?php translate('专业编辑进行一对一采访，在年鉴上双语报道，并推送至30家专业媒体（媒体类型可定制）更加深入地展示您的作品内核。')?></p>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 p1">
+            <div class="detail" id="detail8">
+                <h5><?php translate('微信传播')?></h5>
+                <img src="__PUBLIC__/img/contest2016/promotion8.png" style="width:100%" alt="">
+                <p><?php translate('成功设计平台微信头条发布，直接受众35000+，间接辐射100000+，向大众分享您的设计理念和故事。')?></p>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 p1">
+            <div class="detail" id="detail9">
+                <h5><?php translate('媒体推广')?></h5>
+                <img src="__PUBLIC__/img/contest2016/promotion9.png" style="width:100%" alt="">
+                <p><?php translate('专业编辑撰写推广文案，并在30家门户/行业网络媒体报道 ，彰显您的设计理念，提升品牌价值 （媒体类型可订制）。')?></p>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 p1 p2 p4">
+            <div class="detail" id="detail10">
+                <h5><?php translate('3D 展示')?></h5>
+                <img src="__PUBLIC__/img/contest2016/promotion10.png" style="width:100%" alt="">
+                <p><?php translate('现场大屏，运用Pin3D 展示技术，多维立体展示您的获奖设计作品，获得更多的合作机会和资源对接。')?></p>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 p1 p2 p3">
+            <div class="detail" id="detail11">
+                <h5><?php translate('实物展示')?></h5>
+                <img src="__PUBLIC__/img/contest2016/promotion11.png" style="width:100%" alt="">
+                <p><?php translate('活动现场专属展区，立体、真实展示您的获奖作品和品牌；活动当天还将在展区安排VIP /媒体 Tour，详细讲解您展示作品的设计理念和背后故事，为您提供与潜在客户和合作伙伴建立关系的机会。')?></p>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 p1 p2 p3">
+            <div class="detail" id="detail12">
+                <h5><?php translate('广告宣传')?></h5>
+                <img src="__PUBLIC__/img/contest2016/promotion12.png" style="width:100%" alt="">
                 <p><?php translate('在大赛年鉴中广告宣传页用1页的篇幅推广获奖设计的品牌和公司，更全面的展示您设计背后的品牌及公司主体。')?></p>
             </div>
         </div>
     </div>
 </div>
 <div id="section2">
-    <h3 style="font-size:20px;margin-bottom:30px;color:#333;"><?php translate('购买推广服务')?></h3>
+    <h3 style="font-size:20px;margin-bottom:30px;color:#333;"><?php translate('购买')?><span id="s1" style="margin-left:10px;color:#ef5045;"><?php translate('A 基础推广服务')?></span><span id="s2" style="margin-left:10px;color:#ef5045;"><?php translate('B 展示推广服务')?></span><span id="s3" style="margin-left:10px;color:#ef5045;"><?php translate('C 闪耀推广服务')?></span><span id="s4" style="margin-left:10px;color:#ef5045;"><?php translate('D 成功推广服务RMB')?></span></h3>
     <p>
         <?php translate('选择需要推广的获奖作品')?>
     </p>
@@ -472,60 +557,35 @@
         </foreach>
     </select>
     <p style="margin-top:12px;">
-        <?php translate('选择一项标准推广服务')?>
+        <?php translate('自由选择套餐中不包含的增值推广服务')?>
     </p>
     <div class="row">
-        <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3">
-            <div class="choice1" id="1a" name="3000">
-                <?php translate('A 基础推广服务')?>
-            </div>
-        </div>
-        <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3">
-            <div class="choice1" id="1b" name="8000">
-                <?php translate('B 展示推广服务')?>
-            </div>
-        </div>
-        <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3">
-            <div class="choice1" id="1c" name="12000">
-                <?php translate('C 闪耀推广服务')?>
-            </div>
-        </div>
-        <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3">
-            <div class="choice1" id="1d" name="18000">
-                <?php translate('D 成功推广服务')?>
-            </div>
-        </div>
-    </div>
-    <p style="margin-top:12px;">
-        <?php translate('自由选择增值推广服务')?>
-    </p>
-    <div class="row">
-        <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3">
+        <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3 add p1">
             <div class="choice2" id="20" name="3000">
                 <?php translate('双页年鉴展示')?>
             </div>
         </div>
-        <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3">
+        <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3 add p1 p2 p3 p4">
             <div class="choice2" id="21" name="15000">
                 <?php translate('专题报道')?>
             </div>
         </div>
-        <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3">
+        <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3 add p1">
             <div class="choice2" id="22" name="10000">
                 <?php translate('媒体推广')?>
             </div>
         </div>
-        <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3">
+        <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3 add p1">
             <div class="choice2" id="23" name="1000">
                 <?php translate('微信传播')?>
             </div>
         </div>
-        <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3">
+        <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3 add p1 p2 p4">
             <div class="choice2" id="24" name="5000">
                 <?php translate('3D展示')?>
             </div>
         </div>
-        <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3">
+        <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3 add p1 p2 p3">
             <div class="choice2" id="25" name="12000">
                 <?php translate('实物展示')?>
             </div>
@@ -564,16 +624,29 @@
 </div>
 <script>
 $(document).ready(function() {
+    var tmp = 0;
+    if ($('#promotion1a').height() > $('#promotion1b').height()) {
+        tmp = $('#promotion1a').height();
+    }
+    else {
+        tmp = $('#promotion1b').height();
+    }
+    if ($('#promotion1c').height() > tmp) {
+        tmp = $('#promotion1c').height();
+    }
+    if ($('#promotion1d').height() > tmp) {
+        tmp = $('#promotion1d').height();
+    }
+    $('#promotion1a').height(tmp);
+    $('#promotion1b').height(tmp);
+    $('#promotion1c').height(tmp);
+    $('#promotion1d').height(tmp);
+
     var submission_id = '';
     var choice1 = '';
     var choice2 = [0, 0, 0, 0, 0, 0, 0, 0];
     var prices = [3000, 15000, 10000, 1000, 5000, 12000, 500, 200];
-    $('.choice1').click(function(event) {
-        $('.choice1').removeClass('active');
-        $(this).addClass('active');
-        choice1 = $(this).attr('id');
-        cal_total();
-    });
+
     $('.choice2').click(function(event) {
         $(this).toggleClass('active');
         if ($(this).hasClass('active')) {
@@ -701,6 +774,65 @@ $(document).ready(function() {
                 });
             }
         });
+    });
+    
+    $('.promotion1').click(function(event) {
+        /* Act on the event */
+        $('#section1').hide();
+        $('#section2').show();
+        $('#section3').show();
+        $('#section3 h3.package').hide();
+        $('#section3 .col-md-6').hide();
+        $('#section2 h3 span').hide();
+        $('#section2 .add').hide();
+        var tmp = $(this).attr('id');
+        if (tmp == 'promotion1a') {
+            $('#section3 #title1').show();
+            $('#section3 .p1').show();
+            $('#section2 h3 span#s1').show();
+            $('#section2 .p1').show();
+            choice1 = '1a';
+            choice2 = [0, 0, 0, 0, 0, 0, 0, 0];
+            $('.choice2').removeClass('active');
+            $('#section2 span.number').text(0);
+        }
+        else if (tmp == 'promotion1b') {
+            $('#section3 #title2').show();
+            $('#section3 .p2').show();
+            $('#section2 h3 span#s2').show();
+            $('#section2 .p2').show();
+            choice1 = '1b';
+            choice2 = [0, 0, 0, 0, 0, 0, 0, 0];
+            $('.choice2').removeClass('active');
+            $('#section2 span.number').text(0);
+        }
+        else if (tmp == 'promotion1c') {
+            $('#section3 #title3').show();
+            $('#section3 .p3').show();
+            $('#section2 h3 span#s3').show();
+            $('#section2 .p3').show();
+            choice1 = '1c';
+            choice2 = [0, 0, 0, 0, 0, 0, 0, 0];
+            $('.choice2').removeClass('active');
+            $('#section2 span.number').text(0);
+        }
+        else if (tmp == 'promotion1d') {
+            $('#section3 #title4').show();
+            $('#section3 .p4').show();
+            $('#section2 h3 span#s4').show();
+            $('#section2 .p4').show();
+            choice1 = '1d';
+            choice2 = [0, 0, 0, 0, 0, 0, 0, 0];
+            $('.choice2').removeClass('active');
+            $('#section2 span.number').text(0);
+        }
+        cal_total();
+    });
+
+    $('#back').click(function(event) {
+        $('#section1').show();
+        $('#section2').hide();
+        $('#section3').hide();
     });
 });
 </script>
