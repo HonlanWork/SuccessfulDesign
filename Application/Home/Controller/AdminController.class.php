@@ -693,7 +693,7 @@ class AdminController extends Controller{
             array('conclusione','项目成效总结英文'), 
             array('invitation','合伙伙伴'),
             ); 
-        $xlsData = M('submission')->where(array('contest_id'=>C('CONTESTID'), 'issubmitted'=>1))->select();
+        $xlsData = M('submission')->where(array('contest_id'=>C('CONTESTID'), 'issubmitted'=>1, 'judge_first'=>'yes'))->select();
 
         $judges = M('user')->where(array('role'=>1))->select();
         $tmp = array();
