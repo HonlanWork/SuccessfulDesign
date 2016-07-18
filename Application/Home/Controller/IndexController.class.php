@@ -320,6 +320,10 @@ class IndexController extends Controller {
                 }
             }
         }
+        else {
+            $map['contest_id'] = array('neq', C('CONTESTID'));
+        }
+
         $this->year = I('year');
         
         $submissions = M('submission')->field('id,contest_id,titlec,titlee,category,result,image')->where($map)->select();
