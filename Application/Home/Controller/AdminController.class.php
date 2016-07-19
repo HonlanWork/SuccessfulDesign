@@ -860,7 +860,7 @@ class AdminController extends Controller{
 
     // 作品推广管理
     public function promotion(){
-        $promotions = M('promotion')->where(array('contest_id'=>C('CONTESTID'), 'ispaied'=>1))->order('timestamp desc')->select();
+        $promotions = M('promotion')->where(array('contest_id'=>C('CONTESTID')))->order('ispaied desc, timestamp desc')->select();
         $names = ['双页年鉴展示', '专题报道', '媒体推广', '微信传播', '3D展示', '实物展示', '增订奖杯&奖状', '增订年鉴'];
         for ($i = 0; $i < count($promotions); $i++) {
             $tmp = '';

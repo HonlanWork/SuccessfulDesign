@@ -22,6 +22,9 @@
         <th>
             服务费用
         </th>
+        <th>
+            是否支付
+        </th>
     </tr>
     <foreach name="promotions" item="v">
         <tr>
@@ -40,6 +43,11 @@
             </td>
             <td>
                 RMB {$v.price}
+            </td>
+            <td>
+                <if condition="$v['ispaied'] eq 1">
+                    已支付
+                </if>
             </td>
         </tr>
     </foreach>
