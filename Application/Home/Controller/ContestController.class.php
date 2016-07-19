@@ -529,7 +529,7 @@ class ContestController extends CommonController {
 		    case 'alipay_wap':
 		        $extra = array(
 		            'success_url' => C('SITE_PREFIX') . U('Contest/promotion_pay_success', array('submission_id'=>$submission_id,'promotion_code'=>$orderNo)),
-		            'cancel_url' => C('SITE_PREFIX') . U('Contest/promotion')
+		            'cancel_url' => C('SITE_PREFIX') . U('Contest/promotion_pay_cancel', array('submission_id'=>$submission_id,'promotion_code'=>$orderNo))
 		        );
 		        break;
 		    case 'bfb_wap':
@@ -625,5 +625,10 @@ class ContestController extends CommonController {
     		SendMail($value['email'], $email['title'], $email_content);
     	}
 		$this->redirect('User/submissions');
+	}
+
+	public function promotion_pay_cancel(){
+		M('promotion')->where(array('submission_id'=>I('submission_id'),'promotion_code'=>I('promotion_code')))->delete();
+		$this->redirect('Contest/promotion');
 	}
 }
