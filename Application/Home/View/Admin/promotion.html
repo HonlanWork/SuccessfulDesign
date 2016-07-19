@@ -9,8 +9,7 @@
     <tr>
         <th>
             作品名称
-        </th>
-        <th>
+            <br/>
             作者邮箱
         </th>
         <th>
@@ -18,12 +17,14 @@
         </th>
         <th>
             购买时间
-        </th>
-        <th>
+            <br/>
             服务费用
         </th>
         <th>
             是否支付
+        </th>
+        <th>
+            操作
         </th>
     </tr>
     <foreach name="promotions" item="v">
@@ -31,22 +32,24 @@
             <td>
                 <p style="font-size:13px;color:#666;">{$v.titlee}</p>
                 <p style="font-size:13px;color:#666;margin-bottom:0;">{$v.titlec}</p>
+                <p style="font-size:13px;color:#666;">{$v.email}</p>
             </td>
-            <td>
-                {$v.email}
-            </td> 
             <td>
                 {$v.promotion}
             </td>
             <td>
                 {$v.timestamp|date='Y-m-d H:i:s',###}
-            </td>
-            <td>
+                <br/>
                 RMB {$v.price}
             </td>
             <td>
                 <if condition="$v['ispaied'] eq 1">
                     已支付
+                </if>
+            </td>
+            <td>
+                <if condition="$v['ispaied'] eq 0">
+                    <a href="{:U('Admin/promotion_mark_pay', array('id'=>$v['id']))}">改为已支付</a>
                 </if>
             </td>
         </tr>
