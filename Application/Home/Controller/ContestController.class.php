@@ -628,7 +628,7 @@ class ContestController extends CommonController {
 	}
 
 	public function promotion_pay_cancel(){
-		M('promotion')->where(array('submission_id'=>I('submission_id'),'promotion_code'=>I('promotion_code')))->delete();
+		// M('promotion')->where(array('submission_id'=>I('submission_id'),'promotion_code'=>I('promotion_code')))->delete();
 		$this->redirect('Contest/promotion');
 	}
 }
