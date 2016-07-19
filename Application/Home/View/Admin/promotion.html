@@ -14,8 +14,7 @@
         </th>
         <th>
             推广服务
-        </th>
-        <th>
+            <br/>
             购买时间
             <br/>
             服务费用
@@ -30,14 +29,15 @@
     <foreach name="promotions" item="v">
         <tr>
             <td>
-                <p style="font-size:13px;color:#666;">{$v.titlee}</p>
-                <p style="font-size:13px;color:#666;margin-bottom:0;">{$v.titlec}</p>
-                <p style="font-size:13px;color:#666;">{$v.email}</p>
+                {$v.titlee}
+                <br/>
+                {$v.titlec}
+                <br/>
+                {$v.email}
             </td>
             <td>
                 {$v.promotion}
-            </td>
-            <td>
+                <br/>
                 {$v.timestamp|date='Y-m-d H:i:s',###}
                 <br/>
                 RMB {$v.price}
