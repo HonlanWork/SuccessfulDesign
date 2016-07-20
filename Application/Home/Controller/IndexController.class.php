@@ -321,9 +321,10 @@ class IndexController extends Controller {
             }
         }
         else {
-            $map['contest_id'] = array('neq', C('CONTESTID'));
+            if (C('CURRENT_FINISH') == 0) {
+                $map['contest_id'] = array('neq', C('CONTESTID'));
+            }
         }
-
         $this->year = I('year');
         
         $submissions = M('submission')->field('id,contest_id,titlec,titlee,category,result,image')->where($map)->select();
@@ -392,7 +393,12 @@ class IndexController extends Controller {
         $this->submissions = $submissions;
 
         $years = array();
-        $tmp = date("Y") - 1;
+        if (C('CURRENT_FINISH') == 0) {
+            $tmp = date("Y") - 1;
+        }
+        else {
+            $tmp = date("Y");
+        }
         for ($i = $tmp; $i >= 2006; $i--) {
             array_push($years, $i);
         }
