@@ -125,7 +125,9 @@ class UserController extends CommonController {
 	}
 
 	public function past_submission() {
-		$map['contest_id']  = array('neq', C('CONTESTID'));
+		if (C('CURRENT_FINISH') == 0) {
+            $map['contest_id']  = array('neq', C('CONTESTID'));
+        }
 		$map['id'] = array('eq', I('id'));
 		$this->submission = M('submission')->where($map)->find();
 		
