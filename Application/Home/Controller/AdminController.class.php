@@ -898,7 +898,7 @@ class AdminController extends Controller{
 
         $this->count_paid = M('promotion')->where(array('contest_id'=>C('CONTESTID'), 'ispaied'=>1))->count();
         $this->count_offline = M('promotion')->where(array('contest_id'=>C('CONTESTID'), 'ispaied'=>1, 'offline'=>1))->count();
-        $this->count_unpaid = M('promotion')->where(array('contest_id'=>C('CONTESTID'), 'ispaied'=>0))->select();
+        $this->count_unpaid = M('promotion')->where(array('contest_id'=>C('CONTESTID'), 'ispaied'=>0))->count();
         // $this->count_unpaid = count($this->count_unpaid);
         layout('admin');
         $this->display();
