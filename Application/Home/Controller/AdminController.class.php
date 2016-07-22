@@ -895,6 +895,10 @@ class AdminController extends Controller{
             $promotions[$i]['email'] = $tmp_sub['email'];
         }
         $this->promotions = $promotions;
+
+        $this->count_paid = M('promotion')->where(array('contest_id'=>C('CONTESTID'), 'ispaied'=>1))->count();
+        $this->count_offline = M('promotion')->where(array('contest_id'=>C('CONTESTID'), 'ispaied'=>1, 'offline'>1))->count();
+        $this->count_unpaid = M('promotion')->where(array('contest_id'=>C('CONTESTID'), 'ispaied'=>0))->count();
         layout('admin');
         $this->display();
     }
