@@ -59,6 +59,9 @@
             <td>
                 <if condition="$v['ispaied'] eq 0">
                     <a href="{:U('Admin/promotion_mark_pay', array('id'=>$v['id']))}">已经线下<br/>支付成功</a>
+                    <br/>
+                    <br>
+                    <a href="{:U('Admin/promotion_delete', array('id'=>$v['id']))}">删除未付款订单</a>
                 </if>
             </td>
         </tr>

@@ -903,5 +903,10 @@ class AdminController extends Controller{
         M('promotion')->where(array('id'=>I('id')))->save(array('ispaied'=>1,'offline'=>1));
         $this->redirect('Admin/promotion');
     }
+
+    public function promotion_delete(){
+        M('promotion')->where(array('id'=>I('id')))->delete();
+        $this->redirect('Admin/promotion');
+    }
 }
 ?>
