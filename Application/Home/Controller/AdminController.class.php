@@ -901,7 +901,7 @@ class AdminController extends Controller{
 
     public function promotion_mark_pay(){
         M('promotion')->where(array('id'=>I('id')))->save(array('ispaied'=>1,'offline'=>1));
-        $yhis->redirect('Admin/promotion');
+        $this->redirect('Admin/promotion');
     }
 }
 ?>
