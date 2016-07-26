@@ -133,11 +133,13 @@
             background-color: #F6F6F6;
         }
         
-        .navbar-default .navbar-right .dropdown-menu {
+        /*.navbar-default .navbar-right .dropdown-menu {*/
+        .navbar-default .dropdown-menu {
             min-width: 0;
         }
         
-        .navbar-default .navbar-right .dropdown-menu li a {
+        /*.navbar-default .navbar-right .dropdown-menu li a {*/
+        .navbar-default .dropdown-menu li a {
             padding: 12px 36px 12px 30px;
         }
         
@@ -309,10 +311,22 @@
                                         <?php translate('获奖作品')?>
                                     </a>
                                 </li>
-                                <li>
-                                    <a href="{:U('Index/moments')}">
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                         <?php translate('精彩瞬间')?>
                                     </a>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a href="{:U('Index/moments')}">
+                                                <?php translate('高峰论坛')?>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{:U('Index/moments_other')}">
+                                                <?php translate('其他内容')?>
+                                            </a>
+                                        </li>
+                                    </ul>
                                 </li>
                                 <li>
                                     <a href="{:U('Index/downloads')}">

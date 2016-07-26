@@ -414,9 +414,21 @@ class IndexController extends Controller {
     }
 
     public function moments(){
-        $pictures = M('video')->where(array('src'=>''))->order('sort asc')->select();
+        $pictures = M('video')->where(array('src'=>'', 'issummit'=>1))->order('sort asc')->select();
         $map = array();
         $map['src'] = array('neq', '');
+        $map['issummit'] = array('eq', 1);
+        $videos = M('video')->where($map)->order('sort asc')->select();
+        $this->pictures = $pictures;
+        $this->videos = $videos;
+        $this->display();
+    }
+
+    public function moments_other(){
+        $pictures = M('video')->where(array('src'=>'', 'issummit'=>0))->order('sort asc')->select();
+        $map = array();
+        $map['src'] = array('neq', '');
+        $map['issummit'] = array('eq', 0);
         $videos = M('video')->where($map)->order('sort asc')->select();
         $this->pictures = $pictures;
         $this->videos = $videos;

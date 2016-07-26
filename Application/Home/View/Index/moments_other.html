@@ -1,0 +1,188 @@
+<style>
+#main {
+    padding: 10px 6%;
+    padding-top: 30px;
+    margin-bottom: 30px;
+    box-shadow: 2px 2px 3px rgba(20, 20, 20, 0.3);
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+#main .cell {
+    height: 160px;
+    overflow: hidden;
+    background-size: cover;
+    background-position: middle;
+    text-align: center;
+    position: relative;
+    margin-bottom: 20px;
+    vertical-align: middle;
+}
+
+#main .cell:hover {
+    cursor: pointer;
+}
+
+#main .cell h5 {
+    font-size: 14px;
+    color: #fff;
+    line-height: 1.3;
+}
+
+#main .mask {
+    padding: 20px;
+    padding-top: 30px;
+    width: 100%;
+    height: 160px;
+    background-color: rgba(40, 40, 40, 0.5);
+}
+#main .modal .fa:hover {
+    cursor: pointer;
+}
+</style>
+<div id="pictures">
+    <h4 style="margin-top:0;margin-bottom:15px;"><?php translate("图片")?></h4>
+    <div class="row">
+        <foreach name="pictures" item="v">
+            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
+                <div class="cell" style="background-image:url(__PUBLIC__{$v.image});" name="{$v.id}">
+                    <div class="mask">
+                        <?php if (isset($_SESSION['lang']) and $_SESSION['lang'] == 'en') { ?>
+                        <h5>{$v.titlee}</h5>
+                        <?php } else { ?>
+                        <h5>{$v.titlec}</h5>
+                        <?php } ?>
+                    </div>
+                </div>
+            </div>
+        </foreach>
+    </div>
+</div>
+<div id="videos" style="margin-top:30px;">
+    <h4 style="margin-top:0;margin-bottom:15px;"><?php translate("视频")?></h4>
+    <div class="row">
+        <foreach name="videos" item="v">
+            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
+                <div class="cell" style="background-image:url(__PUBLIC__{$v.image});">
+                    <div class="mask">
+                        <?php if (isset($_SESSION['lang']) and $_SESSION['lang'] == 'en') { ?>
+                        <h5>{$v.titlee}</h5>
+                        <?php } else { ?>
+                        <h5>{$v.titlec}</h5>
+                        <?php } ?>
+                        <p style="display:none;">__PUBLIC__{$v.src}</p>
+                    </div>
+                </div>
+            </div>
+        </foreach>
+    </div>
+</div>
+<div class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" style="font-size:15px;"></h4>
+            </div>
+            <div class="modal-body">
+                <div id="img" style="position:relative;">
+                    <img src="" alt="" style="width:100%;height:auto;">
+                    <span class="fa fa-fw fa-angle-left" style="font-size:60px;position:absolute;left:30px;bottom:30px;color:#fff;opacity:0.8;"></span>
+                    <span class="fa fa-fw fa-angle-right" style="font-size:60px;position:absolute;right:30px;bottom:30px;color:#fff;opacity:0.8;"></span>
+                </div>
+                <video controls="controls" preload="no" auto-play="false" style="width:100%;height:auto;border-radius:3px;">
+                </video>
+            </div>
+            <!-- <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div> -->
+        </div>
+    </div>
+</div>
+<script>
+$(document).ready(function() {
+    var offset = 0;
+    var isVideo = 0;
+    var pid = -1;
+
+    $('#pictures .cell').click(function(event) {
+        isVideo = 0;
+        offset = 0;
+        var title = $(this).children('.mask').children('h5').text();
+        $('.modal .modal-header h4').text(title);
+        $('.modal .modal-body #img').show();
+        $('.modal .modal-body video').hide();
+        pid = $(this).attr('name');
+        $.ajax({
+            url: '{:U("Index/moment_picture")}',
+            type: 'POST',
+            dataType: 'json',
+            data: {
+                pid: pid,
+                offset: offset
+            }
+        })
+        .done(function(data) {
+            $('.modal .modal-body #img img').attr('src', "__PUBLIC__" + data['pic']['src']);
+            $('.modal').modal();
+        })
+        .fail(function() {
+        })
+        .always(function() {
+        });
+    });
+    $('.modal .fa-angle-left').click(function(event) {
+        offset -= 1;
+        $.ajax({
+            url: '{:U("Index/moment_picture")}',
+            type: 'POST',
+            dataType: 'json',
+            data: {
+                pid: pid,
+                offset: offset
+            }
+        })
+        .done(function(data) {
+            $('.modal .modal-body #img img').attr('src', "__PUBLIC__" + data['pic']['src']);
+        })
+        .fail(function() {
+        })
+        .always(function() {
+        });
+    });
+    $('.modal .fa-angle-right').click(function(event) {
+        offset += 1;
+        $.ajax({
+            url: '{:U("Index/moment_picture")}',
+            type: 'POST',
+            dataType: 'json',
+            data: {
+                pid: pid,
+                offset: offset
+            }
+        })
+        .done(function(data) {
+            $('.modal .modal-body #img img').attr('src', "__PUBLIC__" + data['pic']['src']);
+        })
+        .fail(function() {
+        })
+        .always(function() {
+        });
+    });
+
+
+    $('#videos .cell').click(function(event) {
+        isVideo = 1;
+        var title = $(this).children('.mask').children('h5').text();
+        $('.modal .modal-header h4').text(title);
+        $('.modal .modal-body #img').hide();
+        $('.modal .modal-body video').attr("autoplay","true").attr('src', $(this).children('.mask').children('p').text()).show();
+        $('.modal').modal();
+    });
+
+    $('.modal').on('hidden.bs.modal', function (e) {
+        $('.modal .modal-body video').attr("autoplay", "false").attr('src', ''); 
+    });
+});
+</script>
