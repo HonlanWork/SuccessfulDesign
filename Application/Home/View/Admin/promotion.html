@@ -10,12 +10,12 @@
         <th>
             作品ID
         </th> 
-        <th>
+        <th style="max-width:250px;">
             作品名称
             <br/>
             作者邮箱
         </th>
-        <th>
+        <th style="max-width:210px;">
             推广服务
             <br/>
             购买时间
@@ -34,14 +34,14 @@
             <td>
                 {$v.submission_id}
             </td>
-            <td>
+            <td style="max-width:250px;">
                 {$v.titlee}
                 <br/>
                 {$v.titlec}
                 <br/>
                 {$v.email}
             </td>
-            <td>
+            <td style="max-width:210px;">
                 {$v.promotion}
                 <br/>
                 {$v.timestamp|date='Y-m-d H:i:s',###}
