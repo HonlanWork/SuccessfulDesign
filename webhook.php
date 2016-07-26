@@ -28,10 +28,28 @@ if ($result === 1) {
     exit;
 }
 
+$mysql_server_name='localhost';
+$mysql_username = 'root';
+$mysql_password = 'root';
+$mysql_database = 'dbname';
+
+$conn = mysql_connect($mysql_server_name, $mysql_username, $mysql_password) or die("error connecting") ;
+mysql_select_db($mysql_database, $conn);
+
 $event = json_decode($raw_data, true);
 if ($event['type'] == 'charge.succeeded') {
     $charge = $event['data']['object'];
-    // ...
+
+    if ($charge['extra']['context'] == 'registration') {
+        # code...
+        // $sql = ''
+        // $result = mysql_query($sql, $conn);
+    }
+    elseif ($charge['extra']['context'] == 'promotion') {
+        $sql = "update promotion set ispaied=1, promotion_code='' where submission_id=".$charge['extra']['submission_id']." and promotion_code=".$charge['order_no']; 
+        $result = mysql_query($sql, $conn);
+    }
+
     http_response_code(200); // PHP 5.4 or greater
 } elseif ($event['type'] == 'refund.succeeded') {
     $refund = $event['data']['object'];
@@ -53,4 +71,6 @@ if ($event['type'] == 'charge.succeeded') {
     // 异常时返回非 2xx 的返回码
     // http_response_code(400);
 }
+
+mysql_close($conn);
 ?>

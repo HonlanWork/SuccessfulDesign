@@ -96,6 +96,8 @@ class ContestController extends CommonController {
 		 * 以下 channel 仅为部分示例，未列出的 channel 请查看文档 https://pingxx.com/document/api#api-c-new
 		 */
 		$extra = array();
+		$extra['context'] = 'registration';
+		$extra['submission_id'] = $input_data['submission_id'];
 		switch ($channel) {
 		    case 'alipay_wap':
 		        $extra = array(
@@ -526,6 +528,8 @@ class ContestController extends CommonController {
 		 * 以下 channel 仅为部分示例，未列出的 channel 请查看文档 https://pingxx.com/document/api#api-c-new
 		 */
 		$extra = array();
+		$extra['context'] = 'promotion';
+		$extra['submission_id'] = $submission_id;
 		switch ($channel) {
 		    case 'alipay_wap':
 		        $extra = array(
