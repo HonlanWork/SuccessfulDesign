@@ -608,7 +608,7 @@ class ContestController extends CommonController {
 	}
 
 	public function promotion_pay_success(){
-		M('promotion')->where(array('submission_id'=>I('submission_id'),'user_id'=>$_SESSION['uid'],'promotion_code'=>I('promotion_code')))->save(array('ispaied'=>1,'promotion_code'=>''));
+		M('promotion')->where(array('submission_id'=>I('submission_id'),'promotion_code'=>I('promotion_code')))->save(array('ispaied'=>1,'promotion_code'=>''));
 		$email = M('email')->where(array('name'=>'购买推广'))->find();
     	$email_content = $email['content'];
     	if(count(explode("\n", $email_content)) == 1 ){
