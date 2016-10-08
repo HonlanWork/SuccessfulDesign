@@ -4,7 +4,9 @@
     margin-top: 20px;
 }
 </style>
-<h3 style="margin-top:10px;margin-bottom:20px;">作品推广 <small>{$count_paid}已支付 {$count_offline}线下支付 {$count_unpaid}未支付</small></h3>
+<h3 style="margin-top:10px;margin-bottom:20px;">作品推广 <small>{$count_paid}已支付 {$count_offline}线下支付 {$count_unpaid}未支付</small>
+    <a href="{:U('Admin/promotion_export')}" style="margin-left:20px;margin-right:10px;font-size:12px;" class="btn btn-success">导出excel</a>
+</h3>
 <table class="table table-hover">
     <tr>
         <th>

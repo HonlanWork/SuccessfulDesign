@@ -913,5 +913,65 @@ class AdminController extends Controller{
         M('promotion')->where(array('id'=>I('id')))->delete();
         $this->redirect('Admin/promotion');
     }
+
+    public function promotion_export(){
+        $xlsName = "promotions";
+        $xlsCell = array(
+            array('id','序号'),
+            array('email','用户邮箱'),
+            array('submission_id','作品id'),
+            array('titlec','作品中文名'),
+            array('titlee','作品英文名'),
+            array('promotion','推广内容'),
+            array('price','推广价格'),
+            array('timestamp','购买时间'),
+            array('offline','支付方式'),
+            ); 
+        $xlsData = M('promotion')->where(array('contest_id'=>C('CONTESTID'), 'ispaied'=>1))->select();
+
+        $xlsTitle = iconv('utf-8', 'gb2312', $xlsName);//文件名称
+        $fileName = '推广作品汇总_'.date('YmdHis');//or $xlsTitle 文件名称可根据自己情况设定
+        $cellNum = count($xlsCell);
+        $dataNum = count($xlsData);
+        vendor("PHPExcel.PHPExcel");
+       
+        $objPHPExcel = new \PHPExcel();
+        $cellName = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','AA','AB','AC','AD','AE','AF','AG','AH','AI','AJ','AK','AL','AM','AN','AO','AP','AQ','AR','AS','AT','AU','AV','AW','AX','AY','AZ');
+        
+        for($i = 0; $i < $cellNum; $i++){
+            $objPHPExcel->setActiveSheetIndex(0)->setCellValue($cellName[$i].'1', $xlsCell[$i][1]); 
+        } 
+
+        for ($i = 0; $i < count($xlsData); $i++) { 
+            $email = M('user')->where(array('id'=>$xlsData[$i]['user_id']))->find();
+            $xlsData[$i]['email'] = $email['email'];
+            $submission = M('submission')->where(array('id'=>$xlsData[$i]['submission_id']))->find();
+            $xlsData[$i]['titlec'] = $submission['titlec'];
+            $xlsData[$i]['titlec'] = $submission['titlec'];
+            if ($xlsData[$i]['offline'] == 1) {
+                $xlsData[$i]['offline'] = '线下';
+            }
+            else {
+                $xlsData[$i]['offline'] = '线上';
+            }
+        }
+
+          // Miscellaneous glyphs, UTF-8   
+        for($i = 0; $i < $dataNum; $i++){
+            for($j = 0; $j < $cellNum; $j++){
+                if ($j == 7 && $xlsData[$i][$xlsCell[$j][0]] != '') {
+                    $xlsData[$i][$xlsCell[$j][0]] = date('Y-m-d H:i:s', $xlsData[$i][$xlsCell[$j][0]]);  
+                }
+                $objPHPExcel->getActiveSheet(0)->setCellValue($cellName[$j].($i+2), $xlsData[$i][$xlsCell[$j][0]]);
+            }             
+        }  
+        
+        header('pragma:public');
+        header('Content-type:application/vnd.ms-excel;charset=utf-8;name="'.$xlsTitle.'.xls"');
+        header("Content-Disposition:attachment;filename=$fileName.xls");//attachment新窗口打印inline本窗口打印
+        $objWriter = \PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');  
+        $objWriter->save('php://output'); 
+        exit; 
+    }
 }
 ?>
