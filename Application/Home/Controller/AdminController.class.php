@@ -916,6 +916,7 @@ class AdminController extends Controller{
 
     public function promotion_export(){
         $xlsName = "promotions";
+        $names = ['双页年鉴展示', '专题报道', '媒体推广', '微信传播', '3D展示', '实物展示', '增订奖杯&奖状', '增订年鉴'];
         $xlsCell = array(
             array('id','序号'),
             array('email','用户邮箱'),
@@ -947,13 +948,38 @@ class AdminController extends Controller{
             $xlsData[$i]['email'] = $email['email'];
             $submission = M('submission')->where(array('id'=>$xlsData[$i]['submission_id']))->find();
             $xlsData[$i]['titlec'] = $submission['titlec'];
-            $xlsData[$i]['titlec'] = $submission['titlec'];
+            $xlsData[$i]['titlee'] = $submission['titlee'];
             if ($xlsData[$i]['offline'] == 1) {
                 $xlsData[$i]['offline'] = '线下';
             }
             else {
                 $xlsData[$i]['offline'] = '线上';
             }
+            $tmp = '';
+            $xlsData[$i]['promotion'] = explode(',', $xlsData[$i]['promotion']);
+            if ($xlsData[$i]['promotion'][0] == '1a') {
+                $tmp = translate_return('A 基础推广服务');
+            }
+            elseif ($xlsData[$i]['promotion'][0] == '1b') {
+                $tmp = translate_return('B 展示推广服务');
+            }
+            elseif ($xlsData[$i]['promotion'][0] == '1c') {
+                $tmp = translate_return('C 闪耀推广服务');
+            }
+            elseif ($xlsData[$i]['promotion'][0] == '1d') {
+                $tmp = translate_return('D 成功推广服务');
+            }
+            for ($j = 1; $j < count($xlsData[$i]['promotion']); $j++) { 
+                if ($xlsData[$i]['promotion'][$j] != 0) {
+                    if ($xlsData[$i]['promotion'][$j] == 1) {
+                        $tmp .= ' '.$names[$j - 1];
+                    }
+                    else {
+                        $tmp .= ' '.$names[$j - 1].'x'.$xlsData[$i]['promotion'][$j];
+                    }
+                }
+            }
+            $xlsData[$i]['promotion'] = $tmp;
         }
 
           // Miscellaneous glyphs, UTF-8   
