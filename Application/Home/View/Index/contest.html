@@ -241,6 +241,13 @@
     <img src="__PUBLIC__/img/contest2016/banner.png" style="width:100%;">
     <?php } ?>
 </div>
+<div style="background-color:#f2f2f2;">
+    <?php if (isset($_SESSION['lang']) and $_SESSION['lang'] == 'en') { ?>
+    <h3 style="font-size:25px;"><?php translate('2017成功设计大赛7月底正式启动<br/>网站升级中 敬请期待')?></h3>
+    <?php } else{ ?>
+    <h3 style="font-size:20px;"><?php translate('2017成功设计大赛7月底正式启动<br/>网站升级中 敬请期待')?></h3>
+    <?php } ?>
+</div>
 <div id="section2">
     <?php if (isset($_SESSION['lang']) and $_SESSION['lang'] == 'en') { ?>
     <h3 style="font-size:25px;"><?php translate('国内首个评估设计商业和社会价值的<br/>全球综合类设计大赛')?></h3>
